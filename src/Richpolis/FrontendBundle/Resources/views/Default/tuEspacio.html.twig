@@ -1,0 +1,117 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
+{% endblock %}    
+
+{% if publicacion.imagen | length > 0 %}
+   {% set portada = 'publicaciones/' ~ publicacion.imagen %}
+{% elseif publicacion.galerias | length > 0 %}
+   {% set portada = 'galerias/' ~ publicacion.galerias[0].archivo %} 
+{% endif %}    
+
+{% set urlAbsolutaFoto = 'http://'
+                             ~ app.request.server.get('SERVER_NAME')
+                             ~ 'uploads/' ~ portada %}
+
+{% block redes_sociales %}
+
+    <meta property="og:url" content="{{url('frontend_tu_espacio',{'slug': publicacion.slug})}}" />
+    <meta property="og:title" content="{{ publicacion.titulo }}" />
+    <meta property="og:description" content="{{ publicacion.descripcion | striptags | truncate(250,true,'...') | raw  }}" />
+    {% if publicacion.imagen | length > 0 %}
+    <meta property="og:image" content="{{ 'http://' ~ app.request.server.get('SERVER_NAME') ~ publicacion.webPath | imagine_filter('imagen_120_90') }}" />
+    {% elseif publicacion.galerias | length > 0 %}
+    <meta property="og:image" content="{{ 'http://' ~ app.request.server.get('SERVER_NAME') ~ publicacion.galerias[0].webPath | imagine_filter('imagen_120_90') }}" />    
+    {% endif %}    
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="heraldodetoluca.com.mx" />
+    <!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@heraldodetoluca">
+    <meta name="twitter:title" content="{{ publicacion.titulo }}">
+    <meta name="twitter:description" content="{{publicacion.descripcion | striptags | truncate(250,true,'...')}}">
+    <meta name="twitter:creator" content="@richpolis">
+    <meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
+    <meta name="twitter:domain" content="{{url('homepage')}}">
+    <meta name="twitter:app:name:iphone" content="">
+    <meta name="twitter:app:name:ipad" content="">
+    <meta name="twitter:app:name:googleplay" content="">
+    <meta name="twitter:app:url:iphone" content="">
+    <meta name="twitter:app:url:ipad" content="">
+    <meta name="twitter:app:url:googleplay" content="">
+    <meta name="twitter:app:id:iphone" content="">
+    <meta name="twitter:app:id:ipad" content="">
+    <meta name="twitter:app:id:googleplay" content="">
+
+{% endblock %}
+
+{% block contenido %}
+    <section class="padding columna-2">
+        <article class="publicacion-tu-espacio">
+            <header>
+                <h2 class="titulo">
+                    tu espacio
+                </h2>
+            </header>
+            <div class="contenido">
+                <div class="contenido-titulo">
+                    tema actual:
+                </div>
+                <div class="contenido-principal">
+                    {{publicacion.descripcion | raw }}
+                </div>
+                <div class="contenido-informacion">
+                    Tu espacio 
+                    es una herramienta dentro del portal que mensualmente convoca diversos temas 
+                    relevantes para la comunidad, desplegandolos en este TU ESPACIO.<br/> 
+                    <span style="color: blue;">Participa rellenando los siguientes campos.</span>
+                </div>
+            </div>
+            <div class="comentarios-formulario">
+                <form action="{{ path('frontend_tu_espacio',{'slug': publicacion.slug,'contar': false}) }}" class="validate" id="formComentarios" method="post" {{ form_enctype(form)}}>
+                    {{form_errors(form)}}
+                    <div class="controles-izquierdos">
+                        {{form_row(form.username)}}
+                        {{form_row(form.email)}}
+                        {{form_row(form.file)}}
+                    </div>
+                    <div class="controles-derechos">
+                        {{form_row(form.message)}}
+                    </div>
+                    {{form_rest(form)}}
+                    <div class="group-control">
+                        <input type="submit" value="Enviar"/>
+                    </div>
+                </form>
+            </div>     
+        </article>
+        {% if comentarios | length > 0 %}        
+        <article class="list-noticias">
+            <header>
+                <h2 class="titulo azul" style="width: 400px;">
+                    publicaciones sobre el tema actual
+                </h2>
+            </header>
+            <section class="comentarios">
+                {% for comentario in comentarios if comentario.nivel == 0 %}
+                    {% include 'FrontendBundle:Default:comentario.html.twig' with {'comentario': comentario } %}
+                {% endfor %}
+            </section>
+        </article>
+        {% endif %}    
+    </section>	
+    {# include 'FrontendBundle:Default:aside.html.twig' #}        
+    {{render(controller('FrontendBundle:Default:aside'))}}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+<script src="{{asset('js/fancybox/jquery.fancybox.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        $("a.fancybox").fancybox();
+    });
+</script>
+{% endblock %}    

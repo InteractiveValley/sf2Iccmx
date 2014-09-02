@@ -1,0 +1,272 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}H GRUPO EDITORIAL{% endblock %}
+
+{% set urlAbsolutaFoto = 'http://'
+                             ~ app.request.server.get('SERVER_NAME')
+                             ~ asset('images/heraldologo.png') %}
+{% block stylesheets %}
+    
+	{% block redes_sociales %}
+		<meta property="og:url" content="{{url('homepage')}}" />
+		<meta property="og:title" content="Heraldo de Toluca" />
+		<meta property="og:image" content="{{urlAbsolutaFoto}}" />
+		<meta property="og:type" content="article" />
+		<meta property="og:site_name" content="heraldodetoluca.com.mx" />
+		<!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
+
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:site" content="@heraldodetoluca">
+		<meta name="twitter:title" content="Heraldo de Toluca">
+		<meta name="twitter:description" content="Descripcion de la publicacion">
+		<meta name="twitter:creator" content="@richpolis">
+		<meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
+		<meta name="twitter:domain" content="{{url('homepage')}}">
+		<meta name="twitter:app:name:iphone" content="">
+		<meta name="twitter:app:name:ipad" content="">
+		<meta name="twitter:app:name:googleplay" content="">
+		<meta name="twitter:app:url:iphone" content="">
+		<meta name="twitter:app:url:ipad" content="">
+		<meta name="twitter:app:url:googleplay" content="">
+		<meta name="twitter:app:id:iphone" content="">
+		<meta name="twitter:app:id:ipad" content="">
+		<meta name="twitter:app:id:googleplay" content="">
+	{% endblock %}
+
+<link rel="stylesheet" href="{{asset('css/main.css')}}"/>
+<link rel="stylesheet" href="{{asset('css/jquery.bxslider.css')}}"/>
+<style>
+    .loader {
+        display: none;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('/images/page-loader.gif') 50% 50% no-repeat transparent;
+    }
+    
+</style>
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d71da3524ae18f"></script>
+
+{% endblock %}
+
+{% block body %}
+<div class="container border-gris-lr">
+        <header class="header">
+            <div class="publicidad publicidad-principal">
+                {{ render(controller('FrontendBundle:Default:publicidadHead')) }}
+            </div>
+            <div class="navegador secundario">
+                <ul>
+                    <li><a href="{{path('frontend_nosotros')}}">nosotros</a></li>
+                    <li><a href="{{path('frontend_historia')}}">historia</a></li>
+                    <li><a href="{{path('frontend_edicion_pdf')}}">edicion pdf</a></li>
+                    <li><a href="{{path('frontend_heraldo_tv',{'slug':'ultimo'})}}">heraldo tv</a></li>
+                    <li><a href="{{path('frontend_tu_espacio',{'slug':'ultimo'})}}">tu espacio</a></li>
+                    <li><a href="{{path('frontend_contacto')}}">contacto</a></li>
+                </ul>
+            </div>
+            <div id="logo-redes-sociales">
+                <a id="logo" href="{{path('homepage')}}">
+                    <figure id="logo">
+                        <img src="{{ asset('images/heraldologo.png') }}" alt="Heraldo de Toluca"/>
+                    </figure>
+                </a>
+                <div class="redes-sociales">
+                    <a href="https://twitter.com/HeraldoEdomex/" target="_blank"><span class="twitter ico_twitter"></span></a>
+                    <a href="https://www.facebook.com/HeraldoEdomex" target="_blank"><span class="facebook ico_facebook"></span></a>
+                    <a href="https://www.youtube.com/user/HGrupoEditorial" target="_blank"><span class="youtube ico_youtube"></span></a>
+                    <a href="https://www.flickr.com/photos/77889457@N06/" target="_blank"><span class="flickr ico_flickr"></span></a>
+                </div>
+                <div class="buscador">
+                    <form id="formBuscar" action="{{path('frontend_buscador')}}" class="form-buscador">
+                        <input name="textoBuscar" id="textoBuscar" type="text" class="buscar">
+                        <a href="#" onclick="javascript:buscar();"><span class="accion-buscar ico_buscar"></span></a>
+                        <a href="{{path('frontend_archivos')}}" class="link-archivo">archivos</a>
+                    </form>
+                </div>
+                <div class="fecha">{{"now"|date("l,j F Y", "America/Mexico_City")}}</div>
+            </div>
+        </header>
+        <nav class="navegador principal">
+            <ul class="menu">
+                <!--li>
+                    <a href="{{path('portada')}}">portada</a>
+                </li-->
+                <li>
+                    <a href="{{path('homepage')}}">inicio</a>
+                </li>
+                <li>
+                    <a href="{{path('frontend_categoria',{slug: 'general'})}}">general</a>
+                    <ul class="submenu">
+                        <li><a href="{{path('frontend_categoria',{slug: 'entorno'})}}">entorno</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'poder'})}}">poder</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{path('frontend_categoria',{slug: 'nacional'})}}">nacional</a></li>
+                <li><a href="{{path('frontend_categoria',{slug: 'mundo'})}}">mundo</a></li>
+                <li><a href="{{path('frontend_categoria',{slug: 'negocios'})}}">negocios</a></li>
+                <li>
+                    <a href="{{path('frontend_categoria',{slug: 'municipios'})}}">municipios</a>
+                    <ul class="submenu">
+                        <li><a href="{{path('frontend_categoria',{slug: 'oriente'})}}">oriente</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'valle-de-mexico'})}}">valle de mexico</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'valle-de-toluca'})}}">valle de toluca</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{path('frontend_categoria',{slug: 'trofeo'})}}">trofeo</a>
+                    <ul class="submenu">
+                        <li><a href="{{path('frontend_categoria',{slug: 'local'})}}">local</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'nacional'})}}">nacional</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'internacional'})}}">internacional</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{path('frontend_categoria',{slug: 'arte-y-gente'})}}">arte y gente</a>
+                    <ul class="submenu">
+                        <li><a href="{{path('frontend_categoria',{slug: 'espectaculos'})}}">espectaculos</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'cultura'})}}">cultura</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'sociales'})}}">sociales</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{path('frontend_categoria',{slug: 'ideas-y-voces'})}}">ideas y voces</a>
+                    <ul class="submenu">
+                        <li><a href="{{path('frontend_categoria',{slug: 'caricaturas'})}}">caricaturas</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{path('frontend_categoria',{slug: 'entrevista'})}}">entrevista</a></li>
+            </ul>
+        </nav>
+    {% block contenido %}{% endblock %}
+    <span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span>
+    <div class="loader"></div>
+</div>
+    <footer>
+        <div class="navegadores">
+            <div class="container">
+                <div class="navegador secundario">
+                    <ul>
+                        <li><a href="{{path('frontend_nosotros')}}">nosotros</a></li>
+                        <li><a href="{{path('frontend_historia')}}">historia</a></li>
+                        <li><a href="{{path('frontend_edicion_pdf')}}">edicion pdf</a></li>
+                        <li><a href="{{path('frontend_heraldo_tv',{'slug':'ultimo'})}}">heraldo tv</a></li>
+                        <li><a href="{{path('frontend_tu_espacio',{'slug':'ultimo'})}}">tu espacio</a></li>
+                        <li><a href="{{path('frontend_contacto')}}">contacto</a></li>
+                    </ul>
+                </div>
+                <div class="navegador principal principal-footer">
+                    <ul>
+                        <!--li><a href="{{path('portada')}}">portada</a></li-->
+                        <li><a href="{{path('homepage')}}">inicio</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'general'})}}">general</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'nacional'})}}">nacional</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'mundo'})}}">mundo</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'negocios'})}}">negocios</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'municipios'})}}">municipios</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'trofeo'})}}">trofeo</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'arte-y-gente'})}}">arte y gente</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'ideas-y-voces'})}}">ideas y voces</a></li>
+                        <li><a href="{{path('frontend_categoria',{slug: 'entrevista'})}}">entrevista</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="contenidos">
+                <figure class="logo">
+                    <img src="{{asset('images/logofooter.png')}}" alt="" class="imagen-logo">
+                </figure>
+                <div class="contenido">
+                    {{ render(controller('FrontendBundle:Default:piePagina')) }}
+                </div>
+                <div class="redes-sociales">
+                    <a href="https://twitter.com/HeraldoEdomex/" target="_blank"><span class="twitter ico_twitter"></span></a>
+                    <a href="https://www.facebook.com/HeraldoEdomex" target="_blank"><span class="facebook ico_facebook"></span></a>
+                    <a href="https://www.youtube.com/user/HGrupoEditorial" target="_blank"><span class="youtube ico_youtube"></span></a>
+                    <a href="https://www.flickr.com/photos/77889457@N06/" target="_blank"><span class="flickr ico_flickr"></span></a>
+                </div>
+            </div>
+        </div>    
+    </footer>    
+{% endblock %}
+ 
+{% block javascripts %}
+<script src="{{asset('js/jquery.js')}}"></script>
+<!--script src="{{asset('js/underscore-min.js')}}"></script-->
+<!--script src="{{asset('js/backbone-min.js')}}"></script-->
+<!--script src="{{asset('js/swig.js')}}"></script-->
+<script type="text/javascript" src="{{asset('js/jquery.bxslider.min.js')}}"></script>
+<script>
+$(document).ready(function(){
+          
+          $('.galeria-publicidad').bxSlider({
+                pager: false,
+                controls: false,
+                auto: true,
+                pause: 8000,
+                autoHover: true,
+          });
+          
+          $('.galeria-publicidad-head-left').bxSlider({
+                pager: false,
+                controls: false,
+                auto: true,
+                pause: 8000,
+                slideWidth: 728,
+                autoHover: true,
+          });
+          
+          $('.galeria-publicidad-head-right').bxSlider({
+                pager: false,
+                controls: false,
+                auto: true,
+                pause: 8000,
+                slideWidth: 230,
+                autoHover: true
+          });
+
+          $(".tab").on("click",function(){
+            $(".tab").removeClass("active");
+            $(this).addClass("active");
+            var tabClass = $(this).data('tab');
+            $(".lomas").fadeOut("fast");
+            $("."+tabClass).fadeIn("fast");
+          });
+
+          $(".tab-visto").click();
+          
+          $(".ver-nota").on("click",function(){
+            	var slug = $(this).data('slug');
+            	var url = '{{path('frontend_publicaciones',{'slug': '***'})}}';
+				location.href =  url.replace("***", slug);
+          });
+
+        setTimeout(function(){
+            iniciarCircle();
+        },8000);
+
+});
+		
+function buscar(){
+	var $texto = $("#textoBuscar");
+	if($texto.val().length>0){
+		var $formBuscar = $("#formBuscar");
+		$formBuscar.submit();
+	}
+	
+}
+function iniciarCircle(){
+    $('#minuto-a-minuto ul.lista li:first-child').slideUp("slow",function(){
+        $('#minuto-a-minuto ul.lista').append($(this).slideDown("fast"));
+    });
+    setTimeout(function(){
+        iniciarCircle();
+    },4000);
+}
+</script>
+{% endblock %}

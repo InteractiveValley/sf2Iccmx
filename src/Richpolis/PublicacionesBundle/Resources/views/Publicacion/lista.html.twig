@@ -1,0 +1,22 @@
+<table id="table-{{categoria.tipoCategoria}}" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Categoria</th>
+            <th>Imagen</th>
+            <th>Titulo</th>
+            {% if categoria.tipoCategoria is constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION') %}
+            <th>Es principal</th>
+            <th>En carrusel</th>
+            {% endif %}
+            <th>Usuario</th>
+            <th>Estatus</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="cuerpoTabla">
+        {% for entity in entities %}
+            {% include 'PublicacionesBundle:Publicacion:item.html.twig' with {'entity': entity } %}
+        {% endfor %}
+    </tbody>
+</table>

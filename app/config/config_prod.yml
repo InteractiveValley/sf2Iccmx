@@ -1,0 +1,64 @@
+imports:
+    - { resource: config.yml }
+
+# In production environment you should know that the parameters for URL generation
+# always pass the requirements. Otherwise it would break your link (or even site with
+# strict_requirements = true). So we can disable the requirements check completely for
+# enhanced performance with strict_requirements = null.
+framework:
+    router:
+        strict_requirements: null
+    #validation:
+    #    cache: apc
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+
+stfalcon_tinymce:
+    include_jquery: false
+    tinymce_jquery: true
+    selector: ".tinymce"
+    base_url: "http://hgrupoeditorial.com/" # this parameter may be included if you need to override the assets_base_urls for your template engine (to override a CDN base url)
+    # Get current language from the parameters.ini
+    language: %locale%
+    # Custom buttons
+    tinymce_buttons:
+        stfalcon: # Id of the first button
+            title: "Stfalcon"
+            image: "http://stfalcon.com/favicon.ico"
+    theme:
+        # Simple theme: same as default theme
+        simple: ~
+        # Advanced theme with almost all enabled plugins
+        advanced:
+             file_browser_callback : 'elFinderBrowser'
+             plugins:
+                 - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
+                 - "searchreplace wordcount visualblocks visualchars code fullscreen"
+                 - "insertdatetime media nonbreaking save table contextmenu directionality"
+                 - "emoticons template paste textcolor"
+             toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+             toolbar2: "print preview media | forecolor backcolor emoticons | stfalcon | example"
+             image_advtab: true
+             templates:
+                 - {title: 'Test template 1', content: 'Test 1'}
+                 - {title: 'Test template 2', content: 'Test 2'}
+        # BBCode tag compatible theme (see http://www.bbcode.org/reference.php)
+        bbcode:
+             plugins: ["bbcode, code, link, preview"]
+             menubar: false
+             toolbar1: "bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview"

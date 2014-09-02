@@ -1,0 +1,40 @@
+Comentarios:
+    resource: "@ComentariosBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+Publicidad:
+    resource: "@PublicidadBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+Galerias:
+    resource: "@GaleriasBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+Paginas:
+    resource: "@PaginasBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+Frontend:
+    resource: "@FrontendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+Backend:
+    resource: "@BackendBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+Publicaciones:
+    resource: "@PublicacionesBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"

@@ -1,0 +1,44 @@
+<tr id="registro-{{entity.id}}" data-id="{{ entity.id }}">
+    <td><a href="{{ path('publicaciones_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+    <td>{{ entity.categoria.nivelCategoria }}</td>
+    <td>
+        {% if entity.imagen | length > 0 %}
+            <img src="{{entity.thumbnailWebPath}}" style="max-height: 100px; max-width: 100px;"/>
+        {% else  %}
+            sin imagen 
+        {% endif %}
+    </td>
+    <td>{{ entity.titulo }}</td>
+    {% if entity.categoria.tipoCategoria is constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION') %}
+    <td class="is-principal" data-url="{{ path('publicaciones_is_principal',{'id': entity.id }) }}">
+        {% if is_granted('ROLE_ADMIN') %}
+            {% if entity.isPrincipal %}
+                <button class="btn btn-success activo"><i class="fa fa-check-square-o"></i></button>
+                {% else %}
+                <button class="btn btn-info inactivo"><i class="fa fa-square-o"></i></button>
+                {% endif %}    
+            {% else %}
+                {{ entity.isPrincipal | isActive | raw }}
+            {% endif %}    
+    </td>
+    <td class="is-carrusel"  data-url="{{ path('publicaciones_is_carrusel',{'id': entity.id }) }}">
+        {% if entity.isCarrusel %}
+            <button class="btn btn-success activo"><i class="fa fa-check-square-o"></i></button>
+        {% else %}
+            <button class="btn btn-info inactivo"><i class="fa fa-square-o"></i></button>
+        {% endif %}
+    </td>
+    {% endif %}
+    <td>{{ entity.usuario }}</td>
+    <td class="status">
+        {{ entity.status | status_publicacion | raw }}
+    </td>
+    <td>
+        {% if entity.usuario.id == app.user.id or is_granted('ROLE_ADMIN') %}
+            {% if entity.status < constant('Richpolis\\PublicacionesBundle\\Entity\\Publicacion::STATUS_APROBADO') %}
+            <button onclick="javascript:editarRegistro('{{ path('publicaciones_edit', { 'id': entity.id }) }}')" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
+            {% endif %}
+        {% endif %}
+        <button onclick="javascript:editarRegistro('{{ path('publicaciones_show', { 'id': entity.id }) }}', '#registro-{{entity.id}}')" class="btn btn-xs btn-info"><i class="fa fa-folder-open"></i> </button>
+    </td>
+</tr>

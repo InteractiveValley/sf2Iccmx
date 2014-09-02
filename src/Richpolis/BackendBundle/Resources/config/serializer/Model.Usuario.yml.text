@@ -1,0 +1,43 @@
+Richpolis\BackendBundle\Entity\Usuario:
+  exclusion_policy: ALL
+  xml_root_name: usuario
+  properties:
+    username:
+      expose: true
+      type: string
+    twitter:
+      expose: true
+      type: string
+    facebook:
+      expose: true
+      type: string
+    email:
+      expose: true
+      type: string
+    grupo:
+      expose: true
+      type: integer
+    password:
+      expose: false
+      type: string
+    createdAt:
+      expose: true
+      type: date
+    updatedAt:
+      expose: true
+      type: date
+  relations:
+    -
+      rel: self
+      href:
+        route: get_usuario
+        parameters:
+          id: expr(object.id)
+        absolute: true
+    -
+      rel: publicaciones
+      embed:
+        content: expr(object.getPublicaciones())
+        xmlElementName: publicaciones
+        exclusion:
+          exclude_if: expr(object.id === 0)

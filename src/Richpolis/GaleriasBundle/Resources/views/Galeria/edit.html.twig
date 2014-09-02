@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Galeria edit</h1>
+
+    {% include 'GaleriasBundle:Galeria:form.html.twig' with {'form': edit_form } %}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('galerias') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

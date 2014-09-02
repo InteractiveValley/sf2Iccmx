@@ -1,0 +1,24 @@
+<tr id="registro-{{entity.id}}" data-id="{{entity.id}}">
+    <td><a href="{{ path('publicidad_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+    <td>{{ entity.empresa }}</td>
+    <td>
+        {% if entity.archivo | length > 0 %}
+            {{ entity.archivoMiniView | raw }}
+        {% else  %}
+            sin imagen 
+        {% endif %}
+    </td>
+    <td>{% if entity.vigencia %}{{ entity.vigencia|date('d-m-Y') }}{% endif %}</td>
+    <td class="is-active" data-url="{{ path('publicidad_is_active',{'id': entity.id }) }}">
+        {% if entity.isActive %}
+            <button class="btn btn-success activo"><i class="fa fa-check-square-o"></i></button>
+        {% else %}
+            <button class="btn btn-info inactivo"><i class="fa fa-square-o"></i></button>
+        {% endif %}
+    </td>
+    <td>
+        <button onclick="javascript:editarRegistro('{{ path('publicidad_edit', { 'id': entity.id }) }}')" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
+        <button onclick="javascript:editarRegistro('{{ path('publicidad_show', { 'id': entity.id }) }}', '#registro-{{entity.id}}')" class="btn btn-xs btn-info"><i class="fa fa-folder-open"></i> </button>
+    </td>
+</tr>
+    

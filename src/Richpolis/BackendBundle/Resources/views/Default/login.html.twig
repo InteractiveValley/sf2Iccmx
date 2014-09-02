@@ -1,0 +1,75 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block title %}Administrador - Login{% endblock %}
+
+{% block body %}
+	 <!-- Form area -->
+        <div class="admin-form">
+            <div class="container">
+                <div class="encabezado-login">
+                    <img src="{{ asset('images/heraldologo.png') }}"/>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Widget starts -->
+                        <div class="widget">
+                            <!-- Widget head -->
+                            <div class="widget-head">
+                                <i class="icon-lock"></i> Login 
+                            </div>
+                            <div class="widget-content">
+                                <div class="padd">
+                                    <!-- Login form -->
+                                    <form class="form-horizontal" action='{{ path('backend_check') }}'  method="post">
+                                        <!-- Email -->
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" for="username">Usuario</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <!-- Password -->
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" for="password">Contraseña</label>
+                                            <div class="col-lg-9">
+                                                <input type="password" id="password" name="_password" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <!-- Remember me checkbox and sign in button -->
+                                        <!--div class="form-group">
+                                            <div class="col-lg-9 col-lg-offset-3">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> Remember me
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div-->
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <button type="submit" class="btn btn-danger">Entrar</button>
+                                            <button type="reset" class="btn btn-default">Limpiar</button>
+                                        </div>
+                                        <br />
+                                    </form>
+
+                                </div>
+                            </div>
+
+                            <div class="widget-foot">
+                                <!--Not Registred? <a href="#">Register here</a>-->
+                                {% if error %}
+                                        <div>{{ error.message }}</div>
+                                {% else %}
+                                        <br/>
+                                {% endif %}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div class="pie-login">
+                    <img src="{{asset('images/interactivevalley.png')}}"/>
+                </div>
+            </div> 
+        </div>
+
+{% endblock %}

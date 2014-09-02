@@ -1,0 +1,27 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block contenido %}
+  
+  <section class="padding columna-2">
+        <article class="list-noticias categoria">
+            <header>
+                <h2 class="titulo rojo">
+                    <span>Categorias</span>
+                </h2>
+            </header>
+            <section class="categorias">
+                {% for categoria in categorias if categoria.nivel == 0 %}
+                <p><a href="{{path('frontend_categoria',{'slug':categoria.slug}) }}">{{categoria}} ({{categoria.contPublicaciones}})</a></p>
+				{% for child in categoria.children %}
+					<p>{{child}} ({{child.contPublicaciones}})</p>
+				{% endfor %}
+                {% endfor %}
+            </section>
+        </article>
+    </section>	
+    {# include 'FrontendBundle:Default:aside.html.twig' #}        
+    {{render(controller('FrontendBundle:Default:aside'))}}
+    <!--p class="padding">
+        <button class="ver-archivos">Archivos</button>    
+    </p-->
+{% endblock %}

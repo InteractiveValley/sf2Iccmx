@@ -1,0 +1,27 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block contenido %}
+  
+  <section class="padding columna-2">
+        <article class="list-noticias categoria">
+            <header>
+                <h2 class="titulo">
+                    <span>Resultados</span>
+                </h2>
+            </header>
+            <section class="noticias">
+                {% for noticia in pagination %}
+                    {% include 'FrontendBundle:Default:item_largo.html.twig' with {'noticia': noticia} %}
+				{% else %}
+					<p>Sin resultados</p>
+                {% endfor %}
+            </section>
+        </article>
+        {{ knp_pagination_render(pagination) }}    
+    </section>	
+    {# include 'FrontendBundle:Default:aside.html.twig' #}        
+    {{render(controller('FrontendBundle:Default:aside'))}}
+    <!--p class="padding">
+        <button class="ver-archivos">Archivos</button>    
+    </p-->
+{% endblock %}

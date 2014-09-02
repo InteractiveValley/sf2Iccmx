@@ -1,0 +1,188 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Administrador{% endblock %}
+
+{% block viewport %} 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+{% endblock %}
+
+{% block stylesheets %}
+<!-- Stylesheets -->
+<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+<link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+<link rel="stylesheet" href="{{asset('css/style.css')}}">
+<link rel="stylesheet" href="{{asset('css/bootstrap-responsive.html')}}">
+<link rel="stylesheet" href="{{asset('css/admin.css')}}">
+{% endblock %}
+
+{% block body %}
+
+  {% set route = app.request.get('_route') %}
+
+  {% set usuarios = "" %}
+  {% set categorias = "" %}
+  {% set publicaciones = "" %}
+  {% set publicidad = "" %}
+  {% set galerias = "" %}
+  {% set configuraciones = "" %}
+
+  {% if route == "categorias_publicaciones" %}
+    {% set categorias = "class=open" %}
+  {% elseif route == "backend_usuarios" %}
+    {% set usuarios = "class=open" %}
+  {% elseif route == "publicaciones" %}
+    {% set publicaciones = "class=open" %}
+  {% elseif route == "publicidad" %}
+    {% set publicidad = "class=open" %}
+  {% elseif route == "galerias" %}
+    {% set galerias = "class=open" %}     
+  {% elseif route == "configuraciones" %}
+    {% set configuraciones = "class=open" %}       
+  {% endif %}
+      
+<header>
+    <div class="navbar navbar-fixed-top bs-docs-nav" role="banner">
+        <div class="container">
+            <!-- Menu button for smallar screens -->
+            <div class="navbar-header">
+                <button class="navbar-toggle btn-navbar" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span>Menu</span>
+                </button>
+                <a href="#" class="pull-left menubutton hidden-xs">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <!-- Site name for smallar screens -->
+                <a href="{{path('backend_homepage')}}" class="navbar-brand">
+                    <span class="bold">Dashboard</span>
+                </a>
+            </div>
+
+            <!-- Navigation starts -->
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">         
+
+                <!-- Links -->
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown pull-right user-data">            
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                {% if app.user.imagen | length > 0 %}
+                                <img src="{{app.user.webPath}}" width="25" height="25" style="border-radius: 50%;"/>    
+                                {% else %}
+                                <img src="/apple-touch-icon.png" width="25" height="25"/>
+                                {% endif %}
+                                {{app.user.username|default('anonimo')}} <b class="caret"></b>
+                                
+                            </a>
+
+                            <!-- Dropdown menu -->
+                            <ul class="dropdown-menu">
+                                <li><a href="{{path('users_show',{'id':app.user.id})}}"><i class="fa fa-user"></i> Perfil</a></li>
+                                <!--li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li-->
+                                <li>
+                                    <a href="{{path('backend_logout')}}">
+                                        <i class="fa fa-key"></i> Salir
+                                    </a>
+                                </li>
+                            </ul>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</header>
+<!-- Main content starts -->
+<div class="content">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-dropdown">
+            <a href="#">Navegador</a>
+        </div>
+        <!-- Search form -->
+        <form class="navbar-form" role="search" action="#search" method="post">
+            <div class="form-group">
+                <input id="buscarItem" name="buscarItem" type="text" class="form-control" placeholder="buscar">
+                <button class="btn search-button" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </form>
+        <!--- Sidebar navigation -->
+        <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
+        <ul id="nav">
+            <!-- Main menu with font awesome icon -->
+            <li>
+                <a href="{{path('paginas')}}">
+                    <i class="fa fa-sitemap"></i> <span>Paginas</span>
+                </a>
+            </li>
+            <li class="has_sub">
+                <a href="#">
+                    <i class="fa fa-comment"></i> <span>Categorias</span> <span class="pull-right"><i class="fa fa-chevron-left"></i></span>
+                </a>
+                {% render(controller('PublicacionesBundle:CategoriaPublicacion:ulTipos')) %}
+            </li>
+            <li class="has_sub">
+                <a  href="#">
+                    <i class="fa fa-copy"></i> <span>Publicaciones</span> <span class="pull-right"><i class="fa fa-chevron-left"></i></span>
+                </a>
+                {% render(controller('PublicacionesBundle:CategoriaPublicacion:ulPublicaciones')) %}
+            </li>
+            <li>
+                <a href="{{path('comentarios')}}">
+                    <i class="fa fa-sitemap"></i> <span>Comentarios</span>
+                </a>
+            </li>
+            <li class="has_sub">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Publicidad</span> <span class="pull-right"><i class="fa fa-chevron-left"></i></span>
+                </a>
+                {% render(controller('PublicidadBundle:Publicidad:ul')) %}
+            </li>
+            
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a {{usuarios}} href="{{path('users')}}">
+                    <i class="fa fa-user"></i> <span>Usuarios</span>
+                </a>
+            </li>
+            <li>
+                <a {{configuraciones}} href="{{path('configuraciones')}}">
+                    <i class="fa fa-gears"></i> <span>Configuraciones</span>
+                </a>
+            </li>
+            {% endif %}    
+        </ul>
+    </div>
+<!-- Sidebar ends -->
+	{% block mainbar %} {% endblock %}
+</div>
+<!-- Content ends -->
+<!-- Footer starts -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+               <!-- Copyright info -->
+                <!--p class="copy">Copyright &copy; 2012 | <a href="#">Your Site</a> </p-->
+                <p></p>
+            </div>
+        </div>
+    </div>
+</footer> 	
+<!-- Footer ends -->
+<!-- Scroll to top -->
+<span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span>
+<div class="loader"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- JS -->
+    <script src="{{asset('js/jquery.js')}}"></script>
+    <script src="{{asset('js/underscore-min.js')}}"></script>
+    <script src="{{asset('js/backbone-min.js')}}"></script>
+    <script src="{{asset('js/swig.js')}}"></script>
+    <script src="{{asset('js/bootstrap.js')}}"></script>
+    
+
+{% endblock %}

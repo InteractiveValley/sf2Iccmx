@@ -1,0 +1,24 @@
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/build/
+/vendor/
+/bin/
+/web/upload/*
+/composer.phar
+
+# netbeans
+/nbproject/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# codio
+/.codio/

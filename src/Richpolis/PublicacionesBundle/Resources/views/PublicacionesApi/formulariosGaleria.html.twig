@@ -1,0 +1,107 @@
+{# formularios #}
+<div id="editarFormModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="editarModalLabel">Editar registro</h4>
+            </div>
+            <div class="modal-body">
+                <div style="float: right; height: 120px;">
+                    <img class="image-dialog" src="" id=""/>
+                </div>
+
+                <p>Indique el titulo y/o descripcion</p>
+                <div style="clear: both;"></div>
+                <div style="padding-top: 30px;">
+                    <div class="form-group">
+                        <label for="field-titulo">Titulo</label>
+                        <input type="text" name="field-titulo" value="00071.jpg" id="field-titulo" class="form-control" />
+                   </div>
+                    <div class="form-group">
+                        <label for="field-contenido">Contenido</label>
+                        <textarea name="field-contenido" id="field-contenido" class="form-control"></textarea>
+                    </div>
+                    <input name="field-url" id="field-url" type="hidden" value=""/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+                <button class="btn btn-primary" onclick="javascript:guardarEditarFormModal();">Guardar</button>
+                <button class="btn" onclick="javascript:avanzadaEditarFormModal();">Avanzado</button>
+            </div>
+        </div>
+    </div>            
+</div>
+
+<div class="modal fade" id="confirmarFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="confirmarModalLabel">Confirmar eliminar registro</h4>
+            </div>
+            <div class="modal-body">
+                <div style="float: right;">
+                    <img class="image-dialog" src="" id="" style="max-width:120px;max-height: 120px;"/>
+                </div>
+                <div style="clear: both;"></div>
+                <p style="margin-top:20px;">¿Confirmar eliminar el siguiente registro?</p>
+                <input id="field-eliminar" type="hidden" value=""/>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button class="btn btn-danger" onclick="javascript:eliminarConfirmarFormModal();">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmarActivarFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="confirmarModalLabel">Confirmar activar registro</h4>
+            </div>
+            <div class="modal-body">
+                <div style="float: right; height: 120px;">
+                    <img class="image-dialog" src="" id=""/>
+                </div>
+                <div style="clear: both;"></div>
+                <p style="margin-top:20px;">¿Confirmar activar el registro?</p>
+                <input id="field-activar" type="hidden" value=""/>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button class="btn btn-success" onclick="javascript:activarConfirmarFormModal();">Activar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="newVideoLinkFormModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="newVideoLinkModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="editarModalLabel">Crear video link</h4>
+            </div>
+            <div class="modal-body" id="contenidoVideoLink">
+                <div>
+                    <div>
+                        <label for="archivo" class="required">Link Video</label>
+                        <input type="text" id="archivo" name="archivo" required="required" class="validate[required] form-control placeholder" placeholder="Link Video" data-bind="value: link video">
+                    </div>
+                    <input type="hidden" id="tipoArchivo" name="tipoArchivo" value="2">
+                    <input type="hidden" id="publicacion" name="publicacion" value="2">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+                <button class="btn btn-primary" onclick="javascript:guardarVideoLinkFormModal();">Guardar</button>
+            </div>
+        </div>
+    </div>            
+</div>

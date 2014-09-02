@@ -1,0 +1,142 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block stylesheets%}
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+  <!-- Font awesome icon -->
+  <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}"> 
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="{{asset('css/jquery-ui-1.9.2.custom.min.css')}}"> 
+  <!-- Date picker -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
+  <!-- CLEditor -->
+  <link rel="stylesheet" href="{{asset('css/jquery.cleditor.css')}}"> 
+  <!-- Uniform -->
+  <link rel="stylesheet" href="{{asset('css/uniform.default.html')}}"> 
+  <!-- Uniform -->
+  <link rel="stylesheet" href="{{asset('css/daterangepicker-bs3.css')}}" />
+  <!-- Bootstrap toggle -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap-switch.css')}}">
+    <!-- Bootstrap toggle -->
+  <link rel="stylesheet" href="{{asset('js/datatables/css/dataTables.bootstrap.css')}}">
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <!-- Widgets stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/widgets.css')}}">   
+    <!-- Gritter Notifications stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/jquery.gritter.css')}}"> 
+  <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+  
+{% endblock %}
+
+{% block mainbar %}
+   <!-- Main bar -->
+    <div class="mainbar">
+     <!-- Page heading -->
+      <div class="page-head">
+        <h2 class="pull-left">Galerias</h2>
+        <div class="clearfix"></div>
+        <!-- Breadcrumb -->
+        <div class="bread-crumb">
+          <a href="{{path('backend_homepage')}}"><i class="fa fa-home"></i>Dashboard</a> 
+          <Divider>
+          <span class="divider">/</span> 
+          <a href="#" class="bread-current">Galerias</a>
+          {% if is_granted('ROLE_ADMIN') %}
+          <a href="#newImagen" class="btn btn-info pull-right" style="color: white; margin-left: 5px;">Subir imagen</a>
+          &nbsp;
+          &nbsp;
+          <a href="#newLinkVideo" class="btn btn-info pull-right" style="color: white; margin-left: 5px;">Subir link video</a>
+          {% endif %}
+        </div>
+        
+        <div class="clearfix"></div>
+
+      </div>
+      <!-- Page heading ends -->
+
+      <!-- Matter -->
+
+      <div class="matter">
+        <div class="container" id="contenidoPagina">
+
+        </div>
+      </div>
+
+    <!-- Matter ends -->
+
+    </div>
+
+   <!-- Mainbar ends -->        
+   <div class="clearfix"></div>
+ 
+  {# templates backbone #}   
+  {% include 'PublicacionesBundle:Galerias:index.html.twig' %}
+
+  {% include 'PublicacionesBundle:Galerias:show.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+<script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script> <!-- jQuery UI -->
+
+<!-- jQuery Notification - Noty -->
+<script src="{{asset('js/jquery.noty.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/themes/default.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/bottom.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/topRight.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/top.js')}}"></script> <!-- jQuery Notify -->
+<!-- jQuery Notification ends -->
+
+<script src="{{asset('js/datatables/js/jquery.dataTables.js')}}"></script>
+
+<script src="{{asset('js/sparklines.js')}}"></script> <!-- Sparklines -->
+<script src="{{asset('js/jquery.cleditor.min.js')}}"></script> <!-- CLEditor -->
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script> <!-- Date picker -->
+<script src="{{asset('js/jquery.uniform.min.html')}}"></script> <!-- jQuery Uniform -->
+<script src="{{asset('js/jquery.slimscroll.min.js')}}"></script> <!-- jQuery SlimScroll -->
+<script src="{{asset('js/bootstrap-switch.min.js')}}"></script> <!-- Bootstrap Toggle -->
+<script src="{{asset('js/bootbox.min.js')}}"></script> <!-- Filter for support page -->
+<script src="{{asset('js/custom.js')}}"></script> <!-- Custom codes -->
+<script src="{{asset('bundles/publicaciones/js/app_galeria.js')}}"></script> 
+<script>
+$(document).ready(function() {
+    window.api = {
+      url: '{{path('api_1_get_galerias')}}',
+      publicacion: 0,
+      usuario: 0,
+      tipos: {
+          {% for key, value in tipos %}
+            '{{value}}':{{key}},
+          {% endfor %}
+      },
+      accion: {
+          guardar: false,
+          eliminar: false,
+          up: false,
+          down: false,
+      },
+      modelo: {
+        id: 0,
+        registro: "",
+        
+      },
+    };
+    $(".loader").fadeIn();
+    window.routers.app = new Galerias.Routers.App();
+    window.collections.galerias = new Galerias.Collections.Galerias();
+    window.collections.galerias.url=window.api.url;
+    var xhr = window.collections.galerias.fetch();
+    xhr.done(function(){
+        $(".loader").fadeOut();
+        Backbone.history.start({
+            root : '/',
+            pushState:false
+        });
+    });
+});
+</script>
+{% endblock %}
+

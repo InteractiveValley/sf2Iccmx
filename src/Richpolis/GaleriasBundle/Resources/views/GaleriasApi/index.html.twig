@@ -1,0 +1,62 @@
+{# list usuarios #}
+{% raw %}
+<script type="text/template" id="table_template">
+<!-- Table -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget">
+            <div class="widget-head">
+                <div class="pull-left">Registro de Categorias</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-content">
+                <table id="datatable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Thumbnail</th>
+                            <th>Tipo</th>
+                            <th>Publicacion</th>
+                            <th>Posicion</th>
+                            <th>Activo?</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla">
+                       
+                    </tbody>
+                </table>
+                <div class="widget-foot">
+                    <br><br>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/template" id="item_table_template">
+    <td>{{ id }}</td>
+    <td><img src="{{webPathThumbnail}}" style="max-width: 60px;"/></td>
+    <td>{{ stringTipo }}</td>
+    <td>{{ publicacion.titulo }}</td>
+    <td>{{ position }}</td>
+    <td>
+    {% if is_active %}
+        <i class="fa fa-check-circle"></i>
+    {% else %}
+        <i class="fa fa-circle"></i>
+    {% endif %}
+    </td>
+    <td class="acciones">
+        <a href="#edit/{{id}}" class="btn btn-xs btn-warning">
+            <i class="fa fa-pencil"></i> 
+        </a>
+        <a href="#show/{{id}}" class="btn btn-xs btn-info">
+            <i class="fa fa-folder-open"></i>
+        </a>
+    </td>
+</script> 
+
+{% endraw %}

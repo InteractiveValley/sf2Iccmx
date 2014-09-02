@@ -1,0 +1,207 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block stylesheets%}
+    <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+  <!-- Font awesome icon -->
+  <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}"> 
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="{{asset('css/jquery-ui-1.9.2.custom.min.css')}}"> 
+  <!-- Calendar -->
+  <link rel="stylesheet" href="{{asset('css/fullcalendar.css')}}">
+  <!-- prettyPhoto -->
+  <link rel="stylesheet" href="{{asset('css/prettyPhoto.css')}}">  
+  <!-- Star rating -->
+  <link rel="stylesheet" href="{{asset('css/rateit.css')}}">
+  <!-- Date picker -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
+  <!-- CLEditor -->
+  <link rel="stylesheet" href="{{asset('css/jquery.cleditor.css')}}"> 
+  <!-- Uniform -->
+  <link rel="stylesheet" href="{{asset('css/uniform.default.html')}}"> 
+  <!-- Uniform -->
+  <link rel="stylesheet" href="{{asset('css/daterangepicker-bs3.css')}}" />
+  <!-- Bootstrap toggle -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap-switch.css')}}">
+    <!-- Bootstrap toggle -->
+  <link rel="stylesheet" href="{{asset('js/datatables/css/dataTables.bootstrap.css')}}">
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <!-- Widgets stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/widgets.css')}}">   
+    <!-- Gritter Notifications stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/jquery.gritter.css')}}"> 
+
+{% endblock %}
+
+{% block mainbar %}
+          <!-- Main bar -->
+    <div class="mainbar">
+      
+      <!-- Page heading -->
+      <div class="page-head">
+        <h2 class="pull-left">Configuraciones</h2>
+        <div class="clearfix"></div>
+        <!-- Breadcrumb -->
+        <div class="bread-crumb">
+          <a href="{{path('backend_homepage')}}"><i class="fa fa-home"></i>Dashboard</a--> 
+          <Divider>
+          <span class="divider">/</span> 
+          <a href="{{path('configuraciones')}}" class="bread-current">Configuraciones</a>
+          {% if is_granted('ROLE_SUPER_ADMIN') %}
+          <a href="{{path('configuraciones_select')}}" class="btn btn-info pull-right" style="color: white; margin-left: 5px;">Crear configuracion</a>
+          {% endif %}
+        </div>
+        
+        <div class="clearfix"></div>
+
+      </div>
+      <!-- Page heading ends -->
+
+      <!-- Matter -->
+
+      <div class="matter">
+        <div class="container">
+
+          <!-- Table -->
+
+            <div class="row">
+
+              <div class="col-md-12">
+
+                <div class="widget">
+
+                <div class="widget-head">
+                  <div class="pull-left">Registro de configuraciones</div>
+                  <!--div class="widget-icons pull-right">
+                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                    <a href="#" class="wsettings"><i class="fa fa-wrench"></i></a>  
+                    <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                  </div-->  
+                  <div class="clearfix"></div>
+                </div>
+
+                  <div class="widget-content">
+
+                    <table id="datatable" class="table table-striped table-bordered table-hover">
+                      <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Configuracion</th>
+                            <th>Tipo</th>
+                            <th>Contenido</th>
+                            <th>Activo?</th>
+                            <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for entity in entities %}
+                            <tr id="registro-{{entity.id}}">
+                                <td><a href="{{ path('configuraciones_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                <td>{{ entity.configuracion }}</td>
+                                <td>{{ entity.stringtipoconfiguracion }}</td>
+                                <td>
+                                    {% if entity.isImagen %}
+                                        <img src="{{ entity.webPath }}" style="max-width: 200px;"/>
+                                    {% else %}    
+                                        {{ entity.texto | raw }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if entity.isActive %}
+                                        <i class="fa fa-check-circle"></i>
+                                    {% else %}
+                                        <i class="fa fa-circle"></i>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <button onclick="javascript:editarRegistro('{{ path('configuraciones_edit', { 'id': entity.id }) }}')" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
+                                    <button onclick="javascript:editarRegistro('{{ path('configuraciones_show', { 'id': entity.id }) }}','#registro-{{entity.id}}')" class="btn btn-xs btn-info"><i class="fa fa-folder-open"></i> </button>
+                                </td>
+                                
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+
+                    <div class="widget-foot">
+                       <br><br>
+                      <div class="clearfix"></div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+        </div>
+      </div>
+
+    <!-- Matter ends -->
+
+    </div>
+
+   <!-- Mainbar ends -->        
+   <div class="clearfix"></div>
+  
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+<script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script> <!-- jQuery UI -->
+<script src="{{asset('js/fullcalendar.min.js')}}"></script> <!-- Full Google Calendar - Calendar -->
+<script src="{{asset('js/jquery.rateit.min.js')}}"></script> <!-- RateIt - Star rating -->
+<script src="{{asset('js/jquery.prettyPhoto.js')}}"></script> <!-- prettyPhoto -->
+
+<!-- jQuery Flot -->
+<script src="{{asset('js/excanvas.min.js')}}"></script>
+<script src="{{asset('js/jquery.flot.js')}}"></script>
+<script src="{{asset('js/jquery.flot.resize.js')}}"></script>
+<script src="{{asset('js/jquery.flot.pie.js')}}"></script>
+<script src="{{asset('js/jquery.flot.stack.js')}}"></script>
+
+<!-- jQuery Notification - Noty -->
+<script src="{{asset('js/jquery.noty.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/themes/default.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/bottom.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/topRight.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/top.js')}}"></script> <!-- jQuery Notify -->
+<!-- jQuery Notification ends -->
+
+<script src="{{asset('js/datatables/js/jquery.dataTables.js')}}"></script>
+
+<script src="{{asset('js/sparklines.js')}}"></script> <!-- Sparklines -->
+<script src="{{asset('js/jquery.cleditor.min.js')}}"></script> <!-- CLEditor -->
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script> <!-- Date picker -->
+<script src="{{asset('js/jquery.uniform.min.html')}}"></script> <!-- jQuery Uniform -->
+<script src="{{asset('js/jquery.slimscroll.min.js')}}"></script> <!-- jQuery SlimScroll -->
+<script src="{{asset('js/bootstrap-switch.min.js')}}"></script> <!-- Bootstrap Toggle -->
+<script src="{{asset('js/bootbox.min.js')}}"></script> <!-- Filter for support page -->
+<script src="{{asset('js/custom.js')}}"></script> <!-- Custom codes -->
+<script src="{{asset('js/charts.js')}}"></script> <!-- Charts & Graphs -->
+
+
+<script>
+var editarRegistro = function(url){
+        location.href=url;
+};
+
+$(document).ready(function() {
+    $('#datatable').dataTable({
+        "sPaginationType": "full_numbers",
+        "sNext":"Siguiente",
+        "sLast":"Ultimo",
+        "sFirst":"Primero",
+        "sPrevious": "Anterior",
+    });
+});
+</script>
+
+    
+{% endblock %}
+

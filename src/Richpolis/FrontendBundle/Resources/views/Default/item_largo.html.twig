@@ -1,0 +1,21 @@
+<article class="item-noticia item-noticia-lg">
+    <a href="{{path('frontend_publicaciones',{'slug': noticia.slug})}}">
+        {% if noticia.imagen | length > 0 %}
+            <figure class="thumbnail-mediana">
+                <img src="{{ noticia.webPath | imagine_filter('imagen_302_126') }}" alt="{{noticia.titulo}}"/>
+            </figure>
+        {% elseif noticia.galerias | length > 0 %}
+            <figure class="thumbnail-mediana">
+                <img src="{{ noticia.galerias[0].webPath | imagine_filter('imagen_302_126') }}" alt="{{noticia.galerias[0].titulo}}"/>
+            </figure>
+        {% else %}
+            <figure class="thumbnail-mediana">
+                <img src="http://placehold.it/302x126/ffffff/ffffff" alt=""/>
+            </figure>
+        {% endif %}    
+        <h3 class="titulo">
+            {{noticia.titulo}}
+        </h3>
+    </a>
+    {{noticia.descripcion | striptags | truncate(100,true,'...') | raw }}
+</article>

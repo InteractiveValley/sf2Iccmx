@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Gracias!{% endblock %}
+
+{% block body %}
+<table>
+    <thead>
+	<tr colspan="2">
+		<th>Mensaje desde HGrupoEditorial.com</th>
+	</tr>
+    </thead>
+    <tbody>
+	<tr>
+		<td style="background-color: gray;color: white;">
+			Nombre:
+		<td>
+		<td>
+			{{datos.name}}
+		<td>
+	</tr>
+	<tr>
+		<td style="background-color: gray;color: white;">
+			Email:
+		<td>
+		<td>
+			{{datos.email}}
+		<td>
+	</tr>	
+	<tr>
+		<td style="background-color: gray;color: white;">
+			Asunto:
+		<td>
+		<td>
+			{{datos.subject}}
+		<td>
+	</tr>
+        <tr>
+		<td style="background-color: gray;color: white;">
+			Telefono:
+		<td>
+		<td>
+			{{datos.telefono}}
+		<td>
+	</tr>
+	<tr>
+		<td style="background-color: gray;color: white;">
+			Mensaje:
+		<td>
+		<td>
+			{{datos.body | raw }}
+		<td>
+	</tr>
+    </tbody>
+</table>
+{% endblock %}

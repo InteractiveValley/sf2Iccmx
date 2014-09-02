@@ -1,0 +1,52 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block contenido %}
+  
+  <section class="padding columna-2">
+        <article class="estatica" data-class="list-noticias categoria">
+            <header>
+                <h2 class="titulo">
+                    <span class="azul">{{ categoria }}</span>
+                </h2>
+            </header>
+            <section class="noticias padding-left">
+                {% if categoria.nivel > 0 %}
+                    <span class="nivel"> {{categoria.parent}}/{{categoria}}</span>
+                {% else %}
+                    <span class="nivel"> {{categoria}} </span>
+                {% endif %}
+
+                {% for noticia in pagination %}
+                    {% include 'FrontendBundle:Default:item_largo.html.twig' with {'noticia': noticia} %}
+                {% endfor %}
+            </section>
+        </article>
+        {{ knp_pagination_render(pagination) }}
+        {% if categoria.children | length > 0 %}
+            {% for child in categoria.children %}
+                {% if child.contPublicaciones > 0 %}
+                <article class="list-noticias">
+                    <header>
+                        <h2 class="titulo nacional">
+                            {{child.categoria}}
+                        </h2>
+                    </header>
+                    <section class="noticias">
+                        {% for categoria in child.publicaciones | slice(0, 3) %}
+                           {% include 'FrontendBundle:Default:item_chico.html.twig' with {'noticia': publicacion } %}
+                        {% endfor %}
+                    </section>
+                    <p class="cargador azul">
+                        cargar mas notas <span class="cargar-mas-notas azul">+</span>
+                    </p>
+                </article>
+                {% endif %}    
+            {% endfor %}    
+        {% endif %}    
+    </section>	
+    {# include 'FrontendBundle:Default:aside.html.twig' #}        
+    {{render(controller('FrontendBundle:Default:aside'))}}
+    <!--p class="padding">
+        <button class="ver-archivos">Archivos</button>    
+    </p-->
+{% endblock %}

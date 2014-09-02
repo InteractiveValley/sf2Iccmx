@@ -1,0 +1,15 @@
+<div id="image-loader" style="display: none;">
+     <img src="/images/bx_loader.gif"/>
+</div>
+<div class="row-fluid">
+    <ul id="gallery" class="gallery">
+    {% for entity in galerias %}
+         <li id="registro-{{entity.id}}" class="galeria-item-li">    
+         {% include "GaleriasBundle:Galeria:item.html.twig" with { 'galeria': entity, 'url_delete': url_delete } %}
+         </li><!--/span-->        
+    {% else %}
+        Sin registros
+    {% endfor %}
+   </ul>     
+</div>
+

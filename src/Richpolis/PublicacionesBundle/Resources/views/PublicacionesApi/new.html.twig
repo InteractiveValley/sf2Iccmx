@@ -1,0 +1,26 @@
+{# nuevo usuario #}
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget">
+            <div class="widget-head">
+                <div class="pull-left">Nueva publicacion</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-content">
+                <div class="padd">
+                    <!-- Form starts.  -->
+                    <form action="{{path('api_1_post_publicacion')}}" class="validate" id="formPublicaciones" method="post" {{ form_enctype(form)}}>
+                        {{form_widget(form)}}
+                    </form>
+                </div>
+            </div>
+            <div class="widget-foot">
+                <button id="botonRegresar" class="btn btn-default">Regresar</button>
+                <button id="botonGuardar" class="btn btn-primary">Crear publicacion</button>                     
+            </div>
+        </div>  
+    </div>
+</div>
+<div id="contenedorEditor">
+    {# tinymce_init() #}
+</div>                        

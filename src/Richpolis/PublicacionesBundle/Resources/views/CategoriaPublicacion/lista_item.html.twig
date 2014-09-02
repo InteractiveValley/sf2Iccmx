@@ -1,0 +1,17 @@
+<tr id="registro-{{entity.id}}"  class="{% if entity.nivel == 0 %}categoria-principal{% else %}subcategoria{% endif %}">
+    <td><a href="{{ path('categorias_publicaciones_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+    <td>{% if entity.nivel == 0%}Principal{% else %} Subcategoria {% endif %}</td>
+    <td>{{ entity.nivelCategoria }}</td>
+    <td>
+        {% if entity.isActive %}
+            <i class="fa fa-check-circle"></i>
+        {% else %}
+            <i class="fa fa-circle"></i>
+        {% endif %}
+    </td>
+    <td>
+        <button onclick="javascript:editarRegistro('{{ path('categorias_publicaciones_edit', { 'id': entity.id }) }}')" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
+        <button onclick="javascript:editarRegistro('{{ path('categorias_publicaciones_show', { 'id': entity.id }) }}', '#registro-{{entity.id}}')" class="btn btn-xs btn-info"><i class="fa fa-folder-open"></i> </button>
+        <button onclick="javascript:editarRegistro('{{ path('publicaciones_categoria', { 'slug': entity.slug }) }}', '#registro-{{entity.id}}')" class="btn btn-xs btn-info"><i class="fa fa-files-o"></i> </button>
+    </td>
+</tr>

@@ -1,0 +1,195 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
+{% endblock %}    
+
+{% if publicacion.imagen | length > 0 %}
+   {% set portada = 'publicaciones/' ~ publicacion.imagen %}
+{% elseif publicacion.galerias | length > 0 %}
+   {% set portada = 'galerias/' ~ publicacion.galerias[0].archivo %} 
+{% else %}   
+   {% set portada = 'images/heraldologo.png' %}
+{% endif %}    
+
+
+
+{% set urlAbsolutaFoto = 'http://'
+                             ~ app.request.server.get('SERVER_NAME')
+                             ~ 'uploads/' ~ portada %}
+
+{% block redes_sociales %}
+
+    <meta property="og:url" content="{{url('frontend_tu_espacio',{'slug': publicacion.slug})}}" />
+    <meta property="og:title" content="{{ publicacion.titulo }}" />
+    <meta property="og:description" content="{{ publicacion.descripcion | striptags | truncate(250,true,'...') | raw  }}" />
+    {% if publicacion.imagen | length > 0 %}
+    <meta property="og:image" content="{{ publicacion.webPath | imagine_filter('imagen_120_90') }}" />
+    {% elseif publicacion.galerias | length > 0 %}
+    <meta property="og:image" content="{{ publicacion.galerias[0].webPath | imagine_filter('imagen_120_90') }}" />    
+    {% endif %}    
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="heraldodetoluca.com.mx" />
+    <!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@heraldodetoluca">
+    <meta name="twitter:title" content="{{ publicacion.titulo }}">
+    <meta name="twitter:description" content="{{publicacion.descripcion | striptags | truncate(250,true,'...')}}">
+    <meta name="twitter:creator" content="@richpolis">
+    <meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
+    <meta name="twitter:domain" content="{{url('homepage')}}">
+    <meta name="twitter:app:name:iphone" content="">
+    <meta name="twitter:app:name:ipad" content="">
+    <meta name="twitter:app:name:googleplay" content="">
+    <meta name="twitter:app:url:iphone" content="">
+    <meta name="twitter:app:url:ipad" content="">
+    <meta name="twitter:app:url:googleplay" content="">
+    <meta name="twitter:app:id:iphone" content="">
+    <meta name="twitter:app:id:ipad" content="">
+    <meta name="twitter:app:id:googleplay" content="">
+
+{% endblock %}
+
+{% block contenido %}
+    <section class="padding columna-3">
+        <article class="relacionados">
+            <section class="noticias padding-left carrusel" style="padding-left: 20px;">
+                {% for noticia in relacionados if noticia.id != publicacion.id %}
+                    {% include 'FrontendBundle:Default:item_relacionado.html.twig' with {'noticia': noticia } %}
+                {% endfor %}
+            </section>
+		</article>
+    </section>
+    <section class="padding columna-2">
+        <article class="publicacion-completa">
+            <header>
+                <h2 class="titulo">
+                    {{ publicacion.titulo }}
+                </h2>
+                <span class="datetime">{{ publicacion.createdAt|date("m/d/Y g:ia","America/Mexico_City")}}</span>
+            </header>
+            <div class="contenido">
+                <div class="contenedor-galeria">
+                    {% if publicacion.imagen | length > 0 %}
+                        <img src="{{publicacion.webPath | imagine_filter('imagen_grande') }}" alt="{{publicacion.titulo}}" class="imagen"/>           
+                    {% elseif publicacion.galerias | length > 0 %}
+                    <ul class="galeria">
+                        {% for galeria in publicacion.galerias %}
+                            <li class="item">
+                                {% if galeria.isImagen %}
+                                <img src="{{galeria.webPath | imagine_filter('imagen_grande') }}" alt="{{galeria.titulo}}" class="imagen"/>
+                                {% else %}
+                                {{ galeria.archivoView | raw }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p style="color: white;">sin imagen</p>
+                    {% endif %}
+                </div>
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_sharing_toolbox"></div>
+                {{publicacion.descripcion | raw }}
+            </div>
+        </article>
+        {% if comentarios | length > 0 %}        
+         <article class="comentarios-formulario">
+            <header>
+                <h2 class="titulo">
+                    {{publicacion.contComentarios ~ (publicacion.contComentarios > 1?' comentarios':' comentario')}}
+                </h2>
+            </header>
+            <section class="comentarios">
+                {% for comentario in comentarios if comentario.nivel == 0 %}
+                    {% include 'FrontendBundle:Default:comentario.html.twig' with {'comentario': comentario } %}
+                {% endfor %}
+            </section>
+        </article>
+        {% endif %}
+        <article class="comentarios-formulario">
+            <header>
+                <h2 class="titulo">
+                    Deja tu comentario
+                </h2>
+            </header>
+                <form action="{{ path('frontend_publicaciones',{'slug': publicacion.slug}) }}" class="validate" id="formComentarios" method="post" {{ form_enctype(form)}}>
+                    <span class="closeForm boton" style="display: none;" onclick="javascript:closeForm()">X</span>
+                    {{form_errors(form)}}
+                    <div class="controles-izquierdos">
+                        {{form_row(form.username)}}
+                        {{form_row(form.email)}}
+                    </div>
+                    <div class="controles-derechos">
+                        {{form_row(form.message)}}
+                    </div>
+                    {{form_rest(form)}}
+                    <div class="group-control">
+                        <input type="submit" value="Enviar"/>
+                    </div>
+                </form>
+       </article>  
+    </section>	
+    {% if contar == true %}        
+    {{render(controller('FrontendBundle:Default:aside'))}}
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+<script type="text/javascript">
+    var $boton;
+    $(document).ready(function(){
+        $('.carrusel').bxSlider({
+              auto: false,
+			  minSlides: 3,
+			  maxSlides: 3,
+			  slideWidth: 246,
+			  slideMargin: 40,
+			  pager: false,
+          });
+		{% if publicacion.galerias | length > 1 %}  
+		$('.galeria').bxSlider({
+              mode: 'fade',
+              autoHover:true,
+              auto: true,
+          });
+		{% else %}
+		$('.galeria').bxSlider({
+              auto: false,
+			  pager: true,
+          });
+		{% endif %} 
+		  
+        $(".bx-prev").addClass('ico_carrusel_inicio_izq');
+        $(".bx-next").addClass('ico_carrusel_inicio_der');
+        
+		$("article.relacionados .bx-prev").css({'left': '-30px'});
+		$("article.relacionados .bx-next").css({'right': '-30px'});
+		
+        $(".boton-responder").on("click",function(){
+            $boton = $(this);
+            var $controles = $boton.parent();
+            var idComentario = $boton.data('comentario');
+            var $formulario = $("<form>");
+            var $divComentarioFormulario = $("<div>");
+            var $formComentarios = $("#formComentarios");
+            $formulario.attr('action',$formComentarios.attr('action'));
+            $formulario.attr('method','post');
+            $formulario.html($formComentarios.html());
+            $divComentarioFormulario.attr('id','formulario-comentario-'+idComentario);
+            $divComentarioFormulario.addClass('formulario-comentario');
+            $divComentarioFormulario.append($formulario);
+            $controles.after($divComentarioFormulario)
+            $formulario.find(".closeForm").fadeIn();
+            $formulario.find("#richpolis_comentariosbundle_comentario_parent").val(idComentario);
+            $boton.fadeOut();
+        });
+    });
+function closeForm(){
+   $(".formulario-comentario").remove();
+   $boton.fadeIn();
+}
+</script>
+{% endblock %}    

@@ -1,0 +1,9 @@
+<ul>
+    {% for key, value in tipos %}
+        <li>
+            <a href="{{ path('publicidad_por_tipo', { 'tipoPublicidad': key }) }}"> 
+                <span>{{ value }}</span>
+            </a> 
+        </li>
+    {% endfor %}
+</ul>

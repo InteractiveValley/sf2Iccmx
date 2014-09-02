@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Para implementar paginador personalizado en Heraldo Toluca.
+ *
+ * @author Pablo Díez <pablodip@gmail.com>
+ * @author Jan Sorgalla <jsorgalla@gmail.com>
+ * @author Artem Ponomarenko <imenem@inbox.ru>
+ * @autor Ricardo Alcantara <richpolis@gmail.com>
+ */
+#}
+
+<!--div class="pgn">
+            <a href="#">
+                <span class="prv ico_paginador_izq"></span>
+            </a>
+            <div class="pgs">
+                <a href="#" class="page">1</a>
+                <span class="cur">2</span>
+                <a href="#" class="page">3</a>
+                <a href="#" class="page">4</a>
+                <a href="#" class="page">5</a>
+                <a href="#" class="page">6</a>
+                <a href="#" class="page">7</a>
+                <a href="#" class="page">8</a>
+                <a href="#" class="page">9</a>
+                <a href="#" class="page">10</a>
+            </div>
+            <a href="#">
+                <span class="nxt ico_paginador_der"></span>
+            </a>
+        </div-->
+
+{% if pageCount > 1 %}
+<div class="pgn">
+    {% if previous is defined %}
+      <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
+          <span class="prv ico_paginador_izq"></span>
+      </a>
+    {% else %}
+       <span class="prv ico_paginador_izq"></span>
+    {% endif %}
+    
+    <div class="pgs">
+    {% for page in pagesInRange %}
+        {% if page != current %}
+            <a href="{{ path(route, query|merge({(pageParameterName): page})) }}"  class="page">{{ page }}</a>
+        {% else %}
+            <span class="cur">{{ page }}</span>
+        {% endif %}
+    {% endfor %}
+    </div>
+    
+    {% if next is defined %}
+        <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+            <span class="nxt ico_paginador_der"></span>
+        </a>
+    {% else %}
+        <span class="nxt ico_paginador_der"></span>
+    {% endif %}
+    </ul>
+</div>
+{% endif %}

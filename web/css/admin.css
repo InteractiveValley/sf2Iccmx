@@ -1,0 +1,157 @@
+/* 
+    Created on : 17/04/2014, 12:16:33 PM
+    Author     : richpolis
+*/
+
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('/images/page-loader.gif') 50% 50% no-repeat transparent;
+}
+
+.gallery li { 
+    float: left; 
+    padding: 0.4em; 
+    margin: 0 0.4em 0.4em 0; 
+    text-align: center; 
+    list-style-type: none; 
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+.gallery li h5 { 
+    margin: 0 0 0.4em; 
+    cursor: move; 
+    font-size: small; 
+    font-weight: normal; 
+    background-color: #00438A;
+    color: white;
+    
+}
+.gallery li img {  
+    max-width: 145px;
+    max-height: 90px;
+    cursor: move; 
+}
+
+.gallery li p {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+    width: 100%;
+}
+
+.pagination ul li a{
+    color: black;
+}
+
+.galeria-item-li{
+    border: 1px solid silver;
+    
+}
+
+.galeria-item-li button{
+    height: 40px;
+    width: 40px;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.galeria-item-li:hover button{
+    opacity: 1;
+}
+
+.tipo-categoria{
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+#map { 
+  width:80%; 
+  height:400px; 
+  padding: 0 10%;
+}
+
+.image-dialog{
+    max-width: 300px;
+    max-height: 250px;
+}
+
+.botonUploadVideoLink{
+    margin: 30px 200px;
+    font-weight: bold;
+    font-size: 1.3em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background: #f2f2f2;
+    color: #3366cc;
+    border: 1px solid #ccc;
+    width: 350px;
+    cursor: pointer !important;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    height: 40px;
+}
+
+.is-principal, .in-carrusel{
+    font-size: 20px;
+}
+
+td.is-principal{
+    text-align: center;
+}
+
+td.in-carrusel{
+    text-align: center;
+}
+
+td.titulo
+{
+    position: relative;
+    height: 80px;
+}
+
+td.titulo .badge
+{
+    font-size: 10px;
+}
+
+td.titulo .visitas-comentarios
+{
+    position: absolute;
+    bottom: 0px;
+    font-size: 10px;
+    overflow: hidden;
+    width: 100%;
+    
+}
+
+td.titulo .visitas-comentarios .visitas,
+td.titulo .visitas-comentarios .comentarios
+{
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+td.titulo .visitas-comentarios .comentarios
+{
+    margin-right: 20px;
+}
+
+.comentario-publicacion{width:100%;}
+.comentario-publicacion > .contenido{padding-left:16px;}
+.comentario-publicacion > .contenido p{margin-bottom:5px;margin-top:5px}
+.comentario-publicacion > .contenido .fecha{color:#808080;font-size:12px;font-style:italic}
+.comentario-publicacion > .contenido .publicado-por{display:block;font-size:14px;color:#000;}
+.comentario-publicacion > .contenido .publicado-por .username{font-style:normal;font-weight:bold;text-transform:capitalize}
+.comentario-publicacion > .contenido .contenido{font-size:14px;font-style:italic;padding-left:0}
+.comentario-publicacion figure,.comentario-publicacion .contenido.con-imagen{display:inline-block;vertical-align:top}
+.comentario-publicacion figure{margin:0}

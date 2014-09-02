@@ -1,0 +1,156 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .bootstrap-frm {
+            margin-left:auto;
+            margin-right:auto;
+
+            max-width: 500px;
+            background: #FFF;
+            padding: 20px 30px 20px 30px;
+            font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #888;
+            text-shadow: 1px 1px 1px #FFF;
+            border:1px solid #DDD;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+        }
+        .bootstrap-frm .form-group {
+            display: block;
+            margin: 0px 0px 5px;
+            position: relative;
+        }
+        .bootstrap-frm .form-group>label {
+            float: left;
+            width: 20%;
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 10px;
+            color: #333;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .bootstrap-frm input[type="text"], 
+        .bootstrap-frm input[type="email"], 
+        .bootstrap-frm textarea, 
+        .bootstrap-frm select{
+            border: 1px solid #CCC;
+            color: #888;
+            height: 20px;
+            line-height:15px;
+            margin-bottom: 16px;
+            margin-right: 6px;
+            margin-top: 2px;
+            outline: 0 none;
+            padding: 5px 0px 5px 5px;
+            width: 70%;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;    
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+        .bootstrap-frm select {
+            background: #FFF url('down-arrow.png') no-repeat right;
+            background: #FFF url('down-arrow.png') no-repeat right;
+            appearance:none;
+            -webkit-appearance:none; 
+            -moz-appearance: none;
+            text-indent: 0.01px;
+            text-overflow: '';
+            width: 70%;
+            height: 35px;
+            line-height:15px;
+        }
+        .bootstrap-frm textarea{
+            height:100px;
+            padding: 5px 0px 0px 5px;
+            width: 70%;
+        }
+        .bootstrap-frm input[type="submit"] {
+            background: #FFF;
+            border: 1px solid #CCC;
+            padding: 10px 25px 10px 25px;
+            color: #333;
+            border-radius: 4px;
+        }
+        .bootstrap-frm input[type="submit"]:hover {
+            color: #333;
+            background-color: #EBEBEB;
+            border-color: #ADADAD;
+        }
+        .bootstrap-frm span.errores {
+            color: red;
+            position: relative;
+            top: -10px;
+            left: 112px;
+        }
+        .bootstrap-frm span.errores ul {
+            margin: 0;
+            padding: 0;
+        }
+        .bootstrap-frm span.errores ul li {
+            list-style: none;
+        }
+        
+    </style>
+{% endblock %}
+
+{% block contenido %}
+<section class="padding columna-2">
+    <article class="estatica">
+        <header>
+            <h2 class="titulo">
+                <span>contacto</span>
+            </h2>
+        </header>
+        <p>
+        {% include 'FrontendBundle:Default:formContacto.html.twig' with {'form': form } %}
+        </p>
+    </article>    
+    <article class="contacto formulario">
+        <div class="contenido">
+           {{ pagina.contenido | raw }}
+        </div>
+    </article>
+ </section>
+    
+    {{render(controller('FrontendBundle:Default:aside'))}}
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{asset('js/main.js')}}"></script>
+<script>
+    function iniciarlizarFormContacto(){
+        $("input.form-submit").click( function() {
+            $('img.ajax-loader').css({visibility: 'visible'});
+            $("img.ajax-loader").fadeIn("fast",function(){
+                $.post("{{path('frontend_contacto')}}",$("form.form-contacto").serialize(),
+                function(data){
+                    //alert(data);
+                    actualizaFormularioContacto(data);
+                    setTimeout(function(){
+                        $("#formulario_contacto").find(".form-response-output").fadeOut("fast");
+                    },2000);
+                    
+                });    
+            });
+        });
+    }
+
+    function actualizaFormularioContacto(data){
+      $("#formulario_contacto").parent().html(data).fadeIn("fast");
+      iniciarlizarFormContacto();
+    }
+$(document).on('ready',iniciarlizarFormContacto); 
+
+
+</script>
+{% endblock %}

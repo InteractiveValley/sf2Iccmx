@@ -1,0 +1,36 @@
+<ul>
+{% for categoria in entities if categoria.nivel == 0 %}
+    {% set children = categoria.children | length %}
+    {% if children > 0 %}
+    <li class="has_sub">
+        <a href="#"> 
+            <span>{{ categoria.nivelCategoria }}</span>
+            <span class="pull-right"><i class="fa fa-chevron-left"></i></span>
+        </a>
+        <ul>
+            <li>
+                <a href="{{ path('publicaciones_categoria', { 'slug': categoria.slug }) }}"> 
+                    <span>{{ categoria.nivelCategoriaSinParent }}</span>
+                    <!--span class="pull-right badge">{{categoria.contPublicaciones}}</span-->
+                </a> 
+            </li>
+            {% for child in categoria.children %}
+            <li>
+                <a href="{{ path('publicaciones_categoria', { 'slug': child.slug }) }}"> 
+                    <span>{{ child.nivelCategoriaSinParent }}</span> 
+                    <!--span class="pull-right badge">{{child.contPublicaciones}}</span-->
+                </a> 
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% else %}    
+        <li>
+            <a href="{{ path('publicaciones_categoria', { 'slug': categoria.slug }) }}"> 
+                <span>{{ categoria.nivelCategoria }}</span>
+                <!--span class="pull-right badge">{{categoria.contPublicaciones}}</span-->
+            </a> 
+        </li>
+    {% endif %}    
+{% endfor %}
+</ul>

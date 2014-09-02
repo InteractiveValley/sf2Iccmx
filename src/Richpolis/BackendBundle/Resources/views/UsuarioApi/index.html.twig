@@ -1,0 +1,81 @@
+{# list usuarios #}
+{% raw %}
+<script type="text/template" id="table_template">
+<!-- Table -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget">
+            <div class="widget-head">
+                <div class="pull-left">Registro de Usuarios</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-content">
+                <table id="datatable" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Imagen</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Nombre</th>
+                            <th>Grupo</th>
+                            <th>Twitter</th>
+                            <th>Facebook</th>
+                            <th>Creado</th>
+                            <th>Actualizado</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla">
+                       
+                    </tbody>
+                </table>
+                <div class="widget-foot">
+                    <br><br>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/template" id="item_table_template">
+    <td>{{ id }}</td>
+    <td>
+        {% if imagen %}
+            <img src="{{webPath}}" style="max-width: 100px;"/>
+        {% else  %}
+            sin imagen 
+        {% endif %}
+    </td>
+    <td>{{ username }}</td>
+    <td>{{ email }}</td>
+    <td>{{ nombre }}</td>
+    <td>
+    {% if grupo == 1 %}
+        Grupo Usuarios
+    {% else if grupo == 2 %}
+        Grupo Administradores 
+    {% else %}
+        Superadmin
+    {% endif %}
+    </td>
+    <td>
+        {{ twitter }}
+     </td>
+    <td>
+        {{ facebook }}
+    <td>{{ created_at|date('d/m/Y') }}</td>
+    <td>{{ updated_at|date('d/m/Y') }}</td>
+    <td>
+        <a href="#edit/{{id}}" class="btn btn-xs btn-warning">
+            <i class="fa fa-pencil"></i> 
+        </a>
+        <a href="#show/{{id}}" class="btn btn-xs btn-info">
+            <i class="fa fa-folder-open"></i>
+        </a>
+    </td>
+</script> 
+
+{% endraw %}

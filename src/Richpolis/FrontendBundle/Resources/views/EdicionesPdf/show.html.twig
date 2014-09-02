@@ -1,0 +1,255 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block stylesheets%}
+    <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+  <!-- Font awesome icon -->
+  <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}"> 
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="{{asset('css/jquery-ui-1.9.2.custom.min.css')}}"> 
+  <!-- Calendar -->
+  <link rel="stylesheet" href="{{asset('css/fullcalendar.css')}}">
+  <!-- prettyPhoto -->
+  <link rel="stylesheet" href="{{asset('css/prettyPhoto.css')}}">  
+  <!-- Star rating -->
+  <link rel="stylesheet" href="{{asset('css/rateit.css')}}">
+  <!-- Date picker -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
+  <!-- CLEditor -->
+  <link rel="stylesheet" href="{{asset('css/jquery.cleditor.css')}}"> 
+  <!-- Uniform -->
+  <link rel="stylesheet" href="{{asset('css/uniform.default.html')}}"> 
+  <!-- Uniform -->
+  <link rel="stylesheet" href="{{asset('css/daterangepicker-bs3.css')}}" />
+  <!-- Bootstrap toggle -->
+  <link rel="stylesheet" href="{{asset('css/bootstrap-switch.css')}}">
+    <!-- Bootstrap toggle -->
+  <link rel="stylesheet" href="{{asset('js/datatables/css/dataTables.bootstrap.css')}}">
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <!-- Widgets stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/widgets.css')}}">   
+    <!-- Gritter Notifications stylesheet -->
+  <link rel="stylesheet" href="{{asset('css/jquery.gritter.css')}}"> 
+  <link rel="stylesheet" href="{{ asset('css/fileuploader.css') }}" type="text/css"/>
+  <link rel="stylesheet" href="{{ asset('css/prettyPhoto.css') }}" type="text/css"/>
+  <link rel="stylesheet" href="{{ asset('css/admin.css') }}" type="text/css"/>
+
+{% endblock %}
+
+{% block mainbar %}
+    <!-- Main bar -->
+    <div class="mainbar">
+
+        <!-- Page heading -->
+        <div class="page-head">
+            <h2 class="pull-left">Servicios</h2>
+            <div class="clearfix"></div>
+            <!-- Breadcrumb -->
+            <div class="bread-crumb">
+                <a href="{{path('backend_homepage')}}"><i class="fa fa-home"></i>Dashboard</a--> 
+                <Divider/>
+                <span class="divider">/</span> 
+                <a href="{{path('servicios')}}" class="bread-current">Servicios</a>
+                <a href="{{path('servicios_new')}}" class="btn btn-info pull-right" style="color: white; margin-left: 5px;">Crear servicio</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Page heading ends -->
+        <!-- Matter -->
+        <div class="matter">
+            <div class="container" id="contenidoPagina">
+                <div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="widget">
+                                <div class="widget-head">
+                                    <div class="pull-left">Servicio "{{entity.servicioEs}}"</div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="widget-content">
+                                    <div class="padd">
+                                        <div class="tabbable" style="margin-bottom: 18px;">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#sistema" data-toggle="tab">Sistema</a></li>
+                                                <li><a href="#galeria" data-toggle="tab">Imagenes</a></li>
+                                            </ul>
+                                            <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+                                                <div class="tab-pane active" id="sistema">
+                                                    <table>
+                                                        <tbody><tr>
+                                                                <td>Id:</td>
+                                                                <td>{{entity.id}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Servicio en español:</td>
+                                                                <td>{{ entity.servicioEs}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Descripcion Español:</td>
+                                                                <td>{{ entity.descripcionEs | raw }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Servicio en Ingles:</td>
+                                                                <td>{{ entity.servicioEn }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Descripcion Ingles:</td>
+                                                                <td>{{ entity.descripcionEn | raw }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Imagen:</td>
+                                                                <td>
+                                                                    {% if entity.imagen | length > 0 %}
+                                                                        <img src="{{ entity.webPath }}" style="max-width: 400px;"/>
+                                                                    {% else %}    
+                                                                        sin imagen
+                                                                    {% endif %}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Activo?:</td>
+                                                                <td>
+                                                                    {% if entity.isActive %}
+                                                                        <i class="fa fa-check-circle"></i>
+                                                                    {% else %}
+                                                                        <i class="fa fa-circle"></i>
+                                                                    {% endif %}
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="tab-pane" id="galeria">
+                                                    <div class="container-galeria">    
+                                                        {# seccion de codigo html #}
+                                                        <div id="lista_imagenes" style=" min-height: 400px; overflow: hidden;">
+                                                            {% include 'GaleriasBundle:Galeria:galerias.html.twig' with {'galerias': entity.galerias, 'url_delete': url_delete } %}
+                                                        </div>
+                                                        <table style="width: 99%; margin: 0 auto;">
+                                                            <tr>
+                                                                <td>
+                                                                    <div id="upload"></div>
+                                                                    Extenciones disponibles:   "jpeg","png","gif","jpg"
+                                                                    <!--List Files-->
+                                                                    <ul id="files" ></ul>
+                                                                    <div class="clear"></div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <!--button onclick="javascript:editarRegistro('{{path('galerias_new')}}?tipo=link_video&clase=autobus&idContenedor={{entity.id}}&return={{path('servicios_show',{'id':entity.id})}}#galeria')" class="botonUploadVideoLink">Crear Video Link</button-->
+                                                                    <button onclick="javascript:crearVideoLink()" class="botonUploadVideoLink">Crear Video Link</button>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="widget-foot">
+                                    <button id="botonRegresar" class="btn btn-default" onclick="javascript:regresar('{{path('servicios')}}')">Regresar</button>
+                                    <button id="botonEditar" class="btn btn-info" onclick="javascript:editarRegistro('{{path('servicios_edit',{id: entity.id})}}')">Editar</button>
+                                    <div style="float: left; margin-right: 3px;">
+                                        <form id="formEliminar" action="{{ path('servicios_delete', { 'id': entity.id }) }}" method="post">
+                                            <input name="_method" value="DELETE" type="hidden"/>
+                                            {{ form_widget(delete_form) }}
+                                        </form>
+					<button class="btn btn-danger " onclick="eliminarRegistro();">Eliminar</button>
+                                    </div>        
+                                </div>
+                            </div>  
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                        <!-- Matter ends -->
+
+    </div>
+
+    <!-- Mainbar ends -->        
+    <div class="clearfix"></div>
+
+{% include 'GaleriasBundle:Galeria:formulariosGaleria.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+<script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script> <!-- jQuery UI -->
+<script src="{{asset('js/fullcalendar.min.js')}}"></script> <!-- Full Google Calendar - Calendar -->
+<script src="{{asset('js/jquery.rateit.min.js')}}"></script> <!-- RateIt - Star rating -->
+<script src="{{asset('js/jquery.prettyPhoto.js')}}"></script> <!-- prettyPhoto -->
+
+<!-- jQuery Flot -->
+<script src="{{asset('js/excanvas.min.js')}}"></script>
+<script src="{{asset('js/jquery.flot.js')}}"></script>
+<script src="{{asset('js/jquery.flot.resize.js')}}"></script>
+<script src="{{asset('js/jquery.flot.pie.js')}}"></script>
+<script src="{{asset('js/jquery.flot.stack.js')}}"></script>
+
+<!-- jQuery Notification - Noty -->
+<script src="{{asset('js/jquery.noty.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/themes/default.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/bottom.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/topRight.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/top.js')}}"></script> <!-- jQuery Notify -->
+<!-- jQuery Notification ends -->
+
+<script src="{{asset('js/datatables/js/jquery.dataTables.js')}}"></script>
+
+<script src="{{asset('js/sparklines.js')}}"></script> <!-- Sparklines -->
+<script src="{{asset('js/jquery.cleditor.min.js')}}"></script> <!-- CLEditor -->
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script> <!-- Date picker -->
+<script src="{{asset('js/jquery.uniform.min.html')}}"></script> <!-- jQuery Uniform -->
+<script src="{{asset('js/jquery.slimscroll.min.js')}}"></script> <!-- jQuery SlimScroll -->
+<script src="{{asset('js/bootstrap-switch.min.js')}}"></script> <!-- Bootstrap Toggle -->
+<script src="{{asset('js/bootbox.min.js')}}"></script> <!-- Filter for support page -->
+<script src="{{asset('js/custom.js')}}"></script> <!-- Custom codes -->
+<script src="{{asset('js/charts.js')}}"></script> <!-- Charts & Graphs -->
+<script src="{{ asset('js/jquery.prettyPhoto.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/sfrichpolis.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/fileuploader.js') }}" type="text/javascript"></script>
+
+<script>
+var regresar = function(url){
+    location.href=url;
+};
+
+var editarRegistro = function(url){
+    location.href=url;
+};
+    
+var eliminarRegistro = function(){
+  {% if is_granted('ROLE_ADMIN') %}
+    bootbox.confirm("Esta seguro de eliminar el registro?", function(result) {
+      if(result){
+         $("#formEliminar").submit();
+      }
+    });
+  {% else %}
+    noty({text: 'No tienes los permisos suficientes para realizar esta accion',layout:'bottom', type:'warning', timeout:2000 });
+  {% endif %}      
+};
+
+</script>
+
+{% include 'GaleriasBundle:Galeria:formulariosGaleria.js.twig' with {'entity': entity, 'url_delete': url_delete, 'get_galerias': get_galerias, 'post_galerias': post_galerias, 'post_galerias_link_video': post_galerias_link_video } %}
+
+ <script>
+ $(document).on('ready',function(){
+     createUploader();
+     refrescarGaleria();
+     $('.loader').fadeOut();
+ });
+ </script>   
+{% endblock %}

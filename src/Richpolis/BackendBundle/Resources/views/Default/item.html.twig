@@ -1,0 +1,72 @@
+<tr id="registro-{{entity.id}}">
+    <td>{{ entity.categoria.nivelCategoria }}</td>
+    <td>
+        {% if entity.imagen | length > 0 %}
+            <img src="{{entity.thumbnailWebPath}}" style="max-height: 100px; max-width: 100px;"/>
+        {% else  %}
+            sin imagen 
+        {% endif %}
+    </td>
+    <td class="titulo">
+        {{ entity.titulo }}
+        <br/>
+        <p>
+        {{ entity.createdAt | date("d/m/Y") }}
+        </p>
+        <br/>
+        <p class="visitas-comentarios">
+            <span class="pull-left visitas">Vistas <strong>{{entity.contVisitas}}</strong></span>
+        <span class="pull-right comentarios">Comentarios <strong>{{entity.contComentarios}}</strong></span>
+        </p>
+    </td>
+    {% if entity.categoria.tipoCategoria is constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION') %}
+        <td class="is-principal" data-url="{{ path('backend_publicacion_is_principal',{'id': entity.id }) }}">
+            {% if is_granted('ROLE_ADMIN') %}
+                {% if entity.isPrincipal %}
+                    <button class="backend btn btn-success activo" onclick="javascript:backend({{entity.id}}, '.is-principal')"><i class="fa fa-check-square-o"></i></button>
+                {% else %}
+                    <button class="backend btn btn-info inactivo" onclick="javascript:backend({{entity.id}}, '.is-principal')"><i class="fa fa-square-o"></i></button>
+                {% endif %}    
+            {% else %}
+                {{ entity.isPrincipal | isActive | raw }}
+            {% endif %}    
+        </td>
+        <td class="in-carrusel" data-url="{{ path('backend_publicacion_in_carrusel',{'id': entity.id }) }}">
+            {% if entity.status <= constant('Richpolis\\PublicacionesBundle\\Entity\\Publicacion::STATUS_PUBLICADO') %}
+                {% if is_granted('ROLE_ADMIN') == false and entity.usuario.id != app.user.id %}
+                    {{ entity.isCarrusel | isActive | raw }}
+                {% elseif entity.isCarrusel %}
+                    <button class="backend btn btn-success activo" onclick="javascript:backend({{entity.id}}, '.in-carrusel')"><i class="fa fa-check-square-o"></i></button>
+                {% else %}
+                    <button class="backend btn btn-info inactivo" onclick="javascript:backend({{entity.id}}, '.in-carrusel')"><i class="fa fa-square-o"></i></button>
+                {% endif %}
+            {% else %}
+               {{ entity.isCarrusel | isActive | raw }}
+            {% endif %}
+        </td>
+    {% else %}
+        <td>{{ entity.isPrincipal | isActive | raw }}</td> 
+        <td>{{ entity.isCarrusel | isActive | raw }}</td>
+    {% endif %}
+    <td>{{ entity.usuario }}</td>
+    <td class="status">
+        {{ entity.status | status_publicacion | raw }}
+    </td>
+    <td>
+        {% if is_granted('ROLE_ADMIN') %}
+            {% if entity.status is constant('Richpolis\\PublicacionesBundle\\Entity\\Publicacion::STATUS_APROBADO') %}    
+                <button data-url="{{ path('backend_publicacion_publicar', { 'id': entity.id }) }}" onclick="javascript:backend({{entity.id}}, '.publicar')" class="publicar btn btn-xs btn-success"><i class="fa fa-cloud-upload"></i> </button>
+                <button data-url="{{ path('backend_publicacion_revisar', { 'id': entity.id }) }}" onclick="javascript:backend({{entity.id}}, '.revisar')" class="revisar btn btn-xs btn-danger"><i class="fa fa-repeat"></i> </button>
+            {% endif %}
+            {% if entity.status is constant('Richpolis\\PublicacionesBundle\\Entity\\Publicacion::STATUS_PUBLICADO') %}
+                <button data-url="{{ path('backend_publicacion_revisar', { 'id': entity.id }) }}" onclick="javascript:backend({{entity.id}}, '.revisar')" class="revisar btn btn-xs btn-danger"><i class="fa fa-repeat"></i> </button>
+                <button data-url="{{ path('backend_publicacion_caducar', { 'id': entity.id }) }}" onclick="javascript:backend({{entity.id}}, '.caducar')" class="caducar btn btn-xs btn-info"><i class="fa fa-archive"></i> </button>
+            {% endif %}
+        {% endif %}
+        {% if entity.status < constant('Richpolis\\PublicacionesBundle\\Entity\\Publicacion::STATUS_APROBADO') %}
+            <a href="{{ path('publicaciones_edit', { 'id': entity.id }) }}?return={{path('backend_homepage')}}" class="publicaciones_edit btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </a>
+        {% endif %}
+        <a href="{{ path('publicaciones_show', { 'id': entity.id }) }}?return={{path('backend_homepage')}}" class="publicaciones_show btn btn-xs btn-info"><i class="fa fa-folder-open"></i> </a>
+        <a href="{{ path('frontend_preview_publicaciones', { 'slug': entity.slug }) }}?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]" class="sitio btn btn-xs btn-info"><i class="fa fa-eye"></i> </a>
+    </td>
+</tr>

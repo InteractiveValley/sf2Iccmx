@@ -1,0 +1,158 @@
+{% extends 'BackendBundle::layout.html.twig' %}
+
+{% block stylesheets%}
+<!-- Stylesheets -->
+<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+<!-- Font awesome icon -->
+<link rel="stylesheet" href="{{asset('css/font-awesome.css')}}"> 
+<!-- jQuery UI -->
+<link rel="stylesheet" href="{{asset('css/jquery-ui-1.9.2.custom.min.css')}}"> 
+<!-- Calendar -->
+<link rel="stylesheet" href="{{asset('css/fullcalendar.css')}}">
+<!-- prettyPhoto -->
+<link rel="stylesheet" href="{{asset('css/prettyPhoto.css')}}">  
+<!-- Star rating -->
+<link rel="stylesheet" href="{{asset('css/rateit.css')}}">
+<!-- Date picker -->
+<link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
+<!-- CLEditor -->
+<link rel="stylesheet" href="{{asset('css/jquery.cleditor.css')}}"> 
+<!-- Uniform -->
+<link rel="stylesheet" href="{{asset('css/uniform.default.html')}}"> 
+<!-- Uniform -->
+<link rel="stylesheet" href="{{asset('css/daterangepicker-bs3.css')}}" />
+<!-- Bootstrap toggle -->
+<link rel="stylesheet" href="{{asset('css/bootstrap-switch.css')}}">
+<!-- Main stylesheet -->
+<link rel="stylesheet" href="{{asset('css/style.css')}}">
+<!-- Widgets stylesheet -->
+<link rel="stylesheet" href="{{asset('css/widgets.css')}}">   
+<!-- Gritter Notifications stylesheet -->
+<link rel="stylesheet" href="{{asset('css/jquery.gritter.css')}}">
+<!-- jQuery Validation Engine stylesheet -->
+<link rel="stylesheet" href="{{asset('css/validationEngine.jquery.css')}}">
+
+{% endblock %}
+
+{% block mainbar %}
+<!-- Main bar -->
+<div class="mainbar">
+
+    <!-- Page heading -->
+    <div class="page-head">
+        <h2 class="pull-left">Galerias</h2>
+        <div class="clearfix"></div>
+        <!-- Breadcrumb -->
+        <div class="bread-crumb">
+            <a href="{{path('galerias')}}"><i class="fa fa-home"></i>Galerias</a> 
+            <!-- Divider -->
+            <span class="divider">/</span> 
+            <a href="{{path('galerias_new')}}" class="bread-current">Nuevo Registro</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- Page heading ends -->
+
+    <!-- Matter -->
+    <div class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget">
+
+                        <div class="widget-head">
+                            <div class="pull-left">Nuevo Registro</div>
+                            <!--div class="widget-icons pull-right">
+                                <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                                <a href="#" class="wsettings"><i class="fa fa-wrench"></i></a>  
+                                <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                            </div-->
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="widget-content">
+                            <div class="padd">
+                                {% include 'GaleriasBundle:Galeria:form.html.twig' with {'form': form } %}
+                            </div>
+                        </div>
+                        <div class="widget-foot">
+                            <button id="botonRegresar" class="btn btn-default">Regresar</button>
+                            <button id="botonGuardar" class="btn btn-primary">Crear Registro</button>
+                            
+                        </div>
+                    </div>  
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Matter ends -->
+</div>
+<!-- Mainbar ends -->           
+<div class="clearfix"></div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+<script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script> <!-- jQuery UI -->
+<script src="{{asset('js/fullcalendar.min.js')}}"></script> <!-- Full Google Calendar - Calendar -->
+<script src="{{asset('js/jquery.rateit.min.js')}}"></script> <!-- RateIt - Star rating -->
+<script src="{{asset('js/jquery.prettyPhoto.js')}}"></script> <!-- prettyPhoto -->
+
+<!-- jQuery Flot -->
+<script src="{{asset('js/excanvas.min.js')}}"></script>
+<script src="{{asset('js/jquery.flot.js')}}"></script>
+<script src="{{asset('js/jquery.flot.resize.js')}}"></script>
+<script src="{{asset('js/jquery.flot.pie.js')}}"></script>
+<script src="{{asset('js/jquery.flot.stack.js')}}"></script>
+
+<!-- jQuery Notification - Noty -->
+<script src="{{asset('js/jquery.noty.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/themes/default.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/bottom.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/topRight.js')}}"></script> <!-- jQuery Notify -->
+<script src="{{asset('js/layouts/top.js')}}"></script> <!-- jQuery Notify -->
+<!-- jQuery Notification ends -->
+
+<script src="{{asset('js/languages/jquery.validationEngine-es.js')}}"></script> <!-- jQuery Validation Engine Language File -->
+<script src="{{asset('js/jquery.validationEngine.js')}}"></script> <!-- jQuery Validation Engine -->
+
+<!-- Daterangepicker -->
+<script src="{{asset('js/moment.min.js')}}"></script>
+<script src="{{asset('js/daterangepicker.js')}}"></script>
+
+
+<script src="{{asset('js/sparklines.js')}}"></script> <!-- Sparklines -->
+<script src="{{asset('js/jquery.gritter.min.js')}}"></script> <!-- jQuery Gritter -->
+<script src="{{asset('js/jquery.cleditor.min.js')}}"></script> <!-- CLEditor -->
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script> <!-- Date picker -->
+<script src="{{asset('js/jquery.uniform.min.html')}}"></script> <!-- jQuery Uniform -->
+<script src="{{asset('js/jquery.slimscroll.min.js')}}"></script> <!-- jQuery SlimScroll -->
+<script src="{{asset('js/bootstrap-switch.min.js')}}"></script> <!-- Bootstrap Toggle -->
+<script src="{{asset('js/filter.js')}}"></script> <!-- Filter for support page -->
+<script src="{{asset('js/custom.js')}}"></script> <!-- Custom codes -->
+<script src="{{asset('js/charts.js')}}"></script> <!-- Charts & Graphs -->
+
+
+<script>
+$(document).ready(function(){   
+  $(".validate").validationEngine();
+
+  $("#botonRegresar").on("click",function(){
+    location.href="{{return | raw}}";
+  });
+  
+  $("#botonGuardar").on("click",function(){
+    $(".widget-content form").submit();
+  });
+  
+
+  
+});
+
+</script>
+   {{ tinymce_init() }}
+{% endblock %}
+
+

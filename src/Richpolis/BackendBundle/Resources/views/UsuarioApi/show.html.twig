@@ -1,0 +1,72 @@
+{# show usuario #}
+{% raw %}
+<script type="text/template" id="show_template">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget">
+                <div class="widget-head">
+                    <div class="pull-left">{{username}}</div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="widget-content">
+                    <div class="padd">
+                        <table>
+                            <tr>
+                                <td>Id:</td>
+                                <td>{{id}}</td>
+                            </tr>
+                            <tr>
+                                <td>Usuario:</td>
+                                <td>{{username}}</td>
+                            </tr>
+                            <tr>
+                                <td>Nombre:</td>
+                                <td>{{nombre}}</td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td>{{email}}</td>
+                            </tr>
+                            <tr>
+                                <td>Twitter:</td>
+                                <td>{{twitter}}</td>
+                            </tr>
+                            <tr>
+                                <td>Facebook:</td>
+                                <td>{{facebook}}</td>
+                            </tr>
+                            <tr>
+                                <td>Imagen:</td>
+                        
+                                <td>
+                                    {% if imagen %}
+                                    <img scr="{{webPath}}" style="width: 100px;"/>
+                                    {% else %}
+                                    sin imagen
+                                    {% endif %}
+                        
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Creado:</td>
+                                <td>{{created_at | date('d/m/Y')}}</td>
+                            </tr>
+                            <tr>
+                                <td>Actualizado:</td>
+                                <td>{{updated_at | date('d/m/Y')}}</td>
+                            </tr>
+                        </table>    
+                    </div>
+                </div>
+                <div class="widget-foot">
+                    <button id="botonRegresar" class="btn btn-default">Regresar</button>
+                    <div style="float: left; margin-right: 3px;">
+                        <button id="botonEliminar" class="btn btn-danger">Eliminar</button>
+                    </div>        
+                </div>
+            </div>  
+        </div>    
+    </div>
+</script>
+{% endraw %}

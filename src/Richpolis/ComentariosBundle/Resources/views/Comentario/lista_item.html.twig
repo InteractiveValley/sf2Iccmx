@@ -1,0 +1,19 @@
+<tr id="registro-{{entity.id}}"  class="{% if entity.nivel == 0 %}comentario-principal{% else %}subcomentario-{{entity.nivel}}{% endif %}">
+    <td><a href="{{ path('comentarios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+    <td>
+        <p>{{ entity.username }}</p>
+        <p>{{ entity.email }}</p>
+        <p>{{ entity.status | status_comentario | raw }}</p>
+    </td>
+    <td>
+        <p>{{ entity.createdAt | date("d/m/Y h:g") }}</p>
+        <p>{{ entity.message | raw }}</p>
+    </td>
+    <td>
+        {{entity.publicacion.titulo}}
+    </td>
+    <td>
+        <button onclick="javascript:editarRegistro('{{ path('comentarios_edit', { 'id': entity.id }) }}')" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
+        <button onclick="javascript:editarRegistro('{{ path('comentarios_show', { 'id': entity.id }) }}', '#registro-{{entity.id}}')" class="btn btn-xs btn-info"><i class="fa fa-folder-open"></i> </button>
+    </td>
+</tr>

@@ -1,0 +1,23 @@
+{% set nivel = comentario.nivel %}
+{% set nivelHistoria = nivel - historia %}
+{% set paddingLeft = nivelHistoria * 5 %}
+{% set width = 100 - paddingLeft %}
+<article class="comentario-publicacion nivel-{{comentario.nivel}}" style="padding-left: {{paddingLeft}}%; width: {{width}}%;{% if comentario.id == buscado.id %} border: 1px solid black; {% endif %}">
+    {% if comentario.archivo | length > 0 %}
+    <figure>
+        <a href="{{comentario.webPath}}" class="fancybox">
+            <img src="{{comentario.webPath | imagine_filter('imagen_200_200')}}" alt="{{comentario.id}}"/>
+        </a>
+    </figure>
+    {% endif %}
+    <div class="contenido {% if comentario.archivo | length > 0 %} con-imagen {% endif %}">
+        <p class="fecha">{{comentario.createdAt|date("l,j F Y")}}</p>
+        <p class="publicado-por">Publicado por: <span class="username">{{comentario.username}}</span></p>
+        <p class="contenido">
+            {{comentario.message}}
+        </p>
+    </div>
+</article>
+{% for child in comentario.children %}
+    {% include 'ComentariosBundle:Comentario:comentario.html.twig' with {'comentario': child,'buscado': buscado ,'historia': historia } %}
+{% endfor %}      

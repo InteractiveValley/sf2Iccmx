@@ -1,0 +1,114 @@
+.container > header {
+  background: #22282e;
+  height: 70px;
+  position: relative;
+  width: 100%;
+}
+.container .lenguajes {
+  position: absolute;
+  bottom: -10px;
+  right: 10px;
+  z-index: 1000;
+}
+.container .lenguajes .lenguaje {
+  display: inline-block;
+  height: 30px;
+}
+.container #logo {
+  background: url("../images/logo.png") no-repeat 0 0;
+  display: block;
+  float: left;
+  margin: 6px 10px 0;
+  width: 82px;
+  height: 46px;
+  text-indent: -9999px;
+}
+.container #menu {
+  float: right;
+}
+.container #menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.container #menu li {
+  display: block;
+  float: left;
+  text-transform: uppercase;
+  text-align: center;
+}
+.container a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 26px;
+}
+.container a:hover {
+  background: #151a1e;
+  color: #ffc700;
+}
+.container #nav-mobile {
+  display: none;
+  background: url("../images/nav.png") no-repeat center center;
+  float: right;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0.6;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+}
+.container #nav-mobile.nav-active {
+  opacity: 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+}
+@media only screen and(max-width: 768px) {
+  .container #nav-mobile {
+    display: block;
+  }
+  .container #menu {
+    width: 100%;
+    float: none;
+    padding-top: 60px;
+  }
+  .container > ul {
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    max-height: 0;
+    overflow: hidden;
+  }
+  .container > li {
+    background: #33363b;
+    border-bottom: 1px solid #282b30;
+    float: none;
+  }
+  .container > li:last-child {
+    border-bottom: 0;
+  }
+  .container > li a {
+    padding: 15px 0;
+    height: auto;
+    line-height: normal;
+  }
+  .container > li a:hover {
+    background: #2a2d33;
+  }
+  .container > ul.open-menu {
+    max-height: 400px;
+    -webkit-transition: max-height 0.4s;
+    -moz-transition: max-height 0.4s;
+    -ms-transition: max-height 0.4s;
+    -o-transition: max-height 0.4s;
+    transition: max-height 0.4s;
+  }
+}

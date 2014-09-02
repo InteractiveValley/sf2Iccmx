@@ -1,0 +1,17 @@
+<ul>
+    {% for key, value in tipos %}
+        {% if key is constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION') %}
+            <li>
+                <a href="{{ path('categorias_publicaciones') }}"> 
+                    <span>{{ value }}</span>
+                </a> 
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path('publicaciones_tipo_categoria', { 'key': key }) }}"> 
+                    <span>{{ value }}</span>
+                </a> 
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

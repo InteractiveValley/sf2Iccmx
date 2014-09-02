@@ -1,0 +1,331 @@
+<script>
+    
+    /* Configuracion de Uploader.
+     * 
+     * @returns configuracion de Uploader.
+     */
+    function createUploader(){
+    var uploader = new qq.FileUploader({
+            element: document.getElementById('upload'),
+            template: '<div class="qq-uploader"><div class="qq-upload-drop-area"><span>Drop archivos aqui para cargar</span></div><div class="qq-upload-button"><span id="status" ></span>Agregar archivos</div><ul class="qq-upload-list"></ul></div>',
+            action: '{{ post_galerias | raw }}',
+            params: { },
+            onComplete: function(id, file, responseJson){
+                    refrescarGaleria();             },
+            onSubmit: function(id, fileName){
+                
+            },
+            onProgress: function(id, fileName){
+                    $('#status').addClass("success");
+                    $('#status').addClass("loading");
+                }
+            });
+
+    }
+    
+    /* Refresca el contenido de la galeria
+     * @returns void     
+     */
+    function refrescarGaleria(){
+        $.ajax({
+            url: '{{ get_galerias | raw }}',
+            type: 'GET',
+            dataType: 'html',
+            success: function(data){
+               $("#lista_imagenes").html(data);
+               inicializarGaleria();
+               $('#status').removeClass("loading");
+               $('#status').addClass("success");
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
+    }
+    
+    /* Abre el formulario para confirmar la eliminacion del registro
+     * 
+     * @param integer galeria_id
+     * @param string url
+     * @returns abrir formulario de confirmacion     
+     */
+    function eliminarGaleria(galeria_id,url){
+        debugger;
+        var imagen=$("#image-"+ galeria_id);
+        var $url=$("#field-eliminar");
+        $(".image-dialog").attr({src:imagen.attr("src"),id:galeria_id});
+        $url.val(url);
+        $( "#confimarFormModal" ).modal( "show" );
+    }
+    
+    /* Activa una registro de galeria
+     * 
+     * @param integer galeria_id
+     * @param string url
+     * @returns abrir formulario de activacion     
+     */
+    function activarGaleria(galeria_id,url){
+        debugger;
+        var imagen=$("#image-"+galeria_id);
+        var $url=$("#field-activar");
+        $(".image-dialog").attr({src:imagen.attr("src"),id:galeria_id});
+        $(".image-dialog").set('id',galeria_id);
+        $url.val(url);
+        $( "#confirmarActivarFormModal" ).modal( "show" );
+    }
+    
+    /* Editar una registro de galeria
+     * 
+     * @param integer galeria_id
+     * @param string url
+     * @returns abrir formulario de edicion     
+     */
+     function editarGaleria(galeria_id,url){
+        var imagen=$("#image-"+galeria_id);
+        $(".image-dialog").attr({src:imagen.attr("src"),id:galeria_id});
+        $('#image-loader').show();
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: {tipo: 'parcial'},
+            dataType: 'html',
+            success: function(data){
+                console.log(data);                
+                $('#image-loader').hide();
+                $("#contenidoEditarFormModal").html(data);
+            },
+            error: function(data){
+               console.log(data);
+               $('#image-loader').hide();
+               $( "#editarFormModal" ).modal( "hide" );
+            },
+        });
+        $( "#editarFormModal" ).modal( "show" );
+    }
+    
+    /* 
+     * Enviar la actualizacion al servidor
+     */
+    function updateRegistroGaleria(){
+        $('#image-loader').show();
+        var $form = $("#contenidoEditarFormModal form ");
+        var url=$form.attr('action');
+        var datos = $form.serialize();
+        $.ajax({
+           url: url,
+           type: 'PATCH',
+           data: datos,
+           dataType: 'json',
+           success: function(data){
+              refrescarGaleria();
+              $('#image-loader').hide();
+           },
+           error: function(data){
+               alert("error al actualizar");
+               console.log("error en updateRegistroGaleria");
+               console.log(data);
+               $('#image-loader').hide();
+           }
+        });
+    }
+    
+    function crearRegistroGaleriaVideoLink(){
+        debugger;
+        $('#image-loader').show();
+        var $form = $("#contenidoVideoLink form ");
+        var url='{{ post_galerias_link_video | raw }}';
+        var archivo = $form.find("#galeria_archivo").val();
+        var position = $form.find("#galeria_position").val();
+        var tipoArchivo = $form.find("#galeria_tipoArchivo").val();
+        $.ajax({
+           url: url,
+           type: 'POST',
+           data: {archivo: archivo, 'tipoArchivo': tipoArchivo,'isActive': 1,'position': position},
+           dataType: 'json',
+           success: function(data){
+              debugger;
+              refrescarGaleria();
+              $('#image-loader').hide();
+           },
+           error: function(data){
+               alert("error al actualizar");
+               console.log("error en updateRegistroGaleria");
+               console.log(data);
+               $('#image-loader').hide();
+           }
+        });
+    }
+    
+    function crearVideoLink(){
+        $('#image-loader').show();
+        $.ajax({
+            url: '{{url('galerias_new')}}',
+            type: 'GET',
+            data: {tipo: 'link_video'},
+            dataType: 'html',
+            success: function(data){
+                console.log(data);                
+                $('#image-loader').hide();
+                $("#contenidoVideoLink").html(data);
+                $("#newVideoLinkFormModal").modal( "show" );
+            },
+            error: function(data){
+               console.log(data);
+               $('#image-loader').hide();
+               $( "#newVideoLinkFormModal" ).modal( "hide" );
+            },
+        });
+    }
+    
+       
+    function guardarEditarFormModal(){
+        debugger;
+        var bValid = true;
+        var fieldTitle=$("input#galeria_parcial_titulo")/*,
+            fieldDescription=$("input#galeria_parcial_descripcion")*/;
+        bValid=(fieldTitle.val().length>0 && fieldTitle.val()!="Titulo de Imagen")?true:false;
+        /*bValid=(fieldDescription.val().length>0 && fieldDescription.val()!="Descripcion")?true:false;*/
+        if ( bValid ) {
+            updateRegistroGaleria();
+	$("#editarFormModal").modal( "hide" );
+       } 
+    }
+    
+    function guardarVideoLinkFormModal(){
+        debugger;
+        var bValid = true;
+        var archivo=$("input#galeria_archivo");
+        
+        bValid=(archivo.val().length>0 && archivo.val()!="archivo")?true:false;
+        /*bValid=(fieldDescription.val().length>0 && fieldDescription.val()!="Descripcion")?true:false;*/
+        if ( bValid ) {
+            crearRegistroGaleriaVideoLink();
+            $("#newVideoLinkFormModal").modal( "hide" );
+       } 
+    }
+
+    function avanzadaEditarFormModal(){
+        location.href=$("#field-url").val();
+    }
+    
+    function eliminarConfirmarFormModal(){
+        debugger;
+        $('#image-loader').show();
+        var url= $("#field-eliminar").val();
+        var id = $(".image-dialog").get('id');
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            dataType: 'json',
+            success: function(data){
+               refrescarGaleria();
+               $('#image-loader').hide();
+            },
+            error: function(data){
+                alert("El registro no pudo ser eliminado");
+                $('#image-loader').hide();
+            }
+        });
+	$("#confirmarFormModal").modal( "hide" );
+    }
+    
+    function activarConfirmarFormModal(){
+        $('#image-loader').show();
+        var $url=$("#field-activar");
+        $.ajax({
+           url: $url.val(),
+           type: 'PATCH',
+           data: {isActive: true},
+           dataType: 'html',
+           success: function(data){
+              setTimeout(function(){
+                $('#image-loader').hide();
+              }, 1000);
+              refrescarGaleria();
+           },
+           error: function(data){
+               console.log("error en activarConfirmarFormModal");
+               console.log(data)
+               alert("El registro no se pudo activar");
+           }
+        });
+	$("#confirmarActivarFormModal").modal( "hide" );
+    }
+    
+    
+    
+    function inicializarGaleria(){
+        $.configPrettyPhoto();
+    
+        var $gallery = $( "#gallery" ),
+        $trash = $( "#papelera" );
+   
+        $gallery.sortable({
+                handle: '.image-sorteable',
+                placeholder: "ui-state-highlight",
+                update: function(){
+                    $('#image-loader').show();
+                    var order = $gallery.sortable('serialize');
+                    $.ajax({
+                       url: '{{url('galerias_ordenar')}}?' + order,
+                       type: 'POST',
+                       data: order,
+                       dataType: 'json',
+                       success: function(data){
+                           console.log(data);
+                           $('#image-loader').hide();
+                       },
+                       error: function(data){
+                           console.log(data);
+                           $('#image-loader').hide();
+                       },
+                    });
+                }
+        });
+
+        $gallery.disableSelection();
+
+        $trash.droppable({
+          accept: "#gallery > li",
+          activeClass: "ui-state-default",
+          hoverClass: "ui-state-highlight",
+          drop: function( event, ui ) {
+            ui.draggable.find(".eliminar-item").click();
+          }
+        });
+
+        /*$("li.tipo-categoria").each(function(){
+           var $tipo=$(this);
+           $tipo.droppable({
+                accept: "#gallery > li",
+                activeClass: "ui-state-default",
+                hoverClass: "ui-state-highlight",
+                drop: function( event, ui ) {
+                    cambiarTipoCategoria(ui.draggable,$tipo);
+                }
+           }); 
+        });
+
+        $("li.archivo-categoria").each(function(){
+           var $tipo=$(this);
+           $tipo.droppable({
+                accept: "#gallery > li",
+                activeClass: "ui-state-default",
+                hoverClass: "ui-state-highlight",
+                drop: function( event, ui ) {
+                    cambiarArchivoCategoria(ui.draggable,$tipo);
+                }
+           }); 
+        });*/
+
+        /*$.ajax({
+        'url': $("#contenidoVideoLink form").attr('action'),
+        'data': $("#contenidoVideoLink form").serialize(),
+        'type':'POST',
+        success: function(data){console.log(data)},
+        error:function(data){console.log("error"); console.log(data);}
+        });*/
+    }
+</script>
+
