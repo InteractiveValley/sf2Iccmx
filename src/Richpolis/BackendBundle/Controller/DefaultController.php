@@ -57,9 +57,9 @@ class DefaultController extends Controller
         $statusAprobado = Publicacion::STATUS_APROBADO;
         $statusPublicado = Publicacion::STATUS_PUBLICADO;
         $categoriaPublicacion = CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION;
-        $categoriaLlamados = CategoriaPublicacion::TIPO_CATEGORIA_LLAMADOS;
+        $categoriaLlamados = CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS;
         $categoriaTuEspacio = CategoriaPublicacion::TIPO_CATEGORIA_TU_ESPACIO;
-        $categoriaHeraldoTv = CategoriaPublicacion::TIPO_CATEGORIA_HERALDO_TV;
+        $categoriaHeraldoTv = CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS;
 
         $publicidad = $em->getRepository('PublicidadBundle:Publicidad')
                             ->findBy(array('isActive'=>true), array('createdAt'=>'DESC'), 20);

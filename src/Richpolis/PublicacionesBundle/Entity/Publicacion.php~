@@ -173,8 +173,8 @@ class Publicacion
         self::STATUS_BORRADO=>'Borrado',
         self::STATUS_INCOMPLETO=>'En edición',
         self::STATUS_REVISAR=>'A revisión',
-        self::STATUS_APROBADO=>'Aprobado',
-        self::STATUS_PUBLICADO=>'Publicado',
+        self::STATUS_APROBADO=>'Validar',
+        self::STATUS_PUBLICADO=>'Aprobado',
         self::STATUS_CADUCADO=>'Archivado',
     );
     
@@ -393,7 +393,7 @@ class Publicacion
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web'.$this->getUploadDir();
+        return __DIR__.'/../../../../html'.$this->getUploadDir();
     }
     
     public function getWebPath()
@@ -421,7 +421,7 @@ class Publicacion
         return null === $this->imagen ? null : $this->getUploadRootDir().'/thumbnails/'.$this->imagen;
     }
 
-    public function getDescripcionCorta(){
+    public function getDescripcionCorta($max = 250){
         return RpsStms::cut_string2(RpsStms::strip_html_tags($this->getDescripcion()),250);
     }
     

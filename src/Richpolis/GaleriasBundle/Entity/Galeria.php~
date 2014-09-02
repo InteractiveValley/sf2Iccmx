@@ -481,12 +481,12 @@ class Galeria
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web'.$this->getUploadDir();
+        return __DIR__.'/../../../../html'.$this->getUploadDir();
     }
     
     protected function getThumbnailRootDir()
     {
-        return __DIR__.'/../../../../web'.$this->getUploadDir().'/thumbnails';
+        return __DIR__.'/../../../../html'.$this->getUploadDir().'/thumbnails';
     }
     
     /**
@@ -551,7 +551,7 @@ class Galeria
         if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_IMAGEN){
             if(!file_exists($this->getAbosluteLargePath())){
                 if(file_exists($this->getAbsolutePath())){
-                    $this->crearThumbnail(638,369,$this->getAbosluteLargePath());
+                    $this->crearThumbnail(616,411,$this->getAbosluteLargePath());
                 }
             }
             return null === $this->thumbnail ? null : $this->getUploadDir().'/thumbnails/large/'.$this->thumbnail;
@@ -594,13 +594,14 @@ class Galeria
      * @Serializer\SerializedName("archivoView")
      * 
      */
-    public function getArchivoView(){
+    public function getArchivoView($width = 616, $height = 411){
         $opciones=array(
+            'archivo' => $this->getWebPath(),
             'tipo_archivo'  => RpsStms::getTipoArchivo($this->getArchivo()),
-            'path'      =>  $this->getLargeWebPath(),
+            'path'      =>  $this->getWebPath(),
             'carpeta'   =>  'galerias',
-            'width'     =>  638,
-            'height'    =>  369,
+            'width'     =>  $width,
+            'height'    =>  $height,
         );
         
         return RpsStms::getArchivoView($opciones);

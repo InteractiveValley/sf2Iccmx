@@ -6,89 +6,61 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * EdicionPdf
- *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Richpolis\FrontendBundle\Repository\EdicionPdfRepository")
  */
 class EdicionPdf
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @var string
-     *
-     * @ORM\Column(name="titulo", type="string", length=255)
      */
     private $titulo;
-    
+
     /**
      * @var string
-     *
-     * @ORM\Column(name="archivo", type="string", length=255)
      */
     private $archivo;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="link", type="string", length=255)
      */
     private $link;
 
     /**
      * @var string
-     * @todo Contenido del archivo
-     *
-     * @ORM\Column(name="descripcion", type="text",nullable=false)
      */
     private $descripcion;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="portada", type="string", length=255)
      */
     private $portada;
-    
+
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="fechaPublicacion", type="date")
      */
     private $fechaPublicacion;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="isActive", type="boolean")
      */
     private $isActive;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="createdAt", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="updatedAt", type="datetime")
      */
     private $updatedAt;
 
@@ -101,52 +73,6 @@ class EdicionPdf
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set archivo
-     *
-     * @param string $archivo
-     * @return EdicionPdf
-     */
-    public function setArchivo($archivo)
-    {
-        $this->archivo = $archivo;
-
-        return $this;
-    }
-
-    /**
-     * Get archivo
-     *
-     * @return string 
-     */
-    public function getArchivo()
-    {
-        return $this->archivo;
-    }
-
-    /**
-     * Set fechaPublicacion
-     *
-     * @param \DateTime $fechaPublicacion
-     * @return EdicionPdf
-     */
-    public function setFechaPublicacion($fechaPublicacion)
-    {
-        $this->fechaPublicacion = $fechaPublicacion;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaPublicacion
-     *
-     * @return \DateTime 
-     */
-    public function getFechaPublicacion()
-    {
-        return $this->fechaPublicacion;
     }
 
     /**
@@ -173,6 +99,75 @@ class EdicionPdf
     }
 
     /**
+     * Set archivo
+     *
+     * @param string $archivo
+     * @return EdicionPdf
+     */
+    public function setArchivo($archivo)
+    {
+        $this->archivo = $archivo;
+
+        return $this;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return string 
+     */
+    public function getArchivo()
+    {
+        return $this->archivo;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     * @return EdicionPdf
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string 
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return EdicionPdf
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
      * Set portada
      *
      * @param string $portada
@@ -193,6 +188,29 @@ class EdicionPdf
     public function getPortada()
     {
         return $this->portada;
+    }
+
+    /**
+     * Set fechaPublicacion
+     *
+     * @param \DateTime $fechaPublicacion
+     * @return EdicionPdf
+     */
+    public function setFechaPublicacion($fechaPublicacion)
+    {
+        $this->fechaPublicacion = $fechaPublicacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaPublicacion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaPublicacion()
+    {
+        return $this->fechaPublicacion;
     }
 
     /**
@@ -285,51 +303,5 @@ class EdicionPdf
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set link
-     *
-     * @param string $link
-     * @return EdicionPdf
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-
-        return $this;
-    }
-
-    /**
-     * Get link
-     *
-     * @return string 
-     */
-    public function getLink()
-    {
-        return $this->link;
-    }
-
-    /**
-     * Set descripcion
-     *
-     * @param string $descripcion
-     * @return EdicionPdf
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return string 
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
     }
 }

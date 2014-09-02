@@ -276,12 +276,12 @@ class Configuraciones
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web'.$this->getUploadDir();
+        return __DIR__.'/../../../../html'.$this->getUploadDir();
     }
     
     protected function getThumbnailRootDir()
     {
-        return __DIR__.'/../../../../web'.$this->getUploadDir().'/thumbnails';
+        return __DIR__.'/../../../../html'.$this->getUploadDir().'/thumbnails';
     }
         
     public function getWebPath()

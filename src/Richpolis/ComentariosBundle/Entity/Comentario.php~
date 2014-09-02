@@ -5,7 +5,7 @@ namespace Richpolis\ComentariosBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
+use Richpolis\BackendBundle\Utils\Richsys as RpsStms;
 
 /**
  * Comentario
@@ -28,15 +28,14 @@ class Comentario
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="username", type="string", length=255, nullable=true)
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      * @Assert\Email()
      */
     private $email;
@@ -64,7 +63,7 @@ class Comentario
     /**
      * @var string
      *
-     * @ORM\Column(name="archivo", type="string", length=255, nullable=false)
+     * @ORM\Column(name="archivo", type="string", length=255, nullable=true)
      */
     private $archivo;
 
@@ -124,6 +123,10 @@ class Comentario
     
     public function __construct() {
         $this->status = Comentario::STATUS_PENDIENTE;
+        $this->publicacion = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->nivel = 0;
+		$this->tipoArchivo = RpsStms::TIPO_ARCHIVO_IMAGEN;
+		
     }
     
     public function getStringStatus(){
@@ -151,6 +154,27 @@ class Comentario
         {
           $this->createdAt = new \DateTime();
         }
+    }
+	
+	/**
+     * @ORM\PrePersist
+     */
+    public function setUsernameAtValue()
+    {
+        if(!$this->getUsername())
+        {
+          $this->username = "Anonimo";
+        }
+
+        if(!$this->getEmail())
+        {
+          $this->email = "anonimo@sinemail.com";
+        }
+
+        if(!$this->getArchivo())
+        {
+          $this->archivo = null;
+        }        
     }
     
     /*** uploads ***/
@@ -198,6 +222,7 @@ class Comentario
             // do whatever you want to generate a unique name
             $filename = sha1(uniqid(mt_rand(), true));
             $this->archivo = $filename.'.'.$this->getFile()->guessExtension();
+            $this->setTipoArchivo(RpsStms::getTipoArchivo($this->archivo));
         }
     }
 
@@ -246,7 +271,7 @@ class Comentario
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web'.$this->getUploadDir();
+        return __DIR__.'/../../../../html'.$this->getUploadDir();
     }
     
     public function getWebPath()
@@ -254,7 +279,10 @@ class Comentario
         return null === $this->archivo ? null : $this->getUploadDir().'/'.$this->archivo;
     }
     
-    
+    public function getAbsolutePath()
+    {
+        return null === $this->archivo ? null : $this->getUploadRootDir().'/'.$this->archivo;
+    }
 
     /**
      * Get id
@@ -482,6 +510,8 @@ class Comentario
     public function setParent(\Richpolis\ComentariosBundle\Entity\Comentario $parent = null)
     {
         $this->parent = $parent;
+        
+        $this->setNivel($parent->getNivel()+1);
 
         return $this;
     }

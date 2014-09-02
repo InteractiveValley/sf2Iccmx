@@ -106,7 +106,7 @@ class DefaultController extends Controller {
                 ->findPortada();
         $llamados = $em->getRepository('PublicacionesBundle:Publicacion')
                 ->getPublicacionesPorTipoCategoria(
-                Publicacion::STATUS_PUBLICADO, CategoriaPublicacion::TIPO_CATEGORIA_LLAMADOS
+                Publicacion::STATUS_PUBLICADO, CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS
         );
 
         return array(
@@ -176,7 +176,7 @@ class DefaultController extends Controller {
         
 		if($publicacion->getCategoria()->getTipoCategoria()==CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION){
         	return $this->redirect($this->generateUrl('frontend_publicaciones', array('slug' => $slug, 'contar' => $contar)));
-		} elseif ($publicacion->getCategoria()->getTipoCategoria() == CategoriaPublicacion::TIPO_CATEGORIA_HERALDO_TV) {
+		} elseif ($publicacion->getCategoria()->getTipoCategoria() == CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS) {
             return $this->redirect($this->generateUrl('frontend_heraldo_tv', array('slug' => $slug, 'contar' => $contar)));
         } elseif ($publicacion->getCategoria()->getTipoCategoria() == CategoriaPublicacion::TIPO_CATEGORIA_TU_ESPACIO) {
             return $this->redirect($this->generateUrl('frontend_tu_espacio', array('slug' => $slug, 'contar' => $contar)));
@@ -198,7 +198,7 @@ class DefaultController extends Controller {
 		
         $contar = $request->query->get('contar', true);
         
-        if ($publicacion->getCategoria()->getTipoCategoria() == CategoriaPublicacion::TIPO_CATEGORIA_HERALDO_TV) {
+        if ($publicacion->getCategoria()->getTipoCategoria() == CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS) {
             return $this->redirect($this->generateUrl('frontend_heraldo_tv', array('slug' => $slug, 'contar' => $contar)));
         } elseif ($publicacion->getCategoria()->getTipoCategoria() == CategoriaPublicacion::TIPO_CATEGORIA_TU_ESPACIO) {
             return $this->redirect($this->generateUrl('frontend_tu_espacio', array('slug' => $slug, 'contar' => $contar)));
@@ -268,7 +268,7 @@ class DefaultController extends Controller {
                     ->findOneBy(array('slug' => $slug));
         } else {
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                    ->findOneBy(array('tipoCategoria' => CategoriaPublicacion::TIPO_CATEGORIA_HERALDO_TV));
+                    ->findOneBy(array('tipoCategoria' => CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS));
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                     ->findOneBy(
                     array('categoria' => $categoria, 'status' => Publicacion::STATUS_PUBLICADO), array('createdAt' => 'DESC')
