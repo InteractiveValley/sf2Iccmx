@@ -1,7 +1,7 @@
 <ul>
     {% for key, value in tipos %}
         <li>
-            <a href="{{ path('categorias_publicaciones',{'tipo': key }) }}"> 
+            <a href="{{ path('categorias_publicaciones',{'tipoCategoria': key }) }}"> 
                 <span>{{ value }}</span>
             </a> 
         </li>
