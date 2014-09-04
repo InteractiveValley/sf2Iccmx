@@ -73,7 +73,11 @@
                                     <div>
                                         {{ form_label(form.categoria) }}
                                         {{ form_errors(form.categoria) }}
+										{% if is_granted('ROLE_ADMIN') %}
+										{{ form_widget(form.categoria) }}
+										{% else %}
                                         {{ form_widget(form.categoria,{'read_only':true }) }}
+										{% endif %}
                                     </div>
                                     {{form_widget(form)}}
                                 </form>

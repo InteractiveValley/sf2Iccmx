@@ -1,0 +1,24 @@
+{
+// Configure your Run and Preview buttons here.
+
+// Run button configuration
+  "commands": {
+        "Start servers": "parts start apache2 mysql",
+        "Restart servers": "parts restart apache2 mysql",
+        "Stop servers": "parts stop apache2 mysql",
+        "Dev Cache clear": "php -c /home/codio/.parts/etc/php5 app/console cache:clear",
+        "Dev Assets": "php -c /home/codio/.parts/etc/php5 app/console assets:install web --env=dev --symlink && php -c /home/codio/.parts/etc/php5 app/console assetic:dump --env=dev && php -c /home/codio/.parts/etc/php5 app/console bazinga:js-translation:dump web/js/",
+        "Load Fixtures": "php -c /home/codio/.parts/etc/php5 app/console doctrine:fixtures:load",
+        "Drop & Create DB": "php -c /home/codio/.parts/etc/php5 app/console doctrine:database:drop --force && php -c /home/codio/.parts/etc/php5 app/console doctrine:database:create",
+        "Update DB": "php -c /home/codio/.parts/etc/php5 app/console doctrine:schema:update --force",
+        "Prod Cache clear": "php -c /home/codio/.parts/etc/php5 app/console cache:clear --env=prod --no-debug",
+        "Node version": "node --version"
+  },
+
+// Preview button configuration
+  "preview": {
+        "Frontend URL": "http://{{domain}}:3000/app_dev.php/",
+	  	"Backend URL": "http://{{domain}}:3000/app_dev.php/backend",
+        "PhpMyAmin URL": "http://{{domain}}:3000/phpmyadmin/"
+  }
+}
