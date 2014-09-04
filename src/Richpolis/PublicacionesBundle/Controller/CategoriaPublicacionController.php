@@ -62,8 +62,6 @@ class CategoriaPublicacionController extends Controller {
             'entities' => $entities,
         );
     }
-
-
     
     /**
      * Lists all CategoriaPublicacion entities.
