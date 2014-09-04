@@ -62,8 +62,6 @@ class CategoriaPublicacionController extends Controller {
             'entities' => $entities,
         );
     }
-
-
     
     /**
      * Lists all CategoriaPublicacion entities.
@@ -76,8 +74,8 @@ class CategoriaPublicacionController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                        ->findBy(array('tipoCategoria'=>  CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION)
-                                , array('position'=>'ASC'));
+                        ->findBy(array()
+                                , array('tipoCategoria'=>'ASC','position'=>'ASC'));
         
         return array(
             'entities' => $entities,

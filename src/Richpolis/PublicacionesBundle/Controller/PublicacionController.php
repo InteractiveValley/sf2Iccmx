@@ -135,7 +135,7 @@ class PublicacionController extends Controller {
                 ->findBy(array('tipoCategoria' => $key), array('position' => 'ASC'));
         $categoria = $this->categorias[0];
 
-        if (!$categoria) {
+        if(!$categoria){
             throw $this->createNotFoundException('Unable to find CategoriaPublicacion entity.');
         }
 
