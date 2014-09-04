@@ -1,0 +1,84 @@
+#u10364
+{
+	border-style: solid;
+	border-color: #D0D0D0;
+	background-color: #EBF3F6;
+	position: relative;
+	border-width: 0px 0px 0px 1px;
+}
+
+#u10365-4
+{
+	border-style: solid;
+	border-color: #787979;
+	background-color: transparent;
+	font-weight: bold;
+	position: relative;
+	border-width: 0px 0px 1px;
+}
+
+#u10830
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #CECDCD;
+	background-color: #F0F0EF;
+	position: relative;
+}
+
+#u10363-6
+{
+	background-color: transparent;
+	-moz-border-radius: 0px 10px 10px 0px ;
+	-webkit-border-radius: 0px 10px 10px 0px ;
+	-khtml-border-radius: 0px 10px 10px 0px ;
+	border-radius: 0px 10px 10px 0px ;
+	font-size: 20px;
+	color: #FFFFFF;
+	font-weight: bold;
+	position: relative;
+}
+
+#u10611
+{
+	position: absolute;
+	background-color: transparent;
+}
+
+#u10632,#u10696,#u10666,#u10678,#u10662,#u10622,#u10644,#u10616,#u10654,#u10686,#u10688,#u10658,#u10676,#u10672,#u10670,#u10674,#u10618,#u10646,#u10690,#u10642,#u10702,#u10650,#u10684,#u10706,#u10612,#u10652,#u10692,#u10704,#u10620,#u10636,#u10698,#u10626,#u10638,#u10656,#u10668,#u10648,#u10664,#u10634,#u10614,#u10700,#u10682,#u10624,#u10660,#u10680,#u10640,#u10628,#u10630,#u10708,#u10694
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #D1D1D1;
+	background-color: transparent;
+	position: relative;
+}
+
+#u10632_clip,#u10696_clip,#u10666_clip,#u10678_clip,#u10662_clip,#u10622_clip,#u10644_clip,#u10616_clip,#u10654_clip,#u10686_clip,#u10688_clip,#u10658_clip,#u10676_clip,#u10672_clip,#u10670_clip,#u10674_clip,#u10618_clip,#u10646_clip,#u10690_clip,#u10642_clip,#u10702_clip,#u10650_clip,#u10684_clip,#u10706_clip,#u10612_clip,#u10652_clip,#u10692_clip,#u10704_clip,#u10620_clip,#u10636_clip,#u10698_clip,#u10626_clip,#u10638_clip,#u10656_clip,#u10668_clip,#u10648_clip,#u10664_clip,#u10634_clip,#u10614_clip,#u10700_clip,#u10682_clip,#u10624_clip,#u10660_clip,#u10680_clip,#u10640_clip,#u10628_clip,#u10630_clip,#u10708_clip,#u10694_clip
+{
+	overflow: hidden;
+}
+
+.SSFirstButton,.SSPreviousButton,.SSNextButton,.SSLastButton,.SSSlideLink,.SSCloseButton /* slideshowFreeStyle */
+{
+	cursor: pointer;
+}
+
+.SSSlideLoading /* slideshowFreeStyle */
+{
+	background: url("../images/loading.gif") no-repeat center center;
+}
+
+#u10813,#u10821,#u10827,#u10816
+{
+	border-style: none;
+	border-color: transparent;
+	background-color: transparent;
+	position: relative;
+}
+
+#u10811,#slideshowu10536,#u59789
+{
+	position: relative;
+}
+
