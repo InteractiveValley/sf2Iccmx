@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 
-class PublicacionType extends AbstractType
+class PublicacionEventoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,10 +17,10 @@ class PublicacionType extends AbstractType
     {
         $builder
             ->add('titulo','text',array(
-                'label'=>'Titulo','required'=>true,'attr'=>array(
+                'label'=>'Evento','required'=>true,'attr'=>array(
                     'class'=>'form-control placeholder',
-                    'placeholder'=>'Titulo de publicacion',
-                    'data-bind'=>'value: publicacion'
+                    'placeholder'=>'Evento',
+                    'data-bind'=>'value: evento'
                     )
                 ))    
             ->add('descripcion',null,array(
@@ -31,9 +31,27 @@ class PublicacionType extends AbstractType
                    'data-theme' => 'advanced',
                     )
                 ))
-            ->add('createdAt','date',array('label'=>'Fecha noticia (solo noticias)','attr'=>array(
+            ->add('fechaEvento','date',array('label'=>'Fecha evento','attr'=>array(
                 'class'=>'form-control '
              )))
+            ->add('tipoEvento','choice',array(
+                'label'=>'Tipo evento',
+                'empty_value'=>false,
+                'read_only'=> false,
+                'choices'=>  Publicacion::getArrayTipoEvento(),
+                'preferred_choices'=>  Publicacion::getPreferedTipoEvento(),
+                'attr'=>array(
+                    'class'=>'validate[required] form-control placeholder',
+                    'placeholder'=>'Tipo de evento',
+                    'data-bind'=>'value: tipoEvento'
+                )))
+            ->add('localidad','text',array(
+                'label'=>'Localidad','required'=>true,'attr'=>array(
+                    'class'=>'form-control placeholder',
+                    'placeholder'=>'Localidad',
+                    'data-bind'=>'value: localidad'
+                    )
+                ))     
             ->add('categoria','entity',array(
                 'class'=> 'PublicacionesBundle:CategoriaPublicacion',
                 'label'=>'Categoria',
@@ -65,7 +83,7 @@ class PublicacionType extends AbstractType
                 'class'=>'form-control placeholder',
                 'placeholder'=>'Portada',
                 'data-bind'=>'value: portada'
-             )))
+             )))   
             ->add('imagen','hidden')
             ->add('position','hidden')
             ->add('slug','hidden')
@@ -91,6 +109,6 @@ class PublicacionType extends AbstractType
      */
     public function getName()
     {
-        return 'richpolis_publicacionesbundle_publicacion';
+        return 'richpolis_publicacionesbundle_publicacion_evento';
     }
 }

@@ -40,9 +40,9 @@ class CategoriaPublicacionType extends AbstractType
                 'property'=>'nivelCategoria',
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('u')
-                        ->where('u.nivel=:nivel')
+                        /*->where('u.nivel=:nivel')*/
                         ->orderBy('u.position', 'ASC')
-                        ->setParameter('nivel',0);
+                        /*->setParameter('nivel',0)*/;
                 },
                 'attr'=>array(
                     'class'=>'form-control placeholder',
@@ -54,7 +54,12 @@ class CategoriaPublicacionType extends AbstractType
                 'class'=>'checkbox-inline',
                 'placeholder'=>'Es activo',
                 'data-bind'=>'value: isActive'
-             )))    
+             )))
+            ->add('isActive',null,array('label'=>'Aside','attr'=>array(
+                'class'=>'checkbox-inline',
+                'placeholder'=>'Es activo',
+                'data-bind'=>'value: isActive'
+             )))            
             ->add('position','hidden')
             ->add('contPublicaciones','hidden')
         ;

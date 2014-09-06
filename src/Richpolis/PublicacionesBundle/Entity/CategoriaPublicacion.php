@@ -77,6 +77,12 @@ class CategoriaPublicacion
     private $parent;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Aside", inversedBy="categoria")
+     * @ORM\JoinColumn(name="aside_id", referencedColumnName="id")
+     */
+    private $aside;
+    
+    /**
      * @ORM\OneToMany(targetEntity="CategoriaPublicacion", mappedBy="parent")
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -437,5 +443,28 @@ class CategoriaPublicacion
     public function getContPublicaciones()
     {
         return $this->contPublicaciones;
+    }
+
+    /**
+     * Set aside
+     *
+     * @param \Richpolis\PublicacionesBundle\Entity\Aside $aside
+     * @return CategoriaPublicacion
+     */
+    public function setAside(\Richpolis\PublicacionesBundle\Entity\Aside $aside = null)
+    {
+        $this->aside = $aside;
+
+        return $this;
+    }
+
+    /**
+     * Get aside
+     *
+     * @return \Richpolis\PublicacionesBundle\Entity\Aside 
+     */
+    public function getAside()
+    {
+        return $this->aside;
     }
 }

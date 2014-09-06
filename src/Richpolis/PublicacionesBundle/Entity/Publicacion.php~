@@ -99,10 +99,17 @@ class Publicacion
      * @ORM\Column(name="cont_comentarios", type="integer")
      */
     private $contComentarios;
-
+    
     /**
      * @var boolean
-     * @todo Si la noticia es inactiva no es visible para el usuario. 
+     *
+     * @ORM\Column(name="has_menu", type="boolean" )
+     */
+    private $hasMenu;
+
+    /**
+     * @var integer
+     * @todo Estatus de la edicion de la publicacion. 
      *
      * @ORM\Column(name="status", type="integer")
      */
@@ -161,6 +168,48 @@ class Publicacion
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
+    
+    /* para solo eventos */
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_event", type="date", nullable=true)
+     */
+    private $fechaEvento;
+    
+    /**
+     * @var integer
+     * @todo tipo de evento. 
+     *
+     * @ORM\Column(name="type_event", type="integer")
+     */
+    private $tipoEvento;
+    
+    /**
+     * @var boolean
+     * @todo Indica si un evento esta en inicio o no.
+     *
+     * @ORM\Column(name="in_inicio", type="boolean")
+     */
+    private $inInicio;
+    
+    /**
+     * @var boolean
+     * @todo Indica si un evento esta en patrocinio o no.
+     *
+     * @ORM\Column(name="in_patrocinio", type="boolean")
+     */
+    private $inPatrocinio;
+    
+    /**
+     * @var string
+     * @todo Direccion del evento
+     *
+     * @ORM\Column(name="direccion", type="string", length=255, nullable=true)
+     */
+    private $direccionEvento;
+    
 
     const STATUS_BORRADO = -1;
     const STATUS_INCOMPLETO = 1;
@@ -168,6 +217,11 @@ class Publicacion
     const STATUS_APROBADO = 3;
     const STATUS_PUBLICADO = 4;
     const STATUS_CADUCADO = 5;
+    
+    const TIPO_EVENTO_TALLER = 1;
+    const TIPO_EVENTO_SEMINARIO = 2;
+    const TIPO_EVENTO_SESION = 3;
+    const TIPO_EVENTO_DIPLOMADO = 4;
         
     static public $sStatus=array(
         self::STATUS_BORRADO=>'Borrado',
@@ -178,7 +232,12 @@ class Publicacion
         self::STATUS_CADUCADO=>'Archivado',
     );
     
-    
+    static public $sTipoEvento=array(
+        self::TIPO_EVENTO_TALLER=>'Taller',
+        self::TIPO_EVENTO_SEMINARIO=>'Seminario',
+        self::TIPO_EVENTO_SESION=>'Sesion',
+        self::TIPO_EVENTO_DIPLOMADO=>'Diplomado',
+    );
     
     /**
      * Constructor
@@ -188,10 +247,26 @@ class Publicacion
         $this->galerias = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isCarrusel = false;
         $this->isPrincipal = false;
+        $this->inInicio = false;
+        $this->inPatrocinio = false;
+        $this->hasMenu = true;
         $this->status = self::STATUS_INCOMPLETO;
         $this->contVisitas = 0;
         $this->contComentarios = 0;
     }
+    
+    public function getStringTipoEvento(){
+        return self::$sTipoEvento[$this->getTipoEvento()];
+    }
+
+    static function getArrayTipoEvento(){
+        return self::$sTipoEvento;
+    }
+
+    static function getPreferedTipoEvento(){
+        return array(self::TIPO_EVENTO_TALLER);
+    }
+    
     
     public function __toString(){
         return $this->getTitulo();

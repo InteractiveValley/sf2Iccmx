@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Richpolis\PublicacionesBundle\Entity\Publicacion;
 use Richpolis\PublicacionesBundle\Form\PublicacionType;
+use Richpolis\PublicacionesBundle\Form\PublicacionEventoType;
 use Richpolis\PublicacionesBundle\Entity\CategoriaPublicacion;
 use Richpolis\BackendBundle\Utils\Richsys as RpsStms;
 use Richpolis\BackendBundle\Utils\qqFileUploader;
@@ -197,10 +198,18 @@ class PublicacionController extends Controller {
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Publicacion $entity) {
-        $form = $this->createForm(new PublicacionType(), $entity, array(
-            'action' => $this->generateUrl('publicaciones_create'),
-            'method' => 'POST',
-        ));
+        $categoria = $entity->getCategoria();
+        if($categoria->getTipoCategoria()==CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS){
+            $form = $this->createForm(new PublicacionEventoType(), $entity, array(
+                'action' => $this->generateUrl('publicaciones_create'),
+                'method' => 'POST',
+            ));
+        }else{
+            $form = $this->createForm(new PublicacionType(), $entity, array(
+                'action' => $this->generateUrl('publicaciones_create'),
+                'method' => 'POST',
+            ));
+        }
 
         //$form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -338,10 +347,18 @@ class PublicacionController extends Controller {
      * @return \Symfony\Component\Form\Form The form
      */
     private function createEditForm(Publicacion $entity) {
-        $form = $this->createForm(new PublicacionType(), $entity, array(
-            'action' => $this->generateUrl('publicaciones_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $categoria = $entity->getCategoria();
+        if($categoria->getTipoCategoria()==CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS){
+            $form = $this->createForm(new PublicacionEventoType(), $entity, array(
+                'action' => $this->generateUrl('publicaciones_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            ));
+        }else{
+            $form = $this->createForm(new PublicacionType(), $entity, array(
+                'action' => $this->generateUrl('publicaciones_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            ));
+        }
 
         //$form->add('submit', 'submit', array('label' => 'Update'));
 

@@ -96,27 +96,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/", name="portada")
-     * @Template()
-     */
-    public function portadaAction() {
-
-        $em = $this->getDoctrine()->getManager();
-        $portadas = $em->getRepository('PublicacionesBundle:Publicacion')
-                ->findPortada();
-        $llamados = $em->getRepository('PublicacionesBundle:Publicacion')
-                ->getPublicacionesPorTipoCategoria(
-                Publicacion::STATUS_PUBLICADO, CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS
-        );
-
-        return array(
-            'publicaciones' => $portadas,
-            'llamados' => $llamados
-        );
-    }
-
-    /**
-     * @Route("/inicio", name="homepage")
+     * @Route("/", name="homepage")
      * @Template()
      */
     public function indexAction(Request $request) {
