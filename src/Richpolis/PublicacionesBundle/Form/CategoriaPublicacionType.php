@@ -55,11 +55,21 @@ class CategoriaPublicacionType extends AbstractType
                 'placeholder'=>'Es activo',
                 'data-bind'=>'value: isActive'
              )))
-            ->add('isActive',null,array('label'=>'Aside','attr'=>array(
-                'class'=>'checkbox-inline',
-                'placeholder'=>'Es activo',
-                'data-bind'=>'value: isActive'
-             )))            
+            ->add('aside','entity',array(
+                'class'=> 'PublicacionesBundle:Aside',
+                'label'=>'Aside',
+                'required'=>false,
+                'property'=>'clave',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('a')
+                        ->orderBy('a.clave', 'ASC');
+                },
+                'attr'=>array(
+                    'class'=>'form-control placeholder',
+                    'placeholder'=>'Aside',
+                    'data-bind'=>'value: aside',
+                    )
+                ))            
             ->add('position','hidden')
             ->add('contPublicaciones','hidden')
         ;

@@ -1,0 +1,531 @@
+<div class="clearfix colelem" id="u49948"><!-- group -->
+    <a class="nonblock nontext MuseLinkActive clearfix grpelem" id="u49955-4" href="{{path('homepage')}}"><!-- content --><p>Inicio</p></a>
+    <a class="nonblock nontext clearfix grpelem" id="u49950-4" href="#"><!-- content --><p>Librería</p></a>
+    <a class="nonblock nontext clearfix grpelem" id="u49954-4" href="#"><!-- content --><p>Patrocinio</p></a>
+    <a class="nonblock nontext clearfix grpelem" id="u49949-4" href="#"><!-- content --><p>Contacto</p></a>
+    <a class="nonblock nontext clearfix grpelem" id="u49947-4" href="#"><!-- content --><p>Recibir alertas</p></a>
+    <a class="nonblock nontext clearfix grpelem" id="u49951-4" href="#"><!-- content --><p>Intranet</p></a>
+    <div class="grpelem" id="u49956"><!-- custom html -->
+        <form id="cse-search-box" action="http://google.com/cse">
+            <input type="hidden" name="cx" value="EL ID DE TU MOTOR DE BÚSQUEDA va aquí" />
+            <input type="hidden" name="ie" value="UTF-8" />
+            <input type="text" name="q" size="20" />
+            <input type="submit" name="sa" value="Buscar" />
+        </form>
+    </div>
+</div>
+<div class="clearfix colelem" id="pu61977"><!-- group -->
+    <div class="clip_frame clearfix grpelem" id="u61977"><!-- image -->
+        <div id="u61977_clip">
+            <img class="position_content" id="u61977_img" src="/images/pasted%20image%20725x113.jpg" alt="" width="725" height="119"/>
+        </div>
+    </div>
+    <a class="nonblock nontext MuseLinkActive clip_frame grpelem" id="u61219" href="index.html"><!-- image --><img class="block" id="u61219_img" src="/images/icc%20nc%20wbo%20horz%20logo_mx_color.jpg" alt="" width="318" height="100"/></a>
+    <img class="grpelem" id="u61926-4" src="/images/u61926-4.png" alt="La organización mundial de las empresas" width="553" height="38"/><!-- rasterized frame -->
+</div>
+<div class="PamphletWidget clearfix colelem" id="menuPrincipal"><!-- none box -->
+    <div class="popup_anchor" id="u48919popup">
+        <div class="ContainerGroup clearfix" id="u48919"><!-- stack box -->
+            {% for categoria in categorias if categoria.slug == 'quienes-somos' %}
+                {% set rutaCategoria = 'frontend_' ~ 'quienes_somos' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'quienes_somos' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u48920"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'icc-mexico' %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+                <div class="clearfix grpelem" id="u48945-28"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'organos-de-gobierno' %}
+                    <p id="u48945-3"><a class="nonblock" href="#">{{child.categoria|upper}}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="pointer_cursor clearfix grpelem" id="u48955-11"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'historia' %}
+                    <p id="u48955-2">{{ child.categoria | upper }}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="clearfix grpelem" id="u48959-12"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'sede' %}
+                    <p id="u48959-3"><a class="nonblock" href="#">{{ child.categoria | upper }}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+            </div>
+            {% endfor %}
+            {% for categoria in categorias if categoria.slug == 'influencia-global' %}
+                {% set rutaCategoria = 'frontend_' ~ 'influencia_global' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'influencia_global' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u49419"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'encuesta-economica' %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+                <div class="clearfix grpelem" id="u48945-28"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'g20' %}
+                    <p id="u48945-3"><a class="nonblock" href="#">{{child.categoria|upper}}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="pointer_cursor clearfix grpelem" id="u48955-11"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'red-global' %}
+                    <p id="u48955-2">{{ child.categoria | upper }}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="clearfix grpelem" id="u48959-12"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'agenda-global-de-comercio' %}
+                    <p id="u48959-3"><a class="nonblock" href="#">{{ child.categoria | upper }}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+            </div>
+            {% endfor %}
+            {% for categoria in categorias if categoria.slug == 'productos-y-servicios' %}
+                {% set rutaCategoria = 'frontend_' ~ 'productos_servicios' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'productos_servicios' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u49469"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'arbitraje-y-adr' %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+                <div class="clearfix grpelem" id="u48945-28"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'combate-al-crimen-comercial' %}
+                    <p id="u48945-3"><a class="nonblock" href="#">{{child.categoria|upper}}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="pointer_cursor clearfix grpelem" id="u48955-11"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'certificados-de-origen' %}
+                    <p id="u48955-2">{{ child.categoria | upper }}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="clearfix grpelem" id="u48959-12"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'libreria' %}
+                    <p id="u48959-3"><a class="nonblock" href="#">{{ child.categoria | upper }}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+            </div>
+            {% endfor %}
+            {% for categoria in categorias if categoria.slug == 'comisiones-de-trabajo' %}
+                {% set rutaCategoria = 'frontend_' ~ 'comisiones_trabajo' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'comisiones_trabajo' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u49578"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+            </div>
+            {% endfor %}
+            {% for categoria in categorias if categoria.slug == 'grupos-especializados' %}
+                {% set rutaCategoria = 'frontend_' ~ 'grupos_especializados' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'grupos_especializados' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u49673"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'barma' %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+                <div class="clearfix grpelem" id="u48945-28"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'bascap' %}
+                    <p id="u48945-3"><a class="nonblock" href="#">{{child.categoria|upper}}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="pointer_cursor clearfix grpelem" id="u48955-11"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'basis' %}
+                    <p id="u48955-2">{{ child.categoria | upper }}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="clearfix grpelem" id="u48959-12"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'g20-1' %}
+                    <p id="u48959-3"><a class="nonblock" href="#">{{ child.categoria | upper }}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+            </div>
+            {% endfor %}
+            {% for categoria in categorias if categoria.slug == 'posturas' %}
+                {% set rutaCategoria = 'frontend_' ~ 'posturas' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'posturas' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u49673"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'areas-de-trabajo' %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+                <div class="clearfix grpelem" id="u48945-28"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'posicionamientos' %}
+                    <p id="u48945-3"><a class="nonblock" href="#">{{child.categoria|upper}}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+            </div>
+            {% endfor %}
+            {% for categoria in categorias if categoria.slug == 'noticias' %}
+                {% set rutaCategoria = 'frontend_' ~ 'noticias' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'noticias' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u49673"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'noticias' %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+             </div>
+            {% endfor %}
+            {% for categoria in categorias if categoria.slug == 'eventos' %}
+                {% set rutaCategoria = 'frontend_' ~ 'eventos' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'eventos' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u49673"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'calendario' %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+                <div class="clearfix grpelem" id="u48945-28"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'informacion-general' %}
+                    <p id="u48945-3"><a class="nonblock" href="#">{{child.categoria|upper}}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+                <div class="pointer_cursor clearfix grpelem" id="u48955-11"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'premios' %}
+                    <p id="u48955-2">{{ child.categoria | upper }}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+            </div>
+            {% endfor %}
+            <div class="Container invi grpelem" id="u49908"><!-- simple frame --></div>
+            <div class="Container invi grpelem" id="u49938"><!-- simple frame --></div>
+            {% for categoria in categorias if categoria.slug == 'afiliacion' %}
+                {% set rutaCategoria = 'frontend_' ~ 'afiliacion' ~ '_categoria' %}
+                {% set rutaPublicacion = 'frontend_' ~ 'afiliacion' ~ '_publicacion' %}
+            <div class="Container invi clearfix grpelem" id="u49673"><!-- group -->
+                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'afiliacion' %}
+                    <p id="u61155-2">{{child.categoria|upper}}</p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}            
+                </div>
+                <div class="clearfix grpelem" id="u48945-28"><!-- content -->
+                    {% for child in categoria.children if child.slug == 'red-global-1' %}
+                    <p id="u48945-3"><a class="nonblock" href="#">{{child.categoria|upper}}</a></p>
+                    <p>&nbsp;</p>
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="ThumbGroup clearfix grpelem" id="u48908"><!-- none box -->
+        <div class="popup_anchor">
+            <div class="pointer_cursor Thumb popup_element clearfix" id="u48909"><!-- group -->
+                <!--a class="block" href="quienes-somos.html"></a-->
+                <a class="nonblock nontext clearfix grpelem" id="u48969-4" href="{{path('frontend_quienes_somos')}}"><!-- content --><p id="u48969-2">QUIENES<br/>SOMOS</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="pointer_cursor Thumb popup_element clearfix" id="u49446"><!-- group -->
+                <!--a class="block" href="influencia-global.html"></a-->
+                <a class="nonblock nontext clearfix grpelem" id="u49942-6" href="{{path('frontend_influencia_global')}}"><!-- content --><p id="u49942-2">INFLUENCIA</p><p id="u49942-4">GLOBAL</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="pointer_cursor Thumb popup_element clearfix" id="u49514"><!-- group -->
+                <a class="block" href="productos-y-servicios.html"></a>
+                <a class="nonblock nontext clearfix grpelem" id="u49516-6" href="productos-y-servicios.html"><!-- content --><p id="u49516-2">PRODUCTOS Y</p><p id="u49516-4">SERVICIOS</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="Thumb popup_element clearfix" id="u49630"><!-- group -->
+                <div class="clearfix grpelem" id="u49632-6"><!-- content -->
+                    <p id="u49632-2">COMISIONES DE</p>
+                    <p id="u49632-4">&nbsp;TRABAJO</p>
+                </div>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="pointer_cursor Thumb popup_element clearfix" id="u49728"><!-- group -->
+                <a class="block" href="posturas.html"></a>
+                <a class="nonblock nontext clearfix grpelem" id="u49730-6" href="posturas.html"><!-- content --><p id="u49730-2">GRUPOS</p><p id="u49730-4">ESPECIALIZADOS</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="pointer_cursor Thumb popup_element clearfix" id="u49807"><!-- group -->
+                <a class="block" href="posturas.html"></a>
+                <a class="nonblock nontext clearfix grpelem" id="u49809-4" href="posturas.html"><!-- content --><p id="u49809-2">POSTURAS</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="Thumb popup_element clearfix" id="u49813"><!-- group -->
+                <a class="nonblock nontext clearfix grpelem" id="u49815-4" href="noticias.html"><!-- content --><p id="u49815-2">NOTICIAS</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="pointer_cursor Thumb popup_element clearfix" id="u49863"><!-- group -->
+                <a class="block" href="eventos-y-capacitacion.html"></a>
+                <a class="nonblock nontext clearfix grpelem" id="u49865-6" href="eventos-y-capacitacion.html"><!-- content --><p id="u49865-2">EVENTOS Y</p><p id="u49865-4">CAPACITACIÓN</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="pointer_cursor Thumb popup_element clearfix" id="u49935"><!-- group -->
+                <a class="block" href="pauta.html"></a>
+                <a class="nonblock nontext clearfix grpelem" id="u49937-4" href="http://www.iccmex.mx/pauta.php"><!-- content --><p id="u49937-2">PAUTA</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="Thumb popup_element clearfix" id="u49939"><!-- group -->
+                <a class="nonblock nontext clearfix grpelem" id="u49941-4" href="http://iccmex.mx/newsletter/2013/redireccion.html"><!-- content --><p id="u49941-2">NEWSLETTER</p></a>
+            </div>
+        </div>
+        <div class="popup_anchor">
+            <div class="pointer_cursor Thumb popup_element clearfix" id="u54398"><!-- group -->
+                <a class="block" href="afiliacion.html"></a>
+                <a class="nonblock nontext clearfix grpelem" id="u54400-4" href="afiliacion.html"><!-- content --><p id="u54400-2">AFILIACIÓN</p></a>
+            </div>
+        </div>
+    </div>
+</div> <!-- fin menu -->
+<div class="colelem" id="menu_principal_fondo"><!-- simple frame --></div>

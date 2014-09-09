@@ -6,875 +6,96 @@
                              ~ app.request.server.get('SERVER_NAME')
                              ~ asset('images/logo.png') %}
 {% block stylesheets %}
-    
-	{% block redes_sociales %}
-		<meta property="og:url" content="{{url('homepage')}}" />
-		<meta property="og:title" content="ICC Mexico" />
-		<meta property="og:image" content="{{urlAbsolutaFoto}}" />
-		<meta property="og:type" content="article" />
-		<meta property="og:site_name" content="iccmx.com" />
-		<!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
 
-		<meta name="twitter:card" content="summary">
-		<meta name="twitter:site" content="@iccmx">
-		<meta name="twitter:title" content="ICC Mexico">
-		<meta name="twitter:description" content="Descripcion de la publicacion">
-		<meta name="twitter:creator" content="@richpolis">
-		<meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
-		<meta name="twitter:domain" content="{{url('homepage')}}">
-	{% endblock %}
+    {% block redes_sociales %}
+        <meta property="og:url" content="{{url('homepage')}}" />
+        <meta property="og:title" content="ICC Mexico" />
+        <meta property="og:image" content="{{urlAbsolutaFoto}}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="iccmx.com" />
+        <!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
 
-        <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="{{asset('css/site_global.css')}}"/>
-        <link rel="stylesheet" type="text/css" href="{{asset('css/master_home.css')}}"/>
-        <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}" id="pagesheet"/>
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@iccmx">
+        <meta name="twitter:title" content="ICC Mexico">
+        <meta name="twitter:description" content="Descripcion de la publicacion">
+        <meta name="twitter:creator" content="@richpolis">
+        <meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
+        <meta name="twitter:domain" content="{{url('homepage')}}">
+    {% endblock %}
 
-        <!-- Other scripts -->
-        <script type="text/javascript">
-            document.documentElement.className += ' js';
-        </script>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{{asset('css/site_global.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/master_home.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}" id="pagesheet"/>
+
+    <!-- Other scripts -->
+    <script type="text/javascript">
+        document.documentElement.className += ' js';
+    </script>
 {% endblock %}
 
 {% block body %}
-        <div class="shadow clearfix" id="page"><!-- column -->
-            <div class="position_content" id="page_position_content">
-                <div class="colelem" id="u1886"><!-- custom html -->
-                    <div id="fb-root"></div>
-                    <script>(function(d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id))
-                                return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));</script>
-                </div>
-                <div class="clearfix colelem" id="u49948"><!-- group -->
-                    <a class="nonblock nontext MuseLinkActive clearfix grpelem" id="u49955-4" href="index.html"><!-- content --><p>Inicio</p></a>
-                    <a class="nonblock nontext clearfix grpelem" id="u49950-4" href="libreria.html"><!-- content --><p>Librería</p></a>
-                    <a class="nonblock nontext clearfix grpelem" id="u49954-4" href="patrocinio.html"><!-- content --><p>Patrocinio</p></a>
-                    <a class="nonblock nontext clearfix grpelem" id="u49949-4" href="contacto.html"><!-- content --><p>Contacto</p></a>
-                    <a class="nonblock nontext clearfix grpelem" id="u49947-4" href="newsletter.html"><!-- content --><p>Recibir alertas</p></a>
-                    <a class="nonblock nontext clearfix grpelem" id="u49951-4" href="http://www.iccmex.mx/password.php"><!-- content --><p>Intranet</p></a>
-                    <div class="grpelem" id="u49956"><!-- custom html -->
-                        <form id="cse-search-box" action="http://google.com/cse">
-                            <input type="hidden" name="cx" value="EL ID DE TU MOTOR DE BÚSQUEDA va aquí" />
-                            <input type="hidden" name="ie" value="UTF-8" />
-                            <input type="text" name="q" size="20" />
-                            <input type="submit" name="sa" value="Buscar" />
-                        </form>
-                    </div>
-                </div>
-                <div class="clearfix colelem" id="pu61977"><!-- group -->
-                    <div class="clip_frame clearfix grpelem" id="u61977"><!-- image -->
-                        <div id="u61977_clip">
-                            <img class="position_content" id="u61977_img" src="images/pasted%20image%20725x113.jpg" alt="" width="725" height="119"/>
-                        </div>
-                    </div>
-                    <a class="nonblock nontext MuseLinkActive clip_frame grpelem" id="u61219" href="index.html"><!-- image --><img class="block" id="u61219_img" src="images/icc%20nc%20wbo%20horz%20logo_mx_color.jpg" alt="" width="318" height="100"/></a>
-                    <img class="grpelem" id="u61926-4" src="images/u61926-4.png" alt="La organización mundial de las empresas" width="553" height="38"/><!-- rasterized frame -->
-                </div>
-                <div class="PamphletWidget clearfix colelem" id="pamphletu48907"><!-- none box -->
-                    <div class="popup_anchor" id="u48919popup">
-                        <div class="ContainerGroup clearfix" id="u48919"><!-- stack box -->
-                            <div class="Container invi clearfix grpelem" id="u48920"><!-- group -->
-                                <div class="clearfix grpelem" id="u61155-27"><!-- content -->
-                                    <p id="u61155-2">ICC MÉXICO</p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u61155-4">​</span><span><span class="actAsInlineDiv normal_text" id="u61162"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u61163"><!-- image --><span class="actAsDiv" id="u61163_clip"><img class="position_content" id="u61163_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="mensaje-presidente.html">Mensaje de nuestro</a></p>
-                                    <p>&nbsp;&nbsp;&nbsp; <a class="nonblock" href="mensaje-presidente.html">&nbsp;Presidente</a></p>
-                                    <p><span id="u61155-14">​</span><span><span class="actAsInlineDiv normal_text" id="u61159"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u61160"><!-- image --><span class="actAsDiv" id="u61160_clip"><img class="position_content" id="u61160_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="icc-mex-2013.html">Sobre ICC México</a></p>
-                                    <p><span id="u61155-20">​</span><span><span class="actAsInlineDiv normal_text" id="u61156"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u61157"><!-- image --><span class="actAsDiv" id="u61157_clip"><img class="position_content" id="u61157_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="programa-accion.html">Programa de Acción</a></p>
-                                </div>
-                                <div class="clearfix grpelem" id="u48945-28"><!-- content -->
-                                    <p id="u48945-3"><a class="nonblock" href="organos-de-gobierno.html">ÓRGANOS DE GOBIERNO</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u48945-5">​</span><span><span class="actAsInlineDiv normal_text" id="u48946"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u48947"><!-- image --><span class="actAsDiv" id="u48947_clip"><img class="position_content" id="u48947_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="organos-de-gobierno.html">Consejo Mundial</a></p>
-                                    <p><span id="u48945-11">​</span><span><span class="actAsInlineDiv normal_text" id="u48952"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u48953"><!-- image --><span class="actAsDiv" id="u48953_clip"><img class="position_content" id="u48953_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="organos-de-gobierno.html">Presidencia y Secretaría</a></p>
-                                    <p>&nbsp;&nbsp;&nbsp; <a class="nonblock" href="organos-de-gobierno.html">&nbsp;General</a></p>
-                                    <p><span id="u48945-21">​</span><span><span class="actAsInlineDiv normal_text" id="u48949"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u48950"><!-- image --><span class="actAsDiv" id="u48950_clip"><img class="position_content" id="u48950_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="organos-de-gobierno.html">Comisión Ejecutiva ICC</a></p>
-                                </div>
-                                <div class="pointer_cursor clearfix grpelem" id="u48955-11"><!-- content -->
-                                    <a class="block" href="historia.html"></a>
-                                    <p id="u48955-2">HISTORIA</p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u48955-4">​</span><span class="actAsInlineDiv normal_text" id="u48956"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u48957"><!-- image --><span class="actAsDiv" id="u48957_clip"><img class="position_content" id="u48957_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="historia.html">Los mercaderes de la paz</a></p>
-                                </div>
-                                <div class="clearfix grpelem" id="u48959-12"><!-- content -->
-                                    <p id="u48959-3"><a class="nonblock" href="sede.html">SEDE</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u48959-5">​</span><span class="actAsInlineDiv normal_text" id="u48960"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u48961"><!-- image --><span class="actAsDiv" id="u48961_clip"><img class="position_content" id="u48961_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="comisiones--trabajo.html">Comisiones de Trabajo</a></p>
-                                </div>
-                                <a class="nonblock nontext clip_frame grpelem" id="u48943" href="historia.html"><!-- image --><img class="block" id="u48943_img" src="images/pasted%20image%20300x200.jpg" alt="" width="287" height="191"/></a>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u49419"><!-- group -->
-                                <div class="clearfix grpelem" id="u49225-18"><!-- content -->
-                                    <p id="u49225-3"><a class="nonblock" href="encuesta-economica.html">ENCUESTA ECONÓMICA</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u49225-5">​</span><span><span class="actAsInlineDiv normal_text" id="u49226"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49227"><!-- image --><span class="actAsDiv" id="u49227_clip"><img class="position_content" id="u49227_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="encuesta-economica.html">Encuesta sobre el cambio económico global</a></p>
-                                    <p><a class="nonblock" href="de-las-encuestas-2012---actual.html"><span id="u49225-11">​</span></a><span class="actAsInlineDiv normal_text" id="u49229"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49230"><!-- image --><span class="actAsDiv" id="u49230_clip"><img class="position_content" id="u49230_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="de-las-encuestas-2012---actual.html">&nbsp;Encuestas 2012&#45;Actual</a></p>
-                                </div>
-                                <div class="clearfix grpelem" id="u49232-37"><!-- content -->
-                                    <p id="u49232-3"><a class="nonblock" href="g20.html">G20</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u49232-5">​</span><span class="actAsInlineDiv normal_text" id="u49239"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49240"><!-- image --><span class="actAsDiv" id="u49240_clip"><img class="position_content" id="u49240_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="grupo-asesor-del-g20.html">Sobre el grupo asesor G20</a></p>
-                                    <p><span id="u49232-11">​</span><span class="actAsInlineDiv normal_text" id="u49233"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49234"><!-- image --><span class="actAsDiv" id="u49234_clip"><img class="position_content" id="u49234_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="cumbres-g20.html">Cumbres</a></p>
-                                    <p><span id="u49232-17">​</span><span><span class="actAsInlineDiv normal_text" id="u49242"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49243"><!-- image --><span class="actAsDiv" id="u49243_clip"><img class="position_content" id="u49243_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="mensaje-de-la-icc.html">Mensaje de la ICC a G20</a></p>
-                                    <p><span id="u49232-23">​</span><span><span class="actAsInlineDiv normal_text" id="u49245"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49246"><!-- image --><span class="actAsDiv" id="u49246_clip"><img class="position_content" id="u49246_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="consultas-globales.html">Consultas Globales</a></p>
-                                    <p><span id="u49232-29">​</span><span><span class="actAsInlineDiv normal_text" id="u49236"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49237"><!-- image --><span class="actAsDiv" id="u49237_clip"><img class="position_content" id="u49237_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="reportes-y-productos.html">Reportes y Productos</a></p>
-                                    <p>&nbsp;</p>
-                                </div>
-                                <div class="pointer_cursor clearfix grpelem" id="u49218-18"><!-- content -->
-                                    <a class="block" href="sede.html"></a>
-                                    <p id="u49218-3"><a class="nonblock" href="red-global.html">RED GLOBAL</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u49218-5">​</span><span><span class="actAsInlineDiv normal_text" id="u49219"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49220"><!-- image --><span class="actAsDiv" id="u49220_clip"><img class="position_content" id="u49220_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="red-global.html">Red Global</a></p>
-                                    <p><span id="u49218-11">​</span><span><span class="actAsInlineDiv normal_text" id="u49222"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49223"><!-- image --><span class="actAsDiv" id="u49223_clip"><img class="position_content" id="u49223_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="red-global.html">Comités Nacionales</a></p>
-                                </div>
-                                <div class="pointer_cursor clearfix grpelem" id="u49248-12"><!-- content -->
-                                    <a class="block" href="sede.html"></a>
-                                    <p id="u49248-3"><a class="nonblock" href="agenda-global.html">&nbsp;AGENDA GLOBAL DE COMERCIO</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u49248-5">​</span><span><span class="actAsInlineDiv normal_text" id="u49249"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49250"><!-- image --><span class="actAsDiv" id="u49250_clip"><img class="position_content" id="u49250_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="agenda-global.html">Acerca de la Agenda</a></p>
-                                </div>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u49469"><!-- group -->
-                                <div class="clearfix grpelem" id="u49115-20"><!-- content -->
-                                    <p id="u49115-3"><a class="nonblock" href="arbitraje-icc.html">ARBITRAJE Y ADR</a></p>
-                                    <p id="u49115-4">&nbsp;</p>
-                                    <p id="u49115-5">&nbsp;</p>
-                                    <p id="u49115-9"><span id="u49115-6">​</span><span class="actAsInlineDiv normal_text" id="u62438"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62439"><!-- image --><span class="actAsDiv" id="u62439_clip"><img class="position_content" id="u62439_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;Mediación</p>
-                                    <p id="u49115-13"><span id="u49115-10">​</span><span class="actAsInlineDiv normal_text" id="u62442"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62443"><!-- image --><span class="actAsDiv" id="u62443_clip"><img class="position_content" id="u62443_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;Dispute Boards</p>
-                                    <p id="u49115-14">&nbsp;</p>
-                                    <p id="u49115-15">&nbsp;</p>
-                                    <p id="u49115-16">&nbsp;</p>
-                                    <p>&nbsp;</p>
-                                    <p id="u49115-18">&nbsp;</p>
-                                </div>
-                                <div class="clearfix grpelem" id="u49141-50"><!-- content -->
-                                    <p id="u49141-2">COMBATE AL CRIMEN COMERCIAL</p>
-                                    <p>&nbsp;</p>
-                                    <p><a class="nonblock" href="combate-al-crimen-comercial.html"><span id="u49141-4">​</span></a><span class="actAsInlineDiv normal_text" id="u49145"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49146"><!-- image --><span class="actAsDiv" id="u49146_clip"><img class="position_content" id="u49146_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="combate-al-crimen-comercial.html">&nbsp;</a><span id="u49141-9">Buro Marítimo Internacional</span></p>
-                                    <p><span id="u49141-11">​</span><span id="u49141-12"><span class="actAsInlineDiv normal_text" id="u49151"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49152"><!-- image --><span class="actAsDiv" id="u49152_clip"><img class="position_content" id="u49152_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span id="u49141-13">&nbsp;</span><a class="nonblock" href="toolkit.html">Toolkit de la ICC sobre competencia</a></p>
-                                    <p><span id="u49141-17">​</span><span id="u49141-18"><span class="actAsInlineDiv normal_text" id="u49142"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49143"><!-- image --><span class="actAsDiv" id="u49143_clip"><img class="position_content" id="u49143_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span id="u49141-19">&nbsp;</span><a class="nonblock" href="resist.html">RESIST</a></p>
-                                    <p><span id="u49141-23">​</span><span id="u49141-24"><span class="actAsInlineDiv normal_text" id="u49154"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49155"><!-- image --><span class="actAsDiv" id="u49155_clip"><img class="position_content" id="u49155_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span id="u49141-25">&nbsp;</span><a class="nonblock" href="clausulas-anticorrupcion.html">Cláusula Anticorrupción de la ICC</a></p>
-                                    <p id="u49141-32"><span id="u49141-29">​</span><span class="actAsInlineDiv normal_text" id="u62458"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62459"><!-- image --><span class="actAsDiv" id="u62459_clip"><img class="position_content" id="u62459_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;Oficina para el combate a los</p>
-                                    <p id="u49141-34">&nbsp;&nbsp;&nbsp;&nbsp; Crímenes Comerciales</p>
-                                    <p><span id="u49141-35">​</span><span id="u49141-36"><span class="actAsInlineDiv normal_text" id="u49148"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49149"><!-- image --><span class="actAsDiv" id="u49149_clip"><img class="position_content" id="u49149_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span id="u49141-37">&nbsp;</span><a class="nonblock" href="combate-a-la-pirater%c3%ada-y-falsificaci%c3%b3n.html">Buró del Combate a la piratería y</a></p>
-                                    <p><span id="u49141-41">&nbsp;&nbsp;&nbsp;&nbsp; </span><a class="nonblock" href="combate-a-la-pirater%c3%ada-y-falsificaci%c3%b3n.html">falsificación</a></p>
-                                    <p id="u49141-48"><span id="u49141-45">​</span><span class="actAsInlineDiv normal_text" id="u62454"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62455"><!-- image --><span class="actAsDiv" id="u62455_clip"><img class="position_content" id="u62455_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;Buró de Investigación Financiera</p>
-                                </div>
-                                <div class="clearfix grpelem" id="u49119-58"><!-- content -->
-                                    <p id="u49119-2">CERTIFICADOS DE ORIGEN</p>
-                                    <p id="u49119-8"><a class="nonblock" href="incoterms.html"><span id="u49119-3">​</span></a><span id="u49119-5"><span class="actAsInlineDiv normal_text" id="u54573"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u54570"><!-- image --><span class="actAsDiv" id="u54570_clip"><img class="position_content" id="u54570_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><a class="nonblock" href="incoterms.html"><span id="u49119-6">&nbsp;Incoterms</span></a></p>
-                                    <p id="u49119-14"><span id="u49119-9">​</span><span id="u49119-10"><span class="actAsInlineDiv normal_text" id="u54569"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u54566"><!-- image --><span class="actAsDiv" id="u54566_clip"><img class="position_content" id="u54566_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span id="u49119-11">&nbsp;</span><a class="nonblock" href="contratos-y-modelos.html"><span id="u49119-12">Contratos Modelos</span></a></p>
-                                    <p><span id="u49119-15">​</span><span><span class="actAsInlineDiv normal_text" id="u49129"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49130"><!-- image --><span class="actAsDiv" id="u49130_clip"><img class="position_content" id="u49130_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="ata-carnet.html">ATA Carnet</a></p>
-                                    <p><span id="u49119-21">​</span><span><span class="actAsInlineDiv normal_text" id="u49120"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49121"><!-- image --><span class="actAsDiv" id="u49121_clip"><img class="position_content" id="u49121_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="lineamientos.html">Lineamientos sobre propiedad Intelectual</a></p>
-                                    <p><span id="u49119-27">​</span><span><span class="actAsInlineDiv normal_text" id="u49126"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49127"><!-- image --><span class="actAsDiv" id="u49127_clip"><img class="position_content" id="u49127_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="hoja-ruta-propiedad-intelectual.html">Hoja de Ruta sobre Propiedad Intelectual</a></p>
-                                    <p><span id="u49119-33">​</span><span><span class="actAsInlineDiv normal_text" id="u49135"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49136"><!-- image --><span class="actAsDiv" id="u49136_clip"><img class="position_content" id="u49136_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="hoja-ruta-green.html">Hoja de Ruta sobre Economía Verde</a></p>
-                                    <p><span id="u49119-39">​</span><span><span class="actAsInlineDiv normal_text" id="u49138"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49139"><!-- image --><span class="actAsDiv" id="u49139_clip"><img class="position_content" id="u49139_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="indice-de-apertura.html">Indice de apertura de mercados</a></p>
-                                    <p><span id="u49119-45">​</span><span><span class="actAsInlineDiv normal_text" id="u49123"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49124"><!-- image --><span class="actAsDiv" id="u49124_clip"><img class="position_content" id="u49124_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="inteligencia-de-mercados.html">Inteligencia de mercado</a></p>
-                                    <p><span id="u49119-51">​</span><span class="actAsInlineDiv normal_text" id="u62487"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62488"><!-- image --><span class="actAsDiv" id="u62488_clip"><img class="position_content" id="u62488_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="gu%c3%ada-sobre-responsabilidad-empresarial.html">Guía sobre RSE en la cadena de valor</a></p>
-                                </div>
-                                <div class="clearfix grpelem" id="u62584-5"><!-- content -->
-                                    <p><a class="nonblock" href="libreria.html"><span id="u62584">LIBRERIA</span></a></p>
-                                </div>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u49578"><!-- group -->
-                                <div class="clearfix grpelem" id="u49158-49"><!-- content -->
-                                    <p id="u49158-3"><a class="nonblock" href="comisiones-de-trabajo.html">COMISIONES DE TRABAJO</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u49158-5">​</span><span class="actAsInlineDiv normal_text" id="u49162"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49163"><!-- image --><span class="actAsDiv" id="u49163_clip"><img class="position_content" id="u49163_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="aduanas.html">Aduanas y Facilitación Comercial</a></p>
-                                    <p><span id="u49158-11">​</span><span><span class="actAsInlineDiv normal_text" id="u49168"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49169"><!-- image --><span class="actAsDiv" id="u49169_clip"><img class="position_content" id="u49169_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="anticorrupcion.html">Anticorrupción</a></p>
-                                    <p><span id="u49158-17">​</span><span class="actAsInlineDiv normal_text" id="u49159"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49160"><!-- image --><span class="actAsDiv" id="u49160_clip"><img class="position_content" id="u49160_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="arbitraje.html">Arbitraje</a></p>
-                                    <p><span id="u49158-23">​</span><span class="actAsInlineDiv normal_text" id="u49177"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49178"><!-- image --><span class="actAsDiv" id="u49178_clip"><img class="position_content" id="u49178_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="banca.html">Banca</a></p>
-                                    <p><span id="u49158-29">​</span><span class="actAsInlineDiv normal_text" id="u49174"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49175"><!-- image --><span class="actAsDiv" id="u49175_clip"><img class="position_content" id="u49175_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="comercio-internacional.html">Comercio Internacional y Políticas de Inversión</a></p>
-                                    <p><span id="u49158-35">​</span><span class="actAsInlineDiv normal_text" id="u49165"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49166"><!-- image --><span class="actAsDiv" id="u49166_clip"><img class="position_content" id="u49166_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="competencia.html">Competencia Económica</a></p>
-                                    <p><span id="u49158-41">​</span><span class="actAsInlineDiv normal_text" id="u49171"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49172"><!-- image --><span class="actAsDiv" id="u49172_clip"><img class="position_content" id="u49172_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="economia-digital.html">Economía Digital</a></p>
-                                    <p id="u49158-47">&nbsp;</p>
-                                </div>
-                                <div class="clearfix grpelem" id="u49180-43"><!-- content -->
-                                    <p id="u49180">&nbsp;</p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u49180-3">​</span><span class="actAsInlineDiv normal_text" id="u49187"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49188"><!-- image --><span class="actAsDiv" id="u49188_clip"><img class="position_content" id="u49188_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="grupo-de-politica-y-economia.html">Grupo de Política Económica</a></p>
-                                    <p><span id="u49180-9">​</span><span class="actAsInlineDiv normal_text" id="u49184"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49185"><!-- image --><span class="actAsDiv" id="u49185_clip"><img class="position_content" id="u49185_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="impuestos.html">Impuestos</a></p>
-                                    <p><span id="u49180-15">​</span><span class="actAsInlineDiv normal_text" id="u49193"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49194"><!-- image --><span class="actAsDiv" id="u49194_clip"><img class="position_content" id="u49194_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="medio-ambiente-y-energia.html">Medio Ambiente y Energía</a></p>
-                                    <p><span id="u49180-21">​</span><span><span class="actAsInlineDiv normal_text" id="u49644"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49641"><!-- image --><span class="actAsDiv" id="u49641_clip"><img class="position_content" id="u49641_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="mercadotecnia-y-publicidad.html">Mercadotecnia y Publicidad</a></p>
-                                    <p><span id="u49180-27">​</span><span class="actAsInlineDiv normal_text" id="u49190"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49191"><!-- image --><span class="actAsDiv" id="u49191_clip"><img class="position_content" id="u49191_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="propiedad-intelectual.html">Propiedad Intelectual</a></p>
-                                    <p><span id="u49180-33">​</span><span class="actAsInlineDiv normal_text" id="u49181"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49182"><!-- image --><span class="actAsDiv" id="u49182_clip"><img class="position_content" id="u49182_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="responsabilidad-social.html">Responsabilidad Social Empresari</a><span id="u49180-38">al</span></p>
-                                    <p>&nbsp;</p>
-                                    <p id="u49180-41">&nbsp;</p>
-                                </div>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u49673"><!-- group -->
-                                <div class="clearfix grpelem" id="u49298-34"><!-- content -->
-                                    <p id="u49298-3"><a class="nonblock" href="barma.html">BARMA</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u49298-5">​</span><span class="actAsInlineDiv normal_text" id="u49308"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49309"><!-- image --><span class="actAsDiv" id="u49309_clip"><img class="position_content" id="u49309_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="barma%2c-objetivos.html">Objetivos</a></p>
-                                    <p><span id="u49298-11">​</span><span><span class="actAsInlineDiv normal_text" id="u49299"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49300"><!-- image --><span class="actAsDiv" id="u49300_clip"><img class="position_content" id="u49300_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="barma%2c-logros.html">Logros</a></p>
-                                    <p><span id="u49298-17">​</span><span><span class="actAsInlineDiv normal_text" id="u49302"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49303"><!-- image --><span class="actAsDiv" id="u49303_clip"><img class="position_content" id="u49303_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="barma%2c-alcance.html">Alcance</a></p>
-                                    <p><span id="u49298-24">​</span><span><span class="actAsInlineDiv normal_text" id="u49305"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49306"><!-- image --><span class="actAsDiv" id="u49306_clip"><img class="position_content" id="u49306_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="barma%2c-contacto.html">Contacto</a></p>
-                                    <p>&nbsp;</p>
-                                    <p id="u49298-31">&nbsp;</p>
-                                    <p id="u49298-32">&nbsp;</p>
-                                </div>
-                                <div class="clearfix grpelem" id="u49311-36"><!-- content -->
-                                    <p id="u49311-3"><a class="nonblock" href="bascap.html">BASCAP</a></p>
-                                    <p id="u49311-4">&nbsp;</p>
-                                    <p><span id="u49311-5">​</span><span class="actAsInlineDiv normal_text" id="u49324"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49325"><!-- image --><span class="actAsDiv" id="u49325_clip"><img class="position_content" id="u49325_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="bascap%2c-valor-pi.html">Valor de la propiedad intelectual</a></p>
-                                    <p><span id="u49311-11">​</span><span><span class="actAsInlineDiv normal_text" id="u49315"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49316"><!-- image --><span class="actAsDiv" id="u49316_clip"><img class="position_content" id="u49316_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="bascap%2c-red.html">Red BASCAP</a></p>
-                                    <p><span id="u49311-17">​</span><span><span class="actAsInlineDiv normal_text" id="u49321"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49322"><!-- image --><span class="actAsDiv" id="u49322_clip"><img class="position_content" id="u49322_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="bascap%2c-compromiso.html">Compromiso y Políticas Internacionales</a></p>
-                                    <p><span id="u49311-23">​</span><span><span class="actAsInlineDiv normal_text" id="u49312"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49313"><!-- image --><span class="actAsDiv" id="u49313_clip"><img class="position_content" id="u49313_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="bascap%2c-medios.html">Medios</a></p>
-                                    <p><span id="u49311-29">​</span><span><span class="actAsInlineDiv normal_text" id="u49318"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49319"><!-- image --><span class="actAsDiv" id="u49319_clip"><img class="position_content" id="u49319_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="bascap%2c-contacto.html">Contacto</a></p>
-                                </div>
-                                <div class="clearfix grpelem" id="u49279-43"><!-- content -->
-                                    <p id="u49279-3"><a class="nonblock" href="basis.html">BASIS</a></p>
-                                    <p id="u49279-4">&nbsp;</p>
-                                    <p><span id="u49279-5">​</span><span class="actAsInlineDiv normal_text" id="u49286"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49287"><!-- image --><span class="actAsDiv" id="u49287_clip"><img class="position_content" id="u49287_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="basis%2c-posturas.html">Postura</a></p>
-                                    <p><a class="nonblock" href="basis%2c-miembros.html"><span id="u49279-11">​</span></a><span class="actAsInlineDiv normal_text" id="u49292"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49293"><!-- image --><span class="actAsDiv" id="u49293_clip"><img class="position_content" id="u49293_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="basis%2c-miembros.html">&nbsp;Miembros y Socios</a></p>
-                                    <p><span id="u49279-17">​</span><span><span class="actAsInlineDiv normal_text" id="u49283"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49284"><!-- image --><span class="actAsDiv" id="u49284_clip"><img class="position_content" id="u49284_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="basis%2c-historia.html">Historia</a></p>
-                                    <p><a class="nonblock" href="basis%2c-foro-de-gobernanza.html"><span id="u49279-23">​</span></a><span class="actAsInlineDiv normal_text" id="u49289"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49290"><!-- image --><span class="actAsDiv" id="u49290_clip"><img class="position_content" id="u49290_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="basis%2c-foro-de-gobernanza.html">&nbsp;Foro de Governanza</a></p>
-                                    <p><span id="u49279-29">​</span><span><span class="actAsInlineDiv normal_text" id="u49295"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49296"><!-- image --><span class="actAsDiv" id="u49296_clip"><img class="position_content" id="u49296_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="basis%2c-actividades.html">Actividades</a></p>
-                                    <p><span id="u49279-36">​</span><span><span class="actAsInlineDiv normal_text" id="u49280"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49281"><!-- image --><span class="actAsDiv" id="u49281_clip"><img class="position_content" id="u49281_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="basis%2c-contacto.html">Contacto</a></p>
-                                </div>
-                                <div class="clearfix grpelem" id="u62515-37"><!-- content -->
-                                    <p id="u62515-3"><a class="nonblock" href="g20.html">G20</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u62515-5">​</span><span class="actAsInlineDiv normal_text" id="u62522"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62523"><!-- image --><span class="actAsDiv" id="u62523_clip"><img class="position_content" id="u62523_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="grupo-asesor-del-g20.html">Sobre el grupo asesor G20</a></p>
-                                    <p><span id="u62515-11">​</span><span class="actAsInlineDiv normal_text" id="u62519"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62520"><!-- image --><span class="actAsDiv" id="u62520_clip"><img class="position_content" id="u62520_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span>&nbsp;<a class="nonblock" href="cumbres-g20.html">Cumbres</a></p>
-                                    <p><span id="u62515-17">​</span><span><span class="actAsInlineDiv normal_text" id="u62525"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62526"><!-- image --><span class="actAsDiv" id="u62526_clip"><img class="position_content" id="u62526_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="mensaje-de-la-icc.html">Mensaje de la ICC a G20</a></p>
-                                    <p><span id="u62515-23">​</span><span><span class="actAsInlineDiv normal_text" id="u62528"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62529"><!-- image --><span class="actAsDiv" id="u62529_clip"><img class="position_content" id="u62529_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="consultas-globales.html">Consultas Globales</a></p>
-                                    <p><span id="u62515-29">​</span><span><span class="actAsInlineDiv normal_text" id="u62516"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u62517"><!-- image --><span class="actAsDiv" id="u62517_clip"><img class="position_content" id="u62517_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="reportes-y-productos.html">Reportes y Productos</a></p>
-                                    <p>&nbsp;</p>
-                                </div>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u49743"><!-- group -->
-                                <div class="clearfix grpelem" id="u49278-8"><!-- content -->
-                                    <p id="u49278-3"><a class="nonblock" href="areas-de-trabajo.html">ÁREAS DE TRABAJO</a></p>
-                                    <p id="u49278-4">&nbsp;</p>
-                                    <p>&nbsp;</p>
-                                    <p>&nbsp;</p>
-                                </div>
-                                <a class="nonblock nontext clearfix grpelem" id="u57508-7" href="posicionamientos.html"><!-- content --><p id="u57508-2">POSICIONAMIENTOS</p><p id="u57508-3">&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></a>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u49811"><!-- group -->
-                                <div class="clearfix grpelem" id="u57342-25"><!-- content -->
-                                    <p id="u57342-3"><a class="nonblock" href="noticias.html">NOTICIAS</a></p>
-                                    <p id="u57342-4">&nbsp;</p>
-                                    <p id="u57342-10"><a class="nonblock" href="noticias.html"><span id="u57342-5">​</span></a><span class="actAsInlineDiv normal_text" id="u57379"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u57376"><!-- image --><span class="actAsDiv" id="u57376_clip"><img class="position_content" id="u57376_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="noticias.html">&nbsp;Noticias ICC</a></p>
-                                    <p id="u57342-16"><a class="nonblock" href="medios.html"><span id="u57342-11">​</span></a><span class="actAsInlineDiv normal_text" id="u57383"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u57380"><!-- image --><span class="actAsDiv" id="u57380_clip"><img class="position_content" id="u57380_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="medios.html">&nbsp;ICC en los Medios</a></p>
-                                    <p id="u57342-22"><a class="nonblock" href="videos.html"><span id="u57342-17">​</span></a><span class="actAsInlineDiv normal_text" id="u57387"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u57384"><!-- image --><span class="actAsDiv" id="u57384_clip"><img class="position_content" id="u57384_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="videos.html">&nbsp;Videos</a></p>
-                                    <p>&nbsp;</p>
-                                </div>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u49836"><!-- group -->
-                                <div class="clearfix grpelem" id="u49874-24"><!-- content -->
-                                    <p id="u49874-3"><a class="nonblock" href="eventos-y-capacitacion.html">CALENDARIO</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><a class="nonblock" href="eventos-y-capacitacion.html"><span id="u49874-5">​</span></a><span class="actAsInlineDiv normal_text" id="u49881"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49882"><!-- image --><span class="actAsDiv" id="u49882_clip"><img class="position_content" id="u49882_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="eventos-y-capacitacion.html">&nbsp;Calendario</a></p>
-                                    <p><a class="nonblock" href="eventos-y-capacitacion.html"><span id="u49874-11">​</span></a><span class="actAsInlineDiv normal_text" id="u49878"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49879"><!-- image --><span class="actAsDiv" id="u49879_clip"><img class="position_content" id="u49879_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="eventos-y-capacitacion.html">&nbsp;Seminarios, talleres y diplomados</a></p>
-                                    <p>&nbsp;</p>
-                                    <p id="u49874-20"><a class="nonblock" href="cursos-online.html">CURSOS EN LÍNEA</a></p>
-                                    <p id="u49874-21">&nbsp;</p>
-                                    <p id="u49874-22">&nbsp;</p>
-                                </div>
-                                <div class="clearfix grpelem" id="u49887-16"><!-- content -->
-                                    <p id="u49887-2">INFORMACIÓN GENERAL</p>
-                                    <p><a class="nonblock" href="10-razones.html"><span id="u49887-3">​</span></a><span class="actAsInlineDiv normal_text" id="u49891"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49892"><!-- image --><span class="actAsDiv" id="u49892_clip"><img class="position_content" id="u49892_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="10-razones.html">&nbsp;10 Razones para atender a un evento</a></p>
-                                    <p><span id="u49887-9">​</span><span><span class="actAsInlineDiv normal_text" id="u49888"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u49889"><!-- image --><span class="actAsDiv" id="u49889_clip"><img class="position_content" id="u49889_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="patrocinio.html">Patrocinios</a></p>
-                                </div>
-                                <div class="clearfix grpelem" id="u54622-16"><!-- content -->
-                                    <p id="u54622-2">PREMIOS</p>
-                                    <p id="u54622-8"><a class="nonblock" href="premios.html"><span id="u54622-3">​</span></a><span class="actAsInlineDiv normal_text" id="u54626"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u54627"><!-- image --><span class="actAsDiv" id="u54627_clip"><img class="position_content" id="u54627_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="premios.html">&nbsp;Premio Oslo Business for Peace</a></p>
-                                    <p id="u54622-14"><a class="nonblock" href="premio-mercaderes.html"><span id="u54622-9">​</span></a><span class="actAsInlineDiv normal_text" id="u54623"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u54624"><!-- image --><span class="actAsDiv" id="u54624_clip"><img class="position_content" id="u54624_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span><a class="nonblock" href="premio-mercaderes.html">&nbsp;Premio a &quot;Mercaderes de la Paz&quot;</a></p>
-                                </div>
-                            </div>
-                            <div class="Container invi grpelem" id="u49908"><!-- simple frame --></div>
-                            <div class="Container invi grpelem" id="u49938"><!-- simple frame --></div>
-                            <div class="Container invi clearfix grpelem" id="u54397"><!-- group -->
-                                <div class="clearfix grpelem" id="u54409-12"><!-- content -->
-                                    <p id="u54409-3"><a class="nonblock" href="afiliece-a-la-icc.html">AFILIECE A LA ICC</a></p>
-                                    <p>&nbsp;</p>
-                                    <p id="u54409-7"><a class="nonblock" href="porque-ser-socio.html">POR QUÉ SER SOCIO DE ICC</a></p>
-                                    <p id="u54409-8">&nbsp;</p>
-                                    <p id="u54409-9">&nbsp;</p>
-                                    <p id="u54409-10">&nbsp;</p>
-                                </div>
-                                <div class="pointer_cursor clearfix grpelem" id="u54659-18"><!-- content -->
-                                    <a class="block" href="sede.html"></a>
-                                    <p id="u54659-3"><a class="nonblock" href="red-global.html">RED GLOBAL</a></p>
-                                    <p>&nbsp;</p>
-                                    <p><span id="u54659-5">​</span><span><span class="actAsInlineDiv normal_text" id="u54663"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u54664"><!-- image --><span class="actAsDiv" id="u54664_clip"><img class="position_content" id="u54664_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="red-global.html">Red Global</a></p>
-                                    <p><span id="u54659-11">​</span><span><span class="actAsInlineDiv normal_text" id="u54660"><!-- content --><span class="actAsDiv clip_frame clearfix excludeFromNormalFlow" id="u54661"><!-- image --><span class="actAsDiv" id="u54661_clip"><img class="position_content" id="u54661_img" src="images/captura%20de%20pantalla%202014-01-13%20a%20las%20152930.jpg" alt="" width="153" height="341"/></span></span></span></span><span>&nbsp;</span><a class="nonblock" href="red-global.html">Comités Nacionales</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ThumbGroup clearfix grpelem" id="u48908"><!-- none box -->
-                        <div class="popup_anchor">
-                            <div class="pointer_cursor Thumb popup_element clearfix" id="u48909"><!-- group -->
-                                <a class="block" href="quienes-somos.html"></a>
-                                <a class="nonblock nontext clearfix grpelem" id="u48969-4" href="quienes-somos.html"><!-- content --><p id="u48969-2">QUIENES<br/>SOMOS</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="pointer_cursor Thumb popup_element clearfix" id="u49446"><!-- group -->
-                                <a class="block" href="influencia-global.html"></a>
-                                <a class="nonblock nontext clearfix grpelem" id="u49942-6" href="influencia-global.html"><!-- content --><p id="u49942-2">INFLUENCIA</p><p id="u49942-4">GLOBAL</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="pointer_cursor Thumb popup_element clearfix" id="u49514"><!-- group -->
-                                <a class="block" href="productos-y-servicios.html"></a>
-                                <a class="nonblock nontext clearfix grpelem" id="u49516-6" href="productos-y-servicios.html"><!-- content --><p id="u49516-2">PRODUCTOS Y</p><p id="u49516-4">SERVICIOS</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="Thumb popup_element clearfix" id="u49630"><!-- group -->
-                                <div class="clearfix grpelem" id="u49632-6"><!-- content -->
-                                    <p id="u49632-2">COMISIONES DE</p>
-                                    <p id="u49632-4">&nbsp;TRABAJO</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="pointer_cursor Thumb popup_element clearfix" id="u49728"><!-- group -->
-                                <a class="block" href="posturas.html"></a>
-                                <a class="nonblock nontext clearfix grpelem" id="u49730-6" href="posturas.html"><!-- content --><p id="u49730-2">GRUPOS</p><p id="u49730-4">ESPECIALIZADOS</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="pointer_cursor Thumb popup_element clearfix" id="u49807"><!-- group -->
-                                <a class="block" href="posturas.html"></a>
-                                <a class="nonblock nontext clearfix grpelem" id="u49809-4" href="posturas.html"><!-- content --><p id="u49809-2">POSTURAS</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="Thumb popup_element clearfix" id="u49813"><!-- group -->
-                                <a class="nonblock nontext clearfix grpelem" id="u49815-4" href="noticias.html"><!-- content --><p id="u49815-2">NOTICIAS</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="pointer_cursor Thumb popup_element clearfix" id="u49863"><!-- group -->
-                                <a class="block" href="eventos-y-capacitacion.html"></a>
-                                <a class="nonblock nontext clearfix grpelem" id="u49865-6" href="eventos-y-capacitacion.html"><!-- content --><p id="u49865-2">EVENTOS Y</p><p id="u49865-4">CAPACITACIÓN</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="pointer_cursor Thumb popup_element clearfix" id="u49935"><!-- group -->
-                                <a class="block" href="pauta.html"></a>
-                                <a class="nonblock nontext clearfix grpelem" id="u49937-4" href="http://www.iccmex.mx/pauta.php"><!-- content --><p id="u49937-2">PAUTA</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="Thumb popup_element clearfix" id="u49939"><!-- group -->
-                                <a class="nonblock nontext clearfix grpelem" id="u49941-4" href="http://iccmex.mx/newsletter/2013/redireccion.html"><!-- content --><p id="u49941-2">NEWSLETTER</p></a>
-                            </div>
-                        </div>
-                        <div class="popup_anchor">
-                            <div class="pointer_cursor Thumb popup_element clearfix" id="u54398"><!-- group -->
-                                <a class="block" href="afiliacion.html"></a>
-                                <a class="nonblock nontext clearfix grpelem" id="u54400-4" href="afiliacion.html"><!-- content --><p id="u54400-2">AFILIACIÓN</p></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="colelem" id="u49943"><!-- simple frame --></div>
-                <div class="PamphletWidget clearfix colelem" id="pamphletu553"><!-- none box -->
-                    <div class="ThumbGroup clearfix grpelem" id="u569"><!-- none box -->
-                    </div>
-                    <div class="popup_anchor" id="u554popup">
-                        <div class="ContainerGroup clearfix" id="u554"><!-- stack box -->
-                            <div class="Container clearfix grpelem" id="u555"><!-- group -->
-                                <div class="gradient clearfix grpelem" id="u611-9"><!-- content -->
-                                    <p id="u611">&nbsp;</p>
-                                    <p id="u611-3">Publicación del mes</p>
-                                    <p id="u611-4">&nbsp;</p>
-                                    <p id="u611-5">&nbsp;</p>
-                                    <p id="u611-7">El Modelo Contrato de Compraventa Internacional es una herramienta de ahorro de tiempo para los comerciantes, hombres de negocios, abogados y todas las partes involucradas en importaciones y exportaciones transfronterizos, transacciones de ventas.</p>
-                                </div>
-                                <div class="clip_frame clearfix grpelem" id="u903"><!-- image -->
-                                    <div id="u903_clip">
-                                        <a href="http://www.iccmex.mx/noticias/2014/marzo/publicacion_mes-marzo-2014.html"</a><img class="position_content" id="u903_img" src="images/banner-publicacion-2014.jpg" alt="" width="687" height="397"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u557"><!-- group -->
-                                <div class="gradient clearfix grpelem" id="u785-12"><!-- content -->
-                                    <p id="u785">&nbsp;</p>
-                                    <p id="u785-3">Competencia Económica</p>
-                                    <p id="u785-4">&nbsp;</p>
-                                    <p id="u785-5">&nbsp;</p>
-                                    <p id="u785-8">...</p>
-                                </div>
-                                <div class="clip_frame clearfix grpelem" id="u919"><!-- image -->
-                                    <div id="u919_clip">
-                                        <a href="eventos/lll_taller_competencia_economica/lll_taller_competencia_economica.html"</a><img class="position_content" id="u919_img" src="images/banner-evento-2014.jpg" alt="" width="687" height="397"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u557"><!-- group -->
-                                <div class="gradient clearfix grpelem" id="u785-12"><!-- content -->
-                                    <p id="u785">&nbsp;</p>
-                                    <p id="u785-3"></p>
-                                    <p id="u785-4">&nbsp;</p>
-                                    <p id="u785-5">&nbsp;</p>
-                                    <p id="u785-8">La International Chamber of Commerce (ICC), lanza una encuesta mundial para identificar las barreras nacionales que enfrentan los comerciantes cuando utilizan las reglas Incoterms® 2010.</p>
-                                </div>
-                                <div class="clip_frame clearfix grpelem" id="u919"><!-- image -->
-                                    <div id="u919_clip">
-                                        <a href="n-27may14.html"</a><img class="position_content" id="u919_img" src="images/banner-noticia-2014.jpg" alt="" width="687" height="397"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="Container invi clearfix grpelem" id="u1009"><!-- group -->
-                                <div class="gradient clearfix grpelem" id="u1014-10"><!-- content -->
-                                    <p id="u785">&nbsp;</p>
-                                    <p id="u785-3">Postura ICC México</p>
-                                    <p id="u785-4">&nbsp;</p>
-                                    <p id="u785-5">&nbsp;</p>
-                                    <p id="u785-8">Durante el desarrollo del evento se presentaron grandes inquietudes y puntos controversiales de parte de los expertos, integrantes del sector energético, en relación con las iniciativas de las leyes secundarias.</p>
-                                </div>
-                                <div class="clip_frame clearfix grpelem" id="u919"><!-- image -->
-                                    <div id="u919_clip">
-                                        <a href="n-10jun14.html"</a><img class="position_content" id="u919_img" src="images/banner-postura-2014.jpg" alt="" width="687" height="397"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu colelem" id="u18049"><!-- custom html -->
-                            <!-- AddThis Smart Layers BEGIN -->
-                            <!-- Go to http://www.addthis.com/get/smart-layers to customize -->
-                            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5227d94e5f260ea2"></script>
-                            <script type="text/javascript">
-                        addthis.layers({
-                            'theme': 'transparent',
-                            'share': {
-                                'position': 'left',
-                                'numPreferredServices': 3
-                            },
-                            'follow': {
-                                'services': []
-                            },
-                            'whatsnext': {}
-                        });
-                            </script>
-                            <!-- AddThis Smart Layers END -->
-                        </div>
-                        <div class="clearfix colelem" id="pu1223"><!-- group -->
-                            <div class="pointer_cursor clearfix grpelem" id="u1223"><!-- column -->
-                                <a class="block" href="icc-mex-2013.html"></a>
-                                <div class="position_content" id="u1223_position_content">
-                                    <div class="clearfix colelem" id="u1268-4"><!-- content -->
-                                        <p>Redes Sociales</p>
-                                    </div>
-                                    <div class="colelem" id="u1888"><!-- custom html -->
-                                        <div class="fb-like" data-href="https://www.facebook.com/pages/ICC-M%C3%A9xico/149175608474960" data-width="322" data-show-faces="false" data-send="true"></div>
-                                    </div>
-                                    <div class="colelem" id="u70"><!-- custom html -->
-                                        <a class="twitter-timeline" href="https://twitter.com/ICCMEXICO" data-widget-id="374929849804025856">Tweets por @ICCMEXICO</a>
-                                        <script>!function(d, s, id) {
-                                                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                                                if (!d.getElementById(id)) {
-                                                    js = d.createElement(s);
-                                                    js.id = id;
-                                                    js.src = p + "://platform.twitter.com/widgets.js";
-                                                    fjs.parentNode.insertBefore(js, fjs);
-                                                }
-                                            }(document, "script", "twitter-wjs");</script>
-                                    </div>
-                                    <div class="colelem" id="u61193"><!-- custom html -->
-                                        <iframe width="270" height="250" src="//www.youtube.com/embed/mK-LH7eAM8k" frameborder="0" allowfullscreen></iframe>
-                                    </div>
-                                    <div class="clip_frame colelem" id="u1651" ><a href="icc-mex-2014.html"><!-- image --><img class="block" id="u1651_img" src="images/icc.png" alt="" width="310" height="86"/>
-                                    </div>
-                                    <a class="nonblock nontext clip_frame colelem" id="u1610" href="http://iccmex.mx/programa_accion-2014.pdf"><!-- image --><img class="block" id="u1610_img" src="images/programa_accion-2014.png" alt="" width="310" height="86"/></a>
-                                    <a class="nonblock nontext clip_frame colelem" id="u1610" href="http://www.iccmex.mx/informe_presidencia-2014.pdf"><!-- image --><img class="block" id="u1610_img" src="images/informe_actividades-2014.png" alt="" width="310" height="86"/></a>
-                                </div>
-                            </div>
-                            <div class="clearfix grpelem" id="u54451-3"><!-- content -->
-                                <p>&nbsp;</p>
-                            </div>
-                            <div class="PamphletWidget clearfix grpelem" id="pamphletu1277"><!-- none box -->
-                                <div class="popup_anchor" id="u1285popup">
-                                    <div class="ContainerGroup clearfix" id="u1285"><!-- stack box -->
-                                        <div class="Container clearfix grpelem" id="u1296"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1297-21"><!-- content -->
-                                                <p id="u1297-2">La ICC ofrece una gran variedad de servicios de resolución de disputas para ayudar a solucionar las controversias que surgen en los negocios internacionales.</p>
-                                                <p id="u1297-3">&nbsp;</p>
-                                                <p id="u1297-6"><a class="nonblock" href="mediacion.html">&#45; Mediación</a></p>
-                                                <p id="u1297-8"><a class="nonblock" href="">&#45; Cláusulas estándar</p>
-                                                <p id="u1297-10"><a class="nonblock" href="">&#45; Reglas</p>
-                                                <p id="u1297-12"><a class="nonblock" href="">&#45; Presentar una solicitud de arbitraje</p>
-                                                <p id="u1297-14"><a class="nonblock" href="">&#45; Costos y formas de pago</p>
-                                                <p id="u1297-16"><a class="nonblock" href="">&#45; Árbitro de emergencia</p>
-                                                <p id="u1297-18"><a class="nonblock" href="">&#45; Presentar una solicitud de ADR</p>
-                                                <p id="u1297-19"><a class="nonblock" href="">&nbsp;</p>
-                                            </div>
-                                        </div>
-                                        <div class="Container invi clearfix grpelem" id="u1291"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1292-20"><!-- content -->
-                                                <p id="u1292-2">Las reglas de la ICC son utilizadas en miles de transacciones diarias y se han vuelto una parte esencial del comercio internacional.</p>
-                                                <p id="u1292-3">&nbsp;</p>
-                                                <p id="u1292-6"><a class="nonblock" href="incoterms.html">&#45; Reglas Incoterms® 2010</a></p>
-                                                <p id="u1292-8"><a class="nonblock" href="http://www.iccmex.mx/cdigo_consolidado-icc.pdf">&#45; Código Consolidado de Mercadotecnia y Publicidad de la ICC</p>
-                                                <p id="u1292-11"><a class="nonblock" href="contratos-y-modelos.html">&#45; Contratos modelo y cláusulas</a></p>
-                                                <p id="u1292-14"><a class="nonblock" href="g20.html">&#45; G20</a></p>
-                                                <p id="u1292-17"><a class="nonblock" href="areas-de-trabajo.html">&#45; Áreas de trabajo de la ICC</a></p>
-                                                <p id="u1292-18">&nbsp;</p>
-                                            </div>
-                                        </div>
-                                        <div class="Container invi clearfix grpelem" id="u1286"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1287-15"><!-- content -->
-                                                <p id="u1287-2">Desde el monitoreo de la piratería marítima hasta un estudio de la apertura de mercados, los estudios y reportes de la ICC son una fuente fiable y creíble de información.</p>
-                                                <p id="u1287-3">&nbsp;</p>
-                                                <p id="u1287-6"><a class="nonblock" href="indice-de-apertura.html">&#45; Índice de apertura de mercados</a></p>
-                                                <p id="u1287-9"><a class="nonblock" href="encuesta-economica.html">&#45; Encuesta sobre el Clima Económico Global</a></p>
-                                                <p id="u1287-12"><a class="nonblock" href="combate-a-la-pirater%c3%ada-y-falsificaci%c3%b3n.html">&#45; Reporte de Piratería en Alta Mar</a></p>
-                                                <p id="u1287-13">&nbsp;</p>
-                                            </div>
-                                        </div>
-                                        <div class="Container invi clearfix grpelem" id="u1333"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1366-17"><!-- content -->
-                                                <p id="u1366-2">La ICC facilita el intercambio comercial a través de las fronteras en todo el mundo ofreciendo una gran variedad de productos indispensables.</p>
-                                                <p id="u1366-3">&nbsp;</p>
-                                                <p id="u1366-5">&#45; Certificados de origen</p>
-                                                <p id="u1366-8"><a class="nonblock" href="ata-carnet.html">&#45; ATA Carnet</a></p>
-                                                <p id="u1366-11"><a class="nonblock" href="contratos-y-modelos.html">&#45; Contratos modelo</a></p>
-                                                <p id="u1366-14"><a class="nonblock" href="incoterms.html">&#45; Reglas Incoterms® 2010</a></p>
-                                                <p>&nbsp;</p>
-                                            </div>
-                                        </div>
-                                        <div class="Container invi clearfix grpelem" id="u1341"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1367-16"><!-- content -->
-                                                <p id="u1367-2">La ICC lucha en contra de todos los tipos de crímenes que afecten a las empresas.</p>
-                                                <p id="u1367-3">&nbsp;</p>
-                                                <p id="u1367-6"><a class="nonblock" href="anticorrupcion.html">&#45; Anticorrupción</a></p>
-                                                <p id="u1367-9"><a class="nonblock" href="combate-a-la-pirater%c3%ada-y-falsificaci%c3%b3n.html">&#45; Piratería en Alta Mar</a></p>
-                                                <p id="u1367-13"><a class="nonblock" href="combate-a-la-pirater%c3%ada-y-falsificaci%c3%b3n.html">&#45; Acción Empresarial para Combatir la Piratería y Falsificación</a></p>
-                                                <p>&nbsp;</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ThumbGroup clearfix grpelem" id="u1305"><!-- none box -->
-                                    <div class="popup_anchor">
-                                        <div class="Thumb popup_element rounded-corners clearfix" id="u1308"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1309-4"><!-- content -->
-                                                <p>Solución de controversias y arbitraje</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="popup_anchor">
-                                        <div class="Thumb popup_element rounded-corners clearfix" id="u1310"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1311-4"><!-- content -->
-                                                <p>Reglas y apoyo en el diseño de políticas públicas</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="popup_anchor">
-                                        <div class="Thumb popup_element rounded-corners clearfix" id="u1306"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1307-4"><!-- content -->
-                                                <p>Estudios y reportes</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="popup_anchor">
-                                        <div class="Thumb popup_element rounded-corners clearfix" id="u1339"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1307-4"><!-- content -->
-                                                <p>Certificados de origen</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="popup_anchor">
-                                        <div class="Thumb popup_element rounded-corners clearfix" id="u1342"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1365-4"><!-- content -->
-                                                <p>Combate al crimen comercial</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix grpelem" id="pu1225-4"><!-- column -->
-                                <div class="clearfix colelem" id="u1225-4"><!-- content -->
-                                    <p>Acceso Rápido</p>
-                                </div>
-                                <div class="rounded-corners colelem" id="u1329"><!-- simple frame --></div>
-                                <div class="clearfix colelem" id="pu1401-4"><!-- group -->
-                                    <div class="clearfix grpelem" id="u1401-4"><!-- content -->
-                                        <p>Noticias</p>
-                                    </div>
-                                    <div class="clearfix grpelem" id="u1402-4"><!-- content -->
-                                        <p>Eventos</p>
-                                    </div>
-                                </div>
-                                <div class="clearfix colelem" id="ppu1487-6"><!-- group -->
-                                    <div class="clearfix grpelem" id="pu1487-6"><!-- column -->
-                                        <div class="clearfix colelem" id="u1487-6"><!-- content -->
-                                            <p id="u1487-2">Recomendaciones de ICC México
-                                                respecto a las Leyes Secundarias en Materia de Reforma Energética</p>
-                                            <p>&nbsp;</p>
-                                            <p id="u1487-4">10 de junio de 2014</p>
-                                            <p>&nbsp;</p>
-                                        </div>
-                                        <div class="clearfix colelem" id="u1447-6"><!-- content -->
-                                            <p>Debido a la importancia de la Reforma Energética y de las iniciativas de leyes secundarias presentadas por el Ejecutivo Federal el pasado 30 de abril de 2014, la International Chamber of Commerce México (ICC México), se dio a la tarea de organizar del 19 al 27 de mayo de 2014, el Seminario sobre “Retos y Perspectivas a la Luz de la Reforma Energética", cuyo objetivo no  solo fue compartir las opiniones y experiencias de los expertos en dichos temas, sino también, resaltar aquellas cuestiones de incertidumbre y desconcierto entre los integrantes tanto del sector público como del privado. <a class="nonblock" href="n-10jun14.html">Ver más</a></p>
-                                        </div>
-                                        <div class="colelem" id="u1552"><!-- simple frame --></div>
-                                    </div>
-                                    <div class="clearfix grpelem" id="ppu1425-12"><!-- column -->
-                                        <div class="clearfix colelem" id="pu1425-12"><!-- group -->
-                                            <div class="clearfix grpelem" id="u1425-12"><!-- content -->
-                                                <p id="u1440-2">Young Arbitrators Forum</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1440-4">Hotel Four Seasons</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1440-10"><span>&nbsp;</span><a class="nonblock" href="http://www.iccmex.mx/eventos/2014/junio/iccyaf-16jun14.html"><span id="u1440-7">Ver más | </span><a class="nonblock" href="http://www.iccmex.mx/eventos/2014/junio/iccyaf-16jun14/iccyaf-16jun14.pdf"><span id="u1440-8">Inscripción</span></a></p>
-                                            </div>
-                                            <div class="grpelem" id="u1553"><!-- simple frame --></div>
-                                            <div class="grpelem" id="u1673"><!-- simple frame --></div>
-                                            <div class="grpelem" id="u1674"><!-- simple frame --></div>
-                                            <div class="clearfix grpelem" id="u1675-4"><!-- content -->
-                                                <p>16</p>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u1676-6"><!-- content -->
-                                                <p>Jun</p>
-                                                <p>2014</p>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix colelem" id="pppu1677"><!-- group -->
-                                            <div class="clearfix grpelem" id="ppu1677"><!-- column -->
-                                                <div class="clearfix colelem" id="pu1677"><!-- group -->
-                                                    <div class="grpelem" id="u1677"><!-- simple frame --></div>
-                                                    <div class="clearfix grpelem" id="u1679-4"><!-- content -->
-                                                        <p>17</p>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix colelem" id="pu1678"><!-- group -->
-                                                    <div class="grpelem" id="u1678"><!-- simple frame --></div>
-                                                    <div class="clearfix grpelem" id="u1680-6"><!-- content -->
-                                                        <p>Jun</p>
-                                                        <p>2014</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u1436-12"><!-- content -->
-                                                <p id="u1440-2">Primera Conferencia de la Asociación Latinoamericana de Arbitraje (ALARB)</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1440-4">Hotel Four Seasons</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1440-10"><span>&nbsp;</span><a class="nonblock" href="http://www.iccmex.mx/eventos/2014/junio/conferencia-latinoamericana-arbitraje-2014/sitio/alarb-sitio-info.html"><span id="u1440-7">Ver más | </span><a class="nonblock" href="http://www.iccmex.mx/eventos/2014/junio/conferencia-latinoamericana-arbitraje-2014/conferencia-latinoamericana-arbitraje-2014-programa.pdf"><span id="u1440-8">Programa</span></a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="colelem" id="u1554"><!-- simple frame --></div>
-                                <div class="clearfix colelem" id="ppu1559-6"><!-- group -->
-                                    <div class="clearfix grpelem" id="pu1559-6"><!-- column -->
-                                        <div class="clearfix colelem" id="u1559-6"><!-- content -->
-                                            <p id="u1559-2">ICC lanza encuesta para identificar barreras nacionales en el uso de las Reglas Incoterms® 2010</p>
-                                            <p>&nbsp;</p>
-                                            <p id="u1559-4">27 de mayo de 2014</p>
-                                        </div>
-                                        <div class="clearfix colelem" id="u1556-6"><!-- content -->
-                                            <p>Con objeto de conocer las necesidades de los empresarios y las restricciones al comercio en torno a la aplicación de las reglas Incoterms® 2010, la International Chamber of Commerce (ICC), lanza una encuesta mundial para identificar las barreras nacionales que enfrentan los comerciantes cuando utilizan las reglas Incoterms ® 2010. <a class="nonblock" href="n-27may14.html">Ver más</a></p>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix grpelem" id="ppppu1681"><!-- column -->
-                                        <div class="clearfix colelem" id="pppu1681"><!-- group -->
-                                            <div class="clearfix grpelem" id="ppu1681"><!-- column -->
-                                                <div class="clearfix colelem" id="pu1681"><!-- group -->
-                                                    <div class="grpelem" id="u1681"><!-- simple frame --></div>
-                                                    <div class="clearfix grpelem" id="u1683-4"><!-- content -->
-                                                        <p>03</p>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix colelem" id="pu1682"><!-- group -->
-                                                    <div class="grpelem" id="u1682"><!-- simple frame --></div>
-                                                    <div class="clearfix grpelem" id="u1684-6"><!-- content -->
-                                                        <p>Julio</p>
-                                                        <p>2014</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u1440-12"><!-- content -->
-                                                <p id="u1440-2">V Diplomado en<br/>Comercio Internacional</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1440-4">Escuela Libre de Derecho</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1440-10"><span>&nbsp;</span><a class="nonblock" href="eventos/V_diplomado_comercio_internacional/V_diplomado_comercio_internacional.html"><span id="u1440-7">Ver más | </span><a class="nonblock" href="http://www.iccmex.mx/eventos/2014/febrero/V_diplomado_comercio_internacional/V_diplomado_comercio_internacional-programa.pdf"><span id="u1440-8">Programa</span></a></p>
-                                            </div>
-                                        </div>
-                                        <div class="colelem" id="u1555"><!-- simple frame --></div>
-                                        <div class="clearfix colelem" id="pppu1685"><!-- group -->
-                                            <div class="clearfix grpelem" id="ppu1685"><!-- column -->
-                                                <div class="clearfix colelem" id="pu1685"><!-- group -->
-                                                    <div class="grpelem" id="u1685"><!-- simple frame --></div>
-                                                    <div class="clearfix grpelem" id="u1687-4"><!-- content -->
-                                                        <p>27</p>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix colelem" id="pu1686"><!-- group -->
-                                                    <div class="grpelem" id="u1686"><!-- simple frame --></div>
-                                                    <div class="clearfix grpelem" id="u1688-6"><!-- content -->
-                                                        <p>Ago</p>
-                                                        <p>2014</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u1444-11"><!-- content -->
-                                                <p id="u1444-2">III Taller de<br/>Competencia Económica</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1444-4">Universidad Iberoamericana</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1440-10"><span>&nbsp;</span><a class="nonblock" href="eventos/lll_taller_competencia_economica/lll_taller_competencia_economica.html"><span id="u1440-7">Ver más | </span><a class="nonblock" href="http://www.iccmex.mx/eventos/2014/agosto/III_taller-competencia_economica/III_taller-competencia_economica-programa.pdf"><span id="u1440-8">Programa</span></a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="colelem" id="u1560"><!-- simple frame --></div>
-                                <div class="colelem" id="u1671"><!-- simple frame --></div>
-                                <div class="clearfix colelem" id="ppu1565-6"><!-- group -->
-                                    <div class="clearfix grpelem" id="pu1565-6"><!-- column -->
-                                        <div class="clearfix colelem" id="u1565-6"><!-- content -->
-                                            <p id="u1565-2">Resultados de la Conferencia<br/>"Lucha contra la Corrupción en América Latina"</p>
-                                            <p>&nbsp;</p>
-                                            <p id="u1565-4">19 de mayo de 2014</p>
-                                        </div>
-                                        <div class="clearfix colelem" id="u1562-6"><!-- content -->
-                                            <p>El pasado 12 y 13 de mayo, la International Chamber of Commerce México (ICC México) y la International Bar Association (IBA) reunieron a reconocidos expertos nacionales e internacionales en materia de anticorrupción  para dialogar sobre la problemática que presenta el actual ambiente de corrupción en la región. <a class="nonblock" href="n-19may14.html">Ver más</a></p>
-                                        </div>
-                                        <div class="colelem" id="u1566"><!-- simple frame --></div>
-                                    </div>
-                                    <div class="clearfix grpelem" id="ppppu1689"><!-- column -->
-                                        <div class="clearfix colelem" id="pppu1689"><!-- group -->
-                                            <div class="clearfix grpelem" id="ppu1689"><!-- column -->
-                                                <div class="clearfix colelem" id="pu1689"><!-- group -->
-                                                    <div class="grpelem" id="u1689"><!-- simple frame --></div>
-                                                    <div class="clearfix grpelem" id="u1691-4"><!-- content -->
-                                                        <p>19</p>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix colelem" id="pu1690"><!-- group -->
-                                                    <div class="grpelem" id="u1690"><!-- simple frame --></div>
-                                                    <div class="clearfix grpelem" id="u1692-6"><!-- content -->
-                                                        <p>Jun</p>
-                                                        <p>2014</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u1670-10"><!-- content -->
-                                                <p id="u1670-2">Reunión Ejecutiva de Socios</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1670-3">Hotel Four Seasons</p>
-                                                <p>&nbsp;</p>
-                                                <p id="u1440-10"><span>&nbsp;</span><a class="nonblock" href="http://www.iccmex.mx/eventos/2014/junio/reunion-mexico_ante_mundo-19jun14.html"><span id="u1440-7">Ver más </span></p>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix colelem" id="u1500"><!-- group -->
-                                            <a class="nonblock nontext rounded-corners clearfix grpelem" id="u1499-4" href="eventos-y-capacitacion.html"><!-- content --><p id="u1499-2">Ver todos los eventos</p></a>
-                                            <a class="nonblock nontext clip_frame grpelem" id="u1493" href="eventos-y-capacitacion.html"><!-- image --><img class="block" id="u1493_img" src="images/captura%20de%20pantalla%202013-09-03%20a%20las%20140132.jpg" alt="" width="13" height="12"/></a>
-                                        </div>
-                                        <div class="clearfix colelem" id="u1824-4"><!-- content -->
-                                            <p>Publicaciones del Mes</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix colelem" id="ppu1571-8"><!-- group -->
-                                    <div class="clearfix grpelem" id="pu1571-8"><!-- column -->
-                                        <div class="clearfix colelem" id="u1565-6"><!-- content -->
-                                            <p id="u1565-2">Postura Institucional de ICC México sobre la Reforma Energética</p>
-                                            <p>&nbsp;</p>
-                                            <p id="u1565-4">16 de mayo de 2014</p>
-                                        </div>
-                                        <div class="clearfix colelem" id="u1562-6"><!-- content -->
-                                            <p>Uno de los principales motores del desarrollo económico de cualquier país es, sin duda, el sector energético; la actividad económica emana, se nutre y retroalimenta de las fuentes de energía con que cuenta, desarrolla y consume. <a class="nonblock" href="n-16may14.html">Ver más</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a class="nonblock nontext clip_frame grpelem" id="u54471" href="http://www.iccmex.mx/noticias/2014/marzo/publicacion_mes-marzo-2014.html"><!-- image --><img class="block" id="u54471_img" src="http://www.iccmex.mx/noticias/2014/marzo/publicacion_mes-marzo-2014.jpg" alt="" width="131" height="188"/></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix colelem" id="pu1501"><!-- group -->
-                        <div class="clearfix grpelem" id="u1501"><!-- group -->
-                            <a class="nonblock nontext rounded-corners clearfix grpelem" id="u1502-4" href="noticias.html"><!-- content --><p id="u1502-2">Ver todas las noticias</p></a>
-                            <a class="nonblock nontext clip_frame grpelem" id="u1503" href="noticias.html"><!-- image --><img class="block" id="u1503_img" src="images/captura%20de%20pantalla%202013-09-03%20a%20las%20140132.jpg" alt="" width="13" height="12"/></a>
-                        </div>
-                        <div class="clearfix grpelem" id="u1834"><!-- group -->
-                            <a class="nonblock nontext rounded-corners clearfix grpelem" id="u1837-4" href="libreria.html"><!-- content --><p id="u1837-2">Ir a Librería ICC</p></a>
-                            <a class="nonblock nontext clip_frame grpelem" id="u1835" href="libreria.html"><!-- image --><img class="block" id="u1835_img" src="images/captura%20de%20pantalla%202013-09-03%20a%20las%20140132.jpg" alt="" width="13" height="12"/></a>
-                        </div>
-                    </div>
-                    <div class="verticalspacer"></div>
-                    <div class="clearfix colelem" id="pu417"><!-- group -->
-                        <div class="clearfix grpelem" id="u417"><!-- group -->
-                            <div class="clip_frame grpelem" id="u1805"><!-- image -->
-                                <img class="block" id="u1805_img" src="images/pasted%20image%20500x500.png" alt="" width="18" height="18"/>
-                            </div>
-                            <div class="clearfix grpelem" id="u1776-14"><!-- content -->
-                                <p id="u1776-2">Síguenos en:</p>
-                                <p id="u1776-5"><a class="nonblock" href="https://twitter.com/ICCMEXICO">Twitter</a></p>
-                                <p id="u1776-8"><a class="nonblock" href="https://www.facebook.com/pages/ICC-M%C3%A9xico/149175608474960">Facebook</a></p>
-                                <p id="u1776-10">LinkedIn</p>
-                                <p id="u1776-12">Youtube</p>
-                            </div>
-                        </div>
-                        <div class="clearfix grpelem" id="u1759-13"><!-- content -->
-                            <p id="u1759-2">ICC México</p>
-                            <p><a class="nonblock" href="quienes-somos.html">¿Quiénes Somos?</a></p>
-                            <p><a class="nonblock" href="http://www.iccmex.mx/password.php">Intranet</a></p>
-                            <p><a class="nonblock" href="contacto.html">Pasantías</a></p>
-                        </div>
-                        <div class="clearfix grpelem" id="u1774-16"><!-- content -->
-                            <p id="u1774-2">Acceso Rápido</p>
-                            <p><a class="nonblock" href="afiliece-a-la-icc.html">¿Cómo ser Socio?</a></p>
-                            <p><a class="nonblock" href="patrocinio.html">Oportunidades de Patrocinio</a></p>
-                            <p><a class="nonblock" href="libreria.html">Publicaciones ICC</a></p>
-                            <p><a class="nonblock" href="incoterms.html">Incoterms® 2010</a></p>
-                        </div>
-                        <div class="clearfix grpelem" id="u1775-16"><!-- content -->
-                            <p id="u1775-2">Servicios ICC</p>
-                            <p><a class="nonblock" href="herramientas-para-el-comercio.html">Herramientas para el comercio</a></p>
-                            <p><a class="nonblock" href="combate-al-crimen-comercial.html">Combate al crimen comercial</a></p>
-                            <p><a class="nonblock" href="cursos-online.html">Capacitación en linea</a></p>
-                            <p id="u1775-14"><a class="nonblock" href="arbitraje-icc.html">Solución de Controversias Internacionales</a></p>
-                        </div>
-                        <div class="clip_frame clearfix grpelem" id="u1791"><!-- image -->
-                            <div id="u1791_clip">
-                                <img class="position_content" id="u1791_img" src="images/captura%20de%20pantalla%202013-09-03%20a%20las%20191548.jpg" alt="" width="1024" height="194"/>
-                            </div>
-                        </div>
-                        <div class="clip_frame clearfix grpelem" id="u1796"><!-- image -->
-                            <div id="u1796_clip">
-                                <img class="position_content" id="u1796_img" src="images/captura%20de%20pantalla%202013-09-03%20a%20las%20191548.jpg" alt="" width="1024" height="194"/>
-                            </div>
-                        </div>
-                        <div class="clip_frame clearfix grpelem" id="u1799"><!-- image -->
-                            <div id="u1799_clip">
-                                <img class="position_content" id="u1799_img" src="images/captura%20de%20pantalla%202013-09-03%20a%20las%20191548.jpg" alt="" width="1024" height="194"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix colelem" id="u419"><!-- group -->
-                        <div class="clearfix grpelem" id="u1758-12"><!-- content -->
-                            <p>International Chamber of Commerce México (ICC México)</p>
-                            <p>Indiana 260, Piso 5, Oficina 508, Colonia Ciudad de los Deportes C.P. 03710 ,México, D.F.</p>
-                            <p>Tel: +5255 5687 2203 | 5687 2207 | 5687 2601 | 5687 2507 |5687 2321</p>
-                            <p>Fax: +5255 5687 2628&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="nonblock" href="mailto:iccmex@iccmex.org.mx">&nbsp; iccmex@iccmex.org.mx</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-   
+    <div class="shadow clearfix" id="page"><!-- column -->
+        <div class="colelem" id="u1886"><!-- custom html -->
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id))
+                        return;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+        </div>
+        <div class="menu colelem" id="u18049"><!-- custom html -->
+            <!-- AddThis Smart Layers BEGIN -->
+            <!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5227d94e5f260ea2"></script>
+            <script type="text/javascript">
+                addthis.layers({
+                    'theme': 'transparent',
+                    'share': {
+                        'position': 'left',
+                        'numPreferredServices': 3
+                    },
+                    'follow': {
+                        'services': []
+                    },
+                    'whatsnext': {}
+                });
+            </script>
+            <!-- AddThis Smart Layers END -->
+        </div>
+        {# include 'FrontendBundle:Default:menuPrincipal.html.twig' #}
+        {{ render(controller('FrontendBundle:Default:menuPrincipal')) }}
+        <p>&nbsp;</p>
+        <div id="contenidoPrincipal">
+            {% block contenido %}{% endblock %}
+            <div class="verticalspacer"></div>
+            <!-- footer -->
+            {% include 'FrontendBundle:Default:footer.html.twig' %}
+            <!-- end footer -->            
+        </div>
+
+    </div>
+
 {% endblock %}
- 
+
 {% block javascripts %}
-    <script src="{{asset('js/jquery.js')}}"></script>
-    <!--script src="{{asset('js/underscore-min.js')}}"></script-->
-    <!--script src="{{asset('js/backbone-min.js')}}"></script-->
-    <!--script src="{{asset('js/swig.js')}}"></script-->
+    <!-- JS includes -->
+    <script type="text/javascript">
+        //if (document.location.protocol != 'https:')
+        //    document.write('\x3Cscript src="http://musecdn.businesscatalyst.com/scripts/4.0/jquery-1.8.3.min.js" type="text/javascript">\x3C/script>');
+    </script>
+    <script type="text/javascript">
+       // window.jQuery || document.write('\x3Cscript src="scripts/jquery-1.8.3.min.js" type="text/javascript">\x3C/script>');
+    </script>
+       <script src="{{asset('js/jquery-1.8.3.min.js')}}"></script>
+       <!--script src="{{asset('js/underscore-min.js')}}"></script-->
+       <!--script src="{{asset('js/backbone-min.js')}}"></script-->
+       <!--script src="{{asset('js/swig.js')}}"></script-->
     <!-- JS includes -->
     <script src="{{asset('js/museutils.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/webpro.js')}}" type="text/javascript"></script>
@@ -884,25 +105,56 @@
     <script src="{{asset('js/jquery.watch.js')}}" type="text/javascript"></script>
     <!-- Other scripts -->
     <script type="text/javascript">
-        $(document).ready(function() {
-            try {
-                Muse.Utils.transformMarkupToFixBrowserProblemsPreInit();/* body */
-                Muse.Utils.prepHyperlinks(true);/* body */
-                Muse.Utils.initWidget('#pamphletu48907', function(elem) {
-                    new WebPro.Widget.ContentSlideShow(elem, {contentLayout_runtime: 'stack', event: 'mouseover', deactivationEvent: 'mouseout_both', autoPlay: false, displayInterval: 3000, transitionStyle: 'fading', transitionDuration: 500, hideAllContentsFirst: true, shuffle: false, enableSwipe: true});
-                });/* #pamphletu48907 */
-                Muse.Utils.initWidget('#pamphletu553', function(elem) {
-                    new WebPro.Widget.ContentSlideShow(elem, {contentLayout_runtime: 'stack', event: 'click', deactivationEvent: '', autoPlay: true, displayInterval: 4000, transitionStyle: 'horizontal', transitionDuration: 700, hideAllContentsFirst: false, shuffle: false, enableSwipe: true});
-                });/* #pamphletu553 */
-                Muse.Utils.initWidget('#pamphletu1277', function(elem) {
-                    new WebPro.Widget.ContentSlideShow(elem, {contentLayout_runtime: 'stack', event: 'mouseover', deactivationEvent: '', autoPlay: false, displayInterval: 3000, transitionStyle: 'fading', transitionDuration: 500, hideAllContentsFirst: false, shuffle: false, enableSwipe: true});
-                });/* #pamphletu1277 */
-                Muse.Utils.fullPage('#page');/* 100% height page */
-                Muse.Utils.showWidgetsWhenReady();/* body */
-                Muse.Utils.transformMarkupToFixBrowserProblems();/* body */
-            } catch (e) {
-                Muse.Assert.fail('Error calling selector function:' + e);
-            }
-        });
+       $(document).ready(function() {
+           try {
+               Muse.Utils.transformMarkupToFixBrowserProblemsPreInit();/* body */
+               Muse.Utils.prepHyperlinks(true);/* body */
+               Muse.Utils.initWidget('#menuPrincipal', function(elem) {
+                   new WebPro.Widget.ContentSlideShow(elem, {
+                       contentLayout_runtime: 'stack',
+                       event: 'mouseover',
+                       deactivationEvent: 'mouseout_both',
+                       autoPlay: false,
+                       displayInterval: 3000,
+                       transitionStyle: 'fading',
+                       transitionDuration: 500,
+                       hideAllContentsFirst: true,
+                       shuffle: false,
+                       enableSwipe: true});
+               });/* #menuPrincipal */
+               Muse.Utils.initWidget('#carruselPrincipal', function(elem) {
+                   new WebPro.Widget.ContentSlideShow(elem, {
+                       contentLayout_runtime: 'stack',
+                       event: 'click',
+                       deactivationEvent: '',
+                       autoPlay: true,
+                       displayInterval: 4000,
+                       transitionStyle: 'horizontal',
+                       transitionDuration: 700,
+                       hideAllContentsFirst: false,
+                       shuffle: false,
+                       enableSwipe: true});
+               });/* #carruselPrincipal */
+               Muse.Utils.initWidget('#accesoRapido', function(elem) {
+                   new WebPro.Widget.ContentSlideShow(elem, {
+                       contentLayout_runtime: 'stack',
+                       event: 'mouseover',
+                       deactivationEvent: '',
+                       autoPlay: false,
+                       displayInterval: 3000,
+                       transitionStyle: 'fading',
+                       transitionDuration: 500,
+                       hideAllContentsFirst: false,
+                       shuffle: false,
+                       enableSwipe: true
+                   });
+               }); /*#accesoRapido */
+               Muse.Utils.fullPage('#page');/* 100% height page */
+               Muse.Utils.showWidgetsWhenReady();/* body */
+               Muse.Utils.transformMarkupToFixBrowserProblems();/* body */
+           } catch (e) {
+               Muse.Assert.fail('Error calling selector function:' + e);
+           }
+       });
     </script>
 {% endblock %}

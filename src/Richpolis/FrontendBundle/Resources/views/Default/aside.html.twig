@@ -1,140 +1,27 @@
-{% set aside_arriba = constant('Richpolis\\PublicidadBundle\\Entity\\Publicidad::TIPO_PUBLICIDAD_ASIDE_ARRIBA') %}
-{% set aside_abajo = constant('Richpolis\\PublicidadBundle\\Entity\\Publicidad::TIPO_PUBLICIDAD_ASIDE_ABAJO') %}
-<aside class="padding-trb columna-1">
-    <div class="publicidad aside-arriba sin-padding">
-        <ul class="galeria-publicidad">
-        {% for publicidad in publicidadArray[aside_arriba] if publicidad.isActive == true %}
-            {% if publicidad.isImagen %}
-            <li>
-                <a href="{{publicidad.link}}" target="_blank">
-                {{ publicidad.archivoView | raw }}
-                </a>
-            </li>
-            {% else %}    
-            <li>{{ publicidad.archivoView | raw }}</li>
-            {% endif %}
-        {% else %}
-            <li><img src="http://placehold.it/300x250/ffffff/ffffff" alt=""/></li>
-        {% endfor %}
-        </ul>    
+<div class="position_content" id="aside_position_content">
+    <div class="clearfix colelem" id="u1268-4"><!-- content -->
+        <p>Redes Sociales</p>
     </div>
-    <article id="lomasvisto-comentado">
-        <header>
-            <p class="titulo-tabs">
-                lo más  <span data-tab="lomas-comentado" class="tab tab-comentado">comentado</span><span data-tab="lomas-visto" class="tab tab-visto active">visto</span>
-            </p>
-        </header>
-        <div class="contenido lomas lomas-visto">
-            <!--select name="cbLoMasVisto" id="cbLoMasVisto" class="control-lomas">
-                <option value="categoria1">lo mas visto</option>
-                {% for categoria in categorias %}
-                    <option value="{{categoria.id}}">{{categoria.categoria}}</option>
-                {% endfor %}    
-            </select-->
-            <ul>
-                {% for item in lomasvistos %}
-                <li class="item-lomas-visto">
-                        <div class="numero">{{loop.index}}</div>
-                        <a href="{{path('frontend_publicaciones',{'slug':item.slug})}}">
-                            <div class="contenido">{{item.titulo}}</div>
-                            <figure class="thumbnail-mini">
-                                {% if item.imagen | length > 0 %}
-                                    <img src="{{item.webPath | imagine_filter('imagen_90_60') }}" alt="{{item.titulo}}"/>
-                                {% elseif item.galerias | length > 0 %}
-                                    <img src="{{item.galerias[0].webPath | imagine_filter('imagen_90_60') }}" alt="{{item.galerias[0].titulo}}"/>
-                                {% else %}
-                                    <img src="http://placehold.it/90x60/ffffff/ffffff" alt=""/>
-                                {% endif %}
-                            </figure>
-                        </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="contenido lomas lomas-comentado">
-            <!--select name="cbLoMasComentado" id="cbLoMasComentado"  class="control-lomas">
-                <option value="categoria1">Lo mas comentado</option>
-                {% for categoria in categorias %}
-                    <option value="{{categoria.id}}">{{categoria.categoria}}</option>
-                {% endfor %}
-            </select-->
-            <ul>
-                {% for item in lomascomentados %}
-                <li class="item-lomas-comentado">
-                    <div class="numero">{{loop.index}}</div>
-                        <a href="{{path('frontend_publicaciones',{'slug':item.slug})}}">
-                            <div class="contenido">{{item.titulo}}</div>
-                            <figure class="thumbnail-mini">
-                                {% if item.imagen | length > 0 %}
-                                    <img src="{{item.webPath | imagine_filter('imagen_90_60') }}" alt="{{item.titulo}}"/>
-                                {% elseif item.galerias | length > 0 %}
-                                    <img src="{{item.galerias[0].webPath | imagine_filter('imagen_90_60') }}" alt="{{item.galerias[0].titulo}}"/>
-                                {% else %}
-                                    <img src="http://placehold.it/90x60/ffffff/ffffff" alt=""/>
-                                {% endif %}
-                            </figure>
-                        </a>    
-                </li>
-                {% endfor%}
-            </ul>
-        </div>
-    </article>
-    <article id="ediciones-pdf">
-             <header class="ediciones-pdf ico_edicioespdf">
-                 <a href="{{path('frontend_edicion_pdf')}}" style="color: white;">
-                    <h3 class="titulo">ediciones pdf</h3>
-                 </a>
-             </header>
-             <!--div class="contenedor-galeria">
-                 <span class="control izquierdo ico_edicionespdf_flecha_izquierda"></span>
-                 <span class="control derecho ico_edicionespdf_flecha_derecha"></span>
-                 <ul class="galeria-pdf">
-                     {% for pdf in range(1,3) %}
-                       <li class="item edicion-pdf">
-                         <figure class="imagen-archivo">
-                             <img src="http://placehold.it/60x110" alt="">
-                         </figure>
-                         <div class="contenido">
-                             <h4 class="titulo"> edicion {{pdf}} </h4>
-                             <span class="fecha-archivo">{{date("+"~pdf~"days")|date("F jS \\a\\t g:ia") }}</span>
-                         </div>
-                     </li>
-                    {% endfor %}
-                 </ul>
-             </div-->
-    </article>
-    <article id="minuto-a-minuto">
-        <header>
-            <h2 class="titulo">minuto a minuto</h2>
-        </header>
-        <div class="contenido contenedor-lista">
-            <ul class="lista">
-                {% for item in ultimasPublicaciones %}
-                <li class="item minuto">
-                    <span class="tiempo">{{ item.createdAt|date("G:i") }}</span>
-                    <a href="{{path('frontend_publicaciones',{'slug':item.slug})}}">
-                        <div class="contenido">{{ item.titulo }}</div>
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </article>
-    <div class="publicidad aside-abajo sin-padding">
-        <ul class="galeria-publicidad">
-        {% for publicidad in publicidadArray[aside_abajo] if publicidad.isActive == true %}
-            {% if publicidad.isImagen %}
-            <li>
-                <a href="{{publicidad.link}}" target="_blank">
-                {{ publicidad.archivoView | raw }}
-                </a>
-            </li>
-            {% else %}    
-            <li>{{ publicidad.archivoView | raw }}</li>
-            {% endif %}
-        {% else %}
-            <li><img src="http://placehold.it/300x250/ffffff/ffffff" alt=""/></li>
-        {% endfor %}
-        </ul>    
+    <div class="colelem" id="u1888"><!-- custom html -->
+        <div class="fb-like" data-href="https://www.facebook.com/pages/ICC-M%C3%A9xico/149175608474960" data-width="322" data-show-faces="false" data-send="true"></div>
     </div>
-</aside>
+    <div class="colelem" id="u70"><!-- custom html -->
+        <a class="twitter-timeline" href="https://twitter.com/ICCMEXICO" data-widget-id="374929849804025856">Tweets por @ICCMEXICO</a>
+        <script>!function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = p + "://platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }(document, "script", "twitter-wjs");</script>
+    </div>
+    <div class="colelem" id="u61193"><!-- custom html -->
+        <iframe width="270" height="250" src="//www.youtube.com/embed/mK-LH7eAM8k" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="clip_frame colelem" id="u1651" ><a href="icc-mex-2014.html"><!-- image --><img class="block" id="u1651_img" src="/images/icc.png" alt="" width="310" height="86"/>
+    </div>
+    <a class="nonblock nontext clip_frame colelem" id="u1610" href="http://iccmex.mx/programa_accion-2014.pdf"><!-- image --><img class="block" id="u1610_img" src="/images/programa_accion-2014.png" alt="" width="310" height="86"/></a>
+    <a class="nonblock nontext clip_frame colelem" id="u1610" href="http://www.iccmex.mx/informe_presidencia-2014.pdf"><!-- image --><img class="block" id="u1610_img" src="/images/informe_actividades-2014.png" alt="" width="310" height="86"/></a>
+</div>

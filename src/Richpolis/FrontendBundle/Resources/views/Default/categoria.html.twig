@@ -1,7 +1,6 @@
 {% extends 'FrontendBundle::layout.html.twig' %}
 
 {% block contenido %}
-  
   <section class="padding columna-2">
         <article class="estatica" data-class="list-noticias categoria">
             <header>
@@ -44,9 +43,4 @@
             {% endfor %}    
         {% endif %}    
     </section>	
-    {# include 'FrontendBundle:Default:aside.html.twig' #}        
-    {{render(controller('FrontendBundle:Default:aside'))}}
-    <!--p class="padding">
-        <button class="ver-archivos">Archivos</button>    
-    </p-->
 {% endblock %}
