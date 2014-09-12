@@ -325,10 +325,36 @@ class PublicacionRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
     
-    public function getUltimasPublicaciones($registros){
+    public function getUltimasNoticias($registros = 4){
 
         $query=$this->queryPublicacionesPorTipoCategoria(
-            Publicacion::STATUS_PUBLICADO,
+            0,
+            CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS,
+            true,
+            'createdAt',
+            'DESC'
+        );
+        return $query->getQuery()->setMaxResults($registros)->getResult();
+    }
+    
+    public function getEventosEnInicio($registros = 4){
+        $query= $this->getEntityManager()->createQueryBuilder();
+        $query->select('p,c,u')   
+              ->from('Richpolis\PublicacionesBundle\Entity\Publicacion', 'p')
+              ->leftJoin('p.usuario', 'u')
+              ->leftJoin('p.categoria', 'c')
+              ->where('p.inInicio=:inicio')
+              ->setParameter('inicio', true)
+              ->orderBy('p.createdAt', 'DESC');
+        $query->andWhere('c.tipoCategoria=:tipo')
+              ->setParameter('tipo', CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS);
+        return $query->getQuery()->setMaxResults($registros)->getResult();
+    }
+    
+    public function getUltimasPublicaciones($registros = 4){
+
+        $query=$this->queryPublicacionesPorTipoCategoria(
+            0,
             CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION,
             true,
             'createdAt',
@@ -337,7 +363,7 @@ class PublicacionRepository extends EntityRepository
         return $query->getQuery()->setMaxResults($registros)->getResult();
     }
 	
-	public function getPublicacionesRelacionadas(CategoriaPublicacion $categoria, $registros = 9){
+    public function getPublicacionesRelacionadas(CategoriaPublicacion $categoria, $registros = 9){
 
         $query=$this->queryPorCategoria(
 			$categoria->getId(),

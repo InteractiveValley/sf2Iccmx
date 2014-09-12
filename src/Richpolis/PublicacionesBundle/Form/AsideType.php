@@ -8,15 +8,28 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AsideType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('clave')
-            ->add('contenido')
+            ->add('clave','text',array(
+                'label'=>'Clave','required'=>true,'attr'=>array(
+                    'class'=>'form-control placeholder',
+                    'placeholder'=>'Clave de referencia',
+                    'data-bind'=>'value: clave'
+                    )
+                ))    
+            ->add('contenido',null,array(
+                'label'=>'Contenido',
+                'required'=>true,
+                'attr'=>array(
+                    'class'=>'cleditor tinymce form-control placeholder',
+                   'data-theme' => 'advanced',
+                    )
+                ))
         ;
     }
     

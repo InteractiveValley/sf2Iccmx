@@ -1,89 +1,116 @@
 {% extends 'FrontendBundle::layout.html.twig' %}
 
-
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
 {% endblock %} 
 
 {% block contenido %}
-       
-    {{render(controller('FrontendBundle:Default:aside'))}}
-
+    <div class="PamphletWidget clearfix colelem" id="carruselPrincipal"> 
+        {% include 'FrontendBundle:Default:carruselPrincipal.html.twig' %}
+    </div>    
+    <div class="clearfix colelem" id="paside" style=""><!-- group -->
+        <div class="pointer_cursor clearfix grpelem" id="aside"><!-- column -->
+            {% include 'FrontendBundle:Default:aside.html.twig'  %}
+        </div>
+        <div class="clearfix grpelem" id="u54451-3"></div>
+        <div class="clearfix grpelem" id="pu1225-4"><!-- column -->
+            <div class="clearfix colelem" id="u1225-4"><!-- content -->
+                <p>Acceso Rápido</p>
+            </div>
+            <div class="rounded-corners colelem" id="u1329">
+                {% include 'FrontendBundle:Default:accesoRapido.html.twig' %}
+            </div>
+            <div class="clearfix colelem" id="pu1401-4"><!-- group -->
+                <div class="clearfix grpelem" id="u1401-4"><!-- content -->
+                    <p>Noticias</p>
+                    {% for noticia in noticias %}
+                        {% include 'FrontendBundle:Default:item_noticia.html.twig' with { 'noticia': noticia } %}
+                    {% endfor %}
+                </div>
+                <div class="clearfix grpelem" id="u1402-4"><!-- content -->
+                    <p>Eventos</p>
+                    {% for evento in eventos %}
+                        {% include 'FrontendBundle:Default:item_evento.html.twig'  with { 'evento': evento } %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
-{{ parent() }}
-<script src="{{asset('js/fancybox/jquery.fancybox.js')}}"></script>
-<script src="{{asset('js/fancybox/jquery.fancybox-media.js')}}"></script>
-<script>
-var sliderVideos;
-    $(document).ready(function() {
-        $('.galeria').bxSlider({
-              mode: 'fade',
-              autoHover:true,
-              auto: true,
-              pause: 7000,
+    {{ parent() }}
+    <script src="{{asset('js/fancybox/jquery.fancybox.js')}}"></script>
+    <script src="{{asset('js/fancybox/jquery.fancybox-media.js')}}"></script>
+    <script>
+        var sliderVideos;
+        $(document).ready(function() {
+            $('.galeria').bxSlider({
+                mode: 'fade',
+                autoHover: true,
+                auto: true,
+                pause: 7000,
+            });
+
+            sliderVideos = $('.videos').bxSlider({
+                auto: false,
+                minSlides: 3,
+                maxSlides: 3,
+                slideWidth: 191,
+                slideMargin: 10,
+                pager: false,
+                controls: false,
+            });
+
+            $(".bx-prev").addClass('ico_carrusel_inicio_izq');
+            $(".bx-next").addClass('ico_carrusel_inicio_der');
+
+            $(".control.izquierdo").on("click", function() {
+                if (publicacionesPdf > 1) {
+                    publicacionesPdf--;
+                    valorGaleriaPdf = (((publicacionesPdf) * 300) - 300);
+                    $(".galeria-pdf").animate({left: '-' + valorGaleriaPdf + 'px'}, 1000);
+                }
+            });
+
+            $(".control.derecho").on("click", function() {
+                if (publicacionesPdf < publicacionesPdfMax) {
+                    publicacionesPdf++;
+                    valorGaleriaPdf = (((publicacionesPdf) * 300) - 300);
+                    $(".galeria-pdf").animate({left: '-' + valorGaleriaPdf + 'px'}, 1000);
+                }
+            });
+
+
+            $("a.fancybox").fancybox();
+
+            $("a.fancybox-media").fancybox({
+                helpers: {
+                    media: true
+                },
+                youtube: {
+                    autoplay: 0
+                }
+            });
+
+            $("a.lanzador-cargar-notas").on("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                debugger;
+                var clase = $(this).data('clase');
+                $(this).parent().remove();
+                //$("."+clase).removeClass('hidden');
+                $("." + clase).fadeIn('fast');
+            });
         });
-		
-        sliderVideos = $('.videos').bxSlider({
-            auto: false,
-            minSlides: 3,
-            maxSlides: 3,
-            slideWidth: 191,
-            slideMargin: 10,
-            pager: false,
-            controls: false,
-        });
-		
-        $(".bx-prev").addClass('ico_carrusel_inicio_izq');
-        $(".bx-next").addClass('ico_carrusel_inicio_der');
 
-          $(".control.izquierdo").on("click",function(){
-            if(publicacionesPdf>1){
-                publicacionesPdf--;
-                valorGaleriaPdf = (((publicacionesPdf)*300)-300);
-                $(".galeria-pdf").animate({left: '-'+valorGaleriaPdf+'px'},1000);
-            }
-          });
+        function videosPrev() {
+            sliderVideos.goToPrevSlide();
+        }
 
-          $(".control.derecho").on("click",function(){
-            if(publicacionesPdf<publicacionesPdfMax){
-                publicacionesPdf++;
-                valorGaleriaPdf = (((publicacionesPdf)*300)-300);
-                $(".galeria-pdf").animate({left: '-'+valorGaleriaPdf+'px'},1000);
-            }
-          });
+        function videosNext() {
+            sliderVideos.goToNextSlide();
+        }
 
-	
-        $("a.fancybox").fancybox();
-          
-        $("a.fancybox-media").fancybox({
-            helpers : {
-                media: true
-            },
-            youtube : {
-               autoplay: 0
-            }
-        });
-        
-        $("a.lanzador-cargar-notas").on("click",function(e){
-           e.preventDefault();
-           e.stopPropagation();
-           debugger;
-           var clase = $(this).data('clase');
-           $(this).parent().remove();
-           //$("."+clase).removeClass('hidden');
-           $("."+clase).fadeIn('fast');
-        });
-    });
-
-function videosPrev(){
-	sliderVideos.goToPrevSlide();
-}
-
-function videosNext(){
-	sliderVideos.goToNextSlide();
-}
-
-</script>
+    </script>
 {% endblock %}

@@ -160,6 +160,9 @@ class PublicacionController extends Controller {
      */
     public function createAction(Request $request) {
         $entity = new Publicacion();
+        $idCategoria = $this->getCategoriaDefault();
+        $categoria = $this->getDoctrine()->getRepository('PublicacionesBundle:CategoriaPublicacion')->find($idCategoria);
+        $entity->setCategoria($categoria);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 

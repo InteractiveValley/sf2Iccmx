@@ -45,7 +45,17 @@ class PublicacionEventoType extends AbstractType
                     'placeholder'=>'Tipo de evento',
                     'data-bind'=>'value: tipoEvento'
                 )))
-            ->add('localidad','text',array(
+            ->add('inInicio',null,array('label'=>'En inicio?','attr'=>array(
+                'class'=>'checkbox-inline',
+                'placeholder'=>'En inicio',
+                'data-bind'=>'value: inInicio'
+             )))
+            ->add('inPatrocinio',null,array('label'=>'En patrocinio?','attr'=>array(
+                'class'=>'checkbox-inline',
+                'placeholder'=>'En patrocinio',
+                'data-bind'=>'value: inPatrocinio'
+             )))    
+            ->add('direccionEvento','text',array(
                 'label'=>'Localidad','required'=>true,'attr'=>array(
                     'class'=>'form-control placeholder',
                     'placeholder'=>'Localidad',
@@ -83,7 +93,12 @@ class PublicacionEventoType extends AbstractType
                 'class'=>'form-control placeholder',
                 'placeholder'=>'Portada',
                 'data-bind'=>'value: portada'
-             )))   
+             )))
+            ->add('hasMenu',null,array('label'=>'Con menu?','attr'=>array(
+                'class'=>'checkbox-inline',
+                'placeholder'=>'Con menu',
+                'data-bind'=>'value: hasMenu'
+             )))            
             ->add('imagen','hidden')
             ->add('position','hidden')
             ->add('slug','hidden')

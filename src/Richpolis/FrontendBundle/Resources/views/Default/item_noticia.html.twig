@@ -1,0 +1,15 @@
+<div class="clearfix colelem" id="ppu1571-8"><!-- group -->
+    <div class="clearfix grpelem" id="pu1571-8"><!-- column -->
+        <div class="clearfix colelem" id="u1565-6"><!-- content -->
+            <p id="u1565-2">{{noticia.titulo}}</p>
+            <p>&nbsp;</p>
+            <p id="u1565-4">{{noticia.createdAt | date('d/m/Y')}}</p>
+        </div>
+        <div class="clearfix colelem" id="u1562-6"><!-- content -->
+            <p>
+                {{ publicacion.descripcion | striptags | truncate(250,true,'...') | raw   }}
+                <a class="nonblock" href="{{path('frontend_noticias_publicacion',{'categoriaSlug': noticia.categoria.slug, 'publicacionSlug': noticia.slug})}}">Ver más</a>
+            </p>
+        </div>
+    </div>
+</div>

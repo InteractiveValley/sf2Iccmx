@@ -2,36 +2,36 @@
 
 {% block stylesheets %}
     <!-- Stylesheets -->
-  <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
-  <!-- Font awesome icon -->
-  <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}"> 
-  <!-- jQuery UI -->
-  <link rel="stylesheet" href="{{asset('css/jquery-ui-1.9.2.custom.min.css')}}"> 
-  <!-- Calendar -->
-  <link rel="stylesheet" href="{{asset('css/fullcalendar.css')}}">
-  <!-- prettyPhoto -->
-  <link rel="stylesheet" href="{{asset('css/prettyPhoto.css')}}">  
-  <!-- Star rating -->
-  <link rel="stylesheet" href="{{asset('css/rateit.css')}}">
-  <!-- Date picker -->
-  <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
-  <!-- CLEditor -->
-  <link rel="stylesheet" href="{{asset('css/jquery.cleditor.css')}}"> 
-  <!-- Uniform -->
-  <link rel="stylesheet" href="{{asset('css/uniform.default.html')}}"> 
-  <!-- Uniform -->
-  <link rel="stylesheet" href="{{asset('css/daterangepicker-bs3.css')}}" />
-  <!-- Bootstrap toggle -->
-  <link rel="stylesheet" href="{{asset('css/bootstrap-switch.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+    <!-- Font awesome icon -->
+    <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}"> 
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="{{asset('css/jquery-ui-1.9.2.custom.min.css')}}"> 
+    <!-- Calendar -->
+    <link rel="stylesheet" href="{{asset('css/fullcalendar.css')}}">
+    <!-- prettyPhoto -->
+    <link rel="stylesheet" href="{{asset('css/prettyPhoto.css')}}">  
+    <!-- Star rating -->
+    <link rel="stylesheet" href="{{asset('css/rateit.css')}}">
+    <!-- Date picker -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}">
+    <!-- CLEditor -->
+    <link rel="stylesheet" href="{{asset('css/jquery.cleditor.css')}}"> 
+    <!-- Uniform -->
+    <link rel="stylesheet" href="{{asset('css/uniform.default.html')}}"> 
+    <!-- Uniform -->
+    <link rel="stylesheet" href="{{asset('css/daterangepicker-bs3.css')}}" />
     <!-- Bootstrap toggle -->
-  <link rel="stylesheet" href="{{asset('js/datatables/css/dataTables.bootstrap.css')}}">
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="{{asset('css/style.css')}}">
-  <!-- Widgets stylesheet -->
-  <link rel="stylesheet" href="{{asset('css/widgets.css')}}">   
+    <link rel="stylesheet" href="{{asset('css/bootstrap-switch.css')}}">
+    <!-- Bootstrap toggle -->
+    <link rel="stylesheet" href="{{asset('js/datatables/css/dataTables.bootstrap.css')}}">
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <!-- Widgets stylesheet -->
+    <link rel="stylesheet" href="{{asset('css/widgets.css')}}">   
     <!-- Gritter Notifications stylesheet -->
-  <link rel="stylesheet" href="{{asset('css/jquery.gritter.css')}}"> 
-  
+    <link rel="stylesheet" href="{{asset('css/jquery.gritter.css')}}"> 
+
 {% endblock %}
 
 {% block mainbar %}
@@ -81,8 +81,16 @@
                                                                     <td>{{entity.categoria}}</td>
                                                                 </tr>
                                                                 <tr>
+                                                                    <td>Slug:</td>
+                                                                    <td>{{entity.slug}}</td>
+                                                                </tr>
+                                                                <tr>
                                                                     <td>Parent:</td>
                                                                     <td>{{entity.parent}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Aside:</td>
+                                                                    <td>{{entity.aside}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Activo?:</td>
@@ -94,7 +102,7 @@
                                                                         {% endif %}
                                                                     </td>
                                                                 </tr>
-                                                                
+
                                                             </tbody>
                                                         </table>    
                                                     </div>
@@ -104,10 +112,10 @@
                                                     <button id="botonEditar" class="btn btn-info" onclick="javascript:editarRegistro('{{path('categorias_publicaciones_edit',{id: entity.id})}}')">Editar</button>
                                                     <div style="float: left; margin-right: 3px;">
                                                         <form id="formEliminar" action="{{ path('categorias_publicaciones_delete', { 'id': entity.id }) }}" method="post">
-                                                                <input type="hidden" name="_method" value="DELETE">
-																{{ form_widget(delete_form) }}
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            {{ form_widget(delete_form) }}
                                                         </form>
-														<button class="btn btn-danger" onclick="eliminarRegistro();">Eliminar</button>
+                                                        <button class="btn btn-danger" onclick="eliminarRegistro();">Eliminar</button>
                                                     </div>        
                                                 </div>
                                             </div>  
@@ -117,74 +125,74 @@
                             </div>
                         </div>
 
-    <!-- Matter ends -->
+                        <!-- Matter ends -->
 
-    </div>
+                        </div>
 
-    <!-- Mainbar ends -->        
-    <div class="clearfix"></div>
+                        <!-- Mainbar ends -->        
+                        <div class="clearfix"></div>
 
-{% endblock %}
+                    {% endblock %}
 
-{% block javascripts %}
-  {{ parent() }}
+                    {% block javascripts %}
+                        {{ parent() }}
 
-<script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script> <!-- jQuery UI -->
-<script src="{{asset('js/fullcalendar.min.js')}}"></script> <!-- Full Google Calendar - Calendar -->
-<script src="{{asset('js/jquery.rateit.min.js')}}"></script> <!-- RateIt - Star rating -->
-<script src="{{asset('js/jquery.prettyPhoto.js')}}"></script> <!-- prettyPhoto -->
+                        <script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script> <!-- jQuery UI -->
+                        <script src="{{asset('js/fullcalendar.min.js')}}"></script> <!-- Full Google Calendar - Calendar -->
+                        <script src="{{asset('js/jquery.rateit.min.js')}}"></script> <!-- RateIt - Star rating -->
+                        <script src="{{asset('js/jquery.prettyPhoto.js')}}"></script> <!-- prettyPhoto -->
 
-<!-- jQuery Flot -->
-<script src="{{asset('js/excanvas.min.js')}}"></script>
-<script src="{{asset('js/jquery.flot.js')}}"></script>
-<script src="{{asset('js/jquery.flot.resize.js')}}"></script>
-<script src="{{asset('js/jquery.flot.pie.js')}}"></script>
-<script src="{{asset('js/jquery.flot.stack.js')}}"></script>
+                        <!-- jQuery Flot -->
+                        <script src="{{asset('js/excanvas.min.js')}}"></script>
+                        <script src="{{asset('js/jquery.flot.js')}}"></script>
+                        <script src="{{asset('js/jquery.flot.resize.js')}}"></script>
+                        <script src="{{asset('js/jquery.flot.pie.js')}}"></script>
+                        <script src="{{asset('js/jquery.flot.stack.js')}}"></script>
 
-<!-- jQuery Notification - Noty -->
-<script src="{{asset('js/jquery.noty.js')}}"></script> <!-- jQuery Notify -->
-<script src="{{asset('js/themes/default.js')}}"></script> <!-- jQuery Notify -->
-<script src="{{asset('js/layouts/bottom.js')}}"></script> <!-- jQuery Notify -->
-<script src="{{asset('js/layouts/topRight.js')}}"></script> <!-- jQuery Notify -->
-<script src="{{asset('js/layouts/top.js')}}"></script> <!-- jQuery Notify -->
-<!-- jQuery Notification ends -->
+                        <!-- jQuery Notification - Noty -->
+                        <script src="{{asset('js/jquery.noty.js')}}"></script> <!-- jQuery Notify -->
+                        <script src="{{asset('js/themes/default.js')}}"></script> <!-- jQuery Notify -->
+                        <script src="{{asset('js/layouts/bottom.js')}}"></script> <!-- jQuery Notify -->
+                        <script src="{{asset('js/layouts/topRight.js')}}"></script> <!-- jQuery Notify -->
+                        <script src="{{asset('js/layouts/top.js')}}"></script> <!-- jQuery Notify -->
+                        <!-- jQuery Notification ends -->
 
-<script src="{{asset('js/datatables/js/jquery.dataTables.js')}}"></script>
+                        <script src="{{asset('js/datatables/js/jquery.dataTables.js')}}"></script>
 
-<script src="{{asset('js/sparklines.js')}}"></script> <!-- Sparklines -->
-<script src="{{asset('js/jquery.cleditor.min.js')}}"></script> <!-- CLEditor -->
-<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script> <!-- Date picker -->
-<script src="{{asset('js/jquery.uniform.min.html')}}"></script> <!-- jQuery Uniform -->
-<script src="{{asset('js/jquery.slimscroll.min.js')}}"></script> <!-- jQuery SlimScroll -->
-<script src="{{asset('js/bootstrap-switch.min.js')}}"></script> <!-- Bootstrap Toggle -->
-<script src="{{asset('js/bootbox.min.js')}}"></script> <!-- Filter for support page -->
-<script src="{{asset('js/custom.js')}}"></script> <!-- Custom codes -->
-<script src="{{asset('js/charts.js')}}"></script> <!-- Charts & Graphs -->
+                        <script src="{{asset('js/sparklines.js')}}"></script> <!-- Sparklines -->
+                        <script src="{{asset('js/jquery.cleditor.min.js')}}"></script> <!-- CLEditor -->
+                        <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script> <!-- Date picker -->
+                        <script src="{{asset('js/jquery.uniform.min.html')}}"></script> <!-- jQuery Uniform -->
+                        <script src="{{asset('js/jquery.slimscroll.min.js')}}"></script> <!-- jQuery SlimScroll -->
+                        <script src="{{asset('js/bootstrap-switch.min.js')}}"></script> <!-- Bootstrap Toggle -->
+                        <script src="{{asset('js/bootbox.min.js')}}"></script> <!-- Filter for support page -->
+                        <script src="{{asset('js/custom.js')}}"></script> <!-- Custom codes -->
+                        <script src="{{asset('js/charts.js')}}"></script> <!-- Charts & Graphs -->
 
 
-<script>
-var regresar = function(url){
-    location.href=url;
-};
+                        <script>
+                            var regresar = function(url) {
+                                location.href = url;
+                            };
 
-var editarRegistro = function(url){
-    location.href=url;
-};
-    
-var eliminarRegistro = function(){
-  {% if is_granted('ROLE_ADMIN') %}
-    bootbox.confirm("Esta seguro de eliminar el registro?", function(result) {
-      if(result){
-         $("#formEliminar").submit();
-      }
-    });
-  {% else %}
-    noty({text: 'No tienes los permisos suficientes para realizar esta accion',layout:'bottom', type:'warning', timeout:2000 });
-  {% endif %}      
-};
+                            var editarRegistro = function(url) {
+                                location.href = url;
+                            };
 
-</script>
+                            var eliminarRegistro = function() {
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    bootbox.confirm("Esta seguro de eliminar el registro?", function(result) {
+                                        if (result) {
+                                            $("#formEliminar").submit();
+                                        }
+                                    });
+                                {% else %}
+                                    noty({text: 'No tienes los permisos suficientes para realizar esta accion', layout: 'bottom', type: 'warning', timeout: 2000});
+                                {% endif %}      
+                            };
 
-    
-{% endblock %}
+                        </script>
+
+
+                    {% endblock %}
 

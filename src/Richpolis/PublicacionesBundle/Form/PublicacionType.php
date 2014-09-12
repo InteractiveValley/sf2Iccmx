@@ -66,6 +66,11 @@ class PublicacionType extends AbstractType
                 'placeholder'=>'Portada',
                 'data-bind'=>'value: portada'
              )))
+            ->add('hasMenu',null,array('label'=>'Con menu?','attr'=>array(
+                'class'=>'checkbox-inline',
+                'placeholder'=>'Con menu',
+                'data-bind'=>'value: hasMenu'
+             )))
             ->add('imagen','hidden')
             ->add('position','hidden')
             ->add('slug','hidden')

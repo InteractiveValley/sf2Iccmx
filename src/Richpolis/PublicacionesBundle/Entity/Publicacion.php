@@ -253,6 +253,7 @@ class Publicacion
         $this->status = self::STATUS_INCOMPLETO;
         $this->contVisitas = 0;
         $this->contComentarios = 0;
+        $this->tipoEvento = self::TIPO_EVENTO_TALLER;
     }
     
     public function getStringTipoEvento(){
@@ -468,7 +469,7 @@ class Publicacion
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../html'.$this->getUploadDir();
+        return __DIR__.'/../../../../web'.$this->getUploadDir();
     }
     
     public function getWebPath()

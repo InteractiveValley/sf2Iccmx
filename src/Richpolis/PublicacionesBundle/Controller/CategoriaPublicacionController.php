@@ -282,17 +282,22 @@ class CategoriaPublicacionController extends Controller {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        //if ($form->isValid()) {
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find CategoriaPublicacion entity.');
             }
+            
+            $publicaciones = $entity->getPublicaciones();
+            foreach($publicaciones as $publicacion){
+                $em->remove($publicacion);
+            }
 
             $em->remove($entity);
             $em->flush();
-        //}
+        }
 
         return $this->redirect($this->generateUrl('categorias_publicaciones'));
     }

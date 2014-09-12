@@ -1,0 +1,24 @@
+<div class="clearfix colelem" id="pppu1689"><!-- group -->
+    <div class="clearfix grpelem" id="ppu1689"><!-- column -->
+        <div class="clearfix colelem" id="pu1689"><!-- group -->
+            <div class="grpelem" id="u1689"><!-- simple frame --></div>
+            <div class="clearfix grpelem" id="u1691-4"><!-- content -->
+                <p>{{ evento.fechaEvento | date('d') }}</p>
+            </div>
+        </div>
+        <div class="clearfix colelem" id="pu1690"><!-- group -->
+            <div class="grpelem" id="u1690"><!-- simple frame --></div>
+            <div class="clearfix grpelem" id="u1692-6"><!-- content -->
+                <p>{{ evento.fechaEvento | date('mm') }}</p>
+                <p>{{ evento.fechaEvento | date('Y') }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix grpelem" id="u1670-10"><!-- content -->
+        <p id="u1670-2">{{evento.titulo}}</p>
+        <p>&nbsp;</p>
+        <p id="u1670-3">{{evento.direccionEvento}}</p>
+        <p>&nbsp;</p>
+        <p id="u1440-10"><span>&nbsp;</span><a class="nonblock" href="{{path('frontend_eventos_publicacion',{'categoriaSlug':evento.categoria.slug, 'publicacionSlug': evento.slug})}}"><span id="u1440-7">Ver más </span></p>
+    </div>
+</div>

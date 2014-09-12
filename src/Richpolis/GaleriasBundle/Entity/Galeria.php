@@ -481,12 +481,12 @@ class Galeria
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../html'.$this->getUploadDir();
+        return __DIR__.'/../../../../web'.$this->getUploadDir();
     }
     
     protected function getThumbnailRootDir()
     {
-        return __DIR__.'/../../../../html'.$this->getUploadDir().'/thumbnails';
+        return __DIR__.'/../../../../web'.$this->getUploadDir().'/thumbnails';
     }
     
     /**
