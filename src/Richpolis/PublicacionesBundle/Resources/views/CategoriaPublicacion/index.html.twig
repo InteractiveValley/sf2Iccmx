@@ -94,9 +94,6 @@
                       <tbody id="cuerpoTabla">
                       {% for categoria in entities if categoria.nivel == 0 %}
                           {% include 'PublicacionesBundle:CategoriaPublicacion:lista_item.html.twig' with {'entity': categoria }  %}
-                          {% for child in categoria.children %}
-                              {% include 'PublicacionesBundle:CategoriaPublicacion:lista_item.html.twig' with {'entity': child }  %}
-                          {% endfor %}    
                       {% endfor %}
 
                       </tbody>

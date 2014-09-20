@@ -110,6 +110,7 @@ class CategoriaPublicacionController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $this->setCategoriaSluggable($entity,true);
             $em->persist($entity);
             $em->flush();
 
@@ -282,17 +283,22 @@ class CategoriaPublicacionController extends Controller {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        //if ($form->isValid()) {
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find CategoriaPublicacion entity.');
             }
+            
+            $publicaciones = $entity->getPublicaciones();
+            foreach($publicaciones as $publicacion){
+                $em->remove($publicacion);
+            }
 
             $em->remove($entity);
             $em->flush();
-        //}
+        }
 
         return $this->redirect($this->generateUrl('categorias_publicaciones'));
     }
@@ -349,5 +355,38 @@ class CategoriaPublicacionController extends Controller {
             $response->setData(array('ok' => false));
             return $response;
         }
+    }
+
+    private function setCategoriaSluggable(CategoriaPublicacion $entity, $isNew = false){
+        $em = $this->getDoctrine()->getManager();
+        $entity->setSlugAtValue();
+        $slug = $entity->getSlug();
+        $id = 0;
+        if(!$isNew){
+            $id = $entity->getId();
+        }
+        $resultados = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                         ->findCategoriaSluggable($slug,$id);
+        if(count($resultados)>0){
+            $cont=0;
+            $encontrado = false;
+            do{
+                //buscamos el slug correcto
+                $slugBuscar = $slug .($cont>0?'-'.$cont:'');
+                foreach($resultados as $resultado){
+                    if($resultado->getSlug() == $slugBuscar){
+                        $encontrado=true;
+                        break;
+                    }else{
+                        $encontrado = false;
+                    }
+                }
+                //entonces empecemos a buscar otro slug
+                $cont++;
+            }while($encontrado);
+            $slug = $slugBuscar;    
+        }   
+        $entity->setSlug($slug);
+        return true;
     }
 }

@@ -11,6 +11,8 @@ class Richsys
     const TIPO_ARCHIVO_LINK=3;
     const TIPO_ARCHIVO_MUSICA=4;
     const TIPO_ARCHIVO_FLASH=5;
+    const TIPO_ARCHIVO_PDF=6;
+    const TIPO_ARCHIVO_DOC=7;
         
     static public $sTipoArchivo=array(
         self::TIPO_ARCHIVO_IMAGEN=>'Imagen',
@@ -18,12 +20,21 @@ class Richsys
         self::TIPO_ARCHIVO_LINK=>'Link',
         self::TIPO_ARCHIVO_MUSICA=>'Musica',
         self::TIPO_ARCHIVO_FLASH=>'Flash',
+        self::TIPO_ARCHIVO_FLASH=>'PDF',
+        self::TIPO_ARCHIVO_FLASH=>'Documento',
     );
     
-    
+    static public function normaliza ($cadena){
+        $originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+        $modificadas = 'AAAAAAACEEEEIIIIDNOOOOOOUUUUYBsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+        $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+        return $cadena;
+    }
     
     static public function slugify($text)
     {
+        $text = self::normaliza($text);
+        
         // replace non letter or digits by -
         $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
 
@@ -267,6 +278,12 @@ EOF;
             case "avi":    
               $resp="video/x-msvideo";
               break;
+            case "pdf":
+              $resp = "application/pdf";
+              break;
+            case "doc":
+              $resp = "application/octet-stream";
+              break;
             default:    
               $resp="image/jpeg";
               break;
@@ -295,6 +312,13 @@ EOF;
               break;
             case "mp3":    
               $resp=self::TIPO_ARCHIVO_MUSICA;
+              break;
+            case "pdf":    
+              $resp=self::TIPO_ARCHIVO_PDF;
+              break;
+            case "doc":
+            case "xdoc":    
+              $resp=self::TIPO_ARCHIVO_DOC;
               break;
             default:    
               $resp=self::TIPO_ARCHIVO_LINK;

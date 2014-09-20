@@ -95,33 +95,29 @@ class DefaultController extends Controller {
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
 
-        //$categorias = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-        //        ->getCategoriasConPublicaciones(6);
+        $eventos = $em->getRepository('PublicacionesBundle:Publicacion')
+                ->getEventosEnInicio();
 
-        $publicaciones = $em->getRepository('PublicacionesBundle:Publicacion')
-                ->getUltimasPublicaciones(4);
+        $noticias = $em->getRepository('PublicacionesBundle:Publicacion')
+                ->getUltimasNoticias();
 
         return array(
-            'ultimasPublicaciones' => $publicaciones
+            'eventos' => $eventos,
+            'noticias'=> $noticias,
         );
     }
 
-    
-    
     /**
-     * @Route("/aside", name="frontend_aside")
+     * @Route("/aside/{clave}", name="frontend_aside")
      * @Template()
      */
-    public function asideAction(Request $request) {
+    public function asideAction(Request $request,$clave) {
         $em = $this->getDoctrine()->getManager();
         
-        return array(
-            'publicidadArray' => $this->getPublicidadEnSession($em),
-            'lomasvistos' => $this->getLosmasVistosEnSession($em),
-            'lomascomentados' => $this->getLosmasComentadosEnSession($em),
-            'categorias' => $this->getCategoriasEnSession($em),
-            'ultimasPublicaciones' => $this->getUltimasPublicaciones($em),
-        );
+        $aside = $em->getRepository('PublicacionesBundle:Aside')
+                    ->findOneBy(array('clave'=>$clave));
+        
+        return compact('aside');
     }
     
     /**
@@ -133,8 +129,7 @@ class DefaultController extends Controller {
         
         $configuracion = $em->getRepository('BackendBundle:Configuraciones')
                         ->findOneBy(array('slug' => 'pie-pagina'));
-        
-	return array(
+        return array(
             'configuracion' => $configuracion,
         );
     }
@@ -147,7 +142,7 @@ class DefaultController extends Controller {
     {
         $em = $this->getDoctrine()->getManager();
         $categorias = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                          ->findAll();
+                          ->findActivos();
         
         return array('categorias'=>$categorias);
     }
@@ -160,20 +155,34 @@ class DefaultController extends Controller {
      */
     public function quienesSomosAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_quienes_somos';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
         
     }
@@ -186,20 +195,35 @@ class DefaultController extends Controller {
      */
     public function influenciaGlobalAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_influencia_global';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
-            $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'influencia-global'));
+            $publicaciones = $categoria->getPublicaciones();
+            $portada = $publicaciones[0];
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
         
     }
@@ -212,20 +236,35 @@ class DefaultController extends Controller {
      */
     public function productosServiciosAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_productos_servicios';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria);
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
-            $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'productos-y-servicios'));
+            $publicaciones = $categoria->getPublicaciones();
+            $portada = $publicaciones[0];
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
         
     }
@@ -238,20 +277,35 @@ class DefaultController extends Controller {
      */
     public function comisionesTrabajoAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_comisiones_trabajo';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria);
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
-            $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'comisiones-de-trabajo'));
+            $publicaciones = $categoria->getPublicaciones();
+            $portada = $publicaciones[0];
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
         
     }
@@ -264,20 +318,35 @@ class DefaultController extends Controller {
      */
     public function gruposEspecializadosAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_grupos_especializados';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria);
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
-            $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'grupos-especializados'));
+            $publicaciones = $categoria->getPublicaciones();
+            $portada = $publicaciones[0];
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
         
     }
@@ -290,20 +359,35 @@ class DefaultController extends Controller {
      */
     public function posturasAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_posturas';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria);
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
-            $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'posturas'));
+            $publicaciones = $categoria->getPublicaciones();
+            $portada = $publicaciones[0];
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
         
     }
@@ -316,22 +400,89 @@ class DefaultController extends Controller {
      */
     public function noticiasAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_noticias';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria);
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
-            $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'noticias'));
+            $publicaciones = $categoria->getPublicaciones();
+            $portada = $publicaciones[0];
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
-        
+    }
+    
+    /**
+     * @Route("/eventos/calendario/icc/mexico", name="frontend_eventos_calendario_mexico")
+     * @Route("/eventos/calendario/icc/mexico/{publicacionSlug}", name="frontend_eventos_calendario_mexico_publicacion")
+     * @Method({"GET"})
+     */
+    public function eventosCalendarioIccMexicoAction(Request $request, $publicacionSlug = '') {
+        $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_eventos_calendario_mexico';
+        if(strlen($publicacionSlug)>0){
+            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
+                              ->findOneBy(array('slug' => $publicacionSlug));
+            $categoria = $publicacion->getCategoria();
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                            ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:evento.html.twig', compact('categoria','publicacion','rutaBase'));
+        }else{
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'calendario-icc-mexico'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            return $this->render('FrontendBundle:Default:eventos.html.twig', compact('categoria','rutaBase'));
+        }
+    }
+    
+    /**
+     * @Route("/eventos/calendario/icc/mundial", name="frontend_eventos_calendario_mundial")
+     * @Route("/eventos/calendario/icc/mundial/{publicacionSlug}", name="frontend_eventos_calendario_mundial_publicacion")
+     * @Method({"GET"})
+     */
+    public function eventosCalendarioIccMundialAction(Request $request, $publicacionSlug = '') {
+        $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_eventos_calendario_mundial';
+        if(strlen($publicacionSlug)>0){
+            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
+                              ->findOneBy(array('slug' => $publicacionSlug));
+            $categoria = $publicacion->getCategoria();
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                            ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:evento.html.twig', compact('categoria','publicacion','rutaBase'));
+        }else{
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'calendario-icc-mundial'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            return $this->render('FrontendBundle:Default:eventos.html.twig', compact('categoria','rutaBase'));
+        }
     }
     
     /**
@@ -342,22 +493,36 @@ class DefaultController extends Controller {
      */
     public function eventosAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_eventos';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:evento.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria);
+            return $this->render('FrontendBundle:Default:evento.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
-            $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'eventos'));
+            $publicaciones = $categoria->getPublicaciones();
+            $portada = $publicaciones[0];
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
-        
     }
     
     /**
@@ -368,22 +533,36 @@ class DefaultController extends Controller {
      */
     public function afiliacionAction(Request $request, $categoriaSlug = '', $publicacionSlug = '') {
         $em = $this->getDoctrine()->getManager();
+        $rutaBase = 'frontend_afiliacion';
         if(strlen($categoriaSlug)>0 && strlen($publicacionSlug)>0){
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria->getSlug());
+            
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
-            return $this->render('FrontendBundle:Default:categoria.html.twig',  compact('categoria'));
+            $publicaciones = $categoria->getPublicaciones();
+            $publicacion = $publicaciones[0];
+            while($categoria->getNivel()>1){
+                $categoria = $categoria->getParent();
+            }
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoria);
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'mensaje-de-nuestro-presidente'));
-            $categoria = $publicacion->getCategoria();
-            return $this->render('FrontendBundle:Default:publicacion.html.twig',  compact('categoria','publicacion'));
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findOneBy(array('slug' => 'afiliacion'));
+            $publicaciones = $categoria->getPublicaciones();
+            $portada = $publicaciones[0];
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
-        
     }
     
     /**

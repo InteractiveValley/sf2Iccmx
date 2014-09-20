@@ -35,7 +35,10 @@ class Aside
      */
     private $contenido;
 
-
+    public function __toString() {
+        $this->getClave();
+    }
+    
     /**
      * Get id
      *

@@ -160,6 +160,9 @@ class PublicacionController extends Controller {
      */
     public function createAction(Request $request) {
         $entity = new Publicacion();
+        $idCategoria = $this->getCategoriaDefault();
+        $categoria = $this->getDoctrine()->getRepository('PublicacionesBundle:CategoriaPublicacion')->find($idCategoria);
+        $entity->setCategoria($categoria);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -583,7 +586,7 @@ class PublicacionController extends Controller {
 
         if (!$request->request->has('tipoArchivo')) {
             // list of valid extensions, ex. array("jpeg", "xml", "bmp")
-            $allowedExtensions = array("jpeg", "png", "gif", "jpg");
+            $allowedExtensions = array("jpeg", "png", "gif", "jpg","pdf","doc","xdoc");
             // max file size in bytes
             $sizeLimit = 6 * 1024 * 1024;
             $uploader = new qqFileUploader($allowedExtensions, $sizeLimit, $request->server);
@@ -603,10 +606,12 @@ class PublicacionController extends Controller {
                 $registro->setTitulo($result["titulo"]);
                 $registro->setIsActive(true);
                 $registro->setPosition($max + 1);
-                $registro->setTipoArchivo(RpsStms::TIPO_ARCHIVO_IMAGEN);
+                $registro->setTipoArchivo(RpsStms::getTipoArchivo($result['filename']));
                 //unset($result["filename"],$result['original'],$result['titulo'],$result['contenido']);
                 $em->persist($registro);
-                $registro->crearThumbnail();
+                if($registro->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_IMAGEN){
+                    $registro->crearThumbnail();
+                }
                 $publicacion->getGalerias()->add($registro);
                 $em->flush();
             }

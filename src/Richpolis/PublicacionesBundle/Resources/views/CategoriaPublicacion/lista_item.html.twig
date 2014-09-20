@@ -15,3 +15,6 @@
         <button onclick="javascript:editarRegistro('{{ path('publicaciones_categoria', { 'slug': entity.slug }) }}', '#registro-{{entity.id}}')" class="btn btn-xs btn-info"><i class="fa fa-files-o"></i> </button>
     </td>
 </tr>
+{% for child in entity.children %}
+    {% include 'PublicacionesBundle:CategoriaPublicacion:lista_item.html.twig' with {'entity': child }  %}
+{% endfor %}

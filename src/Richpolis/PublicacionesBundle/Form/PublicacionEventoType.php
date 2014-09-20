@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
+use Richpolis\PublicacionesBundle\Entity\Publicacion;
 
 class PublicacionEventoType extends AbstractType
 {
@@ -31,7 +32,7 @@ class PublicacionEventoType extends AbstractType
                    'data-theme' => 'advanced',
                     )
                 ))
-            ->add('fechaEvento','date',array('label'=>'Fecha evento','attr'=>array(
+            ->add('fechaEvento',null,array('label'=>'Fecha evento','attr'=>array(
                 'class'=>'form-control '
              )))
             ->add('tipoEvento','choice',array(
@@ -124,6 +125,6 @@ class PublicacionEventoType extends AbstractType
      */
     public function getName()
     {
-        return 'richpolis_publicacionesbundle_publicacion_evento';
+        return 'richpolis_publicacionesbundle_evento';
     }
 }

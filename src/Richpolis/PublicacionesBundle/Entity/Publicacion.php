@@ -253,6 +253,7 @@ class Publicacion
         $this->status = self::STATUS_INCOMPLETO;
         $this->contVisitas = 0;
         $this->contComentarios = 0;
+        $this->tipoEvento = self::TIPO_EVENTO_TALLER;
     }
     
     public function getStringTipoEvento(){
@@ -404,7 +405,7 @@ class Publicacion
      * 
      * @return void
      */
-    public function crearThumbnail($width=250,$height=200,$path=""){
+    public function crearThumbnail($width=250,$height=250,$path=""){
         $imagine    = new \Imagine\Gd\Imagine();
         $collage    = $imagine->create(new \Imagine\Image\Box(250, 200));
         $mode       = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
@@ -468,7 +469,7 @@ class Publicacion
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../html'.$this->getUploadDir();
+        return __DIR__.'/../../../../web'.$this->getUploadDir();
     }
     
     public function getWebPath()

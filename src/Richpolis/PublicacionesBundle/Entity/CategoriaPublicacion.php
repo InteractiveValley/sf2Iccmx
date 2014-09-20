@@ -192,8 +192,7 @@ class CategoriaPublicacion
      */
     
     /**
-    * @ORM\PrePersist
-    * @ORM\PreUpdate
+    * Para slugar el valor de la categoria
     */
     public function setSlugAtValue()
     {

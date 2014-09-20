@@ -1,0 +1,37 @@
+<div class="item-evento col-xs-12"><!-- group -->
+    <div class="col-xs-1">
+        <div class="fecha-evento"><!-- column -->
+            <div class="fecha-evento-dia"><!-- group -->
+                {{ evento.fechaEvento | date('d') }}
+            </div>
+            <div class="fecha-evento-mes-ano {{evento.stringTipoEvento | lower }}"><!-- group -->
+                {{ evento.fechaEvento | date('M') }}
+                <br/>
+                {{ evento.fechaEvento | date('Y') }}
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <div class="block-center">
+            <img src="{{evento.webPath}}" style="width: 100%;"/>
+        </div>
+    </div>
+    <div class="col-xs-8">
+        <div class="contenido-evento pull-left"><!-- content -->
+            <p class="titulo-evento">{{evento.titulo}}</p>
+            <p class="direccion-evento">{{evento.direccionEvento}}</p>
+            <p class="links-evento">
+            <a class="nonblock" href="{{path('frontend_eventos_publicacion',{'categoriaSlug':evento.categoria.slug, 'publicacionSlug': evento.slug})}}"><span id="u1440-7">Ver más </span></a> 
+            {% if evento.galerias | length > 0 %}
+                {% for galeria in evento.galerias %}
+                  {% if galeria.titulo == "programa" %}
+                    | <a href="{{galeria.webPath}}" target="_blank">Programa</a>
+                  {% elseif galeria.titulo == "formato" %}
+                    | <a href="{{galeria.webPath}}" target="_blank">Formato de Inscripción</a>
+                  {% endif %}
+                {% endfor %}
+            {% endif %}
+            </p>
+        </div>
+    </div>
+</div>

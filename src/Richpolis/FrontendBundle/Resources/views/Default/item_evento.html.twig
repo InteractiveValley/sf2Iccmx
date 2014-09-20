@@ -1,24 +1,28 @@
-<div class="clearfix colelem" id="pppu1689"><!-- group -->
-    <div class="clearfix grpelem" id="ppu1689"><!-- column -->
-        <div class="clearfix colelem" id="pu1689"><!-- group -->
-            <div class="grpelem" id="u1689"><!-- simple frame --></div>
-            <div class="clearfix grpelem" id="u1691-4"><!-- content -->
-                <p>19</p>
-            </div>
+<div class="item-evento"><!-- group -->
+    <div class="fecha-evento"><!-- column -->
+        <div class="fecha-evento-dia"><!-- group -->
+            {{ evento.fechaEvento | date('d') }}
         </div>
-        <div class="clearfix colelem" id="pu1690"><!-- group -->
-            <div class="grpelem" id="u1690"><!-- simple frame --></div>
-            <div class="clearfix grpelem" id="u1692-6"><!-- content -->
-                <p>Jun</p>
-                <p>2014</p>
-            </div>
+        <div class="fecha-evento-mes-ano {{evento.stringTipoEvento | lower }}"><!-- group -->
+            {{ evento.fechaEvento | date('M') }}
+            <br/>
+            {{ evento.fechaEvento | date('Y') }}
         </div>
     </div>
-    <div class="clearfix grpelem" id="u1670-10"><!-- content -->
-        <p id="u1670-2">Reunión Ejecutiva de Socios</p>
-        <p>&nbsp;</p>
-        <p id="u1670-3">Hotel Four Seasons</p>
-        <p>&nbsp;</p>
-        <p id="u1440-10"><span>&nbsp;</span><a class="nonblock" href="http://www.iccmex.mx/eventos/2014/junio/reunion-mexico_ante_mundo-19jun14.html"><span id="u1440-7">Ver más </span></p>
+    <div class="contenido-evento"><!-- content -->
+        <p class="titulo-evento">{{evento.titulo}}</p>
+        <p class="direccion-evento">{{evento.direccionEvento}}</p>
+        <p class="links-evento">
+            <a class="nonblock" href="{{path('frontend_eventos_publicacion',{'categoriaSlug':evento.categoria.slug, 'publicacionSlug': evento.slug})}}"><span id="u1440-7">Ver más </span></a> 
+            {% if evento.galerias | length > 0 %}
+                {% for galeria in evento.galerias %}
+                  {% if galeria.titulo == "Programa" %}
+                    &nbsp; | <a href="{{galeria.webPath}}" target="_blank">Programa</a>
+                  {% elseif galeria.titulo == "formato" %}
+                    &nbsp; | <a href="{{galeria.webPath}}" target="_blank">Formato de Inscripción</a>
+                  {% endif %}
+                {% endfor %}
+            {% endif %}
+        </p>
     </div>
 </div>

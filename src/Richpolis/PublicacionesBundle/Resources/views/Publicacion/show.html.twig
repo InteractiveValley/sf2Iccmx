@@ -99,6 +99,28 @@
                                                                     <td>Descripcion:</td>
                                                                     <td>{{ entity.descripcion | raw }}</td>
                                                                 </tr>
+                                                                {% if entity.categoria.tipoCategoria == constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS') %}
+                                                                <tr>
+                                                                    <td>Fecha Evento:</td>
+                                                                    <td>{{entity.fechaEvento | date('d-m-Y')}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tipo Evento:</td>
+                                                                    <td>{{ entity.stringTipoEvento }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>En inicio:</td>
+                                                                    <td>{{entity.inInicio | isActive | raw }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>En patrocinio:</td>
+                                                                    <td>{{entity.inPatrocinio | isActive | raw }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Localidad:</td>
+                                                                    <td>{{ entity.direccionEvento }}</td>
+                                                                </tr>
+                                                                {% endif %}    
                                                                 <tr>
                                                                     <td>Categoria:</td>
                                                                     <td>{{entity.categoria.nivelCategoria}}</td>
@@ -140,17 +162,14 @@
                                                         </div>
                                                         <table style="width: 99%; margin: 0 auto;">
                                                             <tr>
-                                                                {% if entity.categoria.tipoCategoria != constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_HERALDO_TV') %}
                                                                 <td>
                                                                     <div id="upload"></div>
-                                                                    Extenciones disponibles:   "jpeg","png","gif","jpg"
+                                                                    Extenciones disponibles:   "jpeg","png","gif","jpg","pdf"
                                                                     <!--List Files-->
                                                                     <ul id="files" ></ul>
                                                                     <div class="clear"></div>
                                                                 </td>
-                                                                {% endif %}
                                                                 <td>
-                                                                    <!--button onclick="javascript:editarRegistro('{{path('galerias_new')}}?tipo=link_video&clase=autobus&idContenedor={{entity.id}}&return={{path('servicios_show',{'id':entity.id})}}#galeria')" class="botonUploadVideoLink">Crear Video Link</button-->
                                                                     <button onclick="javascript:crearVideoLink()" class="botonUploadVideoLink">Crear Video Link</button>
                                                                 </td>
                                                             </tr>

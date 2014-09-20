@@ -23,6 +23,7 @@
   {% set usuarios = "" %}
   {% set categorias = "" %}
   {% set publicaciones = "" %}
+  {% set asides = "" %}
   {% set publicidad = "" %}
   {% set galerias = "" %}
   {% set configuraciones = "" %}
@@ -33,6 +34,8 @@
     {% set usuarios = "class=open" %}
   {% elseif route == "publicaciones" %}
     {% set publicaciones = "class=open" %}
+  {% elseif route == "asides" %}
+    {% set asides = "class=open" %}
   {% elseif route == "publicidad" %}
     {% set publicidad = "class=open" %}
   {% elseif route == "galerias" %}
@@ -121,6 +124,11 @@
                     <i class="fa fa-comment"></i> <span>Categorias</span> <span class="pull-right"><i class="fa fa-chevron-left"></i></span>
                 </a>
                 {% render(controller('PublicacionesBundle:CategoriaPublicacion:ulTipos')) %}
+            </li>
+            <li>
+                <a href="{{path('asides')}}">
+                    <i class="fa fa-sitemap"></i> <span>Asides</span>
+                </a>
             </li>
             <li class="has_sub">
                 <a  href="#">

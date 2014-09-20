@@ -43,16 +43,25 @@ class CategoriaPublicacionRepository extends EntityRepository
     public function findActivos(){
         $em=$this->getEntityManager();
         $query=$em->createQuery('
-               SELECT c, p, g
+               SELECT c, p
                FROM PublicacionesBundle:CategoriaPublicacion c 
                JOIN c.publicaciones p 
-               JOIN p.galerias g 
                WHERE c.isActive = :categoria 
-               AND p.isActive = :publicacion 
                ORDER BY p.position ASC, p.position ASC 
-        ')->setParameters(array('categoria'=> true,'publicacion'=>true));
-        
+        ')->setParameters(array('categoria'=> true));
         return $query->getResult();
+    }
+    
+    public function findCategoriaForSlug($slug){
+        $em=$this->getEntityManager();
+        $query=$em->createQuery('
+               SELECT c, p
+               FROM PublicacionesBundle:CategoriaPublicacion c 
+               JOIN c.publicaciones p 
+               WHERE c.slug = :slug 
+               ORDER BY c.position ASC, p.position ASC 
+        ')->setParameters(array('slug'=> $slug));
+        return $query->getSingleResult();
     }
     
     public function getCategoriaConGaleriaPorId($categoria_id,$active=true){
@@ -171,8 +180,8 @@ class CategoriaPublicacionRepository extends EntityRepository
                 ));
         return $query->getResult();
     }
-	
-	 public function getCategoriasConPublicaciones($maxPublicaciones = 4){
+
+    public function getCategoriasConPublicaciones($maxPublicaciones = 4){
         $em=$this->getEntityManager();
         $query=$em->createQuery('
                SELECT c,p 
@@ -184,5 +193,25 @@ class CategoriaPublicacionRepository extends EntityRepository
         ')->setParameters(array('inicial'=>1,'final'=>$maxPublicaciones,'status'=>Publicacion::STATUS_PUBLICADO));
         
         return $query->getResult();
+    }
+
+    public function findCategoriaSluggable($slug, $excepto = 0){
+        $query= $this->getEntityManager()->createQueryBuilder();
+        if($excepto > 0){
+            $query->select('c')
+                ->from('Richpolis\PublicacionesBundle\Entity\CategoriaPublicacion', 'c')
+                ->where('c.id<>:categoria')
+                ->setParameter('categoria',$excepto)
+                ->andWhere('c.slug LIKE :slug')
+                ->setParameter('slug',$slug."%")
+                ->orderBy('c.categoria', 'DESC'); 
+        }else{
+            $query->select('c')
+                ->from('Richpolis\PublicacionesBundle\Entity\CategoriaPublicacion', 'c')
+                ->andWhere('c.slug LIKE :slug')
+                ->setParameter('slug',$slug."%")
+                ->orderBy('c.categoria', 'DESC'); 
+        }
+        return $query->getQuery()->getResult();
     }
 }

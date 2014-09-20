@@ -1,0 +1,85 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
+{% endblock %} 
+
+{% set contenido = 12 %}
+{% set aside = 0 %}
+
+{% if publicacion.categoria.aside is not null %}
+    {% set aside = 4 %}
+    {% set contenido = contenido - aside %}
+{% endif %}
+
+{% block contenido %}
+    <div class="row publicacion">
+        <div class="col-xs-8">
+            <div class="col-xs-12 relative">
+                <h3 class="titulo-publicacion">{{publicacion.titulo}}</h3>
+                <div class="fecha">
+                    <div class="fecha-evento"><!-- column -->
+                        <div class="fecha-evento-dia"><!-- group -->
+                            {{ publicacion.fechaEvento | date('d') }}
+                        </div>
+                        <div class="fecha-evento-mes-ano {{publicacion.stringTipoEvento | lower }}"><!-- group -->
+                            {{ publicacion.fechaEvento | date('M') }}
+                            <br/>
+                            {{ publicacion.fechaEvento | date('Y') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 extras-publicacion">
+                <a class="pull-left" href="{{path('frontend_eventos_categoria',{'categoriaSlug':publicacion.categoria.slug})}}">ver mas eventos</a>
+                <div class="pull-right">
+                    {% if publicacion.galerias | length > 0 %}
+                        {% set cont = 0 %}
+                        {% for galeria in publicacion.galerias %}
+                          {% if galeria.titulo == "programa" %}
+                            {% set cont = cont + 1 %}
+                            {% if cont > 1 %} | {% endif %}
+                            <a href="{{galeria.webPath}}" target="_blank">Programa</a>
+                          {% elseif galeria.titulo == "formato" %}
+                            {% set cont = cont + 1 %}
+                            {% if cont > 1 %} | {% endif %}  
+                            <a href="{{galeria.webPath}}" target="_blank">Formato de Inscripción</a>
+                          {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>            
+            <div class="col-xs-12">
+                <div class="contenido-publicacion">
+                    {{ publicacion.descripcion | raw }}
+                </div>   
+            </div>
+        </div>    
+        {% if aside > 0 %}
+        <div class="col-xs-{{aside}} menu_fondo">
+            {{ publicacion.categoria.aside.contenido | raw }}
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{asset('js/fancybox/jquery.fancybox.js')}}"></script>
+    <script src="{{asset('js/fancybox/jquery.fancybox-media.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+           $(".link-nav-categoria").on("click",function(){
+              var li = $(this).parent();
+              li.find(".subcategoria").toogle("fast");
+           });
+           $(".expandir").on("click",function(){
+               $(".subcategoria").show("fast");
+           });
+           $(".colapsar").on("click",function(){
+               $(".subcategoria").hide("fast");
+           });
+        });
+    </script>
+{% endblock %}

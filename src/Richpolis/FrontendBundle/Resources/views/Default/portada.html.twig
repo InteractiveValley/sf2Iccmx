@@ -1,87 +1,82 @@
-{% extends '::base.html.twig' %}
+{% extends 'FrontendBundle::layout.html.twig' %}
 
-{% block title %}H GRUPO EDITORIAL{% endblock %}
-
-{% set urlAbsolutaFoto = 'http://'
-                             ~ app.request.server.get('SERVER_NAME')
-                             ~ asset('images/heraldologo.png') %}
 {% block stylesheets %}
-    
-	{% block redes_sociales %}
-		<meta property="og:url" content="{{url('homepage')}}" />
-		<meta property="og:title" content="H Grupo Editorial" />
-		<meta property="og:image" content="{{urlAbsolutaFoto}}" />
-		<meta property="og:type" content="article" />
-		<meta property="og:site_name" content="hgrupoeditorial.com" />
-		<!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/jquery.bxslider.css')}}"/>
+{% endblock %} 
 
-		<meta name="twitter:card" content="summary">
-		<meta name="twitter:site" content="@heraldodetoluca">
-		<meta name="twitter:title" content="H Grupo Editorial">
-		<meta name="twitter:description" content="H Grupo Editorial, Estado de Toluca, Toluca, Valle de México, Morelos, Querétaro">
-		<meta name="twitter:creator" content="@richpolis">
-		<meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
-		<meta name="twitter:domain" content="{{url('homepage')}}">
-		<meta name="twitter:app:name:iphone" content="">
-		<meta name="twitter:app:name:ipad" content="">
-		<meta name="twitter:app:name:googleplay" content="">
-		<meta name="twitter:app:url:iphone" content="">
-		<meta name="twitter:app:url:ipad" content="">
-		<meta name="twitter:app:url:googleplay" content="">
-		<meta name="twitter:app:id:iphone" content="">
-		<meta name="twitter:app:id:ipad" content="">
-		<meta name="twitter:app:id:googleplay" content="">
-	{% endblock %}
+{% set contenido = 12 %}
+{% set aside = 0 %}
 
-<link rel="stylesheet" href="{{asset('css/portada.css')}}"/>
-{% endblock %}
+{% if portada.categoria.aside is not null %}
+    {% set aside = 4 %}
+    {% set contenido = contenido - aside %}
+{% else %}
+    {% set aside = 4 %}
+    {% set contenido = contenido - aside %}
+{% endif %}
 
-{% block body %}
-<div class="container fondo-azul" style="width: 100%;background: #0b59a2;">
-        <header class="header">
-                <figure id="logo">
-                    <img src="{{ asset('images/hgrupoeditoriallogoportada.png') }}" alt="H GRUPO EDITORIAL"/>
-                </figure>
-        </header>
-        <section class="principal">
-            <p>Seleccione el portal que desea visitar:</p>
-            <nav class="navegador">
-                <ul class="menu">
-                    <li>
-                        <a href="{{path('homepage')}}">Estado de México</a>
-                    </li>
-                    <li>
-                        <a href="{{path('homepage')}}">Toluca</a>
-                    </li>
-                    <li>
-                        <a href="{{path('homepage')}}">Valle de México</a>
-                    </li>
-                    <li>
-                        <a href="{{path('homepage')}}">Morelos</a>
-                    </li>
-                    <li>
-                        <a href="{{path('homepage')}}">Querétaro</a>
-                    </li>
-                </ul>
-            </nav>
-       </section>        
-</div>
-<footer>
-        <div class="container">
-            <div class="contenidos">
-                <figure class="logo">
-                    <img src="{{asset('images/logofooter.png')}}" alt="" class="imagen-logo">
-                </figure>
-                <div class="contenido">
-                    {{ render(controller('FrontendBundle:Default:piePagina')) }}
-                </div>
-                <div class="redes-sociales">
-                    <a href="https://twitter.com/HeraldoEdomex/" target="_blank"><span class="twitter ico_twitter"></span></a>
-                    <a href="https://www.facebook.com/HeraldoEdomex" target="_blank"><span class="facebook ico_facebook"></span></a>
-                    <a href="https://www.youtube.com/user/HGrupoEditorial" target="_blank"><span class="youtube ico_youtube"></span></a>
-                    <a href="https://www.flickr.com/photos/77889457@N06/" target="_blank"><span class="flickr ico_flickr"></span></a>
+{% block contenido %}
+    <div class="row publicacion">
+        <div class="col-xs-{{contenido}} ">
+            <div class="galeria block-center">
+                <div id="carrusel-portada" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    {% for galeria in portada.galerias %}
+                    <li data-target="#carrusel-portada" data-slide-to="{{loop.index-1}}" {% if loop.first == true %} class="active" {% endif %}></li>
+                    {% endfor %}
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                    {% for galeria in portada.galerias %}
+                    <div class="item {% if loop.first == true %} active {% endif %}">
+                        {% if galeria.descripcion | length > 0 %}
+                            <a href="{{galeria.descripcion}}">
+                                <img src="{{galeria.webPath | imagine_filter('imagen_portada')}}" alt="{{galeria.titulo}}"/>
+                            </a>
+                        {% else %}
+                            <img src="{{galeria.webPath | imagine_filter('imagen_portada')}}"  alt="{{galeria.titulo}}"/>
+                        {% endif %}
+                      <!--div class="carousel-caption">
+                        <h3>{{ galeria.titulo }}</h3>
+                      </div-->
+                    </div>
+                    {% endfor %}
+                  </div>
                 </div>
             </div>
-        </div>    
-</footer>    
+            <div class="row">
+                <div class=" col-xs-12  contenido-publicacion">
+                {{ portada.descripcion | raw }}
+                </div>
+            </div>   
+        </div>
+        {% if portada.categoria.aside is not null %}
+        <div class="col-xs-{{aside}}  menu_fondo">
+            {{ portada.categoria.aside.contenido | raw }}
+        </div>
+        {% else %}
+        <div class="col-xs-{{aside}}  menu_fondo" style="min-height: 400px; height: 100%;">
+            &nbsp;
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{asset('js/jquery.bxslider.min.js')}}"></script>
+    <script>
+    $(document).ready(function(){
+        /*$('.slider').bxSlider({
+            pager: true,
+            controls: false,
+            auto: true,
+            pause: 4000,
+            autoHover: true,
+        });*/
+    });
+    </script>
 {% endblock %}
