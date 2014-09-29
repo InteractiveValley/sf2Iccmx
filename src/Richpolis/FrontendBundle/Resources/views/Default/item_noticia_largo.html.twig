@@ -1,0 +1,21 @@
+<div class="item-noticia row"><!-- group -->
+    <div class="col-xs-3">
+        <div class="block-center">
+            <img src="{{noticia.webPath}}" style="width: 100%;"/>
+        </div>
+    </div>
+    <div class="col-xs-9">
+        <div class="noticia-contenedor"><!-- column -->
+            <div class="clearfix colelem" id="u1565-6"><!-- content -->
+                <p class="titulo-noticia">{{noticia.titulo}}</p>
+                <p class="fecha-noticia">{{noticia.createdAt | date('d/m/Y')}}</p>
+            </div>
+            <div class="clearfix colelem" id="u1562-6"><!-- content -->
+                <p class="noticia-contenido">
+                    {{ noticia.descripcion | striptags | truncate(250,true,'...') | raw   }}
+                    <a class="nonblock" href="{{path('frontend_noticias_publicacion',{'categoriaSlug': noticia.categoria.slug, 'publicacionSlug': noticia.slug})}}">Leer más</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

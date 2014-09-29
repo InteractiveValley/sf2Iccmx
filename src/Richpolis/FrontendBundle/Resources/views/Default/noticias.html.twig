@@ -21,22 +21,14 @@
             <div class="row">
                 {% if hasMenu > 0 %}
                 <div class="col-xs-4">
-                    {% include 'FrontendBundle:Default:menuPublicacion.html.twig' with {'rutaBase': rutaBase, 'categoria': categoria, 'publicacionActual': '' } %}
+                    {% include 'FrontendBundle:Default:menuPublicacion.html.twig' with {'rutaBase': rutaBase, 'categoria': categoria, 'publicacionActual': publicacion } %}
                 </div>
                 {% endif %} 
                 <div class="col-xs-8">
                     <p class="titulo-seccion relative col-xs-12">{{categoria.categoria | upper }}</p>
                     <div class="col-xs-12">
-                        <p class="titulo-seccion relative">&nbsp;
-                        <ul class="list-inline pull-right lista-categorias-eventos"> 
-                            <li class="lista-categorias-evento"><span class="cuadro taller">&nbsp;&nbsp;&nbsp;&nbsp;</span> Talleres</li>
-                            <li class="lista-categorias-evento"><span class="cuadro seminario">&nbsp;&nbsp;&nbsp;&nbsp;</span> Seminarios</li>
-                            <li class="lista-categorias-evento"><span class="cuadro sesion">&nbsp;&nbsp;&nbsp;&nbsp;</span> Sesiones</li>
-                            <li class="lista-categorias-evento"><span class="cuadro diplomado">&nbsp;&nbsp;&nbsp;&nbsp;</span> Diplomados</li>
-                        </ul>
-                        </p>
-                        {% for evento in publicaciones %}
-                            {% include 'FrontendBundle:Default:item_evento_largo.html.twig'  with { 'evento': evento } %}
+                        {% for noticia in publicaciones %}
+                            {% include 'FrontendBundle:Default:item_noticia_largo.html.twig'  with { 'noticia': noticia } %}
                         {% endfor %}
                     </div>
                 </div>

@@ -1,0 +1,61 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
+{% endblock %} 
+
+{% set contenido = 12 %}
+{% set aside = 0 %}
+{% set hasMenu = 2 %}
+{% set contenido = contenido - hasMenu %}
+
+{% if categoria.aside is not null %}
+    {% set aside = 4 %}
+    {% set contenido = contenido - aside %}
+{% endif %}
+
+{% block contenido %}
+    <div class="row eventos">
+        <div class="col-xs-8">
+            <div class="row">
+                {% if hasMenu > 0 %}
+                <div class="col-xs-4">
+                    
+                </div>
+                {% endif %} 
+                <div class="col-xs-8">
+                    <p class="titulo-seccion relative">PATROCINIOS</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="titulo-seccion relative">Eventos
+                    <ul class="list-inline pull-right lista-categorias-eventos"> 
+                        <li class="lista-categorias-evento"><span class="cuadro taller">&nbsp;&nbsp;&nbsp;&nbsp;</span> Talleres</li>
+                        <li class="lista-categorias-evento"><span class="cuadro seminario">&nbsp;&nbsp;&nbsp;&nbsp;</span> Seminarios</li>
+                        <li class="lista-categorias-evento"><span class="cuadro sesion">&nbsp;&nbsp;&nbsp;&nbsp;</span> Sesiones</li>
+                        <li class="lista-categorias-evento"><span class="cuadro diplomado">&nbsp;&nbsp;&nbsp;&nbsp;</span> Diplomados</li>
+                    </ul>
+                    </p>
+                    {% for evento in publicaciones %}
+                        {% include 'FrontendBundle:Default:item_evento_largo.html.twig'  with { 'evento': evento } %}
+                    {% endfor %}
+                </div>    
+            </div>    
+        </div> 
+        {% if aside > 0 %}
+        <div class="col-xs-{{aside}} menu_fondo">
+            {{ categoria.aside.contenido | raw }}
+        </div>
+        {% endif %}
+        
+    </div>
+    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{asset('js/fancybox/jquery.fancybox.js')}}"></script>
+    <script src="{{asset('js/fancybox/jquery.fancybox-media.js')}}"></script>
+{% endblock %}

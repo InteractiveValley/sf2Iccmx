@@ -33,7 +33,7 @@
     <ul id="menu-ppa">
     <li class="menu-contenedor">
         <div class="menu-item">
-            <a class="link-menu" href="{{path('frontend_quienes_somos')}}">QUIENES<br/>SOMOS</a>
+            <a class="link-menu" href="{{path('frontend_quienes_somos')}}">QUIÉNES<br/>SOMOS</a>
         </div>
         {% for categoria in categorias if categoria.slug == 'quienes-somos' %}
             {% set rutaCategoria = 'frontend_' ~ 'quienes_somos' ~ '_categoria' %}
@@ -220,7 +220,6 @@
         {% for categoria in categorias if categoria.slug == 'eventos' %}
             {% set rutaCategoria = 'frontend_' ~ 'eventos' ~ '_categoria' %}
             {% set rutaPublicacion = 'frontend_' ~ 'eventos' ~ '_publicacion' %}
-            {% set rutaCalendario = 'frontend_' ~ 'eventos' ~ '_calendario' %}
         <div class="menu-contenido menu-panel">
             {% for child in categoria.children %}
                 {% if child.slug == 'calendario' %}    
@@ -228,18 +227,28 @@
                     <p class="titulo">{{child.categoria|upper}}</p>
                     <ul class="lista-submenu">
                         <li class="item">
-                            <a class="nonblock" href="{{path(rutaCalendario ~ '_mexico')}}">
+                            <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'calendario-icc-mexico'})}}">
                                 Calendario ICC México
                             </a>
                         </li>
                         <li class="item">
-                            <a class="nonblock" href="{{path(rutaCalendario ~ '_mundial')}}">
+                            <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'calendario-icc-mundial'})}}">
                                 Calendario ICC Mundial
                             </a>
                         </li>
                     </ul>
                 </div>    
-
+                {% elseif child.slug == 'patrocinios' %}
+                    <div class="clearfix grpelem menu-bloque-categoria">
+                    <p class="titulo">{{child.categoria|upper}}</p>
+                    <ul class="lista-submenu">
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'patrocinios'})}}">
+                                Patrocinios
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 {% else %}    
                 <div class="clearfix grpelem menu-bloque-categoria">
                     <p class="titulo"><a href="{{path(rutaCategoria,{'categoriaSlug':child.slug})}}">{{child.categoria|upper}}</a></p>

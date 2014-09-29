@@ -426,18 +426,42 @@ class PublicacionRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
     
-    public function getEventosForFecha($month,$year){
+    public function getEventosForFecha($year,$month,$categoria=0){
         $query= $this->getEntityManager()->createQueryBuilder();
         $query->select('p,c,u')   
               ->from('Richpolis\PublicacionesBundle\Entity\Publicacion', 'p')
               ->leftJoin('p.usuario', 'u')
               ->leftJoin('p.categoria', 'c')
-              ->where('p.inInicio=:inicio')
-              ->setParameter('inicio', true)
+              ->where('p.fechaEvento BETWEEN :inicio AND :fin ')
+              ->setParameters(array(
+               'inicio'=>"$year-$month-01 00:00:00",
+               'fin'=>"$year-$month-31 23:59:59",   
+              ))
               ->orderBy('p.fechaEvento', 'ASC');
         $query->andWhere('c.tipoCategoria=:tipo')
               ->setParameter('tipo', CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS);
-        return $query->getQuery()->setMaxResults($registros)->getResult();
+        if($categoria>0){
+            $query->andWhere('c.id=:categoria')
+                  ->setParameter('categoria', $categoria);  
+        }
+        return $query->getQuery()->getResult();
     }
-	
+    
+    public function queryEventosEnPatrocinio(){
+        $query= $this->getEntityManager()->createQueryBuilder();
+        $query->select('p,c,u')   
+              ->from('Richpolis\PublicacionesBundle\Entity\Publicacion', 'p')
+              ->leftJoin('p.usuario', 'u')
+              ->leftJoin('p.categoria', 'c')
+              ->where('p.inPatrocinio=:patrocinio')
+              ->setParameter('patrocinio', true)
+              ->orderBy('p.fechaEvento', 'ASC');
+        $query->andWhere('c.tipoCategoria=:tipo')
+              ->setParameter('tipo', CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS);
+        return $query->getQuery();
+    }
+    
+    public function getEventosEnPatrocinio(){
+        return $this->queryEventosEnPatrocinio()->getResult();
+    }
 }

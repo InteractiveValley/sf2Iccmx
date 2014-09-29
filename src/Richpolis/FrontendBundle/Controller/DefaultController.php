@@ -96,10 +96,10 @@ class DefaultController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $eventos = $em->getRepository('PublicacionesBundle:Publicacion')
-                ->getEventosEnInicio();
+                ->getEventosEnInicio(100);
 
         $noticias = $em->getRepository('PublicacionesBundle:Publicacion')
-                ->getUltimasNoticias();
+                ->getUltimasNoticias(5);
 
         return array(
             'eventos' => $eventos,
@@ -257,7 +257,7 @@ class DefaultController extends Controller {
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria);
+                ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -298,7 +298,7 @@ class DefaultController extends Controller {
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria);
+                ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -339,7 +339,7 @@ class DefaultController extends Controller {
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria);
+                ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -380,7 +380,7 @@ class DefaultController extends Controller {
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria);
+                ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -411,77 +411,27 @@ class DefaultController extends Controller {
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findCategoriaForSlug($categoria->getSlug());
             
-            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
+            return $this->render('FrontendBundle:Default:noticia.html.twig', compact('categoria','publicacion','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
             $publicaciones = $categoria->getPublicaciones();
+            if(count($publicaciones)>0){
+                $publicacion = $publicaciones[0];
+            }
             $publicacion = $publicaciones[0];
             while($categoria->getNivel()>1){
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria);
-            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
+                ->findCategoriaForSlug($categoria->getSlug());
+            return $this->render('FrontendBundle:Default:noticias.html.twig', compact('categoria','publicaciones','publicacion','rutaBase'));
         }else{
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => 'noticias'));
             $publicaciones = $categoria->getPublicaciones();
             $portada = $publicaciones[0];
             return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
-        }
-    }
-    
-    /**
-     * @Route("/eventos/calendario/icc/mexico", name="frontend_eventos_calendario_mexico")
-     * @Route("/eventos/calendario/icc/mexico/{publicacionSlug}", name="frontend_eventos_calendario_mexico_publicacion")
-     * @Method({"GET"})
-     */
-    public function eventosCalendarioIccMexicoAction(Request $request, $publicacionSlug = '') {
-        $em = $this->getDoctrine()->getManager();
-        $rutaBase = 'frontend_eventos_calendario_mexico';
-        if(strlen($publicacionSlug)>0){
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => $publicacionSlug));
-            $categoria = $publicacion->getCategoria();
-            while($categoria->getNivel()>1){
-                $categoria = $categoria->getParent();
-            }
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                            ->findCategoriaForSlug($categoria->getSlug());
-            
-            return $this->render('FrontendBundle:Default:evento.html.twig', compact('categoria','publicacion','rutaBase'));
-        }else{
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findOneBy(array('slug' => 'calendario-icc-mexico'));
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria->getSlug());
-            return $this->render('FrontendBundle:Default:eventos.html.twig', compact('categoria','rutaBase'));
-        }
-    }
-    
-    /**
-     * @Route("/eventos/calendario/icc/mundial", name="frontend_eventos_calendario_mundial")
-     * @Route("/eventos/calendario/icc/mundial/{publicacionSlug}", name="frontend_eventos_calendario_mundial_publicacion")
-     * @Method({"GET"})
-     */
-    public function eventosCalendarioIccMundialAction(Request $request, $publicacionSlug = '') {
-        $em = $this->getDoctrine()->getManager();
-        $rutaBase = 'frontend_eventos_calendario_mundial';
-        if(strlen($publicacionSlug)>0){
-            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => $publicacionSlug));
-            $categoria = $publicacion->getCategoria();
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                            ->findCategoriaForSlug($categoria->getSlug());
-            
-            return $this->render('FrontendBundle:Default:evento.html.twig', compact('categoria','publicacion','rutaBase'));
-        }else{
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findOneBy(array('slug' => 'calendario-icc-mundial'));
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria->getSlug());
-            return $this->render('FrontendBundle:Default:eventos.html.twig', compact('categoria','rutaBase'));
         }
     }
     
@@ -505,22 +455,49 @@ class DefaultController extends Controller {
                 ->findCategoriaForSlug($categoria->getSlug());
             
             return $this->render('FrontendBundle:Default:evento.html.twig', compact('categoria','publicacion','rutaBase'));
+        }elseif($categoriaSlug=='calendario-icc-mexico' || $categoriaSlug == 'calendario-icc-mundial'){
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoriaSlug);
+            $fechaActual = new \DateTime();
+            $year = $request->query->get('year', $fechaActual->format('Y'));
+            $month = $request->query->get('month', $fechaActual->format('m'));
+            $publicaciones = $em->getRepository('PublicacionesBundle:Publicacion')
+                                ->getEventosForFecha($year,$month,$categoria->getId());
+            $nombreMes = $this->getNombreMes($month);
+            return $this->render('FrontendBundle:Default:calendario.html.twig', compact('categoria','publicaciones','rutaBase','year','month','nombreMes'));
+        }elseif($categoriaSlug=='patrocinios'){
+            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                ->findCategoriaForSlug($categoriaSlug);
+            
+            $publicaciones = $em->getRepository('PublicacionesBundle:Publicacion')
+                                ->getEventosEnPatrocinio();
+            return $this->render('FrontendBundle:Default:patrocinios.html.twig', compact('categoria','publicaciones','rutaBase'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
             $publicaciones = $categoria->getPublicaciones();
-            $publicacion = $publicaciones[0];
+            if(count($publicaciones)>0){
+                $publicacion = $publicaciones[0];
+            }else{
+                $publicacion = null;
+            }
+            
             while($categoria->getNivel()>1){
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria);
-            return $this->render('FrontendBundle:Default:evento.html.twig', compact('categoria','publicacion','rutaBase'));
+                            ->findCategoriaForSlug($categoria->getSlug());
+            return $this->render('FrontendBundle:Default:eventos.html.twig', compact('categoria','publicaciones','rutaBase'));
         }else{
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => 'eventos'));
             $publicaciones = $categoria->getPublicaciones();
-            $portada = $publicaciones[0];
+            if(count($publicaciones)){
+                $portada = $publicaciones[0];
+            }else{
+                $portada = null;
+            }
+            
             return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
         }
     }
@@ -554,7 +531,7 @@ class DefaultController extends Controller {
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findCategoriaForSlug($categoria);
+                ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -723,4 +700,20 @@ class DefaultController extends Controller {
         
     }
     
+    public function getNombreMes($month){
+        switch($month){
+            case 1: return "Enero";
+            case 2: return "Febrero";
+            case 3: return "Marzo";
+            case 4: return "Abril";
+            case 5: return "Mayo";
+            case 6: return "Junio";
+            case 7: return "Julio";
+            case 8: return "Agosto";
+            case 9: return "Septiembre";
+            case 10: return "Octubre";
+            case 11: return "Noviembre";
+            case 12: return "Diciembre";
+        }
+    }
 }

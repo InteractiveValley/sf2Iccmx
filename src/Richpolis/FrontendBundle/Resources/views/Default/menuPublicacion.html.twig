@@ -12,7 +12,7 @@
     <div class="nav-list">
         <ul>
             {% for publicacion in categoria.publicaciones %}
-                {% if publicacion.id == publicacionActual.id %}
+                {% if publicacion.slug == publicacionActual %}
                 <li>
                 <a href="#" class="publicacion-actual">
                     {{ publicacion.titulo }}
@@ -37,7 +37,7 @@
                 {% if child.publicaciones | length > 0 %}
                     <ul style="display: none;" class="subcategoria">
                     {% for publicacion in child.publicaciones %}
-                        {% if publicacion.id == publicacionActual.id %}
+                        {% if publicacion.slug == publicacionActual %}
                         <li>
                         <a href="#" class="publicacion-actual">
                             {{ publicacion.titulo }}
