@@ -107,6 +107,8 @@ class DefaultController extends Controller {
         );
     }
 
+    
+    
     /**
      * @Route("/aside/{clave}", name="frontend_aside")
      * @Template()
