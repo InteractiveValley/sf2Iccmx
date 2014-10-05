@@ -34,7 +34,7 @@ class Aside
      * @ORM\Column(name="contenido", type="text")
      */
     private $contenido;
-
+    
     public function __toString() {
         $this->getClave();
     }

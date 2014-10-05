@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Richpolis\FrontendBundle\Entity\Contacto;
 use Richpolis\FrontendBundle\Form\ContactoType;
+use Richpolis\FrontendBundle\Form\SolicitarPedidoType;
 use Richpolis\PublicacionesBundle\Entity\Publicacion;
 use Richpolis\PublicacionesBundle\Entity\CategoriaPublicacion;
 
@@ -100,10 +101,16 @@ class DefaultController extends Controller {
 
         $noticias = $em->getRepository('PublicacionesBundle:Publicacion')
                 ->getUltimasNoticias(5);
+        
+        $aside = $em->getRepository('PublicacionesBundle:Aside')
+                    ->findOneBy(array('clave'=>'inicio'));
+        
+        
 
         return array(
             'eventos' => $eventos,
             'noticias'=> $noticias,
+            'aside'=>$aside,
         );
     }
 
@@ -575,7 +582,15 @@ class DefaultController extends Controller {
     public function libreriaAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         
-        return array();
+        $libreria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                         ->findOneBy(array('slug'=>'libreria-1'));
+        
+        $pagina = $em->getRepository('PaginasBundle:Pagina')
+                     ->findOneBy(array('pagina'=>'libreria'));
+        return array(
+            'libreria'=>$libreria,
+            'pagina'=>$pagina,
+        );
     }
     
     /**
@@ -603,7 +618,7 @@ class DefaultController extends Controller {
             if ($form->isValid()) {
                 $datos = $form->getData();
                 $configuracion = $em->getRepository('BackendBundle:Configuraciones')
-                        ->findOneBy(array('slug' => 'email-contacto'));
+                        ->findOneBy(array('slug' => 'emailcontacto'));
                 $message = \Swift_Message::newInstance()
                         ->setSubject('Contacto desde pagina')
                         ->setFrom($datos->getEmail())
@@ -718,4 +733,56 @@ class DefaultController extends Controller {
             case 12: return "Diciembre";
         }
     }
+    
+    /**
+     * @Route("/solicitar/pedido/{id}",name="solicitar_pedido")
+     * @Method({"GET","POST"})
+     */
+    public function getSolicitarPedido(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $producto = $em->getRepository('PublicacionesBundle:Publicacion')->find($id);
+        
+        $contacto = new Contacto();
+        $contacto->setBody('Solicitud de pedido de libreria');
+        $form = $this->createForm(new SolicitarPedidoType(), $contacto);
+        
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $datos = $form->getData();
+                $configuracion = $em->getRepository('BackendBundle:Configuraciones')
+                        ->findOneBy(array('slug' => 'emailpedidolibreria'));
+                $message = \Swift_Message::newInstance()
+                        ->setSubject('Pedido de libreria')
+                        ->setFrom($datos->getEmail())
+                        ->setTo($configuracion->getTexto())
+                        ->setBody($this->renderView('FrontendBundle:Default:pedidoEmail.html.twig', array('datos' => $datos,'producto'=>$producto)), 'text/html');
+                $this->get('mailer')->send($message);
+                
+                $contacto = new Contacto();
+                $contacto->setBody('Solicitud de pedido de libreria');
+                $form = $this->createForm(new SolicitarPedidoType(), $contacto);    
+                // Redirige - Esto es importante para prevenir que el usuario
+                $response = new JsonResponse(json_encode(array(
+                    'form' => $this->renderView('FrontendBundle:Default:formPedido.html.twig', array(
+                        'rutaAction' => $this->generateUrl('solicitar_pedido',array('id'=>$producto->getId())),
+                        'form'=>$form->createView(),
+                        'producto'=>$producto,
+                     )),
+                    'respuesta' => 'creado',
+                )));
+            }
+        }
+        
+        $response = new JsonResponse(json_encode(array(
+            'form' => $this->renderView('FrontendBundle:Default:formPedido.html.twig', array(
+                'rutaAction' => $this->generateUrl('solicitar_pedido',array('id'=>$producto->getId())),
+                'form'=>$form->createView(),
+                'producto'=>$producto,
+             )),
+            'respuesta' => 'nuevo',
+        )));
+        return $response;
+    }
 }
+

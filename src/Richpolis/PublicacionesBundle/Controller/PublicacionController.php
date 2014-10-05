@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Richpolis\PublicacionesBundle\Entity\Publicacion;
 use Richpolis\PublicacionesBundle\Form\PublicacionType;
 use Richpolis\PublicacionesBundle\Form\PublicacionEventoType;
+use Richpolis\PublicacionesBundle\Form\PublicacionLibreriaType;
 use Richpolis\PublicacionesBundle\Entity\CategoriaPublicacion;
 use Richpolis\BackendBundle\Utils\Richsys as RpsStms;
 use Richpolis\BackendBundle\Utils\qqFileUploader;
@@ -207,6 +208,11 @@ class PublicacionController extends Controller {
                 'action' => $this->generateUrl('publicaciones_create'),
                 'method' => 'POST',
             ));
+        }else if($categoria->getTipoCategoria()==CategoriaPublicacion::TIPO_CATEGORIA_LIBRERIA){
+            $form = $this->createForm(new PublicacionLibreriaType(), $entity, array(
+                'action' => $this->generateUrl('publicaciones_create'),
+                'method' => 'POST',
+            ));
         }else{
             $form = $this->createForm(new PublicacionType(), $entity, array(
                 'action' => $this->generateUrl('publicaciones_create'),
@@ -353,6 +359,11 @@ class PublicacionController extends Controller {
         $categoria = $entity->getCategoria();
         if($categoria->getTipoCategoria()==CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS){
             $form = $this->createForm(new PublicacionEventoType(), $entity, array(
+                'action' => $this->generateUrl('publicaciones_update', array('id' => $entity->getId())),
+                'method' => 'PUT',
+            ));
+        }else if($categoria->getTipoCategoria()==CategoriaPublicacion::TIPO_CATEGORIA_LIBRERIA){
+            $form = $this->createForm(new PublicacionLibreriaType(), $entity, array(
                 'action' => $this->generateUrl('publicaciones_update', array('id' => $entity->getId())),
                 'method' => 'PUT',
             ));

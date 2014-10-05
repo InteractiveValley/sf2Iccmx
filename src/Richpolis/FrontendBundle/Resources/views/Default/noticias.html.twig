@@ -21,7 +21,11 @@
             <div class="row">
                 {% if hasMenu > 0 %}
                 <div class="col-xs-4">
-                    {% include 'FrontendBundle:Default:menuPublicacion.html.twig' with {'rutaBase': rutaBase, 'categoria': categoria, 'publicacionActual': publicacion } %}
+                    {% if categoria.slug == 'icc-en-mexico' or categoria.slug == 'icc-mundial' or categoria.slug == 'noticias-icc' %}
+                        {% include 'FrontendBundle:Default:menuNoticias.html.twig' with {'rutaBase': rutaBase, 'categoria': categoria } %}
+                    {% else %}    
+                        {% include 'FrontendBundle:Default:menuPublicacion.html.twig' with {'rutaBase': rutaBase, 'categoria': categoria, 'publicacionActual': publicacion } %}
+                    {% endif %}
                 </div>
                 {% endif %} 
                 <div class="col-xs-8">

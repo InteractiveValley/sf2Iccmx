@@ -106,13 +106,13 @@ class CategoriaPublicacion
     const TIPO_CATEGORIA_PUBLICACION=1;
     const TIPO_CATEGORIA_NOTICIAS=2;
     const TIPO_CATEGORIA_EVENTOS=3;
-    const TIPO_CATEGORIA_TU_ESPACIO=4;
+    const TIPO_CATEGORIA_LIBRERIA=4;
         
     static public $sTipoCategoria=array(
         self::TIPO_CATEGORIA_PUBLICACION=>'Publicacion sencilla',
         self::TIPO_CATEGORIA_NOTICIAS=>'Noticia',
         self::TIPO_CATEGORIA_EVENTOS=>'Evento',
-        self::TIPO_CATEGORIA_TU_ESPACIO=>'Portada',
+        self::TIPO_CATEGORIA_LIBRERIA=>'Libreria',
     );
     
     /**

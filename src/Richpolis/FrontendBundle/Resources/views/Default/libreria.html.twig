@@ -1,0 +1,150 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
+{% endblock %} 
+
+{% block contenido %}
+<div class="row padding libreria">
+    {{pagina.contenido | raw }}
+</div>    
+    
+<div class="row padding libreria">
+    <div class="row">
+        <div class="categoria-libreria col-xs-6">
+          <h2 class="categoriaSeleccionada">{{libreria.children[0].categoria}}</h3>
+        </div>
+        <div class="selector-libreria col-xs-6">
+            <select name="selectorLibreria" id="selectorLibreria">
+              {% for categoria in libreria.children %}
+                <option value="{{categoria.id}}" id="option-{{categoria.id}}">{{categoria.categoria}}</option>
+              {% endfor %}
+            </select>
+        </div> 
+    </div>
+    {% for categoria in libreria.children %}
+    <div id="categoria-{{categoria.id}}" {% if loop.index > 1 %}style="display: none;"{% endif %} class="categoria-publicaciones-libreria row">
+      <ul class="lista-libreria row">
+        {% for libro in categoria.publicaciones %}
+          <li class="item-libreria  col-xs-12">
+              <figure>
+                <a href="{{libro.webPath}}" class="fancybox">
+                  <img src="{{libro.thumbnailWebPath}}" alt="">
+                </a>
+              </figure>
+              <div class="contenido-item-libreria">
+                <h3>{{libro.titulo}}</h3>
+                <div class="detalles">
+                  {{ libro.descripcionCorta | raw }}
+                </div>
+                <div class="descripcion">
+                  {{ libro.descripcion | raw }}
+                </div>
+                <button class="adquirirLibro" data-url="{{path('solicitar_pedido',{'id': libro.id})}}">adquirir</button>
+              </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}    
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalFormulario" tabindex="-1" role="dialog" aria-labelledby="labelFormulario" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="labelFormulario"></h4>
+      </div>
+      <div class="modal-body" id="modalBodyFormulario">
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="guardar();">Enviar pedido</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).on("ready",function(){
+            $(".adquirirLibro").on('click',function(e){
+                e.preventDefault();
+                mostrarFormulario("COMPRAR LIBRERIA ICC MÉXICO");
+                var url = $(this).data("url");
+                getFormulario(url);
+            });
+            
+            $("#selectorLibreria").on('change',function(){
+               debugger;
+               var num = $(this).val();
+               var categoria = $("#option-"+num).text();
+               var $categoria = $("#categoria-"+num);
+               $(".categoria-publicaciones-libreria").hide("fast",function(){
+                   $categoria.show("fast");
+                   $(".categoriaSeleccionada").text(categoria);
+               });
+               
+            });
+
+        });
+        
+        
+        
+        function mostrarFormulario(titulo){
+            $("#modalFormulario").modal("show");
+            $("#labelFormulario").html(titulo);
+            $loader = $("<img>");
+            $loader.attr({'src': '{{asset('images/loader.GIF')}}','id': 'loader'});
+            $loader.css({'maxWidth': '80px'});
+            $("#modalBodyFormulario").html($loader);
+        }
+        
+        function guardar(){
+            var $form = $("#modalBodyFormulario form");
+            var data = $form.serialize();
+            $loader.attr({'src': '{{asset('images/loader.GIF')}}','id': 'loader'});
+            $loader.css({'maxWidth': '80px'});
+            $("#modalBodyFormulario").append($loader);
+            $.ajax({
+                url: $form.attr('action'),
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+            }).done(function(data, textStatus,jqXHR){
+                debugger;
+                data = JSON.parse(data);
+                if(data.respuesta == 'nuevo'){
+                    $("#modalBodyFormulario").html(data.form);
+                    $("#modalBodyFormulario form").attr({'action': data.rutaAction});
+                }else if(data.respuesta == 'creado'){
+                    $(".contenidos").append(data.html);
+                    $("#modalFormulario").modal("hide");
+                }
+            }).fail(function(data){
+                alert("error");
+                console.log(data);
+            });
+        }
+        
+        function getFormulario(url){
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+            }).done(function(data, textStatus,jqXHR){
+                debugger;
+                data = JSON.parse(data);
+                if(data.respuesta == 'nuevo'){
+                    $("#modalBodyFormulario").html(data.form);
+                    $("#modalBodyFormulario form").attr({'action': data.rutaAction});
+                }
+            });
+        }
+
+    </script>
+{% endblock %}

@@ -1,8 +1,8 @@
 <div class="row menu_fondo">
     <div class="col-xs-4 enlaces-secciones enlaces-secciones-izquierda">
         <a class="enlace" href="{{path('homepage')}}"><p>Inicio</p></a>
-        <a class="enlace" href="#"><p>Librería</p></a>
-        <a class="enlace" href="#"><p>Patrocinio</p></a>
+        <a class="enlace" href="{{path('frontend_libreria')}}"><p>Librería</p></a>
+        <a class="enlace" href="{{path('frontend_eventos_categoria',{'categoriaSlug':'patrocinios'})}}"><p>Patrocinio</p></a>
     </div>
     <div class="col-xs-1 "></div>
     <div class="col-xs-7 enlaces-secciones enlaces-secciones-derecha">
@@ -14,9 +14,9 @@
                 <input type="submit" class="btn btn-xs" name="sa" value="Buscar" />
             </form>
         </div>
-        <a class="enlace" href="#"><p>Intranet</p></a>
+        <!--a class="enlace" href="#"><p>Intranet</p></a-->
         <a class="enlace" href="#"><p>Recibir alertas</p></a>
-        <a class="enlace" href="#"><p>Contacto</p></a>
+        <a class="enlace" href="{{path('frontend_contacto')}}"><p>Contacto</p></a>
     </div>    
 </div>
 <div class="clearfix row menu_fondo_logo" style="height: 111px;"><!-- group -->
@@ -66,19 +66,34 @@
             {% set rutaPublicacion = 'frontend_' ~ 'influencia_global' ~ '_publicacion' %}
         <div class="menu-contenido menu-panel">
             {% for child in categoria.children %}
-            <div class="clearfix grpelem menu-bloque-categoria">
-                <p class="titulo"><a href="{{path(rutaCategoria,{'categoriaSlug':child.slug})}}">{{child.categoria|upper}}</a></p>
-                
-                <ul class="lista-submenu">
-                    {% for publicacion in child.publicaciones %}
-                    <li class="item">
-                        <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
-                            {{ publicacion.titulo }}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                {% if child.slug == 'g20' %}
+                    <div class="clearfix grpelem menu-bloque-categoria">
+                        <p class="titulo">G20</p>
+                        <ul class="lista-submenu">
+                            {% for granson in child.children %}
+                            <li class="item">
+                                <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug': granson.slug,'publicacionSlug': granson.publicaciones[0].slug })}}">
+                                    {{ granson.publicaciones[0].titulo }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                <div class="clearfix grpelem menu-bloque-categoria">
+                    <p class="titulo"><a href="{{path(rutaCategoria,{'categoriaSlug':child.slug})}}">{{child.categoria|upper}}</a></p>
+
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}    
             {% endfor %}
         </div>
         {% endfor %}
@@ -188,17 +203,42 @@
         {% endfor %}
     </li>
     <li class="menu-contenedor">
-        <div class="menu-item menu-item-sencillo">
-            <a class="link-menu" href="{{path('frontend_noticias')}}">NOTICIAS</a>
+       <div class="menu-item  menu-item-sencillo">
+            <a class="link-menu" href="{{path('frontend_noticias_categoria',{'categoriaSlug':'noticias-icc'})}}">NOTICIAS</a>
         </div>
-            {% for categoria in categorias if categoria.slug == 'noticias' %}
-                {% set rutaCategoria = 'frontend_' ~ 'noticias' ~ '_categoria' %}
-                {% set rutaPublicacion = 'frontend_' ~ 'noticias' ~ '_publicacion' %}
-            <div class="menu-contenido menu-panel">
-                {% for child in categoria.children %}
+        {% for categoria in categorias if categoria.slug == 'noticias' %}
+            {% set rutaCategoria = 'frontend_' ~ 'noticias' ~ '_categoria' %}
+            {% set rutaPublicacion = 'frontend_' ~ 'noticias' ~ '_publicacion' %}
+        <div class="menu-contenido">
+            {% set moduloCreado = false %}
+            {% for child in categoria.children %}
+                {% if child.slug == 'icc-en-mexico' or child.slug == 'icc-mundial' or child.slug == 'noticias-icc' %}
+                    {% if moduloCreado == false %}
+                    <div class="clearfix grpelem menu-bloque-categoria">
+                        <p class="titulo">NOTICIAS</p>
+                        <ul class="lista-submenu">
+                            <li class="item">
+                                <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'noticias-icc'})}}">
+                                    Noticias ICC
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'icc-en-mexico'})}}">
+                                    ICC en México
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'icc-mundial'})}}">
+                                    ICC Mundial
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                     {% set moduloCreado = true %}               
+                    {% endif %}                
+                {% else %}    
                 <div class="clearfix grpelem menu-bloque-categoria">
                     <p class="titulo"><a href="{{path(rutaCategoria,{'categoriaSlug':child.slug})}}">{{child.categoria|upper}}</a></p>
-                    
                     <ul class="lista-submenu">
                         {% for publicacion in child.publicaciones %}
                         <li class="item">
@@ -209,13 +249,14 @@
                         {% endfor %}
                     </ul>
                 </div>
-                {% endfor %}
-             </div>
+                {% endif %}    
             {% endfor %}
+        </div>
+        {% endfor %}
     </li>
     <li class="menu-contenedor">
         <div class="menu-item">
-            <a class="link-menu" href="{{path('frontend_eventos')}}">EVENTOS Y<br/>CAPACITACIÓN</a>
+            <a class="link-menu" href="{{path('frontend_eventos_categoria',{'categoriaSlug':'calendario-icc-mexico'})}}">EVENTOS Y<br/>CAPACITACIÓN</a>
         </div>
         {% for categoria in categorias if categoria.slug == 'eventos' %}
             {% set rutaCategoria = 'frontend_' ~ 'eventos' ~ '_categoria' %}
@@ -270,12 +311,12 @@
     </li>
     <li class="menu-contenedor">
         <div class="menu-item menu-item-sencillo menu-sin-submenu">
-            <a class="link-menu" href="{{path('frontend_pauta')}}">PAUTA</a>
+            <a class="link-menu" href="#">PAUTA</a>
         </div>
     </li>
     <li class="menu-contenedor">
         <div class="menu-item menu-item-sencillo menu-sin-submenu">
-            <a class="link-menu" href="{{path('frontend_newsletter')}}">NEWSLETTER</a>
+            <a class="link-menu" href="#">NEWSLETTER</a>
         </div>
     </li>
     <li class="menu-contenedor">

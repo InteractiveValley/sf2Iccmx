@@ -106,6 +106,7 @@ class PublicacionEventoType extends AbstractType
             ->add('status','hidden')
             ->add('contVisitas','hidden')
             ->add('contComentarios','hidden')
+            ->add('descripcionCorta','hidden')
             //->add('galerias','hidden')    
         ;
     }

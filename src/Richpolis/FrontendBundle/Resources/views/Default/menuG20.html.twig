@@ -1,0 +1,56 @@
+<div class="left-nav">
+    <div class="nav-head">
+        <a href="{{path(rutaBase ~ '_categoria',{'categoriaSlug': categoria.slug })}}" style="color:#FFF">
+            {{ categoria.categoria }}
+        </a>
+    </div>
+    {% if categoria.children | length > 0 %}    
+    <div class="links-nav">    
+    <a href="javascript:void(0)" class="expandir">Expandir</a> | <a href="javascript:void(0)" class="colapsar">Colapsar</a>
+    </div>
+    {% endif %}
+    <div class="nav-list">
+        {% if categoria.children | length > 0 %}
+        <ul class="categorias">
+            {% for child in categoria.children %}
+            <li>
+                {% if child.publicaciones[0].slug == publicacionActual %}
+                <a href="#" class="link-nav-categoria publicacion-principal-actual">
+                    {{ child.publicaciones[0].titulo }}
+                </a>
+                {% else %}
+                    
+                <a href="{{path(rutaBase ~ '_publicacion',{'categoriaSlug': child.slug,'publicacionSlug': child.publicaciones[0].slug })}}" class="link-nav-categoria">
+                    {{ child.publicaciones[0].titulo }}
+                </a>    
+                {% endif %}    
+                {% if child.publicaciones | length > 1 %}
+                    <div class="subcategoria-item" style="display:none;">
+                        <ul class="subcategoria">
+                        {% for publicacion in child.publicaciones %}
+                           {% if loop.index > 1 %}
+                                {% if publicacion.slug == publicacionActual %}
+                                <li>
+                                <a href="#" class="publicacion-actual">
+                                    {{ publicacion.titulo }}
+                                </a>
+                                </li>
+                                {% else %}    
+                                <li>
+                                <a href="{{path(rutaBase ~ '_publicacion',{'categoriaSlug': child.slug,'publicacionSlug': publicacion.slug })}}" class=" ">
+                                    {{ publicacion.titulo }}
+                                </a>
+                                </li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+    

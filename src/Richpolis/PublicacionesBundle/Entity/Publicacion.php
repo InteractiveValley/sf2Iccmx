@@ -45,6 +45,14 @@ class Publicacion
     private $descripcion;
     
     /**
+     * @var string
+     * @todo Contenido de la noticia
+     *
+     * @ORM\Column(name="descripcion_corta", type="text",nullable=true)
+     */
+    private $descripcionCorta;
+    
+    /**
      * @var boolean
      * @todo Es para ponerla en la pagina de inicio como noticia principal
      *
@@ -254,6 +262,7 @@ class Publicacion
         $this->contVisitas = 0;
         $this->contComentarios = 0;
         $this->tipoEvento = self::TIPO_EVENTO_TALLER;
+        $this->descripcionCorta = "";
     }
     
     public function getStringTipoEvento(){
@@ -407,7 +416,7 @@ class Publicacion
      */
     public function crearThumbnail($width=250,$height=250,$path=""){
         $imagine    = new \Imagine\Gd\Imagine();
-        $collage    = $imagine->create(new \Imagine\Image\Box(250, 200));
+        $collage    = $imagine->create(new \Imagine\Image\Box(250, 250));
         $mode       = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
         $image      = $imagine->open($this->getAbsolutePath());
         $sizeImage  = $image->getSize();
@@ -416,8 +425,8 @@ class Publicacion
         }
         if($height == null){
             $height = $sizeImage->getHeight();
-            if($height>200){
-                $height = 200;
+            if($height>250){
+                $height = 250;
             }
         }
         if($width == null){
@@ -435,8 +444,8 @@ class Publicacion
         }else{
             $width = 0;
         }
-        if((200 - $size->getHeight())>1){
-            $height = ceil((200 - $size->getHeight())/2);
+        if((250 - $size->getHeight())>1){
+            $height = ceil((250 - $size->getHeight())/2);
         }else{
             $height =0;
         }    
@@ -496,11 +505,6 @@ class Publicacion
     public function getAbosluteThumbnailPath(){
         return null === $this->imagen ? null : $this->getUploadRootDir().'/thumbnails/'.$this->imagen;
     }
-
-    public function getDescripcionCorta($max = 250){
-        return RpsStms::cut_string2(RpsStms::strip_html_tags($this->getDescripcion()),250);
-    }
-    
 
     /**
      * Set titulo
@@ -1016,5 +1020,28 @@ class Publicacion
     public function getDireccionEvento()
     {
         return $this->direccionEvento;
+    }
+
+    /**
+     * Set descripcionCorta
+     *
+     * @param string $descripcionCorta
+     * @return Publicacion
+     */
+    public function setDescripcionCorta($descripcionCorta)
+    {
+        $this->descripcionCorta = $descripcionCorta;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcionCorta
+     *
+     * @return string 
+     */
+    public function getDescripcionCorta()
+    {
+        return $this->descripcionCorta;
     }
 }

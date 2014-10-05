@@ -58,7 +58,7 @@ class DefaultController extends Controller
         $statusPublicado = Publicacion::STATUS_PUBLICADO;
         $categoriaPublicacion = CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION;
         $categoriaLlamados = CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS;
-        $categoriaTuEspacio = CategoriaPublicacion::TIPO_CATEGORIA_TU_ESPACIO;
+        $categoriaTuEspacio = CategoriaPublicacion::TIPO_CATEGORIA_LIBRERIA;
         $categoriaHeraldoTv = CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS;
 
         $publicidad = $em->getRepository('PublicidadBundle:Publicidad')

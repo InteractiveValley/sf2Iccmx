@@ -19,7 +19,10 @@ class Contacto
      */
     protected $email;
 
-
+    
+    protected $empresa;
+    
+    
     protected $subject;
 
     
@@ -86,5 +89,11 @@ class Contacto
         $this->body = $body;
     }
     
+    public function getEmpresa(){
+        $this->empresa;
+    }
     
+    public function setEmpresa($empresa){
+        $this->empresa = $empresa;
+    }
 }

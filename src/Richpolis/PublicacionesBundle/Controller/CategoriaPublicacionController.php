@@ -190,6 +190,7 @@ class CategoriaPublicacionController extends Controller {
 
         return array(
             'entity' => $entity,
+            'tipoCategoria'=>$entity->getTipoCategoria(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -260,9 +261,10 @@ class CategoriaPublicacionController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $this->setCategoriaSluggable($entity,false);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('categorias_publicaciones_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('categorias_publicaciones_show', array('id' => $id)));
         }
 
         return array(

@@ -28,7 +28,8 @@
             </div>
         </div>
         <div class="col-xs-4 menu_fondo">
-            {% include 'FrontendBundle:Default:aside.html.twig'  %}
+            {# include 'FrontendBundle:Default:aside.html.twig'  #}
+            {{ aside.contenido | raw }}
         </div>
     </div>
 {% endblock %}

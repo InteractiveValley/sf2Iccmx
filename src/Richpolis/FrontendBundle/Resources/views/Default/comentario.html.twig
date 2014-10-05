@@ -17,7 +17,7 @@
         </p>
     </div>
     {% if comentario.nivel < 4 %}
-        {% if comentario.publicacion.categoria.tipoCategoria != constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_TU_ESPACIO') %}
+        {% if comentario.publicacion.categoria.tipoCategoria != constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_LIBRERIA') %}
         <p class="controles">
             <button class="boton boton-responder" data-comentario="{{comentario.id}}">responder</button>
         </p>

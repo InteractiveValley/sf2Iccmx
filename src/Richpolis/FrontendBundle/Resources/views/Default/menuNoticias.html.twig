@@ -1,0 +1,26 @@
+<div class="left-nav">
+    <div class="nav-head">
+        <a href="javascript:void(0)" style="color:#FFF">
+            NOTICIAS
+        </a>
+    </div>
+    <div class="nav-list">
+        <ul>
+            <li>
+                <a href="{{path(rutaBase ~ '_categoria',{'categoriaSlug': 'noticias-icc' })}}" class="{{ ((categoria.slug=='noticias-icc')?'publicacion-actual':'') }}">
+                    NOTICIAS ICC
+                </a>
+            </li>
+            <li>
+                <a href="{{path(rutaBase ~ '_categoria',{'categoriaSlug': 'icc-en-mexico' })}}" class="{{ ((categoria.slug=='icc-en-mexico')?'publicacion-actual':'') }}">
+                    ICC en México
+                </a>
+            </li>
+            <li>
+                <a href="{{path(rutaBase ~ '_categoria',{'categoriaSlug': 'icc-mundial' })}}" class="{{ ((categoria.slug=='icc-mundial')?'publicacion-actual':'') }}">
+                    ICC Mundial
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -83,6 +83,7 @@
                                             <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
                                                 <div class="tab-pane active" id="sistema">
                                                     <table>
+                     
                                                             <tbody><tr>
                                                                     <td>Id:</td>
                                                                     <td>{{entity.id}}</td>
@@ -95,6 +96,12 @@
                                                                     <td>Titulo:</td>
                                                                     <td>{{ entity.titulo }}</td>
                                                                 </tr>
+                                                                {% if entity.categoria.tipoCategoria == constant('Richpolis\\PublicacionesBundle\\Entity\\CategoriaPublicacion::TIPO_CATEGORIA_LIBRERIA') %}
+                                                                <tr>
+                                                                    <td>Detalles libro:</td>
+                                                                    <td>{{ entity.descripcionCorta | raw }}</td>
+                                                                </tr>
+                                                                {% endif %}    
                                                                 <tr>
                                                                     <td>Descripcion:</td>
                                                                     <td>{{ entity.descripcion | raw }}</td>
@@ -190,11 +197,9 @@
                                             <input name="_method" value="DELETE" type="hidden"/>
                                             {{ form_widget(delete_form) }}
                                         </form>
-									<button class="btn btn-danger " onclick="eliminarRegistro();">Eliminar</button>
+					<button class="btn btn-danger " onclick="eliminarRegistro();">Eliminar</button>
                                     </div>
-                                    {% if entity.status >= incompleto and entity.status <= revisar %}
-                                    <button id="botonAprobar" class="btn btn-primary" data-url="{{path('publicaciones_aprobar',{id: entity.id})}}">Enviar a validar</button>
-                                    {% endif %}
+               
                                 </div>
                             </div>  
                         </div>    

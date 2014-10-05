@@ -232,11 +232,11 @@ ul.lista-submenu li.item
 		top 2px
 		right 0px
 	& .titulo-publicacion
-		margin-bottom 40px;
+		margin-bottom 40px
 		width 85%
 		border-bottom 1px solid gray
 	& .extras-publicacion
-		margin-bottom 10px;
+		margin-bottom 10px
 		border-bottom 1px dotted gray
 		height 30px
 		& a
@@ -403,4 +403,80 @@ ul.lista-submenu li.item
 			height 33px
 			display block
 			padding-top 8px
-			color white                 
+			color white
+
+.padding
+	padding 16px
+
+.libreria
+	h1
+		font-size 24px
+		&:first-letter
+			text-transform uppercase 
+		& ~ div p
+			font-size 12px
+			font-weight bold
+			line-height 12px
+			margin none
+	& .categoria-libreria > h2
+		font-size 18px
+		font-weight normal
+		background-color color_azul
+		color white
+		text-transform uppercase
+		margin 0px 0px 10px
+		padding 5px 0px 5px 15px
+		border-radius 3px
+	& .selector-libreria > select
+		padding 3px
+		margin 0
+		border-radius 4px
+		font-size 18px
+		box-shadow 0 3px 0 #ccc, 0 -1px #fff inset
+		background #f8f8f8
+		color #888
+		border none
+		outline none
+		display inline-block
+		cursor pointer
+	& ul.lista-libreria
+		margin 0
+		padding 0
+		& .item-libreria
+			list-style none
+			& figure
+			& .contenido-item-libreria
+				display inline-block
+				vertical-align top
+			& .contenido-item-libreria > h3 
+				font-size 16px
+				font-weight normal
+				background-color green
+				color white
+				padding 3px
+				border-radius 3px
+			& .contenido-item-libreria .detalles
+				color color_gris
+				font-size 12px
+				line-height 12px
+			& ul
+				margin 0
+				padding 0
+			& li 
+				list-style none
+			& p
+				margin 5px 0px
+			& .contenido-item-libreria .descripcion
+				color color_azul
+				font-size 14px
+				text-align justify
+			& .contenido-item-libreria .adquirirLibro
+				margin-top 10px
+				padding 10px
+				color white
+				background-color green
+				text-transform uppercase
+				border none
+				border-radius 5px
+				
+					

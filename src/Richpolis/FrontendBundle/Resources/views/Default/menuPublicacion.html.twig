@@ -14,7 +14,7 @@
             {% for publicacion in categoria.publicaciones %}
                 {% if publicacion.slug == publicacionActual %}
                 <li>
-                <a href="#" class="publicacion-actual">
+                <a href="#" class="publicacion-principal-actual">
                     {{ publicacion.titulo }}
                 </a>
                 </li>
@@ -28,34 +28,36 @@
             {% endfor %}    
         </ul>
         {% if categoria.children | length > 0 %}
-        <ul class="categorias">
-            {% for child in categoria.children %}
-            <li>
-                <a href="#" class="link-nav-categoria">
-                    {{ child.categoria }}
-                </a>
-                {% if child.publicaciones | length > 0 %}
-                    <ul style="display: none;" class="subcategoria">
-                    {% for publicacion in child.publicaciones %}
-                        {% if publicacion.slug == publicacionActual %}
-                        <li>
-                        <a href="#" class="publicacion-actual">
-                            {{ publicacion.titulo }}
-                        </a>
-                        </li>
-                        {% else %}    
-                        <li>
-                        <a href="{{path(rutaBase ~ '_publicacion',{'categoriaSlug': child.slug,'publicacionSlug': publicacion.slug })}}" class=" ">
-                            {{ publicacion.titulo }}
-                        </a>
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
+            <ul class="categorias">
+                {% for child in categoria.children %}
+                <li>
+                    <a href="#" class="link-nav-categoria">
+                        {{ child.categoria }}
+                    </a>
+                   <div class="subcategoria-item" style="display: none;">
+                    {% if child.publicaciones | length > 0 %}
+                        <ul class="subcategoria">
+                        {% for publicacion in child.publicaciones %}
+                            {% if publicacion.slug == publicacionActual %}
+                            <li>
+                            <a href="#" class="publicacion-actual">
+                                {{ publicacion.titulo }}
+                            </a>
+                            </li>
+                            {% else %}    
+                            <li>
+                            <a href="{{path(rutaBase ~ '_publicacion',{'categoriaSlug': child.slug,'publicacionSlug': publicacion.slug })}}" class=" ">
+                                {{ publicacion.titulo }}
+                            </a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
         {% endif %}
     </div>
 </div>

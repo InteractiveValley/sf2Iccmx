@@ -90,6 +90,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Aside:</td>
+                                                                    
                                                                     <td>{{entity.aside}}</td>
                                                                 </tr>
                                                                 <tr>
@@ -108,7 +109,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="widget-foot">
-                                                    <button id="botonRegresar" class="btn btn-default" onclick="javascript:regresar('{{path('categorias_publicaciones')}}')">Regresar</button>
+                                                    <button id="botonRegresar" class="btn btn-default" onclick="javascript:regresar('{{path('categorias_publicaciones',{'tipoCategoria': tipoCategoria})}}')">Regresar</button>
                                                     <button id="botonEditar" class="btn btn-info" onclick="javascript:editarRegistro('{{path('categorias_publicaciones_edit',{id: entity.id})}}')">Editar</button>
                                                     <div style="float: left; margin-right: 3px;">
                                                         <form id="formEliminar" action="{{ path('categorias_publicaciones_delete', { 'id': entity.id }) }}" method="post">
@@ -172,6 +173,7 @@
 
                         <script>
                             var regresar = function(url) {
+                                
                                 location.href = url;
                             };
 

@@ -438,8 +438,9 @@ class Galeria
             // clear the temp image path
             $this->temp = null;
         }
-        
-        $this->crearThumbnail();
+        if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_IMAGEN){
+            $this->crearThumbnail();
+        }
         
         $this->file = null;
     }
@@ -481,12 +482,12 @@ class Galeria
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../html'.$this->getUploadDir();
+        return __DIR__.'/../../../../web'.$this->getUploadDir();
     }
     
     protected function getThumbnailRootDir()
     {
-        return __DIR__.'/../../../../html'.$this->getUploadDir().'/thumbnails';
+        return __DIR__.'/../../../../web'.$this->getUploadDir().'/thumbnails';
     }
     
     /**
@@ -500,7 +501,10 @@ class Galeria
             return null === $this->archivo ? null : $this->getUploadDir().'/'.$this->archivo;
         }else if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_LINK){
             return $this->getArchivo();
+        }else if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_PDF){
+            return null === $this->archivo ? null : $this->getUploadDir().'/'.$this->archivo;
         }
+        
     }
     
     /**
@@ -519,6 +523,8 @@ class Galeria
             return null === $this->thumbnail ? null : $this->getUploadDir().'/thumbnails/'.$this->thumbnail;
         }else if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_LINK){
             return $this->getThumbnail();
+        }else if($this->getTipoArchivo() == RpsStms::TIPO_ARCHIVO_PDF){
+            return "/images/ico_pdf.jpg";
         }
     }
     

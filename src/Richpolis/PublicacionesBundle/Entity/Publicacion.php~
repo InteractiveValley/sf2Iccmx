@@ -45,6 +45,14 @@ class Publicacion
     private $descripcion;
     
     /**
+     * @var string
+     * @todo Contenido de la noticia
+     *
+     * @ORM\Column(name="descripcion_corta", type="text",nullable=true)
+     */
+    private $descripcionCorta;
+    
+    /**
      * @var boolean
      * @todo Es para ponerla en la pagina de inicio como noticia principal
      *
@@ -253,6 +261,8 @@ class Publicacion
         $this->status = self::STATUS_INCOMPLETO;
         $this->contVisitas = 0;
         $this->contComentarios = 0;
+        $this->tipoEvento = self::TIPO_EVENTO_TALLER;
+        $this->descripcionCorta = "";
     }
     
     public function getStringTipoEvento(){
@@ -404,9 +414,9 @@ class Publicacion
      * 
      * @return void
      */
-    public function crearThumbnail($width=250,$height=200,$path=""){
+    public function crearThumbnail($width=250,$height=250,$path=""){
         $imagine    = new \Imagine\Gd\Imagine();
-        $collage    = $imagine->create(new \Imagine\Image\Box(250, 200));
+        $collage    = $imagine->create(new \Imagine\Image\Box(250, 250));
         $mode       = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
         $image      = $imagine->open($this->getAbsolutePath());
         $sizeImage  = $image->getSize();
@@ -415,8 +425,8 @@ class Publicacion
         }
         if($height == null){
             $height = $sizeImage->getHeight();
-            if($height>200){
-                $height = 200;
+            if($height>250){
+                $height = 250;
             }
         }
         if($width == null){
@@ -434,8 +444,8 @@ class Publicacion
         }else{
             $width = 0;
         }
-        if((200 - $size->getHeight())>1){
-            $height = ceil((200 - $size->getHeight())/2);
+        if((250 - $size->getHeight())>1){
+            $height = ceil((250 - $size->getHeight())/2);
         }else{
             $height =0;
         }    
@@ -468,7 +478,7 @@ class Publicacion
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../html'.$this->getUploadDir();
+        return __DIR__.'/../../../../web'.$this->getUploadDir();
     }
     
     public function getWebPath()
@@ -495,11 +505,6 @@ class Publicacion
     public function getAbosluteThumbnailPath(){
         return null === $this->imagen ? null : $this->getUploadRootDir().'/thumbnails/'.$this->imagen;
     }
-
-    public function getDescripcionCorta($max = 250){
-        return RpsStms::cut_string2(RpsStms::strip_html_tags($this->getDescripcion()),250);
-    }
-    
 
     /**
      * Set titulo
@@ -877,5 +882,156 @@ class Publicacion
     public function getContComentarios()
     {
         return $this->contComentarios;
+    }
+
+    /**
+     * Set hasMenu
+     *
+     * @param boolean $hasMenu
+     * @return Publicacion
+     */
+    public function setHasMenu($hasMenu)
+    {
+        $this->hasMenu = $hasMenu;
+
+        return $this;
+    }
+
+    /**
+     * Get hasMenu
+     *
+     * @return boolean 
+     */
+    public function getHasMenu()
+    {
+        return $this->hasMenu;
+    }
+
+    /**
+     * Set fechaEvento
+     *
+     * @param \DateTime $fechaEvento
+     * @return Publicacion
+     */
+    public function setFechaEvento($fechaEvento)
+    {
+        $this->fechaEvento = $fechaEvento;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaEvento
+     *
+     * @return \DateTime 
+     */
+    public function getFechaEvento()
+    {
+        return $this->fechaEvento;
+    }
+
+    /**
+     * Set tipoEvento
+     *
+     * @param integer $tipoEvento
+     * @return Publicacion
+     */
+    public function setTipoEvento($tipoEvento)
+    {
+        $this->tipoEvento = $tipoEvento;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoEvento
+     *
+     * @return integer 
+     */
+    public function getTipoEvento()
+    {
+        return $this->tipoEvento;
+    }
+
+    /**
+     * Set inInicio
+     *
+     * @param boolean $inInicio
+     * @return Publicacion
+     */
+    public function setInInicio($inInicio)
+    {
+        $this->inInicio = $inInicio;
+
+        return $this;
+    }
+
+    /**
+     * Get inInicio
+     *
+     * @return boolean 
+     */
+    public function getInInicio()
+    {
+        return $this->inInicio;
+    }
+
+    /**
+     * Set inPatrocinio
+     *
+     * @param boolean $inPatrocinio
+     * @return Publicacion
+     */
+    public function setInPatrocinio($inPatrocinio)
+    {
+        $this->inPatrocinio = $inPatrocinio;
+
+        return $this;
+    }
+
+    /**
+     * Get inPatrocinio
+     *
+     * @return boolean 
+     */
+    public function getInPatrocinio()
+    {
+        return $this->inPatrocinio;
+    }
+
+    /**
+     * Set direccionEvento
+     *
+     * @param string $direccionEvento
+     * @return Publicacion
+     */
+    public function setDireccionEvento($direccionEvento)
+    {
+        $this->direccionEvento = $direccionEvento;
+
+        return $this;
+    }
+
+    /**
+     * Get direccionEvento
+     *
+     * @return string 
+     */
+    public function getDireccionEvento()
+    {
+        return $this->direccionEvento;
+    }
+
+    /**
+     * Set descripcionCorta
+     *
+     * @param string $descripcionCorta
+     * @return Publicacion
+     */
+    public function setDescripcionCorta($descripcionCorta)
+    {
+        $this->descripcionCorta = $descripcionCorta;
+
+        return $this;
     }
 }

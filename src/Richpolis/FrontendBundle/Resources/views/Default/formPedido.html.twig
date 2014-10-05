@@ -1,0 +1,35 @@
+<form action="{{rutaAction}}" method="post" novalidate="novalidate" role="form">
+        <div class="form-group">
+             <label for="producto">PRODUCTO:</label>
+             <span class="form-control">{{producto.titulo}}</span> 
+         </div>
+         <div class="form-group">
+             <label for="contacto_name">NOMBRE:</label>
+             {{ form_widget(form.name, {'attr': {'class': 'form-control','placeholder':'Nombre'|trans }}) }}
+             <span class="errores"> 
+                 {{ form_errors(form.name) }}
+             </span>
+        </div>
+         <div class="form-group">
+             <label for="contacto_empresa">EMPRESA</label>
+                 {{ form_widget(form.empresa, {'attr': {'class': 'form-control','placeholder':'Empresa'|trans }}) }}
+             <span class="errores"> 
+                 {{ form_errors(form.empresa) }}
+             </span>
+         </div>
+         <div class="form-group">
+             <label for="contacto_telefono">TELEFONO:</label>
+                 {{ form_widget(form.telefono, {'attr': {'class': 'form-control','placeholder':'Teléfono'|trans }}) }}
+             <span class="errores"> 
+                 {{ form_errors(form.telefono) }}
+             </span>
+         </div> 
+         <div class="form-group">
+             <label for="contacto_email">EMAIL:</label>
+                 {{ form_widget(form.email, {'attr': {'class': 'form-control','placeholder':'Email'|trans}}) }}
+             <span class="errores"> 
+                 {{ form_errors(form.email) }}
+             </span>
+        </div>    
+         {{ form_rest(form) }}    
+</form>

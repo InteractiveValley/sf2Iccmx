@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Solicitud de pedido{% endblock %}
+
+{% block body %}
+<table>
+    <thead>
+	<tr colspan="2">
+		<th>Solicitud de pedido desde iccmex.com</th>
+	</tr>
+    </thead>
+    <tbody>
+        <tr>
+		<td style="background-color: gray;color: white;">
+			Producto:
+		<td>
+		<td>
+			{{producto.titulo}}
+                        <br/>
+                        {{producto.descripcionCorta | raw }}
+                        <br/>
+                        {{producto.descripcion | raw }}
+                <td>
+	</tr>
+	<tr>
+		<td style="background-color: gray;color: white;">
+			Nombre:
+		<td>
+		<td>
+			{{datos.name}}
+		<td>
+	</tr>
+	<tr>
+		<td style="background-color: gray;color: white;">
+			Empresa:
+		<td>
+		<td>
+			{{datos.empresa}}
+		<td>
+	</tr>
+        <tr>
+		<td style="background-color: gray;color: white;">
+			Telefono:
+		<td>
+		<td>
+			{{datos.telefono}}
+		<td>
+	</tr>	
+        <tr>
+		<td style="background-color: gray;color: white;">
+			Email:
+		<td>
+		<td>
+			{{datos.email}}
+		<td>
+	</tr>	
+    </tbody>
+</table>
+{% endblock %}
