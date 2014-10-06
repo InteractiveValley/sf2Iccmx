@@ -1034,4 +1034,14 @@ class Publicacion
 
         return $this;
     }
+
+    /**
+     * Get descripcionCorta
+     *
+     * @return string 
+     */
+    public function getDescripcionCorta()
+    {
+        return $this->descripcionCorta;
+    }
 }

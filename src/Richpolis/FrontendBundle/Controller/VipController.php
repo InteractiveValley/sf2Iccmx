@@ -19,6 +19,7 @@ class VipController extends Controller {
      */
     public function loginAction()
     {
+        $em = $this->getDoctrine()->getManager();
         $peticion = $this->getRequest();
         $sesion = $peticion->getSession();
         
@@ -27,10 +28,14 @@ class VipController extends Controller {
             SecurityContext::AUTHENTICATION_ERROR,
             $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
         );
- 
+        
+        $pagina = $em->getRepository('PaginasBundle:Pagina')
+                     ->findOneBy(array('pagina'=>'login-vip'));
+        
         return $this->render('FrontendBundle:Vip:login.html.twig', array(
             'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error
+            'error'         => $error,
+            'pagina'=>$pagina,
         ));
     }
     

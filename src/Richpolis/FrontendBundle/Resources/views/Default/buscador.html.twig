@@ -1,27 +1,49 @@
 {% extends 'FrontendBundle::layout.html.twig' %}
 
 {% block contenido %}
-  
-  <section class="padding columna-2">
-        <article class="list-noticias categoria">
-            <header>
-                <h2 class="titulo">
-                    <span>Resultados</span>
-                </h2>
-            </header>
-            <section class="noticias">
-                {% for noticia in pagination %}
-                    {% include 'FrontendBundle:Default:item_largo.html.twig' with {'noticia': noticia} %}
-				{% else %}
-					<p>Sin resultados</p>
-                {% endfor %}
-            </section>
-        </article>
-        {{ knp_pagination_render(pagination) }}    
-    </section>	
-    {# include 'FrontendBundle:Default:aside.html.twig' #}        
-    {{render(controller('FrontendBundle:Default:aside'))}}
-    <!--p class="padding">
-        <button class="ver-archivos">Archivos</button>    
-    </p-->
+<div class="row eventos">
+    <div class="col-xs-8">
+        {% if noticias|length > 0 or eventos|length > 0 %}
+            {% if noticias|length > 0 %}
+            <div class="row">
+                <p class="titulo-seccion relative col-xs-12">NOTICIAS</p>
+                <div class="col-xs-12">
+                    {% for noticia in noticias %}
+                        {% include 'FrontendBundle:Default:item_noticia_largo.html.twig'  with { 'noticia': noticia } %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            {% if eventos|length > 0 %}
+                <div class="row">
+                    <p class="titulo-seccion relative col-xs-12">EVENTOS</p>
+                    <div class="col-xs-12">
+                        <p class="titulo-seccion relative">&nbsp;
+                        <ul class="list-inline pull-right lista-categorias-eventos"> 
+                            <li class="lista-categorias-evento"><span class="cuadro taller">&nbsp;&nbsp;&nbsp;&nbsp;</span> Talleres</li>
+                            <li class="lista-categorias-evento"><span class="cuadro seminario">&nbsp;&nbsp;&nbsp;&nbsp;</span> Seminarios</li>
+                            <li class="lista-categorias-evento"><span class="cuadro sesion">&nbsp;&nbsp;&nbsp;&nbsp;</span> Sesiones</li>
+                            <li class="lista-categorias-evento"><span class="cuadro diplomado">&nbsp;&nbsp;&nbsp;&nbsp;</span> Diplomados</li>
+                        </ul>
+                        </p>
+                        {% for evento in eventos %}
+                            {% include 'FrontendBundle:Default:item_evento_largo.html.twig'  with { 'evento': evento } %}
+                        {% endfor %}
+                    </div>
+                </div>
+              {% endif %}
+        {% else %}
+        <div class="row padding">
+            No hay resultados
+        </div>   
+        {% endif %}   
+        <div class="row padding">
+            {{pagina.contenido | raw }}
+        </div>
+    </div>
+    <div class="col-xs-4 menu_fondo">
+        {% include 'FrontendBundle:Default:aside.html.twig' %}        
+    </div>
+</div>    
 {% endblock %}
+

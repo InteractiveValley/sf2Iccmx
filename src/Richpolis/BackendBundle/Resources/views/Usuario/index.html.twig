@@ -53,6 +53,7 @@
           <a href="{{path('users_show',{'id': app.user.id })}}" class="bread-current">Perfil</a>
           {% endif %}
           {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{path('users_export')}}" class="btn btn-info pull-right" style="color: white; margin-left: 5px;">Exportar</a>    
           <a href="{{path('users_new')}}" class="btn btn-info pull-right" style="color: white; margin-left: 5px;">Crear usuario</a>
           {% endif %}
         </div>

@@ -279,4 +279,23 @@ class UsuariosController extends Controller
         );
         $entity->setPassword($passwordCodificado);
     }
+    
+    /**
+     * Exporta la lista completa de usuarios.
+     *
+     * @Route("/exportar", name="users_export")
+     * @Method("GET")
+     */
+    public function exportarAction() {
+        $usuarios = $this->getDoctrine()
+                ->getRepository('BackendBundle:Usuario')
+                ->findBy(array('newsletter'=>true));
+
+        $response = $this->render(
+                'BackendBundle:Usuario:list.xls.twig', array('usuarios' => $usuarios)
+        );
+        $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+        $response->headers->set('Content-Disposition', 'attachment; filename="export-newsletter.xls"');
+        return $response;
+    }
 }

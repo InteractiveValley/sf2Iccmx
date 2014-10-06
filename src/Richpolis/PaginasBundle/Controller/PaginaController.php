@@ -307,7 +307,7 @@ class PaginaController extends Controller
        
         if(!$request->request->has('tipoArchivo')){ 
             // list of valid extensions, ex. array("jpeg", "xml", "bmp")
-            $allowedExtensions = array("jpeg","png","gif","jpg");
+            $allowedExtensions = array("jpeg","png","gif","jpg","pdf");
             // max file size in bytes
             $sizeLimit = 6 * 1024 * 1024;
             $uploader = new qqFileUploader($allowedExtensions, $sizeLimit,$request->server);
@@ -327,13 +327,11 @@ class PaginaController extends Controller
                 $registro->setTitulo($result["titulo"]);
                 $registro->setIsActive(true);
                 $registro->setPosition($max+1);
-                $registro->setTipoArchivo(RpsStms::TIPO_ARCHIVO_IMAGEN);
+                $registro->setTipoArchivo(RpsStms::getTipoArchivo($result['filename']));
                 //unset($result["filename"],$result['original'],$result['titulo'],$result['contenido']);
                 $em->persist($registro);
-                if($pagina->getPagina()=="clientes"){
-                    $this->crearThumbnailClientes($registro);
-                }else{
-                    $registro->crearThumbnail();    
+                if($registro->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_IMAGEN){
+                    $registro->crearThumbnail();
                 }
                 $pagina->getGalerias()->add($registro);
                 $em->flush();

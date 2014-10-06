@@ -160,6 +160,13 @@ class Usuario implements UserInterface, \Serializable
      */
     private $publicaciones;
     
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="newsletter", type="boolean")
+     */
+    private $newsletter;  
+    
     
     const GRUPO_USUARIOS=1;
     const GRUPO_ADMIN=2;
@@ -198,6 +205,8 @@ class Usuario implements UserInterface, \Serializable
     {
         // may not be needed, see section on salt below
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->newsletter = false;
+        $this->grupo = self::GRUPO_USUARIOS;
     }
     
     /**
@@ -677,5 +686,28 @@ class Usuario implements UserInterface, \Serializable
     public function getImagen()
     {
         return $this->imagen;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param boolean $newsletter
+     * @return Usuario
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return boolean 
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
     }
 }

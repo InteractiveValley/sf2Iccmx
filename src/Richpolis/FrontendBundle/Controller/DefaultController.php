@@ -13,6 +13,8 @@ use Richpolis\FrontendBundle\Form\ContactoType;
 use Richpolis\FrontendBundle\Form\SolicitarPedidoType;
 use Richpolis\PublicacionesBundle\Entity\Publicacion;
 use Richpolis\PublicacionesBundle\Entity\CategoriaPublicacion;
+use Richpolis\BackendBundle\Entity\Usuario;
+use Richpolis\BackendBundle\Form\NewsletterType;
 
 class DefaultController extends Controller {
     
@@ -556,14 +558,69 @@ class DefaultController extends Controller {
     /**
      * @Route("/newsletter", name="frontend_newsletter")
      * @Template()
-     * @Method({"GET"})
+     * @Method({"GET","POST"})
      */
     public function newsletterAction(Request $request) {
+        $usuario = new Usuario();
+        $usuario->setNewsletter(true);
+        $usuario->setUsername("SinUsuario");
+        $usuario->setPassword("SinPassword");
+        $form = $this->createForm(new NewsletterType(), $usuario);
         $em = $this->getDoctrine()->getManager();
-        
-        
-        
-        return array();
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $user = $em->getRepository('BackendBundle:Usuario')
+                           ->findOneBy(array('email'=>$usuario->getEmail()));
+                if($user==null){
+                    $em->persist($usuario);
+                    $em->flush();
+                }else{
+                    $user->setNewsletter(true);
+                    $usuario=null;
+                    $em->flush();
+                }
+                
+                $ok = true;
+                $error = false;
+                $mensaje = "Se ha registrado el email";
+                
+                $usuario = new Usuario();
+                $usuario->setNewsletter(true);
+                $usuario->setUsername("SinUsuario");
+                $usuario->setPassword("SinPassword");
+                $form = $this->createForm(new NewsletterType(), $usuario);
+            } else {
+                $ok = false;
+                $error = true;
+                $mensaje = "No se pudo generar el registro";
+            }
+        } else {
+            $ok = false;
+            $error = false;
+            $mensaje = "";
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('FrontendBundle:Default:formNewsletter.html.twig', array(
+                        'form' => $form->createView(),
+                        'ok' => $ok,
+                        'error' => $error,
+                        'mensaje' => $mensaje,
+            ));
+        }
+
+        $pagina = $em->getRepository('PaginasBundle:Pagina')
+                ->findOneBy(array('pagina' => 'newsletter'));
+
+        return $this->render('FrontendBundle:Default:newsletter.html.twig', array(
+                    'form' => $form->createView(),
+                    'ok' => $ok,
+                    'error' => $error,
+                    'mensaje' => $mensaje,
+                    'pagina' => $pagina,
+        ));
     }
     
     /**
@@ -676,16 +733,20 @@ class DefaultController extends Controller {
      */
     public function buscadorAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $buscar = $request->get("textoBuscar","");
+        $buscar = $request->get("q","");
 	$noticias = $em->getRepository('PublicacionesBundle:Publicacion')
                        ->buscarPublicacionPorTipoCategoria($buscar,CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS);
         
         $eventos = $em->getRepository('PublicacionesBundle:Publicacion')
                        ->buscarPublicacionPorTipoCategoria($buscar,CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS);
-		
+	
+        $pagina = $em->getRepository('PaginasBundle:Pagina')
+                     ->findOneBy(array('pagina'=>'buscador'));	
+        
         return array(
-            'noticias' => $noticias,
-            'eventos'=>$eventos,
+            'noticias'  => $noticias,
+            'eventos'   => $eventos,
+            'pagina'    => $pagina,
         );
         
     }

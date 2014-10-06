@@ -65,6 +65,11 @@ class UsuarioType extends AbstractType
                     'class'=>'validate[required] form-control placeholder',
                     'placeholder'=>'Grupo',
                 )))
+             ->add('newsletter',null,array('label'=>'Enviar newsletter?','attr'=>array(
+                'class'=>'checkbox-inline',
+                'placeholder'=>'Enviar newsletter',
+                'data-bind'=>'value: newsletter'
+                )))
              ->add('salt','hidden')
              ->add('imagen','hidden')   
         ;

@@ -28,10 +28,22 @@
         </div>        
     </div>    
 {% else %}
-    <div class="row padding">
+    <div class="row">
         <div class="col-xs-8">
-            
+            <div class="row padding">
+                Bienvenido {{app.user.nombre}}, para salir <a href="{{path('vip_logout')}}">aqui</a>
+            </div>
+            {% if pagina is null %}
+                <div class="row padding">
+                    Ahora puede acceder a las secciones de <a href="{{path('vip_pauta')}}">Pauta</a>
+                </div>
+            {% else %}
+                {{ pagina.contenido | raw }}
+            {% endif %}    
         </div>
+        <div class="col-xs-4 menu_fondo">
+            {% include 'FrontendBundle:Default:aside.html.twig' %}        
+        </div> 
     </div>    
 {% endif %}    
 {% endblock %}

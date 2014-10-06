@@ -1,0 +1,45 @@
+{% if error is not defined %}
+    {% set error=false %}
+{% endif %}
+    
+{% if ok is not defined %}
+    {% set ok=false %}
+{% endif %}
+    
+{% if mensaje is not defined %}
+    {% set mensaje="" %}
+{% endif %}
+               
+<div id="formulario_newsletter">
+     <form onsubmit="return false;" action="{{path('frontend_newsletter')}}" method="post" class="form-newsletter {% if error == true %}invalid{% endif %} {% if ok == true %}sent{% endif %} bootstrap-frm" novalidate="novalidate" role="form">
+          <div class="form-group">
+             {{ form_row(form.nombre, {'attr': {'class': 'form-control' }}) }}
+         </div>
+         <div class="form-group">
+                 {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+         </div>
+         <div class="form-group">
+             <input type="submit" value="{{"Registrase"|trans}}" class="form-newsletter-control form-submit btn btn-primary">
+             <img class="ajax-loader" src="/images/bx_loader.gif" alt="Enviando ..." style="visibility: hidden;">
+         </div>
+         {% if ok == true and error == false%}    
+         <div class="form-response-output form-mail-sent-ok">
+             {{mensaje}}
+         </div>
+         {% elseif ok == false and error == true %}
+         <div class="form-response-output form-mail-sent-ng form-validation-errors">
+             {{mensaje}}{{form_errors(form)}}
+         </div>    
+         {% else %}
+         <div class="form-response-output">
+             {{mensaje}}
+         </div>    
+         {% endif %}    
+         {{ form_rest(form) }}    
+     </form>
+ </div>
+<script type='text/javascript'>
+$(document).on('ready',function() {   
+    iniciarlizarFormNewsletter();
+});
+</script>

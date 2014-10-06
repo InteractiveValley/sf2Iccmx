@@ -1,0 +1,42 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Email
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Newsletter
+            </th>
+             <th>
+                Alta
+            </th>
+            <th>
+                Actualizacion
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>
+                    {{ usuario.email }}
+                </td>
+                <td>
+                    {{ usuario.nombre }}
+                </td>
+                <td>
+                    {{ ((usuario.newsletter)?'Si':'No') }}
+                </td>
+                <td>
+                    {{ usuario.createdAt | date('d-m-Y') }}
+                </td>
+                <td>
+                    {{ usuario.updatedAt | date('d-m-Y') }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody> 
+</table>

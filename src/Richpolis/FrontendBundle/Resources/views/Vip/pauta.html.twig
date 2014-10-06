@@ -11,8 +11,10 @@
     {{pagina.contenido | raw }}
     <div class="accesos-vip">
         <a href="{{path('vip_login')}}">SOCIOS</a>
+        {% if pagina.galerias | length > 0 %}
         /
-        <a href="{#pagina.galerias[0].webPath#}" target="_blank">NO SOCIOS</a>
+        <a href="{{pagina.galerias[0].webPath}}" target="_blank">NO SOCIOS</a>
+        {% endif %}
     </div>
 </div>    
 {% else %}    
@@ -45,7 +47,9 @@
                     <div class="descripcion">
                       {{ libro.descripcion | raw }}
                     </div>
+                    {% if libro.galerias | length > 0 %}
                     <a class="adquirirLibro" target="_blank" href="{{libro.galerias[0].webPath}}">Descargar</a>
+                    {% endif %}
                   </div>
               </li>
             {% endfor %}

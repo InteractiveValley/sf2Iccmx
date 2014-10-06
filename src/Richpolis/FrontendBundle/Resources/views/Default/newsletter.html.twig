@@ -1,10 +1,10 @@
 {% extends 'FrontendBundle::layout.html.twig' %}
 
 {% block contenido %}
-<div class="row contacto">
+<div class="row newsletter">
     <div class="col-xs-8">
         <div class="row">
-        {% include 'FrontendBundle:Default:formContacto.html.twig' with {'form': form } %}
+        {% include 'FrontendBundle:Default:formNewsletter.html.twig' with {'form': form } %}
         </div>
         <div class="row padding">
             {{pagina.contenido | raw }}
@@ -20,28 +20,32 @@
 {{ parent() }}
 <script src="{{asset('js/main.js')}}"></script>
 <script>
-    function iniciarlizarFormContacto(){
+    function iniciarlizarFormNewsletter(){
         $("input.form-submit").click( function() {
             $('img.ajax-loader').css({visibility: 'visible'});
             $("img.ajax-loader").fadeIn("fast",function(){
-                $.post("{{path('frontend_contacto')}}",$("form.form-contacto").serialize(),
-                function(data){
+                $.post("{{path('frontend_newsletter')}}",$("form.form-newsletter").serialize())
+                .done(function(data){
                     //alert(data);
-                    actualizaFormularioContacto(data);
+                    actualizaFormularioNewsletter(data);
                     setTimeout(function(){
-                        $("#formulario_contacto").find(".form-response-output").fadeOut("fast");
+                        $("#formulario_newsletter").find(".form-response-output").fadeOut("fast");
                     },2000);
                     
-                });    
+                })
+                .fail(function(data) {
+                    alert( "error" );
+                    console.log(data);
+                 });    
             });
         });
     }
 
-    function actualizaFormularioContacto(data){
-      $("#formulario_contacto").parent().html(data).fadeIn("fast");
-      iniciarlizarFormContacto();
+    function actualizaFormularioNewsletter(data){
+      $("#formulario_newsletter").parent().html(data).fadeIn("fast");
+      iniciarlizarFormNewsletter();
     }
-$(document).on('ready',iniciarlizarFormContacto); 
+$(document).on('ready',iniciarlizarFormNewsletter); 
 
 
 </script>
