@@ -551,17 +551,7 @@ class DefaultController extends Controller {
         }
     }
     
-    /**
-     * @Route("/pauta", name="frontend_pauta")
-     * @Template()
-     * @Method({"GET"})
-     */
-    public function pautaAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        
-        return array();
-        
-    }
+    
     
     /**
      * @Route("/newsletter", name="frontend_newsletter")
@@ -570,6 +560,8 @@ class DefaultController extends Controller {
      */
     public function newsletterAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
+        
+        
         
         return array();
     }
@@ -676,17 +668,6 @@ class DefaultController extends Controller {
         return array();
     }
     
-    /**
-     * @Route("/intranet", name="frontend_intranet")
-     * @Template()
-     * @Method({"GET"})
-     */
-    public function intranetAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        
-        return array();
-    }
-    
     
     /**
      * @Route("/buscador", name="frontend_buscador")
@@ -696,23 +677,15 @@ class DefaultController extends Controller {
     public function buscadorAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $buscar = $request->get("textoBuscar","");
-		$query = $em->getRepository('PublicacionesBundle:Publicacion')
-                ->queryBuscarPublicacion($buscar);
-        if(strlen($buscar)>0){
-          $options = array('filterParam'=>'buscar','filterValue'=>$buscar);
-        }else{
-          $options = array();
-        }
-		$paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query, 
-            $this->get('request')->query->get('page', 1),
-            8,
-            $options
-        );
+	$noticias = $em->getRepository('PublicacionesBundle:Publicacion')
+                       ->buscarPublicacionPorTipoCategoria($buscar,CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS);
+        
+        $eventos = $em->getRepository('PublicacionesBundle:Publicacion')
+                       ->buscarPublicacionPorTipoCategoria($buscar,CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS);
 		
         return array(
-            'pagination' => $pagination,
+            'noticias' => $noticias,
+            'eventos'=>$eventos,
         );
         
     }

@@ -1,0 +1,67 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
+{% endblock %} 
+
+{% block contenido %}
+{% if not is_granted('ROLE_USER') %}
+<div class="row padding libreria">
+    {{pagina.contenido | raw }}
+    <div class="accesos-vip">
+        <a href="{{path('vip_login')}}">SOCIOS</a>
+        /
+        <a href="{#pagina.galerias[0].webPath#}" target="_blank">NO SOCIOS</a>
+    </div>
+</div>    
+{% else %}    
+<div class="row libreria">
+    <div class="col-xs-8">
+        <div class="row padding">
+            <h1>Pauta</h1> 
+        </div>
+        <div class="row">
+            <div class="categoria-libreria col-xs-6">
+              <h2 class="categoriaSeleccionada">Ediciones</h3>
+            </div>
+            <div class="selector-libreria col-xs-6">
+            </div> 
+        </div>
+        <div id="categoria-{{libreria.id}}" class="categoria-publicaciones-libreria row">
+          <ul class="lista-libreria row">
+            {% for libro in libreria.publicaciones %}
+              <li class="item-libreria  col-xs-12">
+                  <figure>
+                    <a href="{{libro.webPath}}" class="fancybox">
+                      <img src="{{libro.thumbnailWebPath}}" alt="">
+                    </a>
+                  </figure>
+                  <div class="contenido-item-libreria">
+                    <h3>{{libro.titulo}}</h3>
+                    <div class="detalles">
+                      {{ libro.descripcionCorta | raw }}
+                    </div>
+                    <div class="descripcion">
+                      {{ libro.descripcion | raw }}
+                    </div>
+                    <a class="adquirirLibro" target="_blank" href="{{libro.galerias[0].webPath}}">Descargar</a>
+                  </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+    </div>
+    <div class="col-xs-4 menu_fondo">
+        {% include 'FrontendBundle:Default:aside.html.twig' %}        
+    </div>      
+</div>
+{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    
+</script>
+{% endblock %}

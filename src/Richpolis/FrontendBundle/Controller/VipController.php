@@ -8,23 +8,66 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Richpolis\FrontendBundle\Entity\Contacto;
-use Richpolis\FrontendBundle\Form\ContactoType;
-use Richpolis\FrontendBundle\Form\SolicitarPedidoType;
-use Richpolis\PublicacionesBundle\Entity\Publicacion;
-use Richpolis\PublicacionesBundle\Entity\CategoriaPublicacion;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class VipController extends Controller {
    
     /**
-     * @Route("/vip/pauta", name="frontend_pauta")
+     * @Route("/vip/login", name="vip_login")
+     * @Template()
+     * @Method({"GET"})
+     */
+    public function loginAction()
+    {
+        $peticion = $this->getRequest();
+        $sesion = $peticion->getSession();
+        
+ 
+        $error = $peticion->attributes->get(
+            SecurityContext::AUTHENTICATION_ERROR,
+            $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
+        );
+ 
+        return $this->render('FrontendBundle:Vip:login.html.twig', array(
+            'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
+            'error'         => $error
+        ));
+    }
+    
+    /**
+     * @Route("/vip/login_check", name="vip_login_check")
+     */
+    public function securityCheckAction()
+    {
+        // The security layer will intercept this request
+    }
+
+    /**
+     * @Route("/vip/logout", name="vip_logout")
+     */
+    public function logoutAction()
+    {
+        // The security layer will intercept this request
+    }
+    
+    
+    /**
+     * @Route("/vip/pauta", name="vip_pauta")
      * @Template()
      * @Method({"GET"})
      */
     public function pautaAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         
-        return array();
+       $libreria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+                         ->findOneBy(array('slug'=>'pauta'));
+        
+        $pagina = $em->getRepository('PaginasBundle:Pagina')
+                     ->findOneBy(array('pagina'=>'pauta'));
+        return array(
+            'libreria'=>$libreria,
+            'pagina'=>$pagina,
+        );
         
     }
     

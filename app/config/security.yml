@@ -24,8 +24,10 @@ security:
             provider:       usuarios
             anonymous:      ~
             form_login:
-                login_path: /vip/login
-                check_path: /vip/login_check
+                login_path: vip_login
+                check_path: vip_login_check
+                default_target_path: vip_login
+                always_use_default_target_path: true
             logout:
                 path:       vip_logout
         
@@ -49,6 +51,7 @@ security:
 
     access_control:
         - { path: ^/backend/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/vip/pauta, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/vip/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/backend/users$, roles: ROLE_ADMIN }
         - { path: ^/backend, roles: ROLE_USER }

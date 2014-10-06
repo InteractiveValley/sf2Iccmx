@@ -1,0 +1,68 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block contenido %}
+{% if not is_granted('ROLE_USER') %}    
+    <div class="row">
+        <div class="col-xs-8">
+            {% if error %}
+                <div>{{ error.message }}</div>
+            {% endif %}
+
+            <form action="{{ path('vip_login_check') }}"  method="post" class="bootstrap-frm" novalidate="novalidate" role="form">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" name="_username"
+                           value="{{ last_username }}" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="_password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="login" value="Acceder" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-4 menu_fondo">
+            {% include 'FrontendBundle:Default:aside.html.twig' %}        
+        </div>        
+    </div>    
+{% else %}
+    <div class="row padding">
+        <div class="col-xs-8">
+            
+        </div>
+    </div>    
+{% endif %}    
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{asset('js/main.js')}}"></script>
+<script>
+    function iniciarlizarFormContacto(){
+        $("input.form-submit").click( function() {
+            $('img.ajax-loader').css({visibility: 'visible'});
+            $("img.ajax-loader").fadeIn("fast",function(){
+                $.post("{{path('frontend_contacto')}}",$("form.form-contacto").serialize(),
+                function(data){
+                    //alert(data);
+                    actualizaFormularioContacto(data);
+                    setTimeout(function(){
+                        $("#formulario_contacto").find(".form-response-output").fadeOut("fast");
+                    },2000);
+                    
+                });    
+            });
+        });
+    }
+
+    function actualizaFormularioContacto(data){
+      $("#formulario_contacto").parent().html(data).fadeIn("fast");
+      iniciarlizarFormContacto();
+    }
+$(document).on('ready',iniciarlizarFormContacto); 
+
+
+</script>
+{% endblock %}

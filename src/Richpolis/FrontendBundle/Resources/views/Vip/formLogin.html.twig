@@ -1,0 +1,38 @@
+<div id="formulario_contacto">
+    <form class="form-horizontal" action='{{ path('vip_login_check') }}'  method="post">
+        <!-- Email -->
+        <div class="form-group">
+            <label class="control-label col-lg-3" for="username">Usuario</label>
+            <div class="col-lg-9">
+                <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username">
+            </div>
+        </div>
+        <!-- Password -->
+        <div class="form-group">
+            <label class="control-label col-lg-3" for="password">Contraseña</label>
+            <div class="col-lg-9">
+                <input type="password" id="password" name="_password" placeholder="Password">
+            </div>
+        </div>
+        <!-- Remember me checkbox and sign in button -->
+        <!--div class="form-group">
+            <div class="col-lg-9 col-lg-offset-3">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div-->
+        <div class="col-lg-9 col-lg-offset-3">
+            <button type="submit" class="btn btn-danger">Entrar</button>
+            <button type="reset" class="btn btn-default">Limpiar</button>
+        </div>
+        <br />
+    </form>
+</div>
+<script type='text/javascript'>
+    $(document).on('ready', function () {
+        iniciarlizarFormContacto();
+    });
+</script>

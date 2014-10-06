@@ -280,6 +280,25 @@ class PublicacionRepository extends EntityRepository
         
         return $query->getQuery();
     }
+
+    public function buscarPublicacionPorTipoCategoria($buscar, $tipo = CategoriaPublicacion::TIPO_CATEGORIA_PUBLICACION){
+        $query=$this->getEntityManager()->createQueryBuilder();
+        /*$query->select('p,c,u,g')*/
+        $query->select('p,c,u')
+                ->from('Richpolis\PublicacionesBundle\Entity\Publicacion', 'p')
+                /*->leftJoin('p.galerias', 'g')*/
+                ->leftJoin('p.usuario', 'u')
+                ->leftJoin('p.categoria', 'c')
+                ->where('c.tipoCategoria = :tipo')
+                ->setParameter('tipo', $tipo)
+                ->orderBy('p.createdAt', 'DESC')/*
+                ->addOrderBy('g.position', 'ASC')*/;
+        
+        $query->andWhere('p.titulo LIKE :buscar')
+              ->setParameter('buscar', "%".$buscar."%");
+        
+        return $query->getQuery()->getResult();
+    }
     
     /*
      * Este query es la nueva version de getQueryPublicacionesPorTipoCategoria Activas
