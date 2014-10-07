@@ -107,12 +107,14 @@ class DefaultController extends Controller {
         $aside = $em->getRepository('PublicacionesBundle:Aside')
                     ->findOneBy(array('clave'=>'inicio'));
         
-        
+        $pagina = $em->getRepository('PaginasBundle:Pagina')
+                     ->findOneBy(array('pagina'=>'inicio'));        
 
         return array(
             'eventos' => $eventos,
             'noticias'=> $noticias,
             'aside'=>$aside,
+            'pagina'=>$pagina,
         );
     }
 
