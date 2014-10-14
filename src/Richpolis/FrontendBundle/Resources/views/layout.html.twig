@@ -4,7 +4,7 @@
 
 {% set urlAbsolutaFoto = 'http://'
                              ~ app.request.server.get('SERVER_NAME')
-                             ~ asset('images/logo.png') %}
+                             ~ 'images/LOGO100X100.png' %}
 {% block stylesheets %}
 
     {% block redes_sociales %}
@@ -18,7 +18,7 @@
         <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@iccmx">
         <meta name="twitter:title" content="ICC Mexico">
-        <meta name="twitter:description" content="Descripcion de la publicacion">
+        <!--meta name="twitter:description" content=""-->
         <meta name="twitter:creator" content="@richpolis">
         <meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
         <meta name="twitter:domain" content="{{url('homepage')}}">
