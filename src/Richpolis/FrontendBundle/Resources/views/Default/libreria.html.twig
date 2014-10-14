@@ -23,6 +23,11 @@
             </select>
         </div> 
     </div>
+    {% if libreria.children | length > 0 %}
+        {% set tabActual = libreria[0].id %}
+    {% else %}
+        {% set tabActual = 0 %}
+    {% endif %}   
     {% for categoria in libreria.children %}
     <div id="categoria-{{categoria.id}}" {% if loop.index > 1 %}style="display: none;"{% endif %} class="categoria-publicaciones-libreria row">
       <ul class="lista-libreria row">
@@ -71,6 +76,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
+        var tabActual = {{tabActual}};
         $(document).on("ready",function(){
             $(".adquirirLibro").on('click',function(e){
                 e.preventDefault();
@@ -80,20 +86,18 @@
             });
             
             $("#selectorLibreria").on('change',function(){
-               debugger;
                var num = $(this).val();
                var categoria = $("#option-"+num).text();
                var $categoria = $("#categoria-"+num);
-               $(".categoria-publicaciones-libreria").hide("fast",function(){
-                   $categoria.show("fast");
+               $categoria.show("fast");
+               $("#categoria-"+tabActual).hide("fast",function(){
                    $(".categoriaSeleccionada").text(categoria);
+                   tabActual = num;
                });
                
             });
 
         });
-        
-        
         
         function mostrarFormulario(titulo){
             $("#modalFormulario").modal("show");

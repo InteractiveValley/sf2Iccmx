@@ -800,6 +800,7 @@ class DefaultController extends Controller {
                      )),
                     'respuesta' => 'creado',
                 )));
+                return $response;
             }
         }
         
