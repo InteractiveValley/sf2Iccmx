@@ -13,7 +13,7 @@ use Richpolis\FrontendBundle\Form\ContactoType;
 use Richpolis\FrontendBundle\Form\SolicitarPedidoType;
 use Richpolis\PublicacionesBundle\Entity\Publicacion;
 use Richpolis\PublicacionesBundle\Entity\CategoriaPublicacion;
-use Richpolis\BackendBundle\Entity\Usuario;
+use Richpolis\BackendBundle\Entity\Newsletter;
 use Richpolis\BackendBundle\Form\NewsletterType;
 
 class DefaultController extends Controller {
@@ -558,29 +558,25 @@ class DefaultController extends Controller {
     
     
     /**
-     * @Route("/newsletter", name="frontend_newsletter")
+     * @Route("/registro/newsletter", name="frontend_newsletter")
      * @Template()
      * @Method({"GET","POST"})
      */
     public function newsletterAction(Request $request) {
-        $usuario = new Usuario();
-        $usuario->setNewsletter(true);
-        $usuario->setUsername("SinUsuario");
-        $usuario->setPassword("SinPassword");
-        $form = $this->createForm(new NewsletterType(), $usuario);
+        $newsletter = new Newsletter();
+        $form = $this->createForm(new NewsletterType(), $newsletter);
         $em = $this->getDoctrine()->getManager();
 
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $user = $em->getRepository('BackendBundle:Usuario')
-                           ->findOneBy(array('email'=>$usuario->getEmail()));
-                if($user==null){
-                    $em->persist($usuario);
+                $registro = $em->getRepository('BackendBundle:Newsletter')
+                           ->findOneBy(array('email'=>$newsletter->getEmail()));
+                if($registro==null){
+                    $em->persist($newsletter);
                     $em->flush();
                 }else{
-                    $user->setNewsletter(true);
-                    $usuario=null;
+                    $newsletter=null;
                     $em->flush();
                 }
                 
@@ -588,11 +584,8 @@ class DefaultController extends Controller {
                 $error = false;
                 $mensaje = "Se ha registrado el email";
                 
-                $usuario = new Usuario();
-                $usuario->setNewsletter(true);
-                $usuario->setUsername("SinUsuario");
-                $usuario->setPassword("SinPassword");
-                $form = $this->createForm(new NewsletterType(), $usuario);
+                $newsletter = new Newsletter();
+                $form = $this->createForm(new NewsletterType(), $newsletter);
             } else {
                 $ok = false;
                 $error = true;

@@ -1,0 +1,30 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for registro in registros %}
+            <tr>
+                <td>
+                    {{ registro.id }}
+                </td>
+                <td>
+                    {{ registro.nombre }}
+                </td>
+                <td>
+                    {{ registro.email }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody> 
+</table>

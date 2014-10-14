@@ -16,8 +16,6 @@ class NewsletterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username','hidden')
-            ->add('password', 'hidden')
             ->add('nombre','text',array('label'=>'Nombre','attr'=>array(
                 'class'=>'validate[required] form-control placeholder',
                 'data-bind'=>'value: nombre'
@@ -26,12 +24,6 @@ class NewsletterType extends AbstractType
                 'class'=>'validate[required] form-control placeholder',
                 'data-bind'=>'value: email'
              )))   
-            ->add('twitter','hidden')
-            ->add('facebook','hidden')  
-            ->add('grupo','hidden')
-            ->add('newsletter','hidden')
-            ->add('salt','hidden')
-            ->add('imagen','hidden')   
         ;
     }
     
@@ -45,7 +37,7 @@ class NewsletterType extends AbstractType
             'csrf_protection' => true
         ));*/
         $resolver->setDefaults(array(
-            'data_class' => 'Richpolis\BackendBundle\Entity\Usuario'
+            'data_class' => 'Richpolis\BackendBundle\Entity\Newsletter'
         ));
     }
 

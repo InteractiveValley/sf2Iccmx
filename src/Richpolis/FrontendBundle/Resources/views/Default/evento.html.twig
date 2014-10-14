@@ -5,6 +5,37 @@
     <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
 {% endblock %} 
 
+{% set urlAbsolutaFoto = 'http://'
+                             ~ app.request.server.get('SERVER_NAME')
+                             ~ 'images/LOGO100X100.png' %}
+
+{% block redes_sociales %}
+    <meta property="og:url" content="{{url(rutaBase ~ '_publicacion',{'categoriaSlug': publicacion.categoria.slug,'publicacionSlug': publicacion.slug})}}" />
+    <meta property="og:title" content="{{ publicacion.titulo }}" />
+    <meta property="og:description" content="{{ publicacion.descripcion | striptags | truncate(250,true,'...') | raw  }}" />
+    <meta property="og:image" content="{{ urlAbsolutaFoto }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="iccmex.mx" />
+    <!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@iccmex">
+    <meta name="twitter:title" content="{{ publicacion.titulo }}">
+    <meta name="twitter:description" content="{{publicacion.descripcion | striptags | truncate(250,true,'...')}}">
+    <meta name="twitter:creator" content="@richpolis">
+    <meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
+    <meta name="twitter:domain" content="{{url('homepage')}}">
+    <meta name="twitter:app:name:iphone" content="">
+    <meta name="twitter:app:name:ipad" content="">
+    <meta name="twitter:app:name:googleplay" content="">
+    <meta name="twitter:app:url:iphone" content="">
+    <meta name="twitter:app:url:ipad" content="">
+    <meta name="twitter:app:url:googleplay" content="">
+    <meta name="twitter:app:id:iphone" content="">
+    <meta name="twitter:app:id:ipad" content="">
+    <meta name="twitter:app:id:googleplay" content="">
+{% endblock %}
+
 {% set contenido = 12 %}
 {% set aside = 0 %}
 

@@ -27,6 +27,7 @@
   {% set publicidad = "" %}
   {% set galerias = "" %}
   {% set configuraciones = "" %}
+  {% set newsletters = "" %}
 
   {% if route == "categorias_publicaciones" %}
     {% set categorias = "class=open" %}
@@ -41,7 +42,9 @@
   {% elseif route == "galerias" %}
     {% set galerias = "class=open" %}     
   {% elseif route == "configuraciones" %}
-    {% set configuraciones = "class=open" %}       
+    {% set configuraciones = "class=open" %}
+  {% elseif route == "newsletters" %}
+    {% set newsletters = "class=open" %}       
   {% endif %}
       
 <header>
@@ -152,6 +155,11 @@
             <li>
                 <a {{usuarios}} href="{{path('users')}}">
                     <i class="fa fa-user"></i> <span>Usuarios</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{path('newsletters')}}">
+                    <i class="fa fa-sitemap"></i> <span>Newsletter</span>
                 </a>
             </li>
             <li>

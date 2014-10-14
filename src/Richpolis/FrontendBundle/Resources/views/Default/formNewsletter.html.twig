@@ -12,11 +12,11 @@
                
 <div id="formulario_newsletter">
      <form onsubmit="return false;" action="{{path('frontend_newsletter')}}" method="post" class="form-newsletter {% if error == true %}invalid{% endif %} {% if ok == true %}sent{% endif %} bootstrap-frm" novalidate="novalidate" role="form">
-          <div class="form-group">
+         <div class="form-group">
              {{ form_row(form.nombre, {'attr': {'class': 'form-control' }}) }}
          </div>
          <div class="form-group">
-                 {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+             {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
          </div>
          <div class="form-group">
              <input type="submit" value="{{"Registrase"|trans}}" class="form-newsletter-control form-submit btn btn-primary">

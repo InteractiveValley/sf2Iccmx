@@ -28,7 +28,7 @@ assetic:
 swiftmailer:
     transport: gmail
     username:  richpolis@gmail.com
-    password:  xxxxxxxxxxx
+    password:  sf2Galilea
 
 stfalcon_tinymce:
         include_jquery: false
@@ -65,7 +65,3 @@ stfalcon_tinymce:
                  menubar: false
                  toolbar1: "bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview"
 
-swiftmailer:
-    transport: gmail
-    username:  richpolis@gmail.com
-    password:  xxxxxxxx
