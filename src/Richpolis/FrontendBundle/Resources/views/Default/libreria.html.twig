@@ -23,11 +23,6 @@
             </select>
         </div> 
     </div>
-    {% if libreria.children | length > 0 %}
-        {% set tabActual = libreria[0].id %}
-    {% else %}
-        {% set tabActual = 0 %}
-    {% endif %}   
     {% for categoria in libreria.children %}
     <div id="categoria-{{categoria.id}}" {% if loop.index > 1 %}style="display: none;"{% endif %} class="categoria-publicaciones-libreria row">
       <ul class="lista-libreria row">
@@ -75,9 +70,12 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+     <script src="{{asset('js/fancybox/jquery.fancybox.js')}}"></script>
     <script type="text/javascript">
-        var tabActual = {{tabActual}};
+        var tabActual = {{ libreria.children[0].id }};
         $(document).on("ready",function(){
+             $("a.fancybox").fancybox();
+
             $(".adquirirLibro").on('click',function(e){
                 e.preventDefault();
                 mostrarFormulario("COMPRAR LIBRERIA ICC MÉXICO");
@@ -103,7 +101,7 @@
             $("#modalFormulario").modal("show");
             $("#labelFormulario").html(titulo);
             $loader = $("<img>");
-            $loader.attr({'src': '{{asset('images/loader.GIF')}}','id': 'loader'});
+            $loader.attr({'src': '{{asset('images/loader.gif')}}','id': 'loader'});
             $loader.css({'maxWidth': '80px'});
             $("#modalBodyFormulario").html($loader);
         }
@@ -111,7 +109,7 @@
         function guardar(){
             var $form = $("#modalBodyFormulario form");
             var data = $form.serialize();
-            $loader.attr({'src': '{{asset('images/loader.GIF')}}','id': 'loader'});
+            $loader.attr({'src': '{{asset('images/loader.gif')}}','id': 'loader'});
             $loader.css({'maxWidth': '80px'});
             $("#modalBodyFormulario").append($loader);
             $.ajax({
