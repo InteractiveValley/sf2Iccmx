@@ -27,9 +27,10 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "stfalcon/tinymce-bundle": "dev-master",
         "friendsofsymfony/rest-bundle": "~1.0",
-	"helios-ag/fm-elfinder-bundle": "dev-master",
+		"helios-ag/fm-elfinder-bundle": "dev-master",
         "liip/imagine-bundle": "dev-master",
-        "egeloen/ckeditor-bundle": "~2.0"
+        "egeloen/ckeditor-bundle": "~2.0",
+		"liuggio/excelbundle": "~2.0"
     },
     "scripts": {
         "post-install-cmd": [

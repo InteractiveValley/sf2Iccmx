@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Richpolis\BackendBundle\Entity\Newsletter;
 use Richpolis\BackendBundle\Form\NewsletterType;
 
+use Richpolis\BackendBundle\Utils\Richsys as RpsStms;
+
 /**
  * Newsletter controller.
  *
@@ -59,6 +61,7 @@ class NewsletterController extends Controller
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+			'errores' => RpsStms::getErrorMessages($form),
         );
     }
 
@@ -96,6 +99,7 @@ class NewsletterController extends Controller
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+			'errores' => RpsStms::getErrorMessages($form),
         );
     }
 
@@ -148,6 +152,7 @@ class NewsletterController extends Controller
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+			'errores' => RpsStms::getErrorMessages($editForm),
         );
     }
 
@@ -200,6 +205,7 @@ class NewsletterController extends Controller
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+			'errores' => RpsStms::getErrorMessages($editForm),
         );
     }
     /**
@@ -240,7 +246,7 @@ class NewsletterController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('newsletters_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            //->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
@@ -248,7 +254,7 @@ class NewsletterController extends Controller
     /**
      * Exporta la lista completa de newsletter.
      *
-     * @Route("/exportar", name="newsletter_export")
+     * @Route("/exportar", name="newsletters_export")
      * @Method("GET")
      */
     public function exportarAction() {

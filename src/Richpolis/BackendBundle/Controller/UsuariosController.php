@@ -12,6 +12,8 @@ use Richpolis\BackendBundle\Entity\Usuario;
 use Richpolis\BackendBundle\Form\UsuarioType;
 
 use Richpolis\BackendBundle\Utils\Richsys as RpsStms;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use PHPExcel_Cell;
 
 /**
  * Usuario controller.
@@ -109,7 +111,7 @@ class UsuariosController extends Controller
     /**
      * Finds and displays a Usuario entity.
      *
-     * @Route("/{id}", name="users_show")
+     * @Route("/{id}", name="users_show", requirements={"id" = "\d+"})
      * @Method("GET")
      * @Template("BackendBundle:Usuario:show.html.twig")
      */
@@ -298,4 +300,87 @@ class UsuariosController extends Controller
         $response->headers->set('Content-Disposition', 'attachment; filename="export-newsletter.xls"');
         return $response;
     }
+	
+	/**
+     * Importa lista de usuarios nuevos.
+     *
+     * @Route("/importar", name="users_import")
+     * @Method({"GET","POST"})
+     */
+	public function importarAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        if ($request->getMethod() == 'POST') {
+            $archivo = $request->files->get('archivo');
+            if ($archivo instanceof UploadedFile) {
+                $uploads = $this->container->getParameter('richpolis.uploads');
+                if(!file_exists($uploads)){
+                    mkdir($uploads, 0777);
+                }
+                $fileName = $uploads . '/' . $archivo->getClientOriginalName();
+                if(file_exists($fileName)){
+                    unlink($fileName);
+                }
+                $archivo->move(
+                    $uploads, $archivo->getClientOriginalName()
+                );
+                $this->importar($fileName);
+            } else {
+                print_r("Error al subir archivo");
+                die();
+            }
+            return $this->redirect($this->generateUrl('users'));  
+        }
+        return $this->render('BackendBundle:Usuario:importar.html.twig');
+    }
+
+    private function importar($filename) {
+        //cargamos el archivo a procesar.
+        $objPHPExcel = $this->get('phpexcel')->createPHPExcelObject($filename);
+        //se obtienen las hojas, el nombre de las hojas y se pone activa la primera hoja
+        $total_sheets = $objPHPExcel->getSheetCount();
+        $allSheetName = $objPHPExcel->getSheetNames();
+        $objWorksheet = $objPHPExcel->setActiveSheetIndex(0);
+        //Se obtiene el número máximo de filas
+        $highestRow = $objWorksheet->getHighestRow();
+        //Se obtiene el número máximo de columnas
+        $highestColumn = $objWorksheet->getHighestColumn();
+        $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+        //$headingsArray contiene las cabeceras de la hoja excel. Llos titulos de columnas
+        $headingsArray = $objWorksheet->rangeToArray('A1:' . $highestColumn . '1', null, true, true, true);
+        $headingsArray = $headingsArray[1];
+
+        //Se recorre toda la hoja excel desde la fila 2 y se almacenan los datos
+        $r = -1;
+        $namedDataArray = array();
+        for ($row = 2; $row <= $highestRow; ++$row) {
+            $dataRow = $objWorksheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, null, true, true, true);
+            if ((isset($dataRow[$row]['A'])) && ($dataRow[$row]['A'] > '')) {
+                ++$r;
+                foreach ($headingsArray as $columnKey => $columnHeading) {
+                    $namedDataArray[$r][$columnHeading] = $dataRow[$row][$columnKey];
+                } //endforeach
+            } //endif
+        }
+        $this->loadToDB($namedDataArray);
+    }
+    
+    private function loadToDB($registros = null) {
+        $em = $this->getDoctrine()->getManager();
+        if ($registros && count($registros) > 1) {
+            foreach ($registros as $registro) {
+                $usuario = new Usuario();
+				$usuario->setUsername($registro['username']);
+ 				$usuario->setEmail($registro['password'].'@'.$registro['username'].'.iccmx.mx');
+				$usuario->setPassword($registro['password']);
+				$usuario->setNombre($registro['username']);
+				$usuario->setGrupo(Usuario::GRUPO_USUARIOS);
+				$this->setSecurePassword($usuario);
+				$em->persist($usuario);
+            }
+			$em->flush();
+        }
+    }
+  
+	
+	
 }

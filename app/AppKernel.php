@@ -34,7 +34,8 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle()
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+			new Liuggio\ExcelBundle\LiuggioExcelBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
