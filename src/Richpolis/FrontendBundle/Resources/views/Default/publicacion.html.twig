@@ -7,7 +7,7 @@
 
 {% set urlAbsolutaFoto = 'http://'
                              ~ app.request.server.get('SERVER_NAME')
-                             ~ 'images/LOGO100X100.png' %}
+                             ~ '/images/logo200x200.png' %}
 
 {% block redes_sociales %}
     <meta property="og:url" content="{{url(rutaBase ~ '_publicacion',{'categoriaSlug': publicacion.categoria.slug,'publicacionSlug': publicacion.slug})}}" />

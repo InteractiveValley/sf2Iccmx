@@ -173,7 +173,7 @@ class DefaultController extends Controller {
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            while($categoria->getNivel()>1){
+            while(null != $categoria->getParent()){
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -185,7 +185,8 @@ class DefaultController extends Controller {
                 ->findOneBy(array('slug' => $categoriaSlug));
             $publicaciones = $categoria->getPublicaciones();
             $publicacion = $publicaciones[0];
-            while($categoria->getNivel()>1){
+            $categoria = $publicacion->getCategoria();
+            while(null != $categoria->getParent()){
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -213,7 +214,7 @@ class DefaultController extends Controller {
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            while($categoria->getNivel()>1){
+            while(null != $categoria->getParent()){
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -225,7 +226,8 @@ class DefaultController extends Controller {
                 ->findOneBy(array('slug' => $categoriaSlug));
             $publicaciones = $categoria->getPublicaciones();
             $publicacion = $publicaciones[0];
-            while($categoria->getNivel()>1){
+            $categoria = $publicacion->getCategoria();
+            while(null != $categoria->getParent()){
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -254,7 +256,7 @@ class DefaultController extends Controller {
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
                               ->findOneBy(array('slug' => $publicacionSlug));
             $categoria = $publicacion->getCategoria();
-            while($categoria->getNivel()>1){
+            while(null != $categoria->getParent()){
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
@@ -266,7 +268,7 @@ class DefaultController extends Controller {
                 ->findOneBy(array('slug' => $categoriaSlug));
             $publicaciones = $categoria->getPublicaciones();
             $publicacion = $publicaciones[0];
-            while($categoria->getNivel()>1){
+            while(null != $categoria->getParent()){
                 $categoria = $categoria->getParent();
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
