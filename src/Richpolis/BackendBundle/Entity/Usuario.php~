@@ -687,4 +687,27 @@ class Usuario implements UserInterface, \Serializable
     {
         return $this->imagen;
     }
+
+    /**
+     * Set newsletter
+     *
+     * @param boolean $newsletter
+     * @return Usuario
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return boolean 
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
 }

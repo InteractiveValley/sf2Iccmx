@@ -39,12 +39,14 @@ class CategoriasPublicaciones extends AbstractFixture implements OrderedFixtureI
 
         $categoria1 = new CategoriaPublicacion();
         $categoria1->setCategoria("Categoria 1");
+        $categoria1->setSlugAtValue();
         $categoria1->setPosition(1);
         
         $manager->persist($categoria1);
 
         $categoria2 = new CategoriaPublicacion();
         $categoria2->setCategoria("Categoria 2");
+        $categoria2->setSlugAtValue();
         $categoria2->setPosition(2);
         
         $manager->persist($categoria2);        

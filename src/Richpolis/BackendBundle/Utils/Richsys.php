@@ -20,8 +20,8 @@ class Richsys
         self::TIPO_ARCHIVO_LINK=>'Link',
         self::TIPO_ARCHIVO_MUSICA=>'Musica',
         self::TIPO_ARCHIVO_FLASH=>'Flash',
-        self::TIPO_ARCHIVO_FLASH=>'PDF',
-        self::TIPO_ARCHIVO_FLASH=>'Documento',
+        self::TIPO_ARCHIVO_PDF=>'PDF',
+        self::TIPO_ARCHIVO_DOC=>'Documento',
     );
     
     static public function normaliza($string)
@@ -195,8 +195,9 @@ EOF
     );
                 break;
             case self::TIPO_ARCHIVO_FLASH:
-                $respuesta=  Richsys::getArchivoViewFlash($opciones);
+                $respuesta =  Richsys::getArchivoViewFlash($opciones);
                 break;
+            
         }
         return $respuesta;
      }

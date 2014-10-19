@@ -1,0 +1,23 @@
+<div class="left-nav">
+    <div class="nav-head">
+        <a href="{{path(rutaBase ~ '_publicacion',{'categoriaSlug': publicacion.categoria.slug, 'publicacionSlug': publicacion.slug })}}" style="color:#FFF">
+            {{ publicacion.titulo }}
+        </a>
+    </div>
+    <div class="nav-list">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active" role="tab" data-toggle="tab">
+                <a href="#acerca" class="adicional-publicacion">
+                    Acerca de la comisión
+                </a>
+            </li>
+            {% for adicional in adicionales %}
+                <li>
+                <a href="#{{adicional.slug}}" class="adicional-publicacion" role="tab" data-toggle="tab">
+                    {{ adicional.titulo }}
+                </a>
+                </li>
+            {% endfor %}    
+        </ul>
+    </div>
+</div>

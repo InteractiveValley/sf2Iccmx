@@ -28,6 +28,8 @@
   {% set galerias = "" %}
   {% set configuraciones = "" %}
   {% set newsletters = "" %}
+  {% set adicionales = "" %}
+  
 
   {% if route == "categorias_publicaciones" %}
     {% set categorias = "class=open" %}
@@ -45,6 +47,8 @@
     {% set configuraciones = "class=open" %}
   {% elseif route == "newsletters" %}
     {% set newsletters = "class=open" %}       
+  {% elseif route == "adicionales" %}
+    {% set adicionales = "class=open" %}
   {% endif %}
       
 <header>
@@ -138,6 +142,11 @@
                     <i class="fa fa-copy"></i> <span>Publicaciones</span> <span class="pull-right"><i class="fa fa-chevron-left"></i></span>
                 </a>
                 {% render(controller('PublicacionesBundle:CategoriaPublicacion:ulPublicaciones')) %}
+            </li>
+            <li>
+                <a href="{{path('adicionales')}}">
+                    <i class="fa fa-sitemap"></i> <span>Contenidos adicionales</span>
+                </a>
             </li>
             <li>
                 <a href="{{path('comentarios')}}">
