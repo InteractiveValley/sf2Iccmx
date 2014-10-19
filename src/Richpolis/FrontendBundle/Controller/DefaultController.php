@@ -301,7 +301,10 @@ class DefaultController extends Controller {
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findCategoriaForSlug($categoria->getSlug());
             
-            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
+            $adicionales = $em->getRepository('PublicacionesBundle:Adicional')
+                              ->findBy(array('publicacion'=>$publicacion));
+            
+            return $this->render('FrontendBundle:Default:comision.html.twig', compact('categoria','publicacion','rutaBase','adicionales'));
         }elseif(strlen($categoriaSlug)>0){
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => $categoriaSlug));
@@ -312,7 +315,9 @@ class DefaultController extends Controller {
             }
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findCategoriaForSlug($categoria->getSlug());
-            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
+            $adicionales = $em->getRepository('PublicacionesBundle:Adicional')
+                              ->findBy(array('publicacion'=>$publicacion));
+            return $this->render('FrontendBundle:Default:comision.html.twig', compact('categoria','publicacion','rutaBase','adicionales'));
         }else{
             $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => 'comisiones-de-trabajo'));

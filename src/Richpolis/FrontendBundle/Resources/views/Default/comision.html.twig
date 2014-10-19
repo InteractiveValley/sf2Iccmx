@@ -1,0 +1,82 @@
+{% extends 'FrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/fancybox/jquery.fancybox.css')}}"/>
+{% endblock %} 
+
+{% set urlAbsolutaFoto = 'http://'
+                             ~ app.request.server.get('SERVER_NAME')
+                             ~ 'images/LOGO100X100.png' %}
+
+{% block redes_sociales %}
+    <meta property="og:url" content="{{url(rutaBase ~ '_publicacion',{'categoriaSlug': publicacion.categoria.slug,'publicacionSlug': publicacion.slug})}}" />
+    <meta property="og:title" content="{{ publicacion.titulo }}" />
+    <meta property="og:description" content="{{ publicacion.descripcion | striptags | truncate(250,true,'...') | raw  }}" />
+    <meta property="og:image" content="{{ urlAbsolutaFoto }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="iccmex.mx" />
+    <!--meta property="fb:admins" content="USER_ID1,USER_ID2"/-->
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@iccmex">
+    <meta name="twitter:title" content="{{ publicacion.titulo }}">
+    <meta name="twitter:description" content="{{publicacion.descripcion | striptags | truncate(250,true,'...')}}">
+    <meta name="twitter:creator" content="@richpolis">
+    <meta name="twitter:image:src" content="{{urlAbsolutaFoto}}">
+    <meta name="twitter:domain" content="{{url('homepage')}}">
+    <meta name="twitter:app:name:iphone" content="">
+    <meta name="twitter:app:name:ipad" content="">
+    <meta name="twitter:app:name:googleplay" content="">
+    <meta name="twitter:app:url:iphone" content="">
+    <meta name="twitter:app:url:ipad" content="">
+    <meta name="twitter:app:url:googleplay" content="">
+    <meta name="twitter:app:id:iphone" content="">
+    <meta name="twitter:app:id:ipad" content="">
+    <meta name="twitter:app:id:googleplay" content="">
+{% endblock %}
+
+{% set contenido = 12 %}
+{% set aside = 0 %}
+{% set hasMenu = 2 %}
+{% set contenido = contenido - hasMenu %}
+
+{% if publicacion.categoria.aside is not null %}
+    {% set aside = 4 %}
+    {% set contenido = contenido - aside %}
+{% endif %}
+
+{% block contenido %}
+    <div class="row publicacion">
+        {% if hasMenu > 0 %}
+        <div class="col-xs-{{hasMenu}}">
+            {% include 'FrontendBundle:Default:menuComision.html.twig' with {'rutaBase': rutaBase, 'publicacion': publicacion, 'adicionales': adicionales } %}    
+        </div>
+        {% endif %} 
+        <div class="col-xs-{{contenido}}">
+            <div class="contenido-publicacion">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div class="tab-pane fade in active" id="acerca">
+                      {{ publicacion.descripcion | raw }}
+                  </div>
+                  {% for adicional in adicionales %}
+                  <div class="tab-pane fade" id="{{adicional.slug}}">
+                      {{adicional.descripcion | raw }}
+                  </div>
+                  {% endfor %}  
+                </div>
+            </div>   
+        </div>
+        {% if aside > 0 %}
+        <div class="col-xs-{{aside}} menu_fondo">
+            {{ publicacion.categoria.aside.contenido | raw }}
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+{% endblock %}

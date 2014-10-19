@@ -497,11 +497,9 @@ class Galeria
      */
     public function getWebPath()
     {
-        if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_IMAGEN){
-            return null === $this->archivo ? null : $this->getUploadDir().'/'.$this->archivo;
-        }else if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_LINK){
+        if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_LINK){
             return $this->getArchivo();
-        }else if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_PDF){
+        }else{
             return null === $this->archivo ? null : $this->getUploadDir().'/'.$this->archivo;
         }
         
@@ -525,6 +523,10 @@ class Galeria
             return $this->getThumbnail();
         }else if($this->getTipoArchivo() == RpsStms::TIPO_ARCHIVO_PDF){
             return "/images/ico_pdf.jpg";
+        }else if($this->getTipoArchivo() == RpsStms::TIPO_ARCHIVO_FLASH){
+            return "/images/ico_flash.jpg";
+        }else if($this->getTipoArchivo() == RpsStms::TIPO_ARCHIVO_DOC){
+            return "/images/ico_doc.jpg";
         }
     }
     
@@ -542,8 +544,8 @@ class Galeria
                 }
             }
             return null === $this->thumbnail ? null : $this->getUploadDir().'/thumbnails/medium/'.$this->thumbnail;
-        }else if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_LINK){
-            return $this->getThumbnail();
+        }else{
+            $this->getWebPath();
         }
     }
     
@@ -561,8 +563,8 @@ class Galeria
                 }
             }
             return null === $this->thumbnail ? null : $this->getUploadDir().'/thumbnails/large/'.$this->thumbnail;
-        }else if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_LINK){
-            return $this->getThumbnail();
+        }else{
+            $this->getWebPath();
         }
     }
     
@@ -587,12 +589,13 @@ class Galeria
      */
     public function actualizaThumbnail()
     {
-      if($thumbnail=$this->getAbosluteThumbnailPath()){
-         if(file_exists($thumbnail)){
-            unlink($thumbnail);
-         }
-      }
-      $this->crearThumbnail();
+        if($thumbnail=$this->getAbosluteThumbnailPath()){
+            if(file_exists($thumbnail)){
+                unlink($thumbnail);
+            }
+        }
+        if($this->getTipoArchivo()==RpsStms::TIPO_ARCHIVO_IMAGEN)
+            $this->crearThumbnail();
     }
     
     /**
