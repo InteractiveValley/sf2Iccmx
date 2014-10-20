@@ -117,8 +117,26 @@ class DefaultController extends Controller {
             'pagina'=>$pagina,
         );
     }
-
     
+    /**
+     * @Route("/sesiones/eventos/comisiones/trabajo", name="sesiones_eventos_comisiones_trabajo")
+     */
+    public function sesionesEventosComisionesTrabajoAction(){
+        $em = $this->getDoctrine()->getManager();
+        $publicaciones = $em->getRepository('PublicacionesBundle:Publicacion')
+                            ->getEventosEnComisionesTrabajo();
+        return $this->render('FrontendBundle:Default:lista_eventos.html.twig', compact('publicaciones'));
+    }
+    
+    /**
+     * @Route("/articulos/comisiones/trabajo", name="articulos_comisiones_trabajo")
+     */
+    public function articulosComisionesTrabajoAction(){
+        $em = $this->getDoctrine()->getManager();
+        $publicaciones = $em->getRepository('PublicacionesBundle:Publicacion')
+                            ->getNoticiasEnComisionesTrabajo();
+        return $this->render('FrontendBundle:Default:lista_noticias.html.twig', compact('publicaciones'));
+    }
     
     /**
      * @Route("/aside/{clave}", name="frontend_aside")

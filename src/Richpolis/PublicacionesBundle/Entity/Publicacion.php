@@ -210,6 +210,15 @@ class Publicacion
      */
     private $inPatrocinio;
     
+    
+    /**
+     * @var boolean
+     * @todo Indica si un evento o noticia se va a comisiones de trabajo.
+     *
+     * @ORM\Column(name="in_comisiones_trabajo", type="boolean")
+     */
+    private $inComisionesTrabajo;
+    
     /**
      * @var string
      * @todo Direccion del evento
@@ -257,6 +266,7 @@ class Publicacion
         $this->isPrincipal = false;
         $this->inInicio = false;
         $this->inPatrocinio = false;
+        $this->inComisionesTrabajo = false;
         $this->hasMenu = true;
         $this->status = self::STATUS_INCOMPLETO;
         $this->contVisitas = 0;
@@ -1043,5 +1053,28 @@ class Publicacion
     public function getDescripcionCorta()
     {
         return $this->descripcionCorta;
+    }
+
+    /**
+     * Set inComisionesTrabajo
+     *
+     * @param boolean $inComisionesTrabajo
+     * @return Publicacion
+     */
+    public function setInComisionesTrabajo($inComisionesTrabajo)
+    {
+        $this->inComisionesTrabajo = $inComisionesTrabajo;
+
+        return $this;
+    }
+
+    /**
+     * Get inComisionesTrabajo
+     *
+     * @return boolean 
+     */
+    public function getInComisionesTrabajo()
+    {
+        return $this->inComisionesTrabajo;
     }
 }

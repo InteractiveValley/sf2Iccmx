@@ -483,4 +483,46 @@ class PublicacionRepository extends EntityRepository
     public function getEventosEnPatrocinio(){
         return $this->queryEventosEnPatrocinio()->getResult();
     }
+    
+    public function getEventosEnComisionesTrabajo(){
+        $query= $this->getEntityManager()->createQueryBuilder();
+        $query->select('p,c,u')   
+              ->from('Richpolis\PublicacionesBundle\Entity\Publicacion', 'p')
+              ->leftJoin('p.usuario', 'u')
+              ->leftJoin('p.categoria', 'c')
+              ->where('p.inComisionesTrabajo=:comisiones')
+              ->setParameter('comisiones', true)
+              ->orderBy('p.fechaEvento', 'ASC');
+        $query->andWhere('c.tipoCategoria=:tipo')
+              ->setParameter('tipo', CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS);
+        return $query->getQuery()-getResult();
+    }
+    
+    public function getNoticiasEnComisionesTrabajo(){
+        $query= $this->getEntityManager()->createQueryBuilder();
+        $query->select('p,c,u')   
+              ->from('Richpolis\PublicacionesBundle\Entity\Publicacion', 'p')
+              ->leftJoin('p.usuario', 'u')
+              ->leftJoin('p.categoria', 'c')
+              ->where('p.inComisionesTrabajo=:comisiones')
+              ->setParameter('comisiones', true)
+              ->orderBy('p.createdAt', 'ASC');
+        $query->andWhere('c.tipoCategoria=:tipo')
+              ->setParameter('tipo', CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS);
+        return $query->getQuery()-getResult();
+    }
+    
+    public function queryPublicacionesComisionesTrabajo(){
+        $query= $this->getEntityManager()->createQueryBuilder();
+        $query->select('p,c,u')   
+              ->from('Richpolis\PublicacionesBundle\Entity\Publicacion', 'p')
+              ->leftJoin('p.usuario', 'u')
+              ->leftJoin('p.categoria', 'c')
+              ->leftJoin('c.parent', 'pa')
+              ->where('pa.slug=:slug')
+              ->setParameter('slug', 'comisiones-de-trabajo')
+              ->orderBy('p.categoria', 'ASC')
+              ->addOrderBy('p.position','ASC');
+        return $query;
+    }
 }

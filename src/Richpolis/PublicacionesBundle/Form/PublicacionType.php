@@ -71,6 +71,11 @@ class PublicacionType extends AbstractType
                 'placeholder'=>'Con menu',
                 'data-bind'=>'value: hasMenu'
              )))
+            ->add('inComisionesTrabajo',null,array('label'=>'En comisiones de trabajo','attr'=>array(
+                'class'=>'checkbox-inline',
+                'placeholder'=>'comision de trabajo',
+                'data-bind'=>'value: comisionTrabajo'
+             )))
             ->add('imagen','hidden')
             ->add('position','hidden')
             ->add('slug','hidden')

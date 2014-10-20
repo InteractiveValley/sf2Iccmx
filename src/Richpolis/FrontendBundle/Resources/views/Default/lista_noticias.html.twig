@@ -1,0 +1,3 @@
+{% for noticia in publicaciones %}
+    {% include 'FrontendBundle:Default:item_noticia_largo.html.twig'  with { 'noticia': noticia } %}
+{% endfor %}

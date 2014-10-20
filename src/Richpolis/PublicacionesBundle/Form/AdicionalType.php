@@ -31,14 +31,20 @@ class AdicionalType extends AbstractType
                     )
                 ))
             ->add('slug','hidden')
-            ->add('publicacion',null,array(
-                'label'=>'Publicacion',
-                'required'=>true,
-                'read_only'=>false,                
-                'attr'=>array(
-                    'class'=>'validate[required] form-control placeholder',
-                    'placeholder'=>'Publicacion',
-                    'data-bind'=>'value: publicacion',
+            ->add('publicacion','entity',array( 
+                    'label' => 'Publicacion',
+                    'required' => true,
+                    'expanded' => false,
+                    'class' => 'Richpolis\PublicacionesBundle\Entity\Publicacion',
+                    'property' => 'titulo',
+                    'multiple' => false,
+                    'query_builder' => function(\Richpolis\PublicacionesBundle\Repository\PublicacionRepository $er)  {
+                        return $er->queryPublicacionesComisionesTrabajo();
+                    },                
+                    'attr'=>array(
+                        'class'=>'validate[required] form-control placeholder',
+                        'placeholder'=>'Publicacion',
+                        'data-bind'=>'value: publicacion',
                     )
                 ))
         ;

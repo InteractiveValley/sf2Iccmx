@@ -81,7 +81,8 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Clave</th>
+                                <th>Publicacion</th>
+                                <th>Titulo</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -89,11 +90,10 @@
                             {% for entity in entities %}
                                 <tr id="registro-{{entity.id}}" data-id="{{ entity.id }}">
                                     <td><a href="{{ path('adicionales_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                                    <td>{{ entity.clave }}</td>
+                                    <td>{{ entity.publicacion }}</td>
+                                    <td>{{ entity.titulo }}</td>
                                     <td>
-                                        {% if is_granted('ROLE_ADMIN') %}
-                                            <button onclick="javascript:editarRegistro('{{ path('adicionales_edit', { 'id': entity.id }) }}')" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
-                                        {% endif %}
+                                        <button onclick="javascript:editarRegistro('{{ path('adicionales_edit', { 'id': entity.id }) }}')" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
                                         <button onclick="javascript:editarRegistro('{{ path('adicionales_show', { 'id': entity.id }) }}', '#registro-{{entity.id}}')" class="btn btn-xs btn-info"><i class="fa fa-folder-open"></i> </button>
                                     </td>
                                 </tr>
@@ -164,59 +164,11 @@
 
 <script>
 var editarRegistro = function(url){
-        location.href=url;
+    location.href=url;
 };
-
 $(document).ready(function() {
-	
-    iniciarlizarSorteable();
-        
+    //iniciarlizarSorteable();
 });
-
-function iniciarlizarSorteable(){
-    $("#cuerpoTabla").sortable({
-        items: "tr",
-        cursor: 'move',
-        opacity: 0.6,
-        update: function() {
-            sendOrderToServer();
-        }
-    });
-    $("#cuerpoTabla").disableSelection();
-}
-
-function sendOrderToServer() {
-    $(".loader").fadeIn();
-    var order = $("#cuerpoTabla").sortable('serialize');
-    $.ajax({
-       url: '{{path('adicionales_ordenar')}}?' + order,
-       type: 'PATCH',
-       data: order,
-       dataType: 'json',
-       success: function(data){
-          noty({
-                text: 'Actualizacion realizada',
-                layout:'topRight',
-                type:'success',
-                timeout:2000
-          });
-          console.log(data);
-          $(".loader").fadeOut();
-       },
-       error: function(data){
-           noty({
-                text: 'Error de actualizacion',
-                layout:'topRight',
-                type:'error',
-                timeout:2000
-            });
-           console.log(data);
-           $(".loader").fadeOut();
-       },
-    });
-            
-}
-
 </script>
 
     

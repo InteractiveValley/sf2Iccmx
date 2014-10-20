@@ -983,7 +983,7 @@ header .nav.nav-pills > li > a:hover, header .nav.nav-pills > li > a:focus{
   border: 0px;
 }
 
-.sidebar #nav li ul { display: none; background: #efefef url("../images/cream.png") repeat; }
+.sidebar #nav li ul { display: none; background: #efefef repeat; }
 
 .sidebar #nav li ul li a { 
   display: block; 

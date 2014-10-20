@@ -55,7 +55,12 @@ class PublicacionEventoType extends AbstractType
                 'class'=>'checkbox-inline',
                 'placeholder'=>'En patrocinio',
                 'data-bind'=>'value: inPatrocinio'
-             )))    
+             )))
+            ->add('inComisionesTrabajo',null,array('label'=>'En comisiones de trabajo','attr'=>array(
+                'class'=>'checkbox-inline',
+                'placeholder'=>'En comisiones de trabajo',
+                'data-bind'=>'value: inComisionesTrabajo'
+             )))
             ->add('direccionEvento','text',array(
                 'label'=>'Localidad','required'=>true,'attr'=>array(
                     'class'=>'form-control placeholder',
