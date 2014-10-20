@@ -157,7 +157,7 @@ class AdicionalController extends Controller
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'errores' => RpsStms::getErrorMessages($form)
+            'errores' => RpsStms::getErrorMessages($editForm)
         );
     }
 
@@ -210,7 +210,7 @@ class AdicionalController extends Controller
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'errores' => RpsStms::getErrorMessages($form)
+            'errores' => RpsStms::getErrorMessages($editForm)
         );
     }
     /**
