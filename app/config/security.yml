@@ -45,6 +45,9 @@ security:
             logout:
                 path:   backend_logout
                 target: backend_login
+        adicional:
+            pattern: ^/comisiones-de-trabajo
+            security: false
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"

@@ -4,6 +4,7 @@ namespace Richpolis\PublicacionesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Richpolis\BackendBundle\Utils\Richsys as RpsStms;
 
 /**
  * Adicional

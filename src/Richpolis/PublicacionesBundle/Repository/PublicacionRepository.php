@@ -495,7 +495,7 @@ class PublicacionRepository extends EntityRepository
               ->orderBy('p.fechaEvento', 'ASC');
         $query->andWhere('c.tipoCategoria=:tipo')
               ->setParameter('tipo', CategoriaPublicacion::TIPO_CATEGORIA_EVENTOS);
-        return $query->getQuery()-getResult();
+        return $query->getQuery()->getResult();
     }
     
     public function getNoticiasEnComisionesTrabajo(){
@@ -509,7 +509,7 @@ class PublicacionRepository extends EntityRepository
               ->orderBy('p.createdAt', 'ASC');
         $query->andWhere('c.tipoCategoria=:tipo')
               ->setParameter('tipo', CategoriaPublicacion::TIPO_CATEGORIA_NOTICIAS);
-        return $query->getQuery()-getResult();
+        return $query->getQuery()->getResult();
     }
     
     public function queryPublicacionesComisionesTrabajo(){

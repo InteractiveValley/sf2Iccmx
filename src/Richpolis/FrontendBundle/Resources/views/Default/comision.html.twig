@@ -57,7 +57,7 @@
             <div class="contenido-publicacion">
                 <!-- Tab panes -->
                 <div class="tab-content">
-                  <div class="tab-pane fade in active" id="acerca">
+                  <div class="tab-pane fade active" id="acerca">
                       {{ publicacion.descripcion | raw }}
                   </div>
                   {% for adicional in adicionales %}
@@ -70,7 +70,7 @@
                             {{render(controller('FrontendBundle:Default:articulosComisionesTrabajo'))}}
                         </div>
                     {% elseif adicional.slug == 'minutas-y-documentos-de-estudio' %}
-                        {% if is_granted('ROLE_USUARIO') %}
+                        {% if app.user is not null %}
                         <div class="tab-pane fade" id="{{adicional.slug}}">
                             {{adicional.descripcion | raw }}
                         </div>

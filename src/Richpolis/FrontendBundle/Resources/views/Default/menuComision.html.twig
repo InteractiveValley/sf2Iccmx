@@ -6,14 +6,14 @@
     </div>
     <div class="nav-list">
         <ul class="nav nav-tabs" role="tablist">
-            <li class="active" role="tab" data-toggle="tab">
-                <a href="#acerca" class="adicional-publicacion">
+            <li class="active">
+                <a href="#acerca" class="adicional-publicacion" role="tab" data-toggle="tab">
                     Acerca de la comisión
                 </a>
             </li>
             {% for adicional in adicionales %}
                 {% if adicional.slug == 'minutas-y-documentos-de-estudio' %}
-                    {% if is_granted('ROLE_USUARIO') %}
+                    {% if app.user is not null %}
                         <li>
                             <a href="#{{adicional.slug}}" class="adicional-publicacion" role="tab" data-toggle="tab">
                                 {{ adicional.titulo }}
