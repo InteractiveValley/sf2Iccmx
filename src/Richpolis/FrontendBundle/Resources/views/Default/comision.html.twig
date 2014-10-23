@@ -70,7 +70,7 @@
                             {{render(controller('FrontendBundle:Default:articulosComisionesTrabajo'))}}
                         </div>
                     {% elseif adicional.slug == 'minutas-y-documentos-de-estudio' %}
-                        {% if is_granted('ROLE_USUARIO') %}
+                        {% if is_granted('ROLE_USER') %}
                         <div class="tab-pane fade" id="{{adicional.slug}}">
                             {{adicional.descripcion | raw }}
                         </div>

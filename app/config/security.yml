@@ -20,7 +20,7 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         extranet:
-            pattern:        ^/vip
+            pattern:        ^/
             provider:       usuarios
             anonymous:      ~
             form_login:
@@ -30,7 +30,6 @@ security:
                 always_use_default_target_path: true
             logout:
                 path:       vip_logout
-        
         secured_area:
             pattern:    ^/backend
             form_login:
@@ -41,9 +40,6 @@ security:
             logout:
                 path:   backend_logout
                 target: backend_login
-        frontend:
-            pattern:  ^/
-            security: false
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
