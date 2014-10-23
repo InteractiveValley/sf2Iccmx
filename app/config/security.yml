@@ -19,6 +19,16 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        secured_area:
+            pattern:    ^/backend
+            form_login:
+                check_path: backend_check
+                login_path: backend_login
+                default_target_path: backend_homepage
+                always_use_default_target_path: true
+            logout:
+                path:   backend_logout
+                target: backend_login
         extranet:
             pattern:        ^/
             provider:       usuarios
@@ -30,16 +40,6 @@ security:
                 always_use_default_target_path: true
             logout:
                 path:       vip_logout
-        secured_area:
-            pattern:    ^/backend
-            form_login:
-                check_path: backend_check
-                login_path: backend_login
-                default_target_path: backend_homepage
-                always_use_default_target_path: true
-            logout:
-                path:   backend_logout
-                target: backend_login
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
