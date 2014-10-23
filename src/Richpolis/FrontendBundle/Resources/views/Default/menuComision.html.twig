@@ -13,7 +13,7 @@
             </li>
             {% for adicional in adicionales %}
                 {% if adicional.slug == 'minutas-y-documentos-de-estudio' %}
-                    {% if app.user is not null %}
+                    {% if is_granted('ROLE_USUARIO') %}
                         <li>
                             <a href="#{{adicional.slug}}" class="adicional-publicacion" role="tab" data-toggle="tab">
                                 {{ adicional.titulo }}

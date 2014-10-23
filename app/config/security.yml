@@ -31,10 +31,6 @@ security:
             logout:
                 path:       vip_logout
         
-        login:
-            pattern:  ^/backend/login$
-            security: false
-            
         secured_area:
             pattern:    ^/backend
             form_login:
@@ -45,8 +41,8 @@ security:
             logout:
                 path:   backend_logout
                 target: backend_login
-        adicional:
-            pattern: ^/comisiones-de-trabajo
+        frontend:
+            pattern:  ^/
             security: false
             #anonymous: ~
             #http_basic:
@@ -56,9 +52,12 @@ security:
         - { path: ^/backend/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/vip/pauta, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/vip/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/backend/users$, roles: ROLE_ADMIN }
         - { path: ^/backend, roles: ROLE_ADMIN }
         - { path: ^/efconnect, role: ROLE_ADMIN }
         - { path: ^/elfinder, role: ROLE_ADMIN }
         - { path: ^/vip, role: ROLE_USER }
+
+
         
