@@ -21,6 +21,8 @@ security:
             security: false
         secured_area:
             pattern:    ^/backend
+            provider:    usuarios
+            anonymous:      ~
             form_login:
                 check_path: backend_check
                 login_path: backend_login
@@ -30,7 +32,7 @@ security:
                 path:   backend_logout
                 target: backend_login
         extranet:
-            pattern:        ^/
+            pattern:        ^/*
             provider:       usuarios
             anonymous:      ~
             form_login:
@@ -46,14 +48,13 @@ security:
 
     access_control:
         - { path: ^/backend/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/vip/pauta, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/vip/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/backend/users$, roles: ROLE_ADMIN }
-        - { path: ^/backend, roles: ROLE_ADMIN }
+        - { path: ^/backend/*, roles: ROLE_ADMIN }
         - { path: ^/efconnect, role: ROLE_ADMIN }
         - { path: ^/elfinder, role: ROLE_ADMIN }
-        - { path: ^/vip, role: ROLE_USER }
+        - { path: ^/vip/pauta, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/vip/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/vip/*, role: ROLE_USER }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
 
         

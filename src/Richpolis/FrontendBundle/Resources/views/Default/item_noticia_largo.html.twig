@@ -11,7 +11,7 @@
                 <p class="fecha-noticia">{{noticia.createdAt | date('d/m/Y')}}</p>
             </div>
             <div class="clearfix colelem" id="u1562-6"><!-- content -->
-                {% if noticia.categoria.slug != 'icc-en-mexico' %}
+                {% if noticia.categoria.slug != 'icc-en-mexico' and noticia.categoria.slug != 'icc-mundial' %}
                 <p class="noticia-contenido">
                     {{ noticia.descripcion | striptags | truncate(250,true,'...') | raw   }}
                     <a class="nonblock" href="{{path('frontend_noticias_publicacion',{'categoriaSlug': noticia.categoria.slug, 'publicacionSlug': noticia.slug})}}">Leer más</a>
