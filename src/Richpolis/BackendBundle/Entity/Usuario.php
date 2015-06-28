@@ -171,6 +171,7 @@ class Usuario implements UserInterface, \Serializable
     const GRUPO_USUARIOS=1;
     const GRUPO_ADMIN=2;
     const GRUPO_SUPER_ADMIN=3;
+    const GRUPO_ICC = 4;
     
  
     public function __toString(){
@@ -192,6 +193,7 @@ class Usuario implements UserInterface, \Serializable
             self::GRUPO_USUARIOS=>'Usuarios',
             self::GRUPO_ADMIN=>'Administrador',
             self::GRUPO_SUPER_ADMIN=>'Superadmin',
+            self::GRUPO_ICC=>'ICC'
         );
         return $sTipoGrupo;
     }
@@ -414,11 +416,13 @@ class Usuario implements UserInterface, \Serializable
     function getRoles()
     {
         if($this->getGrupo() == self::GRUPO_USUARIOS){
-            return array('ROLE_USER','ROLE_API');
+            return array('ROLE_USER');
+        }elseif($this->getGrupo() == self::GRUPO_ICC){
+            return array('ROLE_ICC','ROLE_USER');
         }elseif($this->getGrupo() == self::GRUPO_SUPER_ADMIN){
-            return array('ROLE_SUPER_ADMIN','ROLE_API');
+            return array('ROLE_SUPER_ADMIN','ROLE_ADMIN','ROLE_ICC','ROLE_USER');
         }else{
-            return array('ROLE_ADMIN','ROLE_API');
+            return array('ROLE_ADMIN','ROLE_ICC','ROLE_USER');
         }
     }
 

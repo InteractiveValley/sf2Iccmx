@@ -29,10 +29,12 @@
         {% endif %}
     </td>
     {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
     <td>{{ entity.usuario }}</td>
     <td class="status">
         {{ entity.status | status_publicacion | raw }}
     </td>
+    {% endif %}
     <td>
         {% if entity.usuario.id == app.user.id or is_granted('ROLE_ADMIN') %}
             {% if entity.status < constant('Richpolis\\PublicacionesBundle\\Entity\\Publicacion::STATUS_APROBADO') %}

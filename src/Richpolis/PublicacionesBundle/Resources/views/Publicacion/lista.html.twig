@@ -9,8 +9,10 @@
             <th>Es principal</th>
             <th>En carrusel</th>
             {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
             <th>Usuario</th>
             <th>Estatus</th>
+            {% endif %}
             <th>Actions</th>
         </tr>
     </thead>

@@ -8,7 +8,8 @@
 /build/
 /vendor/
 /bin/
-/web/uploads/*
+/web/uploads/
+/web/media/
 /composer.phar
 
 # netbeans
@@ -22,4 +23,3 @@ nb-configuration.xml
 
 # codio
 /.codio/
-/web/media/

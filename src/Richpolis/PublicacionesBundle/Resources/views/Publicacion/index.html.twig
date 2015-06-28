@@ -44,14 +44,24 @@
         <div class="clearfix"></div>
         <!-- Breadcrumb -->
         <div class="bread-crumb">
-          <a href="{{path('backend_homepage')}}"><i class="fa fa-home"></i>Dashboard</a--> 
-          <Divider>
-          <span class="divider">/</span> 
-          <a href="{{path('categorias_publicaciones')}}" class="bread-current">{{categoria.nivelCategoria}}</a>
-          <Divider>
-          <span class="divider">/</span> 
-          <a href="{{path('publicaciones')}}" class="bread-current">Publicaciones</a>
-          <a href="{{path('publicaciones_new')}}" class="btn btn-info pull-right" style="color: white; margin-left: 5px;">Crear Publicación</a>
+          {% if is_granted('ROLE_ADMIN') %}  
+            <a href="{{path('backend_homepage')}}"><i class="fa fa-home"></i>Dashboard</a--> 
+            <Divider>
+            <span class="divider">/</span> 
+            <a href="{{path('categorias_publicaciones')}}" class="bread-current">{{categoria.nivelCategoria}}</a>
+            <Divider>
+            <span class="divider">/</span> 
+            <a href="{{path('publicaciones')}}" class="bread-current">Publicaciones</a>
+            <a href="{{path('publicaciones_new')}}" class="btn btn-info pull-right" style="color: white; margin-left: 5px;">Crear Publicación</a>
+          {% else %}
+            <a href="#"><i class="fa fa-home"></i>Dashboard</a--> 
+            <Divider>
+            <span class="divider">/</span> 
+            <a href="#" class="bread-current">{{categoria.nivelCategoria}}</a>
+            <Divider>
+            <span class="divider">/</span> 
+            <a href="#" class="bread-current">Publicaciones</a>
+          {% endif %}    
         </div>
         
         <div class="clearfix"></div>

@@ -63,9 +63,15 @@
                     <i class="fa fa-bars"></i>
                 </a>
                 <!-- Site name for smallar screens -->
+                {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{path('backend_homepage')}}" class="navbar-brand">
                     <span class="bold">Dashboard</span>
                 </a>
+                {% else %}
+                 <a href="#" class="navbar-brand">
+                    <span class="bold">Dashboard</span>
+                 </a>   
+                {% endif %}    
             </div>
 
             <!-- Navigation starts -->
@@ -83,21 +89,17 @@
                                 {{app.user.username|default('anonimo')}} <b class="caret"></b>
                                 
                             </a>
-
                             <!-- Dropdown menu -->
                             <ul class="dropdown-menu">
+                                {% if is_granted('ROLE_ADMIN') %}    
                                 <li><a href="{{path('users_show',{'id':app.user.id})}}"><i class="fa fa-user"></i> Perfil</a></li>
+                                {% endif %}
                                 <!--li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li-->
-                                <li>
-                                    <a href="{{path('backend_logout')}}">
-                                        <i class="fa fa-key"></i> Salir
-                                    </a>
-                                </li>
+                                <li><a href="{{path('backend_logout')}}"><i class="fa fa-key"></i> Salir</a></li>
                             </ul>
                     </li>
                 </ul>
             </nav>
-
         </div>
     </div>
 </header>
@@ -109,18 +111,19 @@
             <a href="#">Navegador</a>
         </div>
         <!-- Search form -->
-        <form class="navbar-form" role="search" action="#search" method="post">
+        <!--form class="navbar-form" role="search" action="#search" method="post">
             <div class="form-group">
                 <input id="buscarItem" name="buscarItem" type="text" class="form-control" placeholder="buscar">
                 <button class="btn search-button" type="submit">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-        </form>
+        </form-->
         <!--- Sidebar navigation -->
         <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
         <ul id="nav">
             <!-- Main menu with font awesome icon -->
+            {% if is_granted('ROLE_ADMIN') %}
             <li>
                 <a href="{{path('paginas')}}">
                     <i class="fa fa-sitemap"></i> <span>Paginas</span>
@@ -160,7 +163,7 @@
                 {% render(controller('PublicidadBundle:Publicidad:ul')) %}
             </li>
             
-            {% if is_granted('ROLE_ADMIN') %}
+            
             <li>
                 <a {{usuarios}} href="{{path('users')}}">
                     <i class="fa fa-user"></i> <span>Usuarios</span>
@@ -174,6 +177,12 @@
             <li>
                 <a {{configuraciones}} href="{{path('configuraciones')}}">
                     <i class="fa fa-gears"></i> <span>Configuraciones</span>
+                </a>
+            </li>
+            {% elseif is_granted('ROLE_ICC') %}
+             <li>
+                <a  href="{{path('publicaciones_categoria',{'slug': 'calendario-icc-mexico'})}}">
+                    <i class="fa fa-copy"></i><span>Publicaciones</span>
                 </a>
             </li>
             {% endif %}    
