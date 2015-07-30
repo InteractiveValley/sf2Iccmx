@@ -252,7 +252,7 @@ class DefaultController extends Controller {
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'agenda-global-de-comercio'));
+                              ->findOneBy(array('slug' => 'acerca-de-la-agenda'));
             $categoria = $publicacion->getCategoria();
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
@@ -297,7 +297,7 @@ class DefaultController extends Controller {
             $portada = $publicaciones[0];
             return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));*/
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'herramientas-para-el-comercio'));
+                              ->findOneBy(array('slug' => 'incoterms'));
             $categoria = $publicacion->getCategoria();
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
@@ -435,7 +435,7 @@ class DefaultController extends Controller {
             $portada = $publicaciones[0];
             return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));*/
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'posicionamientos'));
+                              ->findOneBy(array('slug' => 'mexico'));
             $categoria = $publicacion->getCategoria();
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
@@ -590,7 +590,7 @@ class DefaultController extends Controller {
             $portada = $publicaciones[0];
             return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));*/
             $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
-                              ->findOneBy(array('slug' => 'afiliacin-2'));
+                              ->findOneBy(array('slug' => 'por-que-ser-socio-de-icc-mexico'));
             $categoria = $publicacion->getCategoria();
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
