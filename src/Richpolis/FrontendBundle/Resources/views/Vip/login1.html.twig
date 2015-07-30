@@ -1,10 +1,37 @@
 {% extends 'FrontendBundle::layout.html.twig' %}
 
 {% block contenido %}
+{% if not is_granted('ROLE_USER') %}    
+    <div class="row">
+        <div class="col-xs-8">
+            {% if error %}
+                <div>{{ error.message }}</div>
+            {% endif %}
+
+            <form action="{{ path('vip_login_check') }}"  method="post" class="bootstrap-frm" novalidate="novalidate" role="form">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" name="_username"
+                           value="{{ last_username }}" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="_password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="login" value="Acceder" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-4 menu_fondo">
+            {% include 'FrontendBundle:Default:aside.html.twig' %}        
+        </div>        
+    </div>    
+{% else %}
     <div class="row">
         <div class="col-xs-8">
             <div class="row padding">
-                Gracias por accesar a intranet.
+                Gracias por accesar a intranet, para cerrar sesión dar click <a href="{{path('vip_logout')}}">aquí</a>
             </div>
             {% if pagina is null %}
                 <div class="row padding">
@@ -17,7 +44,8 @@
         <div class="col-xs-4 menu_fondo">
             {% include 'FrontendBundle:Default:aside.html.twig' %}        
         </div> 
-    </div>       
+    </div>    
+{% endif %}    
 {% endblock %}
 
 {% block javascripts %}

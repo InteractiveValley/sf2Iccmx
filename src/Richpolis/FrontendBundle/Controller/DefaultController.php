@@ -251,11 +251,10 @@ class DefaultController extends Controller {
                 ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
-                ->findOneBy(array('slug' => 'influencia-global'));
-            $publicaciones = $categoria->getPublicaciones();
-            $portada = $publicaciones[0];
-            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
+            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
+                              ->findOneBy(array('slug' => 'agenda-global-de-comercio'));
+            $categoria = $publicacion->getCategoria();
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
         
     }
@@ -292,11 +291,15 @@ class DefaultController extends Controller {
                 ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+            /*$categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => 'productos-y-servicios'));
             $publicaciones = $categoria->getPublicaciones();
             $portada = $publicaciones[0];
-            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));*/
+            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
+                              ->findOneBy(array('slug' => 'herramientas-para-el-comercio'));
+            $categoria = $publicacion->getCategoria();
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
         
     }
@@ -343,6 +346,7 @@ class DefaultController extends Controller {
             $publicaciones = $categoria->getPublicaciones();
             $portada = $publicaciones[0];
             return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
+            
         }
         
     }
@@ -379,11 +383,16 @@ class DefaultController extends Controller {
                 ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+            /*$categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => 'grupos-especializados'));
             $publicaciones = $categoria->getPublicaciones();
             $portada = $publicaciones[0];
-            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));*/
+            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
+                              ->findOneBy(array('slug' => 'sobre-el-grupo-asesor-g20'));
+            $categoria = $publicacion->getCategoria();
+            $rutaBase = 'frontend_influencia_global';
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
         
     }
@@ -420,11 +429,15 @@ class DefaultController extends Controller {
                 ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+            /*$categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => 'posturas'));
             $publicaciones = $categoria->getPublicaciones();
             $portada = $publicaciones[0];
-            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));*/
+            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
+                              ->findOneBy(array('slug' => 'posicionamientos'));
+            $categoria = $publicacion->getCategoria();
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
         
     }
@@ -571,11 +584,15 @@ class DefaultController extends Controller {
                 ->findCategoriaForSlug($categoria->getSlug());
             return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }else{
-            $categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
+            /*$categoria = $em->getRepository('PublicacionesBundle:CategoriaPublicacion')
                 ->findOneBy(array('slug' => 'afiliacion'));
             $publicaciones = $categoria->getPublicaciones();
             $portada = $publicaciones[0];
-            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));
+            return $this->render('FrontendBundle:Default:portada.html.twig',  compact('portada','rutaBase'));*/
+            $publicacion = $em->getRepository('PublicacionesBundle:Publicacion')
+                              ->findOneBy(array('slug' => 'afiliacin-2'));
+            $categoria = $publicacion->getCategoria();
+            return $this->render('FrontendBundle:Default:publicacion.html.twig', compact('categoria','publicacion','rutaBase'));
         }
     }
     

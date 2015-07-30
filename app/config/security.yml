@@ -31,17 +31,17 @@ security:
             logout:
                 path:   backend_logout
                 target: backend_login
-        extranet:
-            pattern:        ^/*
-            provider:       usuarios
-            anonymous:      ~
-            form_login:
-                login_path: vip_login
-                check_path: vip_login_check
-                default_target_path: vip_login
-                always_use_default_target_path: true
-            logout:
-                path:       vip_logout
+        #extranet:
+        #    pattern:        ^/*
+        #    provider:       usuarios
+        #    anonymous:      ~
+        #    form_login:
+        #        login_path: vip_login
+        #        check_path: vip_login_check
+        #        default_target_path: vip_login
+        #        always_use_default_target_path: true
+        #    logout:
+        #        path:       vip_logout
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
@@ -53,7 +53,7 @@ security:
         - { path: ^/elfinder, role: ROLE_ICC }
         - { path: ^/vip/pauta, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/vip/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/vip/*, role: ROLE_USER }
+        #- { path: ^/vip/*, role: ROLE_USER }
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
 

@@ -39,8 +39,9 @@
         <div class="menu-contenido menu-panel">
             {% for child in categoria.children %}
                 <div class="menu-bloque-categoria col-xs-3">
-                    <p class="titulo"><a href="{{path(rutaCategoria,{'categoriaSlug':child.slug})}}">{{child.categoria|upper}}</a></p>
-                    
+                    <p class="titulo">
+                        <a href="{{path(rutaCategoria,{'categoriaSlug':child.slug})}}">{{child.categoria|upper}}</a>
+                    </p>
                     <ul class="lista-submenu">
                         {% for publicacion in child.publicaciones %}
                         <li class="item">
@@ -65,7 +66,7 @@
         <div class="menu-contenido menu-panel">
             {% for child in categoria.children %}
                 {% if child.slug == 'g20' %}
-                    <div class="clearfix grpelem menu-bloque-categoria">
+                    <div class="clearfix grpelem menu-bloque-categoria grupo-g-20-original">
                         <p class="titulo">G20</p>
                         <ul class="lista-submenu">
                             {% for granson in child.children %}
@@ -157,19 +158,34 @@
             {% set rutaPublicacion = 'frontend_' ~ 'grupos_especializados' ~ '_publicacion' %}
         <div class="menu-contenido menu-panel">
             {% for child in categoria.children %}
-            <div class="clearfix grpelem menu-bloque-categoria">
-                <p class="titulo"><a href="{{path(rutaCategoria,{'categoriaSlug':child.slug})}}">{{child.categoria|upper}}</a></p>
-                
-                <ul class="lista-submenu">
-                    {% for publicacion in child.publicaciones %}
-                    <li class="item">
-                        <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
-                            {{ publicacion.titulo }}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                {% if child.slug == 'g-20' %}
+                    <div class="clearfix grpelem menu-bloque-categoria grupo-g-20-copia">
+                        <p class="titulo">G20</p>
+                        <ul class="lista-submenu">
+                            {% for granson in child.children %}
+                            <li class="item">
+                                <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug': granson.slug,'publicacionSlug': granson.publicaciones[0].slug })}}">
+                                    {{ granson.publicaciones[0].titulo }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                <div class="clearfix grpelem menu-bloque-categoria">
+                    <p class="titulo" {{child.slug}}><a href="{{path(rutaCategoria,{'categoriaSlug':child.slug})}}">{{child.categoria|upper}}</a></p>
+
+                    <ul class="lista-submenu">
+                        {% for publicacion in child.publicaciones %}
+                        <li class="item">
+                            <a class="nonblock" href="{{path(rutaPublicacion,{'categoriaSlug':child.slug,'publicacionSlug':publicacion.slug})}}">
+                                {{ publicacion.titulo }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}    
             {% endfor %}
         </div>
         {% endfor %}
@@ -217,17 +233,17 @@
                         <ul class="lista-submenu">
                             <li class="item">
                                 <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'noticias-icc'})}}">
-                                    Noticias ICC
+                                    Comunicados ICC México
                                 </a>
                             </li>
                             <li class="item">
                                 <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'icc-en-mexico'})}}">
-                                    ICC en México
+                                    ICC México en los Medios
                                 </a>
                             </li>
                             <li class="item">
                                 <a class="nonblock" href="{{path(rutaCategoria,{'categoriaSlug': 'icc-mundial'})}}">
-                                    ICC Mundial
+                                    ICC Mundial en los Medios
                                 </a>
                             </li>
                         </ul>

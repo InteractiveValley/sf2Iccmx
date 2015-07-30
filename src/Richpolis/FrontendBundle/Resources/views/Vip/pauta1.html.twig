@@ -6,6 +6,18 @@
 {% endblock %} 
 
 {% block contenido %}
+{% if not is_granted('ROLE_USER') %}
+<div class="row padding libreria">
+    {{pagina.contenido | raw }}
+    <div class="accesos-vip">
+        <a href="{{path('vip_login')}}">SOCIOS</a>
+        {% if pagina.galerias | length > 0 %}
+        /
+        <a href="{{pagina.galerias[0].webPath}}" target="_blank">NO SOCIOS</a>
+        {% endif %}
+    </div>
+</div>    
+{% else %}    
 <div class="row libreria">
     <div class="col-xs-8">
         <div class="row padding">
@@ -48,6 +60,7 @@
         {% include 'FrontendBundle:Default:aside.html.twig' %}        
     </div>      
 </div>
+{% endif %}
 {% endblock %}
 
 {% block javascripts %}

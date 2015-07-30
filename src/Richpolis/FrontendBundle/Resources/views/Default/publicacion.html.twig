@@ -55,10 +55,8 @@
         {% if hasMenu > 0 %}
         <div class="col-xs-{{hasMenu}}">
             {% if categoria.slug == "g20" or categoria.slug == 'g-20' %}
-                {{dump(categoria.slug)}}
                 {% include 'FrontendBundle:Default:menuG20.html.twig' with {'rutaBase': rutaBase, 'categoria': categoria, 'publicacionActual': publicacion.slug } %}
             {% else %}
-                {{"Error slug: " ~ dump(categoria.slug)}}
                 {% include 'FrontendBundle:Default:menuPublicacion.html.twig' with {'rutaBase': rutaBase, 'categoria': categoria, 'publicacionActual': publicacion.slug } %}
             {% endif %}    
         </div>
